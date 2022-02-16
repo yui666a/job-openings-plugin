@@ -1,0 +1,254 @@
+:root {
+  --gr000: #fff;
+  --gr100: #e6e6e6;
+  --gr200: #ccc;
+  --gr300: #b3b3b3;
+  --gr400: #999;
+  --gr500: #808080;
+  --gr600: #666;
+  --gr700: #4d4d4d;
+  --gr800: #333;
+  --gr900: #1a1a1a;
+  --red: rgb(235, 0, 0);
+}
+
+html {
+  background: rgb(247, 247, 247);
+  color: var(--gr800);
+}
+// input {
+//   -webkit-writing-mode: horizontal-tb !important;
+//   // font-style: ;
+//   // font-variant-ligatures: ;
+//   // font-variant-caps: ;
+//   // font-variant-numeric: ;
+//   // font-variant-east-asian: ;
+//   // font-weight: ;
+//   // font-stretch: ;
+//   // font-size: ;
+//   // font-family: ;
+//   text-rendering: auto;
+//   color: var(--gr000);
+//   letter-spacing: normal;
+//   word-spacing: normal;
+//   line-height: normal;
+//   text-transform: none;
+//   text-indent: 0px;
+//   text-shadow: none;
+//   display: inline-block;
+//   text-align: start;
+//   appearance: auto;
+//   -webkit-rtl-ordering: logical;
+//   cursor: text;
+//   background-color: var(--gr000);
+//   margin: 0em;
+//   padding: 1px 2px;
+//   border-width: 2px;
+//   border-style: inset;
+//   border-color: var(--gr000);
+//   border-image: initial;
+// }
+
+header {
+  background: var(--gr000);
+  font-size: 1.3rem;
+  color: var(--gr800);
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  .close-button {
+    position: relative;
+    display: inline-block;
+    color: var(--gr300);
+    width: 28px;
+    height: 28px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3px; /* 棒の幅（太さ） */
+      height: 27px; /* 棒の高さ */
+      background: var(--gr300);
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+}
+
+.icon {
+  position: relative;
+  display: inline-block;
+  color: rgb(240, 161, 15);
+  width: 0.8em;
+  height: 0.8em;
+  border: 2px solid rgb(240, 161, 15);
+  border-radius: 100%;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px; /* 棒の幅（太さ） */
+    height: 0.8em; /* 棒の高さ */
+    background: rgb(240, 161, 15);
+  }
+
+  &::before {
+    transform: translate(-50%, -50%);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+}
+
+.required-tag {
+  display: inline-block;
+  border-radius: 3px;
+  background: var(--red);
+  color: var(--gr000);
+  font-weight: bold;
+  padding: 2px;
+  margin: 2px;
+  margin-bottom: 5px;
+  font-size: 0.8em;
+}
+
+.button {
+  border-radius: 5px;
+  border: 1px solid var(--gr400);
+  padding: 8px;
+
+  transition: all 0.5s 0s ease;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.draft {
+  color: var(--gr300);
+  background-color: var(--gr000);
+}
+
+.confirm {
+  color: var(--gr000);
+  background-color: rgb(240, 161, 15);
+  border: 1px solid rgb(240, 161, 15);
+}
+
+.job-information,
+.company-information {
+  background: var(--gr000);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--gr200);
+  padding: 4px 0;
+  margin: 25px;
+
+  h3 {
+    margin: 5px 0;
+    padding: 5px 1.5rem;
+    border-bottom: 3px solid var(--gr200);
+  }
+
+  form {
+    padding: 0 3rem 1.5rem;
+  }
+  .form-item {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+
+    .item-label {
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 99%;
+      border-radius: 4px;
+      margin: 4px;
+      &::placeholder {
+        color: var(--gr200);
+      }
+    }
+    input[type="text"],
+    select {
+      height: 1.3em;
+    }
+    input[type="text"] {
+      border: 1px solid var(--gr400);
+    }
+
+    .select2-selection {
+      height: 2em;
+    }
+
+    .form-description {
+      font-size: 0.7rem;
+      color: var(--gr400);
+      margin: 4px 1rem;
+    }
+  }
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice {
+  // background: rgb(0, 117, 143);
+}
+
+button {
+  border-radius: 5px;
+  border: 1px solid var(--gr400);
+  padding: 8px;
+
+  &.add {
+    background: var(--gr000);
+    border: none;
+    color: rgb(240, 161, 15);
+    transition: all 0.5s 0s ease;
+    padding: 5px;
+
+    &:hover {
+      background: var(--gr100);
+    }
+    &:disabled {
+      background: var(--gr100);
+      color: var(--gr400);
+    }
+  }
+
+  &.add-confirm {
+    background: rgb(240, 161, 15);
+    border-color: var(--gr000);
+    box-shadow: var(--gr000);
+    color: var(--gr000);
+    transition: all 0.5s 0s ease;
+    padding: 5px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    &:disabled {
+      background: var(--gr100);
+      color: var(--gr400);
+    }
+  }
+}
