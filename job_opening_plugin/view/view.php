@@ -1,5 +1,9 @@
 <?php
 
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/jobTable.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCard.php');
+
+
 /**
  * (未使用) メインメニューページ内容の表示・更新処理
  * @deprecated version 0.1
@@ -23,21 +27,32 @@ EOF;
 //=================================================
 function job_openings_list()
 {
+  $args = array(
+    'post_type' => 'post',  // 投稿タイプ
+    // 'category_name' => 'カテゴリのスラッグ',	// 絞り込むカテゴリ
+    // 'tag' => 'タグスラッグ',	// 絞り込むタグ
+    // 's' => '検索文字列',	// 検索文字列
+    // 'posts_per_page' => 3,	// 表示件数
+    // 'post_status' => 'publish',	// 公開済みのみ
+    'post_type' => 'job_listing',
+    'orderby' => 'date',  //新着順
+    'order' => 'ASC',  // 昇順
+  );
 
-  //---------------------------------
-  // HTML表示
-  //---------------------------------
-  echo <<<EOF
+  query_posts($args);
+  // $posts_array = get_posts($args);
 
-
-<div class="wrap">
-	<h2>サブメニュー②</h2>
-	<p>
-		求人情報一覧 のページです。
-	</p>
-</div>
-
-EOF;
+  echo make_job_openings_table_head();
+  // ループ
+  if (have_posts()) :
+    while (have_posts()) :
+      the_post();
+      make_job_openings_table_row(the_title());
+    endwhile;
+  endif;
+  echo make_job_openings_table_foot();
+  // 投稿データのリセット
+  wp_reset_query();
 }
 
 //=================================================
@@ -45,6 +60,15 @@ EOF;
 //=================================================
 
 function job_openings_add()
+{
+  echo create_job_opening();
+}
+
+
+//=================================================
+// サブメニュー②ページ内容の表示・更新処理
+//=================================================
+function job_openings_TODO()
 {
 
   //---------------------------------
