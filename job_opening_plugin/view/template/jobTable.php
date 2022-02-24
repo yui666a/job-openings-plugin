@@ -1,7 +1,6 @@
 <?php
 
-function make_job_openings_table_row($title)
-{
+function make_job_openings_table_row($title) {
   $job_openings_table_main = '
     <tr
       id="post-11"
@@ -109,8 +108,7 @@ function make_job_openings_table_row($title)
 }
 
 
-function make_job_openings_table_head()
-{
+function make_job_openings_table_head() {
   echo '
   <table class="wp-list-table widefat fixed striped table-view-list posts">
   <thead>
@@ -192,16 +190,11 @@ function make_job_openings_table_head()
       </th>
     </tr>
   </thead>
-  
-  <tbody id="the-list">
   ';
 }
 
-function make_job_openings_table_foot()
-{
+function make_job_openings_table_foot() {
   echo '
-  </tbody>
-  
   <tfoot>
       <tr>
         <td class="manage-column column-cb check-column">

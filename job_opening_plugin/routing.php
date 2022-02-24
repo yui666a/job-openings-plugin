@@ -37,7 +37,7 @@ add_action('admin_menu', function () {
     '企業一覧',
     'manage_options',
     'job-openings-companies',
-    'job_openings_add', // TODO: edit here.
+    'company_list',
     20
   );
 
@@ -57,7 +57,7 @@ add_action('admin_menu', function () {
     '企業 新規作成',
     'manage_options',
     'job-openings-add-company',
-    'job_openings_add', // TODO: edit here.
+    'company_add',
     40
   );
 
