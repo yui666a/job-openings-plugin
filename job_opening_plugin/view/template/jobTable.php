@@ -1,10 +1,4 @@
 <?php
-function console_log($data)
-{
-  echo '<script>';
-  echo 'console.log(' . json_encode($data) . ')';
-  echo '</script>';
-}
 
 function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon)
 {
