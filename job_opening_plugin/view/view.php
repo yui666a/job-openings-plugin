@@ -124,7 +124,8 @@ function company_list()
  */
 function job_openings_add()
 {
-  echo create_job_opening();
+  $user = wp_get_current_user();
+  echo create_job_opening($user);
 }
 
 /**
@@ -132,7 +133,8 @@ function job_openings_add()
  */
 function company_add()
 {
-  echo create_company();
+  $user = wp_get_current_user();
+  echo create_company($user);
 }
 
 
