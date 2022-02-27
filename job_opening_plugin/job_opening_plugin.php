@@ -13,15 +13,22 @@ Author: yui666a
 Author URI: https://yui666a.github.io/home/
 */
 
-// function console_log($data)
-// {
-//   echo '<script>';
-//   echo 'console.log(' . json_encode($data) . ')';
-//   echo '</script>';
-// }
+function console_log($data)
+{
+  echo '<script>';
+  echo 'console.log(' . json_encode($data) . ')';
+  echo '</script>';
+}
 
+function console_error($data)
+{
+  echo '<script>';
+  echo 'console.error(' . json_encode($data) . ')';
+  echo '</script>';
+}
 
 // 定数定義
+// TODO: JOB_OPENING__MINIMUM_WP_VERSIONを定義
 define('JOB_OPENING_VERSION', '0.1');
 define('JOB_OPENING__PLUGIN_DIR', plugin_dir_path(__FILE__));
 // define( 'JOB_OPENING__MINIMUM_WP_VERSION', '5.0' );
@@ -59,3 +66,19 @@ add_action('admin_enqueue_scripts', 'add_files');
 
 require_once(JOB_OPENING__PLUGIN_DIR . 'routing.php');
 require_once(JOB_OPENING__PLUGIN_DIR . 'view/view.php');
+
+/**
+ * プラグインを有効にしたときの処理
+ */
+function on_activate() {
+  include_once(JOB_OPENING__PLUGIN_DIR . 'model/createDB.php');
+  create_table();
+}
+register_activation_hook(__FILE__, 'on_activate');
+
+/**
+ * TODO: プラグインを無効にしたときの処理を書く
+ */
+function on_deactivation() {
+}
+register_deactivation_hook(__FILE__, 'on_deactivation');
