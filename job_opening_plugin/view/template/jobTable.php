@@ -3,19 +3,19 @@
 function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon)
 {
   $admin_url = esc_url(get_admin_url(''));
-  $job_openings_table_main = '
+  $job_openings_table_main = <<<EOF
     <tr
-      id="post-' . $post_id . '"
-      class="iedit author-self level-0 post-' . $post_id . ' type-job_listing status-publish has-post-thumbnail hentry job_listing job-type-full-time"
+      id="post-{$post_id}"
+      class="iedit author-self level-0 post-{$post_id} type-job_listing status-publish has-post-thumbnail hentry job_listing job-type-full-time"
     >
       <th scope="row" class="check-column">
-        <label class="screen-reader-text" for="cb-select-' . $post_id . '">' . $title . '
+        <label class="screen-reader-text" for="cb-select-{$post_id}">{$title}
         </label>
-        <input id="cb-select-' . $post_id . '" type="checkbox" name="post[]" value="' . $post_id . '" />
+        <input id="cb-select-{$post_id}" type="checkbox" name="post[]" value="{$post_id}" />
         <div class="locked-indicator">
           <span class="locked-indicator-icon" aria-hidden="true"></span>
           <span class="screen-reader-text">
-            “' . $title . '” はロックされています
+            “{$title}” はロックされています
           </span>
         </div>
       </th>
@@ -25,22 +25,22 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       >
         <div class="job_position">
           <a
-            href="' . $admin_url . 'post.php?post=' . $post_id . '&amp;action=edit"
+            href="{$admin_url}post.php?post={$post_id}&amp;action=edit"
             class="tips job_title"
-            data-tip="ID: ' . $post_id . '"
-            >' . $title . '</a
+            data-tip="ID: {$post_id}"
+            >{$title}</a
           >
           <div class="company">
             <span class="tips" data-tip="asdf"
               ><a href="https://yui666a.github.io/home/pc.html(TODO)"
-                >' . $author . '</a
+                >{$author}</a
               ></span
             >
           </div>
           <img
             class="company_logo"
             src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
-            alt="' . $author . '"
+            alt="{$author}"
           />
         </div>
         <button type="button" class="toggle-row">
@@ -56,15 +56,15 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       <td class="job_location column-job_location" data-colname="所在地">
         <a
           class="google_map_link"
-          href="https://maps.google.com/maps?q=' . $job_location . '&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
-          >' . $job_location . '</a
+          href="https://maps.google.com/maps?q={$job_location}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
+          >{$job_location}</a
         >
       </td>
       <td class="job_status column-job_status" data-colname="ステータス">
-        ' . $status_icon . '
+        {$status_icon}
       </td>
       <td class="job_posted column-job_posted" data-colname="掲載中">
-        <strong>' . $post_date . '</strong
+        <strong>{$post_date}</strong
         ><span
           >投稿者:
           <a
@@ -74,7 +74,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
         >
       </td>
       <td class="job_expires column-job_expires" data-colname="期限">
-        <strong>' . $job_expires . '</strong>
+        <strong>{$job_expires}</strong>
       </td>
       <td
         class="job_listing_category column-job_listing_category"
@@ -93,19 +93,19 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
             >表示</a
           ><a
             class="button button-icon tips icon-edit"
-            href="' . $admin_url . 'post.php?post=' . $post_id . '&amp;action=edit"
+            href="{$admin_url}post.php?post={$post_id}&amp;action=edit"
             data-tip="編集"
             >編集</a
           ><a
             class="button button-icon tips icon-delete"
-            href="' . $admin_url . 'post.php?post=' . $post_id . '&amp;action=trash&amp;_wpnonce=cf3bb74013"
+            href="{$admin_url}post.php?post={$post_id}&amp;action=trash&amp;_wpnonce=cf3bb74013"
             data-tip="削除"
             >削除</a
           >
         </div>
       </td>
     </tr>
-  ';
+EOF;
   return $job_openings_table_main;
 }
 
@@ -113,7 +113,8 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
 function make_job_openings_table_head()
 {
   $admin_url = esc_url(get_admin_url(''));
-  echo '
+
+  $header = <<<EOF
   <table class="wp-list-table widefat fixed striped table-view-list posts">
   <thead>
     <tr>
@@ -128,7 +129,7 @@ function make_job_openings_table_head()
         class="manage-column column-job_position column-primary sorted desc"
       >
         <a
-          href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
+          href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
           ><span>ポジション</span><span class="sorting-indicator"></span
         ></a>
       </th>
@@ -145,7 +146,7 @@ function make_job_openings_table_head()
         class="manage-column column-job_location sortable desc"
       >
         <a
-          href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
+          href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
           ><span>所在地</span><span class="sorting-indicator"></span
         ></a>
       </th>
@@ -158,7 +159,7 @@ function make_job_openings_table_head()
         class="manage-column column-job_posted sortable desc"
       >
         <a
-          href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
+          href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
           ><span>掲載中</span><span class="sorting-indicator"></span
         ></a>
       </th>
@@ -168,7 +169,7 @@ function make_job_openings_table_head()
         class="manage-column column-job_expires sortable desc"
       >
         <a
-          href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
+          href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
           ><span>期限</span><span class="sorting-indicator"></span
         ></a>
       </th>
@@ -194,14 +195,15 @@ function make_job_openings_table_head()
       </th>
     </tr>
   </thead>
-  ';
+EOF;
+  return $header;
 }
 
 function make_job_openings_table_foot()
 {
   $admin_url = esc_url(get_admin_url(''));
 
-  echo '
+  echo $footer = <<<EOF
   <tfoot>
       <tr>
         <td class="manage-column column-cb check-column">
@@ -214,14 +216,14 @@ function make_job_openings_table_foot()
           class="manage-column column-job_position column-primary sorted desc"
         >
           <a
-            href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
+            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
             ><span>ポジション</span><span class="sorting-indicator"></span
           ></a>
         </th>
         <th scope="col" class="manage-column column-job_listing_type">タイプ</th>
         <th scope="col" class="manage-column column-job_location sortable desc">
           <a
-            href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
+            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
             ><span>所在地</span><span class="sorting-indicator"></span
           ></a>
         </th>
@@ -230,13 +232,13 @@ function make_job_openings_table_foot()
         </th>
         <th scope="col" class="manage-column column-job_posted sortable desc">
           <a
-            href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
+            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
             ><span>掲載中</span><span class="sorting-indicator"></span
           ></a>
         </th>
         <th scope="col" class="manage-column column-job_expires sortable desc">
           <a
-            href="' . $admin_url . 'edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
+            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
             ><span>期限</span><span class="sorting-indicator"></span
           ></a>
         </th>
@@ -253,5 +255,6 @@ function make_job_openings_table_foot()
       </tr>
     </tfoot>
   </table>
-  ';
+EOF;
+
 }

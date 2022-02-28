@@ -1,5 +1,11 @@
 <?php
 
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/jobTable.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCard.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCompany.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_company.php');
+
+
 //=========================
 // 管理画面にメニューを登録
 //=========================
@@ -66,9 +72,9 @@ add_action('admin_menu', function () {
     '設定',
     '設定',
     'manage_options',
-    'job-openings-add-card',
-    'job_openings_add', // TODO: edit here.
-    40
+    'job-openings-settings',
+    'settings', // TODO: edit here.
+    50
   );
 
 });
