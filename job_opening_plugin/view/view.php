@@ -80,34 +80,24 @@ function job_openings_list()
  */
 function company_list()
 {
-  $args = array(
-    'post_type' => 'post',  // 投稿タイプ
-    // 'category_name' => 'カテゴリのスラッグ',	// 絞り込むカテゴリ
-    // 'tag' => 'タグスラッグ',	// 絞り込むタグ
-    // 's' => '検索文字列',	// 検索文字列
-    // 'posts_per_page' => 3,	// 表示件数
-    // 'post_status' => 'publish',	// 公開済みのみ
-    'post_type' => 'job_listing',
-    'orderby' => 'date',  //新着順
-    'order' => 'ASC',  // 昇順
-  );
+  global $wpdb;
+  $query = "SELECT * FROM `". $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=".wp_get_current_user()->ID.";";
+  console_log($query);
+  $get_data = $wpdb->get_results($query, OBJECT);
 
-  query_posts($args);
-  // $posts_array = get_posts($args);
+  // 表 ヘッダーの表示
+  echo make_company_table_head();
 
-  echo make_job_openings_table_head();
-  // ループ
-  if (have_posts()) :
-    echo '<tbody id="the-list">';
-    while (have_posts()) :
-      the_post();
-    // echo make_job_openings_table_row(the_title());
-    endwhile;
-    echo '</tbody>';
-  endif;
-  echo make_job_openings_table_foot();
-  // 投稿データのリセット
-  wp_reset_query();
+  echo '<tbody id="the-list">';
+  // ob_start();
+  foreach ($get_data as $data) :
+    echo make_company_table_row($data);
+  endforeach;
+  echo '</tbody>';
+
+  // 表 フッターの表示
+  echo make_company_table_foot();
+  // ob_get_clean();
 }
 
 /**
