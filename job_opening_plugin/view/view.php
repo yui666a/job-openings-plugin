@@ -32,10 +32,12 @@ function job_openings_list()
     // 'tag' => 'タグスラッグ',	// 絞り込むタグ
     // 's' => '検索文字列',	// 検索文字列
     // 'posts_per_page' => 3,	// 表示件数
+    'offset'=> 0,
     'post_status' => 'publish, inherit, pending, private, future, draft, trash',  // 全て取得
-    'post_type' => 'job_listing',
+    'post_type' => array('job_opening', 'job_listing'),
     'orderby' => 'date',  //新着順
     'order' => 'ASC',  // 昇順
+    'numberposts' => -1, //全件取得
   );
 
   $the_query = get_posts($args);
@@ -81,16 +83,16 @@ function job_openings_list()
 function company_list()
 {
   global $wpdb;
-  $query = "SELECT * FROM `". $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=".wp_get_current_user()->ID.";";
+  $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=" . wp_get_current_user()->ID . ";";
   console_log($query);
-  $get_data = $wpdb->get_results($query, OBJECT);
+  $companies = $wpdb->get_results($query, OBJECT);
 
   // 表 ヘッダーの表示
   echo make_company_table_head();
 
   echo '<tbody id="the-list">';
   // ob_start();
-  foreach ($get_data as $data) :
+  foreach ($companies as $data) :
     echo make_company_table_row($data);
   endforeach;
   echo '</tbody>';
@@ -106,7 +108,7 @@ function company_list()
 function job_openings_add()
 {
   $user = wp_get_current_user();
-  echo create_job_opening($user);
+  echo create_card($user);
 }
 
 /**
