@@ -35,17 +35,3 @@ $(function () {
   // });
 });
 
-const occupations = [
-  { id: 0, text: "Webデザイナー" },
-  { id: 1, text: "フロントエンジニア" },
-  { id: 2, text: "インフラエンジニア" },
-];
-
-$(function () {
-  const select = $("#occupation");
-  select.select2({
-    placeholder: "選択してください",
-    data: occupations,
-  });
-  select.val([]).trigger("change");
-});

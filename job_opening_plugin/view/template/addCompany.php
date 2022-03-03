@@ -31,15 +31,21 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">業種</div>
-        <input
-          type="text"
-          name="company_sector"
-          id="name"
-          placeholder="株式会社 XXXX-XXXX HOLDINGS"
-        />
-        <div class="form-description">
-          未入力の場合は，貴社アカウント名で登録されます
-        </div>
+        <select name="company_sector" id="company_sector">
+          <option value="">--選択してください--</option>
+          <option value="1">金融・保険</option>
+          <option value="2">建設・不動産</option>
+          <option value="3">コンサルティング・士業</option>
+          <option value="4">IT・インターネット</option>
+          <option value="5">メーカー・商社</option>
+          <option value="6">流通・小売・サービス</option>
+          <option value="7">メディカル</option>
+          <option value="8">マスコミ・メディア</option>
+          <option value="9">エンターテインメント</option>
+          <option value="10">運輸・物流</option>
+          <option value="11">エネルギー</option>
+          <option value="12">その他</option>
+        </select>
       </div>
 
       <div class="form-item">
