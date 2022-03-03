@@ -47,6 +47,30 @@
 
         <div class="form-item">
           <div class="item-label">
+            <span class="required-tag">必須</span>対象者
+          </div>
+          <label>
+            <input type="radio" name="remote-work" value="サンプル" />
+            新卒
+          </label>
+          <label>
+            <input type="radio" name="remote-work" value="サンプル" />
+            中途
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="remote-work"
+              value="サンプル"
+              checked
+              required
+            />
+            両方
+          </label>
+        </div>
+
+        <div class="form-item">
+          <div class="item-label">
             <span class="required-tag">必須</span>部署・役職名
           </div>
           <select id="position" multiple required></select>
