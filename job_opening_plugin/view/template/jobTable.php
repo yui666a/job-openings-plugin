@@ -21,7 +21,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       </th>
       <td
         class="job_position column-job_position has-row-actions column-primary"
-        data-colname="ポジション"
+        data-colname="求人タイトル"
       >
         <div class="job_position">
           <a
@@ -30,13 +30,6 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
             data-tip="ID: {$post_id}"
             >{$title}</a
           >
-          <div class="company">
-            <span class="tips" data-tip="asdf"
-              ><a href="https://yui666a.github.io/home/pc.html(TODO)"
-                >{$author}</a
-              ></span
-            >
-          </div>
           <img
             class="company_logo"
             src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
@@ -53,7 +46,14 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       >
         <span class="job-type full-time">Full Time</span>
       </td>
-      <td class="job_location column-job_location" data-colname="所在地">
+      <td class="job_location column-job_location" data-colname="社名・勤務地">
+      <div class="company">
+            <span class="tips" data-tip="asdf"
+              ><a href="https://yui666a.github.io/home/pc.html(TODO)"
+                >{$author}</a
+              ></span
+            >
+          </div>
         <a
           class="google_map_link"
           href="https://maps.google.com/maps?q={$job_location}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
@@ -63,13 +63,13 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       <td class="job_status column-job_status" data-colname="ステータス">
         {$status_icon}
       </td>
-      <td class="job_posted column-job_posted" data-colname="掲載中">
+      <td class="job_posted column-job_posted" data-colname="作成日">
         <strong>{$post_date}</strong
         ><span
           >投稿者:
           <a
             href="/wp-admin/edit.php?post_type=job_listing&amp;orderby=title&amp;order=desc&amp;author=1"
-            >yui666a</a
+            >TODO: yui666a</a
           ></span
         >
       </td>
@@ -130,7 +130,7 @@ function make_job_openings_table_head()
       >
         <a
           href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
-          ><span>ポジション</span><span class="sorting-indicator"></span
+          ><span>求人タイトル</span><span class="sorting-indicator"></span
         ></a>
       </th>
       <th
@@ -147,7 +147,7 @@ function make_job_openings_table_head()
       >
         <a
           href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
-          ><span>所在地</span><span class="sorting-indicator"></span
+          ><span>社名・勤務地</span><span class="sorting-indicator"></span
         ></a>
       </th>
       <th scope="col" id="job_status" class="manage-column column-job_status">
@@ -160,7 +160,7 @@ function make_job_openings_table_head()
       >
         <a
           href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
-          ><span>掲載中</span><span class="sorting-indicator"></span
+          ><span>作成日</span><span class="sorting-indicator"></span
         ></a>
       </th>
       <th
