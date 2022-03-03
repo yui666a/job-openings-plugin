@@ -30,13 +30,6 @@ function make_company_table_row($data)
             data-tip="ID: {$data->co_id}"
             >{$data->co_name}</a
           >
-          <div class="company">
-            <span class="tips" data-tip="asdf"
-              ><a href="https://yui666a.github.io/home/pc.html(TODO)"
-                >{$data->co_name}</a
-              ></span
-            >
-          </div>
           <img
             class="company_logo"
             src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
@@ -50,7 +43,9 @@ function make_company_table_row($data)
       <td class="job_location column-job_location" data-colname="所在地">
         <a
           class="google_map_link"
-          >{$data->co_name}</a
+          href="https://maps.google.com/maps?q={$data->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
+          target="_blank" rel="noopener noreferrer"
+          >{$data->co_address}</a
         >
       </td>
       <td class="job_status column-job_status" data-colname="ステータス">
@@ -65,21 +60,17 @@ function make_company_table_row($data)
       <td class="job_actions column-job_actions" data-colname="操作">
         <div class="actions">
           <a
-            class="button button-icon tips icon-view"
-            href="http://aisohitoshi.wp.xdomain.jp/job/%e3%82%a2%e3%83%b3%e3%82%bf%e3%83%83%e3%83%81%e3%83%a3%e3%83%96%e3%83%ab-%e5%9c%b0%e7%90%83-full-time-%e3%82%b7%e3%83%a3%e3%83%83%e3%83%81%e3%83%a7%e3%81%95%e3%82%93/(TODO)"
-            data-tip="表示"
-            >表示</a
-          ><a
             class="button button-icon tips icon-edit"
             href="{$admin_url}post.php?post={$data->co_id}&amp;action=edit"
             data-tip="編集"
-            >編集</a
-          ><a
+            >編集
+          </a>
+          <a
             class="button button-icon tips icon-delete"
             href="{$admin_url}post.php?post={$data->co_id}&amp;action=trash&amp;_wpnonce=cf3bb74013"
             data-tip="削除"
-            >削除</a
-          >
+            >削除
+          </a>
         </div>
       </td>
     </tr>
