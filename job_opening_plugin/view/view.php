@@ -74,7 +74,7 @@ function job_openings_list()
 
   wp_reset_postdata(); // 投稿データのリセット
   // 表 フッターの表示
-  echo make_job_openings_table_foot();
+  echo make_job_openings_table_head();
 }
 
 /**
