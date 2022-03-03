@@ -150,7 +150,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         <div style="margin-bottom: 4px">
           <input type="radio" name="date_period" value="" checked />
           本日から
-          <input type="tel" id="start" name="trip_period" style="width: 50px" />
+          <input type="tel" id="start" name="trip_period" value="90" style="width: 50px" />
           日間表示する
         </div>
         <div>
