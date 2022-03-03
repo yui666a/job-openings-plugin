@@ -24,6 +24,7 @@ function create_table()
       co_id bigint UNSIGNED NOT NULL AUTO_INCREMENT,
       co_name VARCHAR(50) NOT NULL,
       user_id bigint UNSIGNED NOT NULL,
+      status VARCHAR(20) NOT NULL,
       co_url TEXT,
       co_pr_point LONGTEXT,
       co_zip_code VARCHAR(8),

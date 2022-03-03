@@ -76,7 +76,7 @@ add_action('admin_menu', function () {
     '設定',
     'manage_options',
     'job-openings-settings',
-    'settings', // TODO: edit here.
+    'settings',
     50
   );
 

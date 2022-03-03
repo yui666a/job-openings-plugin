@@ -98,7 +98,7 @@ function company_list()
   echo '</tbody>';
 
   // 表 フッターの表示
-  echo make_company_table_foot();
+  echo make_company_table_head();
   // ob_get_clean();
 }
 
