@@ -54,6 +54,7 @@ function add_files()
 
   // JS
   wp_enqueue_script('jo-main-script', plugin_dir_url(__FILE__) . 'js/main.js', array('jquery'), "0.1", true);
+  wp_enqueue_script('jo-coAutoInput-script', plugin_dir_url(__FILE__) . 'js/companyAutoInput.js', array('jquery'), "0.1", true);
   // CSS
   wp_enqueue_style('jo-normalize', plugin_dir_url(__FILE__) . 'css/normalize.css', "", "0.1");
   wp_enqueue_style('jo-main', plugin_dir_url(__FILE__) . 'css/style.css', "", "0.1");
