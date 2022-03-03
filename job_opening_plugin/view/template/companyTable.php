@@ -47,12 +47,6 @@ function make_company_table_row($data)
           <span class="screen-reader-text">詳細を追加表示</span>
         </button>
       </td>
-      <td
-        class="job_listing_type column-job_listing_type"
-        data-colname="タイプ"
-      >
-        <span class="job-type full-time">Full Time</span>
-      </td>
       <td class="job_location column-job_location" data-colname="所在地">
         <a
           class="google_map_link"
@@ -60,30 +54,14 @@ function make_company_table_row($data)
         >
       </td>
       <td class="job_status column-job_status" data-colname="ステータス">
-      {$data->co_name}
+      {$data->status}
       </td>
-      <td class="job_posted column-job_posted" data-colname="掲載中">
-        <strong>{$data->co_name}</strong
-        ><span
-          >投稿者:
-          <a
-            href="/wp-admin/edit.php?post_type=job_listing&amp;orderby=title&amp;order=desc&amp;author=1"
-            >yui666a</a
-          ></span
-        >
+      <td class="job_created column-job_created" data-colname="作成日">
+        <strong>{$data->created_at}</strong><br/>
       </td>
-      <td class="job_expires column-job_expires" data-colname="期限">
-        <strong>作成日：{$data->created_at}</strong><br/>
-        <strong>更新日：{$data->updated_at}</strong>
+      <td class="job_updated column-job_updated" data-colname="最終更新日">
+        <strong>{$data->updated_at}</strong>
       </td>
-      <td
-        class="job_listing_category column-job_listing_category"
-        data-colname="カテゴリー"
-      >
-        <span class="na">–</span>
-      </td>
-      <td class="featured_job column-featured_job" data-colname="注目 ?">–</td>
-      <td class="filled column-filled" data-colname="採用済み ?">–</td>
       <td class="job_actions column-job_actions" data-colname="操作">
         <div class="actions">
           <a
@@ -135,13 +113,6 @@ function make_company_table_head()
       </th>
       <th
         scope="col"
-        id="job_listing_type"
-        class="manage-column column-job_listing_type"
-      >
-        タイプ
-      </th>
-      <th
-        scope="col"
         id="job_location"
         class="manage-column column-job_location sortable desc"
       >
@@ -155,40 +126,23 @@ function make_company_table_head()
       </th>
       <th
         scope="col"
-        id="job_posted"
-        class="manage-column column-job_posted sortable desc"
-      >
-        <a
-          href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
-          ><span>掲載中</span><span class="sorting-indicator"></span
-        ></a>
-      </th>
-      <th
-        scope="col"
-        id="job_expires"
-        class="manage-column column-job_expires sortable desc"
+        id="job_created"
+        class="manage-column column-job_created sortable desc"
       >
         <a
           href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
-          ><span>期限</span><span class="sorting-indicator"></span
+          ><span>作成日</span><span class="sorting-indicator"></span
         ></a>
       </th>
       <th
         scope="col"
-        id="job_listing_category"
-        class="manage-column column-job_listing_category"
+        id="job_created"
+        class="manage-column column-job_created sortable desc"
       >
-        カテゴリー
-      </th>
-      <th
-        scope="col"
-        id="featured_job"
-        class="manage-column column-featured_job"
-      >
-        <span class="tips" data-tip="注目 ?">注目 ?</span>
-      </th>
-      <th scope="col" id="filled" class="manage-column column-filled">
-        <span class="tips" data-tip="採用済み ?">採用済み ?</span>
+        <a
+          href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
+          ><span>最終更新日</span><span class="sorting-indicator"></span
+        ></a>
       </th>
       <th scope="col" id="job_actions" class="manage-column column-job_actions">
         操作
@@ -197,64 +151,4 @@ function make_company_table_head()
   </thead>
 EOF;
   return $header;
-}
-
-function make_company_table_foot()
-{
-  $admin_url = esc_url(get_admin_url(''));
-
-  echo $footer = <<<EOF
-  <tfoot>
-      <tr>
-        <td class="manage-column column-cb check-column">
-          <label class="screen-reader-text" for="cb-select-all-2"
-            >すべて選択</label
-          ><input id="cb-select-all-2" type="checkbox" />
-        </td>
-        <th
-          scope="col"
-          class="manage-column column-job_position column-primary sorted desc"
-        >
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
-            ><span>ポジション</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_listing_type">タイプ</th>
-        <th scope="col" class="manage-column column-job_location sortable desc">
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
-            ><span>所在地</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_status">
-          <span class="tips" data-tip="ステータス">ステータス</span>
-        </th>
-        <th scope="col" class="manage-column column-job_posted sortable desc">
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
-            ><span>掲載中</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_expires sortable desc">
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
-            ><span>期限</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_listing_category">
-          カテゴリー
-        </th>
-        <th scope="col" class="manage-column column-featured_job">
-          <span class="tips" data-tip="注目 ?">注目 ?</span>
-        </th>
-        <th scope="col" class="manage-column column-filled">
-          <span class="tips" data-tip="採用済み ?">採用済み ?</span>
-        </th>
-        <th scope="col" class="manage-column column-job_actions">操作</th>
-      </tr>
-    </tfoot>
-  </table>
-EOF;
-
 }
