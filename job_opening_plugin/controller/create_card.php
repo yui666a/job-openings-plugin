@@ -3,9 +3,7 @@
 function create_card($user)
 {
   // $post_id = wp_insert_post( array( 'post_title'=>'テスト投稿', 'post_content'=>'この投稿はテストです。' ) );
-  console_log("create_card");
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
-    console_log("haitta");
     global $wpdb;
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
@@ -20,10 +18,8 @@ function create_card($user)
     $trip_period = $_POST['trip_period'];
     $trip_start = $_POST['trip_start'];
     $remote_work = $_POST['trip_last'];
-    console_log("代入完了");
     // セッションキーとチケットが一致しているどうか
     if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-      console_log("セッション入った");
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
         'post_content'   => $work_detail, // 投稿の全文。
@@ -50,7 +46,6 @@ function create_card($user)
         // 'tax_input'      => [ array( <タクソノミー> => <array | string>, ...) ],  // カスタムタクソノミーとターム。デフォルトは空。
         // 'page_template'  => [ <文字列> ],  // テンプレートファイルの名前、例えば template.php 等。デフォルトは空。
       );
-      console_log("配列完了");
       $wp_error= null;
       $post_id = wp_insert_post( $post, $wp_error );
       $message = '登録処理が完了しました';
@@ -77,5 +72,5 @@ EOF;
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  echo create_job_opening($user, $action_url, $session_key, $companies);
+  return create_job_opening($user, $action_url, $session_key, $companies);
 }

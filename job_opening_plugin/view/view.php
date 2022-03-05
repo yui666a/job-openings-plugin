@@ -1,23 +1,5 @@
 <?php
 
-/**
- * (未使用) メインメニューページ内容の表示・更新処理
- * @deprecated version 0.1
- */
-function main_menu_page_contents()
-{
-  // HTML表示
-  echo <<<EOF
-  <div class="wrap">
-    <h2>メインメニュー</h2>
-    <p>
-      job-openingsのページです。
-    </p>
-  </div>
-EOF;
-}
-
-
 //=================================================
 // サブメニュー  ページ内容の表示・更新処理
 //=================================================
@@ -43,9 +25,9 @@ function job_openings_list()
   $the_query = get_posts($args);
   // query_posts($args);
   // $posts_array = get_posts($args);
-
-  echo make_job_openings_table_head();
-  echo '<tbody id="the-list">';
+  $html = "";
+  $html .= make_job_openings_table_head();
+  $html .=  '<tbody id="the-list">';
   // ループ
   global $post;
   foreach ($the_query as $post) :
@@ -68,13 +50,14 @@ function job_openings_list()
     } else {
       $status_icon = '<span data-tip="非公開" class="tips status-draft">非公開</span>';
     }
-    echo make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon);
+    $html .=  make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon);
   endforeach;
-  echo '</tbody>';
+  $html .=  '</tbody>';
 
   wp_reset_postdata(); // 投稿データのリセット
   // 表 フッターの表示
-  echo make_job_openings_table_head();
+  $html .=  make_job_openings_table_head();
+  return $html;
 }
 
 /**
@@ -84,22 +67,23 @@ function company_list()
 {
   global $wpdb;
   $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=" . wp_get_current_user()->ID . ";";
-  console_log($query);
   $companies = $wpdb->get_results($query, OBJECT);
 
+  $html = "";
   // 表 ヘッダーの表示
-  echo make_company_table_head();
+  $html .=  make_company_table_head();
 
-  echo '<tbody id="the-list">';
+  $html .=  '<tbody id="the-list">';
   // ob_start();
   foreach ($companies as $data) :
-    echo make_company_table_row($data);
+    $html .=  make_company_table_row($data);
   endforeach;
-  echo '</tbody>';
+  $html .=  '</tbody>';
 
   // 表 フッターの表示
-  echo make_company_table_head();
+  $html .=  make_company_table_head();
   // ob_get_clean();
+  return $html;
 }
 
 /**
@@ -108,7 +92,8 @@ function company_list()
 function job_openings_add()
 {
   $user = wp_get_current_user();
-  echo create_card($user);
+  // echo create_card($user);
+  return create_card($user);
 }
 
 /**
@@ -117,7 +102,8 @@ function job_openings_add()
 function company_add()
 {
   $user = wp_get_current_user();
-  echo create_company($user);
+  // echo create_company($user);
+  return create_company($user);
 }
 
 /**

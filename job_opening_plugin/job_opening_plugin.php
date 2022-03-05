@@ -15,16 +15,12 @@ Author URI: https://yui666a.github.io/home/
 
 function console_log($data)
 {
-  echo '<script>';
-  echo 'console.log(' . json_encode($data) . ')';
-  echo '</script>';
+  echo '<script>console.log(' . json_encode($data) . ')</script>';
 }
 
 function console_error($data)
 {
-  echo '<script>';
-  echo 'console.error(' . json_encode($data) . ')';
-  echo '</script>';
+  echo '<script>console.error(' . json_encode($data) . ')</script>';
 }
 
 // 定数定義
@@ -86,3 +82,13 @@ register_activation_hook(__FILE__, 'on_activate');
 function on_deactivation() {
 }
 register_deactivation_hook(__FILE__, 'on_deactivation');
+
+
+/**
+ * ショートコードの登録
+ */
+add_shortcode('job_openings_list', 'job_openings_list');
+add_shortcode('job_openings_add', 'job_openings_add');
+add_shortcode('company_list', 'company_list');
+add_shortcode('company_add', 'company_add');
+
