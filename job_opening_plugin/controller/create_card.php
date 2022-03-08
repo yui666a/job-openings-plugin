@@ -14,12 +14,25 @@ function create_card($user)
     $location = $_POST['location'];
     $remote_work = $_POST['remote_work'];
     $occupation = $_POST['occupation'];
-    $date_period = $_POST['date_period'];
+    $date_period_type = $_POST['date_period_type'];
     $trip_period = $_POST['trip_period'];
     $trip_start = $_POST['trip_start'];
-    $remote_work = $_POST['trip_last'];
+    $trip_last = $_POST['trip_last'];
+
     // セッションキーとチケットが一致しているどうか
     if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
+      if($date_period_type == "period"){
+        $date = new DateTime();
+        $date->modify('+'.$trip_period.' day');
+
+        $expired_date = $date->format('Y-m-d');
+        $post_date = $date->format('Y-m-d H:i:s');
+      }else{
+        $expired_date = $trip_last;
+        $date = new DateTime($trip_start);
+        $post_date = $date->format('Y-m-d H:i:s');
+      }
+
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
         'post_content'   => $work_detail, // 投稿の全文。
@@ -38,7 +51,7 @@ function create_card($user)
         // 'guid'           => // 普通はこれを指定せず WordPress に任せてください。
         // 'post_content_filtered' => // 普通はこれを指定せず WordPress に任せてください。
         // 'post_excerpt'   => [ <文字列> ],  // 投稿の抜粋。
-        // 'post_date'      => [ Y-m-d H:i:s ],  // 投稿の作成日時。date('Y-m-d H:i:s')
+        'post_date'      => $post_date,  // 投稿の作成日時。date('Y-m-d H:i:s')
         // 'post_date_gmt'  => [ Y-m-d H:i:s ],  // 投稿の作成日時（GMT）。
         'comment_status' => 'closed',  // 'open' ならコメントを許可。デフォルトはオプション 'default_comment_status' の値、または 'closed'。
         // 'post_category'  => [ array(<カテゴリー ID>, ...) ],  // 投稿カテゴリー。デフォルトは空（カテゴリーなし）。
@@ -48,6 +61,7 @@ function create_card($user)
       );
       $wp_error= null;
       $post_id = wp_insert_post( $post, $wp_error );
+      add_post_meta( $post_id, '_expired_date', $expired_date );
       $message = '登録処理が完了しました';
     } else {
       $message = 'すでに送信済みです';
