@@ -3,10 +3,6 @@
 function create_company_template($user, $action_url, $session_key)
 {
   $html = <<<EOF
-  <header>
-    新規登録
-    <span class="close-button"></span>
-  </header>
 
   <div class="company-information">
     <h3>企業情報</h3>

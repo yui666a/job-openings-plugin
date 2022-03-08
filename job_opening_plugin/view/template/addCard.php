@@ -15,7 +15,6 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       'co_pr_point' => $data->co_pr_point,
       'co_zip_code' => $data->co_zip_code,
       'co_address' => $data->co_address,
-      'co_sector' => $data->co_sector,
       'co_achievement' => $data->co_achievement,
       'co_office_hours' => $data->co_office_hours,
       'co_employee_benefits' => $data->co_employee_benefits,
@@ -27,15 +26,11 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   $companies_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 
   $html = <<<EOF
-  <header>
-    新規登録
-    <span class="close-button"></span>
-  </header>
 
   <!-- main -->
-  <div class="job-information">
-    <h3>求人情報</h3>
-    <form action="{$action_url}" method="post" class="TODO">
+  <form action="{$action_url}" method="post" class="TODO">
+    <div class="job-information">
+      <h3>求人情報</h3>
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -44,11 +39,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       <div class="form-item">
         <div class="item-label">募集企業名</div>
         {$companies_selector}
-        <div class="form-description">
-          任意のID（貴社内の求人管理ID等）または，URLをご入力いただけます
-        </div>
       </div>
-
 
       <div class="form-item">
         <div class="item-label">求人管理</div>
@@ -161,11 +152,19 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
       </div>
 
+    </div>
+    <div class="job-information">
+      <h3>企業情報</h3>
 
-
-      <h3>ここから企業情報</h3>
-
-
+      <div class="form-item">
+        <div class="item-label">募集企業名</div>
+        <input
+          type="text"
+          name="company_name"
+          id="company_name"
+          placeholder="株式会社 XXXX-XXXX HOLDINGS"
+        />
+      </div>
 
       <div class="form-item">
         <div class="item-label">業種</div>
@@ -259,8 +258,9 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           <input type="submit" class="button confirm" value="投稿する" />
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
+
 EOF;
   return $html;
 }

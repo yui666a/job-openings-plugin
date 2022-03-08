@@ -10,9 +10,9 @@ $(function() {
     var company_data = companies_data.filter(function(item, index){
       if (item.co_id == id ) return true;
     });
-    console.log(company_data);
 
     //選択したvalue値をp要素に出力
+    $('[name=company_name]').val(company_data[0].co_name);
     $('[name=company_sector]').val(company_data[0].co_sector);
     $('[name=company_url]').val(company_data[0].co_url);
     $('[name=company_pr]').val(company_data[0].co_pr_point);
