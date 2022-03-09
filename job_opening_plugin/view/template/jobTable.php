@@ -1,8 +1,10 @@
 <?php
 
-function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon)
+function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon, $permalink)
 {
   $admin_url = esc_url(get_admin_url(''));
+  $root_url = esc_url(get_site_url());
+
   $job_openings_table_main = <<<EOF
     <tr
       id="post-{$post_id}"
@@ -48,11 +50,10 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       </td>
       <td class="job_location column-job_location" data-colname="社名・勤務地">
       <div class="company">
-            <span class="tips" data-tip="asdf"
-              ><a href="https://yui666a.github.io/home/pc.html(TODO)"
-                >{$author}</a
-              ></span
-            >
+            <span class="tips" data-tip="asdf">
+              <!--<a href="https://yui666a.github.io/home/pc.html(TODO)"></a>-->
+              {$author}
+            </span>
           </div>
         <a
           class="google_map_link"
@@ -88,12 +89,12 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
         <div class="actions">
           <a
             class="button button-icon tips icon-view"
-            href="http://aisohitoshi.wp.xdomain.jp/job/%e3%82%a2%e3%83%b3%e3%82%bf%e3%83%83%e3%83%81%e3%83%a3%e3%83%96%e3%83%ab-%e5%9c%b0%e7%90%83-full-time-%e3%82%b7%e3%83%a3%e3%83%83%e3%83%81%e3%83%a7%e3%81%95%e3%82%93/(TODO)"
+            href="{$permalink}"
             data-tip="表示"
             >表示</a
           ><a
             class="button button-icon tips icon-edit"
-            href="{$admin_url}post.php?post={$post_id}&amp;action=edit"
+            href="edit_post.php?id={$post_id}"
             data-tip="編集"
             >編集</a
           ><a

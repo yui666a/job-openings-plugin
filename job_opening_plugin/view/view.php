@@ -25,25 +25,27 @@ function job_openings_list()
       // 'posts_per_page' => 3,	// 表示件数
       'offset' => 0,
       'post_status' => 'publish, inherit, pending, private, future, draft, trash',  // 全て取得
-      'post_type' => array('job_opening', 'job_listing'),
+      // 'post_type' => array('job_opening', 'job_listing','job_openings'),
+      'post_type' => array('job_openings'),
       'orderby' => 'date',  //新着順
       'order' => 'ASC',  // 昇順
       'numberposts' => -1, //全件取得
     );
 
-    $the_query = get_posts($args);
+    $posts = get_posts($args);
     // query_posts($args);
     // $posts_array = get_posts($args);
     $html .= make_job_openings_table_head();
     $html .=  '<tbody id="the-list">';
     // ループ
     global $post;
-    foreach ($the_query as $post) :
+    foreach ($posts as $post) :
       setup_postdata($post);
       $post_id = get_the_ID();
       $title = get_the_title();
       $author = get_the_author();
       $post_date = get_the_date();
+      $permalink = get_permalink( $post_id );
       $job_expires = get_post_meta($post_id, '_job_expires', true);
       $job_location = get_post_meta($post_id, '_job_location', true);
 
@@ -58,7 +60,7 @@ function job_openings_list()
       } else {
         $status_icon = '<span data-tip="非公開" class="tips status-draft">非公開</span>';
       }
-      $html .=  make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon);
+      $html .=  make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon, $permalink);
     endforeach;
     $html .=  '</tbody>';
 
@@ -167,4 +169,18 @@ function settings()
 {
   $user = wp_get_current_user();
   // echo create_company($user);
+}
+
+
+
+/**
+ * 企業追加ページ用の関数
+ */
+function user_job_openings()
+{
+  $user = wp_get_current_user();
+  $html = "";
+  $html .= create_company($user);
+
+  return $html;
 }

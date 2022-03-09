@@ -70,7 +70,8 @@ require_once(JOB_OPENING__PLUGIN_DIR . 'view/view.php');
 /**
  * プラグインを有効にしたときの処理
  */
-function on_activate() {
+function on_activate()
+{
   include_once(JOB_OPENING__PLUGIN_DIR . 'model/createDB.php');
   create_table();
 }
@@ -79,7 +80,8 @@ register_activation_hook(__FILE__, 'on_activate');
 /**
  * TODO: プラグインを無効にしたときの処理を書く
  */
-function on_deactivation() {
+function on_deactivation()
+{
 }
 register_deactivation_hook(__FILE__, 'on_deactivation');
 
@@ -91,4 +93,85 @@ add_shortcode('job_openings_list', 'job_openings_list');
 add_shortcode('job_openings_add', 'job_openings_add');
 add_shortcode('company_list', 'company_list');
 add_shortcode('company_add', 'company_add');
+add_shortcode('user_job_openings', 'user_job_openings');
 
+
+
+function add_custom_post_type()
+{
+  $labels = array(
+    'name'               => '求人情報',
+    'singular_name'      => '求人情報',
+    'add_new'            => '新規求人',
+    'add_new_item'       => '新規求人の追加',
+    'edit_item'          => '求人情報の編集',
+    'new_item'           => '求人一覧',
+    'all_items'          => '求人一覧',
+    'view_item'          => '求人情報を見る',
+    'search_items'       => '求人情報を検索する',
+    'not_found'          => '求人情報はありません',
+    'not_found_in_trash' => 'ゴミ箱に求人情報はありません',
+    'parent_item_colon'  => '',
+    'menu_name'          => '求人情報'
+  );
+
+  $args = array(
+    'labels'             => $labels,
+    'public'             => true, // 利用する場合はtrueにする
+    'publicly_queryable' => true,
+    'show_ui'            => true,
+    'show_in_menu'       => true,
+    'query_var'          => true,
+    'rewrite'            => array('slug' => 'book'),
+    'capability_type'    => 'post',
+    'has_archive'        => true,
+    'hierarchical'       => false,
+    'menu_position'      => 5, // この投稿タイプが表示されるメニューの位置
+    'menu_icon'          => 'dashicons-edit', // メニューで使用するアイコン
+    'supports'           => array(
+      'title',
+      'editor',
+      'author',
+      // 'thumbnail', // サムネイル
+      // 'excerpt', // 抜粋
+      // 'comments', // コメント
+      'custom-fields',
+      'custom_feature' => [
+        'setting-1' => 'value',
+        'setting-2' => 'value',
+      ],
+    )
+  );
+
+  register_post_type(
+    'job_openings', // 1.投稿タイプ名 
+    $args
+  );
+}
+add_action('init', 'add_custom_post_type');
+
+// カスタムタクソノミーの追加
+function add_custom_taxonomy()
+{
+  // カテゴリー
+  register_taxonomy(
+    'job_openings-category', // 1.タクソノミーの名前
+    'job_openings',          // 2.利用する投稿タイプ
+    array(            // 3.オプション
+      'label' => 'カテゴリー', // タクソノミーの表示名
+      'hierarchical' => true, // 階層を持たせるかどうか
+      'public' => true, // 利用する場合はtrueにする
+    )
+  );
+  // タグ
+  register_taxonomy(
+    'job_openings-tag', // 1.タクソノミーの名前
+    'job_openings',     // 2.利用する投稿タイプ
+    array(       // 3.オプション
+      'label' => 'タグ', // タクソノミーの表示名
+      'hierarchical' => false, // 階層を持たせるかどうか
+      'public' => true, // 利用する場合はtrueにする
+    )
+  );
+}
+add_action('init', 'add_custom_taxonomy');

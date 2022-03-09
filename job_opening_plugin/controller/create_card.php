@@ -40,7 +40,7 @@ function create_card($user)
         'post_title'     => wp_strip_all_tags( $work_detail ), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
         'post_status'    => 'publish', // 公開ステータス。デフォルトは 'draft'。
-        'post_type'      => 'job_listing', // 投稿タイプ。デフォルトは 'post'。//  TODO: job_openingに変更
+        'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'。//  TODO: job_openingsに変更
         // 'post_author'    => [ <ユーザー ID> ],  // 作成者のユーザー ID。デフォルトはログイン中のユーザーの ID。
         'ping_status'    => 'open', // 'open' ならピンバック・トラックバックを許可。デフォルトはオプション 'default_ping_status' の値。
         // 'post_parent'    => [ <投稿 ID> ],  // 親投稿の ID。デフォルトは 0。
