@@ -21,16 +21,15 @@ function create_card($user)
 
     // セッションキーとチケットが一致しているどうか
     if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-      if($date_period_type == "period"){
+      if ($date_period_type == "period") {
         $date = new DateTime();
-        $date->modify('+'.$trip_period.' day');
-
+        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
+        $date->modify('+' . $trip_period . ' day'); // 掲載終了日
         $expired_date = $date->format('Y-m-d');
-        $post_date = $date->format('Y-m-d H:i:s');
-      }else{
-        $expired_date = $trip_last;
+      } else {
         $date = new DateTime($trip_start);
-        $post_date = $date->format('Y-m-d H:i:s');
+        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
+        $expired_date = $trip_last; // 掲載終了日
       }
 
 
@@ -46,7 +45,7 @@ EOF;
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
         'post_content'   => $content, // 投稿の全文。
         'post_name'      => $work_detail, // 投稿のスラッグ。
-        'post_title'     => wp_strip_all_tags( $work_detail ), // 投稿のタイトル。
+        'post_title'     => wp_strip_all_tags($work_detail), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
         'post_status'    => 'publish', // 公開ステータス。デフォルトは 'draft'。
         'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'。//  TODO: job_openingsに変更
@@ -68,10 +67,10 @@ EOF;
         // 'tax_input'      => [ array( <タクソノミー> => <array | string>, ...) ],  // カスタムタクソノミーとターム。デフォルトは空。
         // 'page_template'  => [ <文字列> ],  // テンプレートファイルの名前、例えば template.php 等。デフォルトは空。
       );
-      $wp_error= null;
-      $post_id = wp_insert_post( $post, $wp_error );
-      add_post_meta( $post_id, '_expired_date', $expired_date );
-      add_post_meta( $post_id, '_company_id', $company_id );
+      $wp_error = null;
+      $post_id = wp_insert_post($post, $wp_error);
+      add_post_meta($post_id, '_expired_date', $expired_date);
+      add_post_meta($post_id, '_company_id', $company_id);
       $message = '登録処理が完了しました';
     } else {
       $message = 'すでに送信済みです';
