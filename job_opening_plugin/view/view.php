@@ -28,7 +28,7 @@ function job_openings_list()
       // 'post_type' => array('job_opening', 'job_listing','job_openings'),
       'post_type' => array('job_openings'),
       'orderby' => 'date',  //新着順
-      'order' => 'ASC',  // 昇順
+      'order' => 'DESC',  // 降順 昇順(ASC)
       'numberposts' => -1, //全件取得
     );
 
@@ -55,10 +55,22 @@ function job_openings_list()
        * see: https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/get_post_status
        * TODO: if you have to separate more kinds, use switch statement.
        */
-      if (get_post_status($post_id) == 'publish') {
-        $status_icon = '<span data-tip="公開中" class="tips status-publish">公開中</span>';
-      } else {
-        $status_icon = '<span data-tip="非公開" class="tips status-draft">非公開</span>';
+      switch (get_post_status($post_id)){
+        case 'publish':
+          $status_icon = '<span data-tip="公開中" class="tips status-publish">公開中</span>';
+          break;
+        case 'auto-draft':
+          $status_icon = '<span data-tip="自動下書き" class="tips status-auto-draft">自動下書き</span>';
+          break;
+        case 'future':
+          $status_icon = '<span data-tip="予約投稿" class="tips status-future">予約投稿</span>';
+          break;
+        case 'trash':
+          $status_icon = '<span data-tip="ゴミ箱" class="tips status-trash">ゴミ箱</span>';
+          break;
+        default:
+          $status_icon = '<span data-tip="非公開" class="tips status-draft">非公開</span>';
+          break;
       }
       $html .=  make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon, $permalink);
     endforeach;
