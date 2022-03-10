@@ -4,6 +4,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
 {
   $admin_url = esc_url(get_admin_url(''));
   $root_url = esc_url(get_site_url());
+  $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'sac_jo_trash' . $post_id);
 
   $job_openings_table_main = <<<EOF
     <tr
@@ -94,12 +95,12 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
             >表示</a
           ><a
             class="button button-icon tips icon-edit"
-            href="edit_post.php?id={$post_id}"
+            href="{$admin_url}post.php?post={$post_id}&action=edit"
             data-tip="編集"
             >編集</a
           ><a
             class="button button-icon tips icon-delete"
-            href="{$admin_url}post.php?post={$post_id}&amp;action=trash&amp;_wpnonce=cf3bb74013"
+            href="{$delete_url}"
             data-tip="削除"
             >削除</a
           >
