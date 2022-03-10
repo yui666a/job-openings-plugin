@@ -33,9 +33,18 @@ function create_card($user)
         $post_date = $date->format('Y-m-d H:i:s');
       }
 
+
+      $co_data = getCompanyById($company_id)[0];
+      $content = <<<EOF
+            <div>あたらしい文字★★求人情報★★</div>
+            <div>★★企業について★★</div>
+            <div>社名{$co_data->co_name}</div>
+            <div>PRポイント{$co_data->co_pr_point}</div>
+EOF;
+
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
-        'post_content'   => $work_detail, // 投稿の全文。
+        'post_content'   => $content, // 投稿の全文。
         'post_name'      => $work_detail, // 投稿のスラッグ。
         'post_title'     => wp_strip_all_tags( $work_detail ), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
@@ -62,6 +71,7 @@ function create_card($user)
       $wp_error= null;
       $post_id = wp_insert_post( $post, $wp_error );
       add_post_meta( $post_id, '_expired_date', $expired_date );
+      add_post_meta( $post_id, '_company_id', $company_id );
       $message = '登録処理が完了しました';
     } else {
       $message = 'すでに送信済みです';

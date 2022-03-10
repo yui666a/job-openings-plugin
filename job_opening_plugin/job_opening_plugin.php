@@ -96,6 +96,17 @@ add_shortcode('company_add', 'company_add');
 add_shortcode('user_job_openings', 'user_job_openings');
 
 
+/**
+ * テンプレートの指定
+ */
+function get_custom_page_template( $page_template ) {
+  $page_template = JOB_OPENING__PLUGIN_DIR . 'view/template/single-job_openings.php';
+  return $page_template;
+}
+// add_filter( 'page_template', 'get_custom_page_template' );
+add_filter( 'single_template', 'get_custom_page_template' );
+
+
 
 function add_custom_post_type()
 {
