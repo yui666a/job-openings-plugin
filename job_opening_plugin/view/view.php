@@ -17,16 +17,8 @@ function job_openings_list()
     || current_user_can('contributor')
   ) {
     $url = $_SERVER['REQUEST_URI'];
-    $mode = strstr($url, 'action=');
-    $mode = strstr($mode, '&', true);
-    if ($mode) {
-      $mode = explode("action=", $mode)[1];
-    }
-
-    $joid = strstr($url, 'post=');
-    if ($joid) {
-      $joid = explode("post=", $joid)[1];
-    }
+    $mode = $_GET["action"];
+    $joid = $_GET["post"];
 
     if (!$mode && !$joid) {
       $html .= aaa($user);
@@ -145,7 +137,7 @@ function user_job_openings()
   $html .= bbb_head();
 
   $posts = getPublishedCard();
-  foreach ($posts as $post){
+  foreach ($posts as $post) {
     setup_postdata($post);
     $post_id = get_the_ID();
     $title = get_the_title();
