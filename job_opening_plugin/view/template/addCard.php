@@ -15,6 +15,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       'co_pr_point' => $data->co_pr_point,
       'co_zip_code' => $data->co_zip_code,
       'co_address' => $data->co_address,
+      'co_sector' => $data->co_sector,
       'co_achievement' => $data->co_achievement,
       'co_office_hours' => $data->co_office_hours,
       'co_employee_benefits' => $data->co_employee_benefits,
@@ -26,11 +27,15 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   $companies_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 
   $html = <<<EOF
+  <header>
+    新規登録
+    <span class="close-button"></span>
+  </header>
 
   <!-- main -->
-  <form action="{$action_url}" method="post" class="TODO">
-    <div class="job-information">
-      <h3>求人情報</h3>
+  <div class="job-information">
+    <h3>求人情報</h3>
+    <form action="{$action_url}" method="post" class="TODO">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -39,7 +44,11 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       <div class="form-item">
         <div class="item-label">募集企業名</div>
         {$companies_selector}
+        <div class="form-description">
+          任意のID（貴社内の求人管理ID等）または，URLをご入力いただけます
+        </div>
       </div>
+
 
       <div class="form-item">
         <div class="item-label">求人管理</div>
@@ -71,7 +80,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       </div>
 
       <div class="form-item">
-        <div class="item-label"><span class="recommended-tag">歓迎</span>労働条件</div>
+        <div class="item-label">労働条件</div>
         <textarea name="working_conditions" rows="6"></textarea>
         <div class="form-description"></div>
       </div>
@@ -139,32 +148,24 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
 
         <div style="margin-bottom: 4px">
-          <input type="radio" name="date_period_type" value="period" checked />
+          <input type="radio" name="date_period" value="" checked />
           本日から
-          <input type="tel" id="start" name="trip_period" value="90" style="width: 50px" />
+          <input type="tel" id="start" name="trip_period" style="width: 50px" />
           日間表示する
         </div>
         <div>
-          <input type="radio" name="date_period_type" value="fromto" />
+          <input type="radio" name="date_period" value="" />
           <input type="date" id="start" name="trip_start" />
           　〜　
           <input type="date" id="start" name="trip_last" />
         </div>
       </div>
 
-    </div>
-    <div class="job-information">
-      <h3>企業情報</h3>
 
-      <div class="form-item">
-        <div class="item-label">募集企業名</div>
-        <input
-          type="text"
-          name="company_name"
-          id="company_name"
-          placeholder="株式会社 XXXX-XXXX HOLDINGS"
-        />
-      </div>
+
+      <h3>ここから企業情報</h3>
+
+
 
       <div class="form-item">
         <div class="item-label">業種</div>
@@ -195,9 +196,9 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>PR文
+          <span class="required-tag">必須</span>PR文
         </div>
-        <textarea name="company_pr" rows="6"></textarea>
+        <textarea name="company_pr" rows="6" required></textarea>
         <div class="form-description">
           貴社の強みや，メリットなどPR文をお書きください
         </div>
@@ -205,18 +206,18 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="required-tag">必須</span>本社所在地
+          <span class="required-tag">必須</span>本社所在地
         </div>
 
-        〒<input required type="text" name="company_zipcode" placeholder="999-9999" style="width: 100px;"></input>
+        〒<input type="text" name="company_zipcode" required placeholder="999-9999" style="width: 100px;"></input>
         <input type="text" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F" required></input>
       </div>
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>過去の実績
+          <span class="required-tag">必須</span>過去の実績
         </div>
-        <textarea name="company_achievement" rows="6"></textarea>
+        <textarea name="company_achievement" rows="6" required></textarea>
         <div class="form-description">
           TODO
         </div>
@@ -224,9 +225,9 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>勤務時間
+          <span class="required-tag">必須</span>勤務時間
         </div>
-        <textarea name="company_office_hour" rows="6" ></textarea>
+        <textarea name="company_office_hour" rows="6" required></textarea>
         <div class="form-description">
           TODO
         </div>
@@ -234,9 +235,9 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
+          <span class="required-tag">必須</span>待遇・福利厚生・支援制度など
         </div>
-        <textarea name="company_benefits" rows="6"></textarea>
+        <textarea name="company_benefits" rows="6" required></textarea>
         <div class="form-description">
           TODO
         </div>
@@ -244,9 +245,9 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>休日・休暇
+          <span class="required-tag">必須</span>休日・休暇
         </div>
-        <textarea name="company_day_off" rows="6"></textarea>
+        <textarea name="company_day_off" rows="6" required></textarea>
         <div class="form-description">
           TODO
         </div>
@@ -258,9 +259,8 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           <input type="submit" class="button confirm" value="投稿する" />
         </div>
       </div>
-    </div>
-  </form>
-
+    </form>
+  </div>
 EOF;
   return $html;
 }

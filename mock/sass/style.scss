@@ -10,7 +10,6 @@
   --gr800: #333;
   --gr900: #1a1a1a;
   --red: rgb(235, 0, 0);
-  --yellow: rgb(235, 200, 0);
 }
 
 html {
@@ -40,8 +39,8 @@ header {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 3px;
-      height: 27px;
+      width: 3px; /* 棒の幅（太さ） */
+      height: 27px; /* 棒の高さ */
       background: var(--gr300);
     }
 
@@ -70,8 +69,8 @@ header {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 2px;
-    height: 0.8em;
+    width: 2px; /* 棒の幅（太さ） */
+    height: 0.8em; /* 棒の高さ */
     background: rgb(240, 161, 15);
   }
 
@@ -89,18 +88,6 @@ header {
   border-radius: 3px;
   background: var(--red);
   color: var(--gr000);
-  font-weight: bold;
-  padding: 2px;
-  margin: 2px;
-  margin-bottom: 5px;
-  font-size: 0.8em;
-}
-
-.recommended-tag {
-  display: inline-block;
-  border-radius: 3px;
-  background: var(--yellow);
-  color: var(--gr800);
   font-weight: bold;
   padding: 2px;
   margin: 2px;
