@@ -4,6 +4,7 @@ function create_company($user)
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
     global $wpdb;
     $userId = $_POST['userId'];
+    $co_logo = $_POST['company_logo'];
     $co_name = $_POST['company_name'];
     $co_sector = $_POST['company_sector'];
     $co_url = $_POST['company_url'];
@@ -21,6 +22,7 @@ function create_company($user)
         $wpdb->prefix . 'sac_job_opening_companies',
         array(
           'co_name' => $co_name,
+          'co_logo' => $co_logo,
           'user_id' => $userId,
           'co_sector' => $co_sector,
           'co_url' => $co_url,
@@ -33,7 +35,7 @@ function create_company($user)
           'co_day_off' => $co_day_off,
           'created_at' => current_time('mysql', 0)
         ),
-        array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
+        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
       );
       $message = '登録処理が完了しました';
     } else {

@@ -26,7 +26,15 @@ function create_company_template($user, $action_url, $session_key)
       </div>
 
       <div class="form-item">
-        <div class="item-label">業種</div>
+        <div class="item-label"><span class="recommended-tag">歓迎</span>企業ロゴ</div>
+        <input type="file" name="company_logo" id="company_logo" accept="image/jpeg, image/png">
+        <div class="form-description">
+          貴社ロゴを挿入いただけます(約15MB以下のファイルに限ります)
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label"><span class="required-tag">必須</span>業種</div>
         <select name="company_sector" id="company_sector">
           <option value="">--選択してください--</option>
           <option value="1">金融・保険</option>
@@ -45,7 +53,7 @@ function create_company_template($user, $action_url, $session_key)
       </div>
 
       <div class="form-item">
-        <div class="item-label">企業HP URL</div>
+        <div class="item-label"><span class="recommended-tag">歓迎</span>企業HP URL</div>
         <input type="text" name="company_url" id="name" placeholder="https://~~~" />
         <div class="form-description">
           貴社ホームページのURLをご入力いただけます
