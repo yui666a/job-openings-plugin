@@ -4,7 +4,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
 {
   $admin_url = esc_url(get_admin_url(''));
   $root_url = esc_url(get_site_url());
-  $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'sac_jo_trash' . $post_id);
+  $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
 
   $job_openings_table_main = <<<EOF
     <tr
