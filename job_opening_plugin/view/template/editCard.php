@@ -28,7 +28,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $html = <<<EOF
 
   <!-- main -->
-  <form action="{$action_url}" method="post" class="TODO">
+  <form action="{$action_url}" method="post">
     <div class="job-information">
       <h3>求人情報</h3>
       <input type="hidden" name="post_method" value="Y">
@@ -218,7 +218,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         </div>
         <textarea name="company_achievement" rows="6"></textarea>
         <div class="form-description">
-          TODO
+        貴社のこれまでの実績をご記入ください
         </div>
       </div>
 
@@ -228,7 +228,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         </div>
         <textarea name="company_office_hour" rows="6" ></textarea>
         <div class="form-description">
-          TODO
+        貴社の普段の勤務時間や営業時間をご記入ください
         </div>
       </div>
 
@@ -238,7 +238,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         </div>
         <textarea name="company_benefits" rows="6"></textarea>
         <div class="form-description">
-          TODO
+        貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
       </div>
 
@@ -248,7 +248,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         </div>
         <textarea name="company_day_off" rows="6"></textarea>
         <div class="form-description">
-          TODO
+        貴社の休日や休暇面をご記入ください
         </div>
       </div>
 

@@ -7,10 +7,10 @@
 /*
 Plugin Name: Job Opening
 Plugin URI: https://github.com/yui666a/job-openings-plugin
-Description: TODO　求人情報を簡易登録可能なプラグイン
+Description: 求人情報を簡易登録可能なプラグイン
 Version: 0.1
 Author: yui666a
-Author URI: https://yui666a.github.io/home/
+Author URI: http://style-arts.jp/
 */
 
 function console_log($data)
@@ -24,11 +24,9 @@ function console_error($data)
 }
 
 // 定数定義
-// TODO: JOB_OPENING__MINIMUM_WP_VERSIONを定義
 define('JOB_OPENING_VERSION', '0.1');
 define('JOB_OPENING__PLUGIN_DIR', plugin_dir_path(__FILE__));
-// define( 'JOB_OPENING__MINIMUM_WP_VERSION', '5.0' );
-// define( 'JOB_OPENING_DELETE_LIMIT', 10000 );
+define( 'JOB_OPENING__MINIMUM_WP_VERSION', '5.9' );
 
 // セッションの開始
 session_start();

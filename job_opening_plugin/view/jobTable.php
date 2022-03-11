@@ -40,7 +40,6 @@ function aaa($user)
     /**
      * To check kinds of status,
      * see: https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/get_post_status
-     * TODO: if you have to separate more kinds, use switch statement.
      */
     switch (get_post_status($post_id)) {
       case 'publish':

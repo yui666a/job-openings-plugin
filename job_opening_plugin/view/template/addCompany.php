@@ -6,7 +6,7 @@ function create_company_template($user, $action_url, $session_key)
 
   <div class="company-information">
     <h3>企業情報</h3>
-    <form action="{$action_url}" method="post" class="TODO" name="TODO">
+    <form action="{$action_url}" method="post">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -77,7 +77,7 @@ function create_company_template($user, $action_url, $session_key)
         </div>
         <textarea name="company_achievement" rows="6"></textarea>
         <div class="form-description">
-          TODO
+          貴社のこれまでの実績をご記入ください
         </div>
       </div>
 
@@ -87,7 +87,7 @@ function create_company_template($user, $action_url, $session_key)
         </div>
         <textarea name="company_office_hour" rows="6"></textarea>
         <div class="form-description">
-          TODO
+          貴社の普段の勤務時間や営業時間をご記入ください
         </div>
       </div>
 
@@ -95,9 +95,9 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
         </div>
-        <textarea name="company_benefits" rows="6" ></textarea>
+        <textarea name="company_benefits" rows="6"></textarea>
         <div class="form-description">
-          TODO
+        貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
       </div>
 
@@ -107,7 +107,7 @@ function create_company_template($user, $action_url, $session_key)
         </div>
         <textarea name="company_day_off" rows="6"></textarea>
         <div class="form-description">
-          TODO
+        貴社の休日や休暇面をご記入ください
         </div>
       </div>
 

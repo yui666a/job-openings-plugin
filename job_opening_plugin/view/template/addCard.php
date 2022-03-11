@@ -28,7 +28,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   $html = <<<EOF
 
   <!-- main -->
-  <form action="{$action_url}" method="post" class="TODO">
+  <form action="{$action_url}" method="post">
     <div class="job-information">
       <h3>求人情報</h3>
       <input type="hidden" name="post_method" value="Y">
@@ -195,7 +195,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>PR文
+          <span class="recommended-tag">歓迎</span>PR文
         </div>
         <textarea name="company_pr" rows="6"></textarea>
         <div class="form-description">
@@ -214,11 +214,11 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>過去の実績
+          <span class="recommended-tag">歓迎</span>過去の実績
         </div>
         <textarea name="company_achievement" rows="6"></textarea>
         <div class="form-description">
-          TODO
+          貴社のこれまでの実績をご記入ください
         </div>
       </div>
 
@@ -226,9 +226,9 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>勤務時間
         </div>
-        <textarea name="company_office_hour" rows="6" ></textarea>
+        <textarea name="company_office_hour" rows="6"></textarea>
         <div class="form-description">
-          TODO
+          貴社の普段の勤務時間や営業時間をご記入ください
         </div>
       </div>
 
@@ -238,7 +238,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
         <textarea name="company_benefits" rows="6"></textarea>
         <div class="form-description">
-          TODO
+          貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
       </div>
 
@@ -248,7 +248,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
         <textarea name="company_day_off" rows="6"></textarea>
         <div class="form-description">
-          TODO
+        貴社の休日や休暇面をご記入ください
         </div>
       </div>
 

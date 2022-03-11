@@ -52,7 +52,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       <td class="job_location column-job_location" data-colname="社名・勤務地">
       <div class="company">
             <span class="tips" data-tip="asdf">
-              <!--<a href="https://yui666a.github.io/home/pc.html(TODO)"></a>-->
+              <!--TODO 作者をa tagリンクにする-->
               {$author}
             </span>
           </div>
@@ -66,14 +66,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
         {$status_icon}
       </td>
       <td class="job_posted column-job_posted" data-colname="作成日">
-        <strong>{$post_date}</strong
-        ><span
-          >投稿者:
-          <a
-            href="/wp-admin/edit.php?post_type=job_listing&amp;orderby=title&amp;order=desc&amp;author=1"
-            >TODO: yui666a</a
-          ></span
-        >
+        <strong>{$post_date}</strong>
       </td>
       <td class="job_expires column-job_expires" data-colname="期限">
         <strong>{$job_expires}</strong>
