@@ -1,8 +1,11 @@
 <?php
 
-function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon)
+function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon, $permalink)
 {
   $admin_url = esc_url(get_admin_url(''));
+  $root_url = esc_url(get_site_url());
+  $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
+  $current_request = $_SERVER["REQUEST_URI"];
   $job_openings_table_main = <<<EOF
     <tr
       id="post-{$post_id}"
@@ -21,7 +24,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       </th>
       <td
         class="job_position column-job_position has-row-actions column-primary"
-        data-colname="ポジション"
+        data-colname="求人タイトル"
       >
         <div class="job_position">
           <a
@@ -30,13 +33,6 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
             data-tip="ID: {$post_id}"
             >{$title}</a
           >
-          <div class="company">
-            <span class="tips" data-tip="asdf"
-              ><a href="https://yui666a.github.io/home/pc.html(TODO)"
-                >{$author}</a
-              ></span
-            >
-          </div>
           <img
             class="company_logo"
             src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
@@ -53,7 +49,13 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       >
         <span class="job-type full-time">Full Time</span>
       </td>
-      <td class="job_location column-job_location" data-colname="所在地">
+      <td class="job_location column-job_location" data-colname="社名・勤務地">
+      <div class="company">
+            <span class="tips" data-tip="asdf">
+              <!--<a href="https://yui666a.github.io/home/pc.html(TODO)"></a>-->
+              {$author}
+            </span>
+          </div>
         <a
           class="google_map_link"
           href="https://maps.google.com/maps?q={$job_location}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
@@ -63,13 +65,13 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       <td class="job_status column-job_status" data-colname="ステータス">
         {$status_icon}
       </td>
-      <td class="job_posted column-job_posted" data-colname="掲載中">
+      <td class="job_posted column-job_posted" data-colname="作成日">
         <strong>{$post_date}</strong
         ><span
           >投稿者:
           <a
             href="/wp-admin/edit.php?post_type=job_listing&amp;orderby=title&amp;order=desc&amp;author=1"
-            >yui666a</a
+            >TODO: yui666a</a
           ></span
         >
       </td>
@@ -88,17 +90,17 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
         <div class="actions">
           <a
             class="button button-icon tips icon-view"
-            href="http://aisohitoshi.wp.xdomain.jp/job/%e3%82%a2%e3%83%b3%e3%82%bf%e3%83%83%e3%83%81%e3%83%a3%e3%83%96%e3%83%ab-%e5%9c%b0%e7%90%83-full-time-%e3%82%b7%e3%83%a3%e3%83%83%e3%83%81%e3%83%a7%e3%81%95%e3%82%93/(TODO)"
+            href="{$permalink}"
             data-tip="表示"
             >表示</a
           ><a
             class="button button-icon tips icon-edit"
-            href="{$admin_url}post.php?post={$post_id}&amp;action=edit"
+            href="{$current_request}&action=edit&post={$post_id}"
             data-tip="編集"
             >編集</a
           ><a
             class="button button-icon tips icon-delete"
-            href="{$admin_url}post.php?post={$post_id}&amp;action=trash&amp;_wpnonce=cf3bb74013"
+            href="{$delete_url}"
             data-tip="削除"
             >削除</a
           >
@@ -130,7 +132,7 @@ function make_job_openings_table_head()
       >
         <a
           href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
-          ><span>ポジション</span><span class="sorting-indicator"></span
+          ><span>求人タイトル</span><span class="sorting-indicator"></span
         ></a>
       </th>
       <th
@@ -147,7 +149,7 @@ function make_job_openings_table_head()
       >
         <a
           href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
-          ><span>所在地</span><span class="sorting-indicator"></span
+          ><span>社名・勤務地</span><span class="sorting-indicator"></span
         ></a>
       </th>
       <th scope="col" id="job_status" class="manage-column column-job_status">
@@ -160,7 +162,7 @@ function make_job_openings_table_head()
       >
         <a
           href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
-          ><span>掲載中</span><span class="sorting-indicator"></span
+          ><span>作成日</span><span class="sorting-indicator"></span
         ></a>
       </th>
       <th
@@ -197,64 +199,4 @@ function make_job_openings_table_head()
   </thead>
 EOF;
   return $header;
-}
-
-function make_job_openings_table_foot()
-{
-  $admin_url = esc_url(get_admin_url(''));
-
-  echo $footer = <<<EOF
-  <tfoot>
-      <tr>
-        <td class="manage-column column-cb check-column">
-          <label class="screen-reader-text" for="cb-select-all-2"
-            >すべて選択</label
-          ><input id="cb-select-all-2" type="checkbox" />
-        </td>
-        <th
-          scope="col"
-          class="manage-column column-job_position column-primary sorted desc"
-        >
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=title&amp;order=asc"
-            ><span>ポジション</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_listing_type">タイプ</th>
-        <th scope="col" class="manage-column column-job_location sortable desc">
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_location&amp;order=asc"
-            ><span>所在地</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_status">
-          <span class="tips" data-tip="ステータス">ステータス</span>
-        </th>
-        <th scope="col" class="manage-column column-job_posted sortable desc">
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=date&amp;order=asc"
-            ><span>掲載中</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_expires sortable desc">
-          <a
-            href="{$admin_url}edit.php?post_type=job_listing&amp;orderby=job_expires&amp;order=asc"
-            ><span>期限</span><span class="sorting-indicator"></span
-          ></a>
-        </th>
-        <th scope="col" class="manage-column column-job_listing_category">
-          カテゴリー
-        </th>
-        <th scope="col" class="manage-column column-featured_job">
-          <span class="tips" data-tip="注目 ?">注目 ?</span>
-        </th>
-        <th scope="col" class="manage-column column-filled">
-          <span class="tips" data-tip="採用済み ?">採用済み ?</span>
-        </th>
-        <th scope="col" class="manage-column column-job_actions">操作</th>
-      </tr>
-    </tfoot>
-  </table>
-EOF;
-
 }

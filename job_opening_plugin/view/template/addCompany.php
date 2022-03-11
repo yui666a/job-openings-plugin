@@ -3,10 +3,6 @@
 function create_company_template($user, $action_url, $session_key)
 {
   $html = <<<EOF
-  <header>
-    新規登録
-    <span class="close-button"></span>
-  </header>
 
   <div class="company-information">
     <h3>企業情報</h3>
@@ -58,9 +54,9 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>PR文
+          <span class="recommended-tag">歓迎</span>PR文
         </div>
-        <textarea name="company_pr" rows="6" required></textarea>
+        <textarea name="company_pr" rows="6"></textarea>
         <div class="form-description">
           貴社の強みや，メリットなどPR文をお書きください
         </div>
@@ -77,9 +73,9 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>過去の実績
+          <span class="recommended-tag">歓迎</span>過去の実績
         </div>
-        <textarea name="company_achievement" rows="6" required></textarea>
+        <textarea name="company_achievement" rows="6"></textarea>
         <div class="form-description">
           TODO
         </div>
@@ -87,9 +83,9 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>勤務時間
+        <span class="recommended-tag">歓迎</span>勤務時間
         </div>
-        <textarea name="company_office_hour" rows="6" required></textarea>
+        <textarea name="company_office_hour" rows="6"></textarea>
         <div class="form-description">
           TODO
         </div>
@@ -97,9 +93,9 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>待遇・福利厚生・支援制度など
+        <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
         </div>
-        <textarea name="company_benefits" rows="6" required></textarea>
+        <textarea name="company_benefits" rows="6" ></textarea>
         <div class="form-description">
           TODO
         </div>
@@ -107,9 +103,9 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>休日・休暇
+        <span class="recommended-tag">歓迎</span>休日・休暇
         </div>
-        <textarea name="company_day_off" rows="6" required></textarea>
+        <textarea name="company_day_off" rows="6"></textarea>
         <div class="form-description">
           TODO
         </div>

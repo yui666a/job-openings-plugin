@@ -55,7 +55,7 @@ EOF;
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  echo create_company_template($user, $action_url, $session_key);
+  return create_company_template($user, $action_url, $session_key);
 }
 
 // add_filter('the_content', 'page_form_sample');

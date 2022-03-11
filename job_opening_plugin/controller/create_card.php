@@ -3,9 +3,7 @@
 function create_card($user)
 {
   // $post_id = wp_insert_post( array( 'post_title'=>'テスト投稿', 'post_content'=>'この投稿はテストです。' ) );
-  console_log("create_card");
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
-    console_log("haitta");
     global $wpdb;
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
@@ -16,22 +14,41 @@ function create_card($user)
     $location = $_POST['location'];
     $remote_work = $_POST['remote_work'];
     $occupation = $_POST['occupation'];
-    $date_period = $_POST['date_period'];
+    $date_period_type = $_POST['date_period_type'];
     $trip_period = $_POST['trip_period'];
     $trip_start = $_POST['trip_start'];
-    $remote_work = $_POST['trip_last'];
-    console_log("代入完了");
+    $trip_last = $_POST['trip_last'];
+
     // セッションキーとチケットが一致しているどうか
     if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-      console_log("セッション入った");
+      if ($date_period_type == "period") {
+        $date = new DateTime();
+        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
+        $date->modify('+' . $trip_period . ' day'); // 掲載終了日
+        $expired_date = $date->format('Y-m-d');
+      } else {
+        $date = new DateTime($trip_start);
+        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
+        $expired_date = $trip_last; // 掲載終了日
+      }
+
+
+      $co_data = getCompanyById($company_id)[0];
+      $content = <<<EOF
+            <div>あたらしい文字★★求人情報★★</div>
+            <div>★★企業について★★</div>
+            <div>社名{$co_data->co_name}</div>
+            <div>PRポイント{$co_data->co_pr_point}</div>
+EOF;
+
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
-        'post_content'   => $work_detail, // 投稿の全文。
+        'post_content'   => $content, // 投稿の全文。
         'post_name'      => $work_detail, // 投稿のスラッグ。
-        'post_title'     => wp_strip_all_tags( $work_detail ), // 投稿のタイトル。
+        'post_title'     => wp_strip_all_tags($work_detail), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
         'post_status'    => 'publish', // 公開ステータス。デフォルトは 'draft'。
-        'post_type'      => 'job_listing', // 投稿タイプ。デフォルトは 'post'。//  TODO: job_openingに変更
+        'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'。//  TODO: job_openingsに変更
         // 'post_author'    => [ <ユーザー ID> ],  // 作成者のユーザー ID。デフォルトはログイン中のユーザーの ID。
         'ping_status'    => 'open', // 'open' ならピンバック・トラックバックを許可。デフォルトはオプション 'default_ping_status' の値。
         // 'post_parent'    => [ <投稿 ID> ],  // 親投稿の ID。デフォルトは 0。
@@ -42,7 +59,7 @@ function create_card($user)
         // 'guid'           => // 普通はこれを指定せず WordPress に任せてください。
         // 'post_content_filtered' => // 普通はこれを指定せず WordPress に任せてください。
         // 'post_excerpt'   => [ <文字列> ],  // 投稿の抜粋。
-        // 'post_date'      => [ Y-m-d H:i:s ],  // 投稿の作成日時。date('Y-m-d H:i:s')
+        'post_date'      => $post_date,  // 投稿の作成日時。date('Y-m-d H:i:s')
         // 'post_date_gmt'  => [ Y-m-d H:i:s ],  // 投稿の作成日時（GMT）。
         'comment_status' => 'closed',  // 'open' ならコメントを許可。デフォルトはオプション 'default_comment_status' の値、または 'closed'。
         // 'post_category'  => [ array(<カテゴリー ID>, ...) ],  // 投稿カテゴリー。デフォルトは空（カテゴリーなし）。
@@ -50,9 +67,10 @@ function create_card($user)
         // 'tax_input'      => [ array( <タクソノミー> => <array | string>, ...) ],  // カスタムタクソノミーとターム。デフォルトは空。
         // 'page_template'  => [ <文字列> ],  // テンプレートファイルの名前、例えば template.php 等。デフォルトは空。
       );
-      console_log("配列完了");
-      $wp_error= null;
-      $post_id = wp_insert_post( $post, $wp_error );
+      $wp_error = null;
+      $post_id = wp_insert_post($post, $wp_error);
+      add_post_meta($post_id, '_expired_date', $expired_date);
+      add_post_meta($post_id, '_company_id', $company_id);
       $message = '登録処理が完了しました';
     } else {
       $message = 'すでに送信済みです';
@@ -77,5 +95,5 @@ EOF;
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  echo create_job_opening($user, $action_url, $session_key, $companies);
+  return create_job_opening($user, $action_url, $session_key, $companies);
 }

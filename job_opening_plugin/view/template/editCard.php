@@ -1,6 +1,6 @@
 <?php
 
-function create_job_opening($user, $action_url, $session_key, $companies)
+function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 {
   $companies_selector = '<select name="company_id" id="company_id"> <option value="">--選択してください--</option>';
   session_start();
