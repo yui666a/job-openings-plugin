@@ -37,7 +37,10 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       <input type="hidden" name="companies_data" value="{$companies_data}">
 
       <div class="form-item">
-        <div class="item-label">募集企業名</div>
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          募集企業名
+        </div>
         {$companies_selector}
       </div>
 
@@ -51,14 +54,41 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
+          <span class="required-tag">必須</span>求人タイプ
+        </div>
+        <label>
+          <input type="radio" name="recruitment_type" class="recruitment_type" value="new_graduate" />
+          新卒
+        </label>
+        <label>
+          <input type="radio" name="recruitment_type" class="recruitment_type" value="mid_career" />
+          中途
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="recruitment_type"
+            class="recruitment_type"
+            value="both"
+            required
+          />
+          どちらでも
+        </label>
+      </div>
+
+      <!--
+      <div class="form-item">
+        <div class="item-label">
           <span class="required-tag">必須</span>部署・役職名
         </div>
         <select id="position" name="position" multiple required></select>
+        <input type="text" name="add_position" id="add_position" placeholder="など" />
         <button class="add" type="button">＋追加</button>
         <div class="form-description">
           募集されるポジション（役職または部署）を記載してください
         </div>
       </div>
+      -->
 
       <div class="form-item">
         <div class="item-label">
@@ -76,6 +106,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         <div class="form-description"></div>
       </div>
 
+      <!--
       <div class="form-item">
         <div class="item-label"><span class="required-tag">必須</span>勤務地</div>
         <select id="location" name="location" multiple required></select>
@@ -88,24 +119,25 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           </label>
         </div>
       </div>
+      -->
 
       <div class="form-item">
         <div class="item-label">
           <span class="required-tag">必須</span>リモートワーク
         </div>
         <label>
-          <input type="radio" name="remote_work" value="サンプル" />
+          <input type="radio" name="remote_work" value="true" />
           可
         </label>
         <label>
-          <input type="radio" name="remote_work" value="サンプル" />
+          <input type="radio" name="remote_work" value="false" />
           不可
         </label>
         <label>
           <input
             type="radio"
             name="remote_work"
-            value="サンプル"
+            value="both"
             required
           />
           どちらでも
@@ -146,13 +178,20 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
         <div>
           <input type="radio" name="date_period_type" value="fromto" />
-          <input type="date" id="start" name="trip_start" />
+          <input type="date" id="start" name="trip_start" style="width:40%"/>
           　〜　
-          <input type="date" id="start" name="trip_last" />
+          <input type="date" id="start" name="trip_last" style="width:40%"/>
+        </div>
+      </div>
+      <div class="form-buttons">
+        <input type="submit" class="button draft" value="下書き保存" />
+        <div style="margin-left: 8px">
+          <input type="submit" class="button confirm" value="投稿する" />
         </div>
       </div>
 
     </div>
+    <!--
     <div class="job-information">
       <h3>企業情報</h3>
 
@@ -251,13 +290,13 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         貴社の休日や休暇面をご記入ください
         </div>
       </div>
-
       <div class="form-buttons">
         <input type="submit" class="button draft" value="下書き保存" />
         <div style="margin-left: 8px">
           <input type="submit" class="button confirm" value="投稿する" />
         </div>
       </div>
+    -->
     </div>
   </form>
 

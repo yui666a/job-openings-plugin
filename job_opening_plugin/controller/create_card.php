@@ -7,6 +7,7 @@ function create_card($user)
     global $wpdb;
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
+    $recruitment_type = $_POST['recruitment_type'];
     $url = $_POST['url'];
     $position = $_POST['position'];
     $work_detail = $_POST['work_detail'];
@@ -71,6 +72,8 @@ EOF;
       $post_id = wp_insert_post($post, $wp_error);
       add_post_meta($post_id, '_expired_date', $expired_date);
       add_post_meta($post_id, '_company_id', $company_id);
+      add_post_meta($post_id, '_recruitment_type', $recruitment_type);
+
       $message = '登録処理が完了しました';
     } else {
       $message = 'すでに送信済みです';
