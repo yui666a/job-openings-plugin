@@ -37,7 +37,10 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
       <input type="hidden" name="companies_data" value="{$companies_data}">
 
       <div class="form-item">
-        <div class="item-label">募集企業名</div>
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          募集企業名
+        </div>
         {$companies_selector}
       </div>
 
@@ -51,61 +54,22 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>部署・役職名
-        </div>
-        <select id="position" name="position" multiple required></select>
-        <button class="add" type="button">＋追加</button>
-        <div class="form-description">
-          募集されるポジション（役職または部署）を記載してください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-          <span class="required-tag">必須</span>仕事内容
-        </div>
-        <textarea name="work_detail" rows="6" required></textarea>
-        <div class="form-description">
-          仕事内容やミッションをわかりやすくご記載ください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label"><span class="recommended-tag">歓迎</span>労働条件</div>
-        <textarea name="working_conditions" rows="6"></textarea>
-        <div class="form-description"></div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label"><span class="required-tag">必須</span>勤務地</div>
-        <select id="location" name="location" multiple required></select>
-        <button class="add" type="button">＋追加</button>
-
-        <div>
-          <label>
-            <input type="checkbox" name="example" value="サンプル" />
-            勤務地問わず
-          </label>
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-          <span class="required-tag">必須</span>リモートワーク
+          <span class="required-tag">必須</span>求人タイプ
         </div>
         <label>
-          <input type="radio" name="remote_work" value="サンプル" />
-          可
+          <input type="radio" name="recruitment_type" class="recruitment_type" value="new_graduate" />
+          新卒
         </label>
         <label>
-          <input type="radio" name="remote_work" value="サンプル" />
-          不可
+          <input type="radio" name="recruitment_type" class="recruitment_type" value="mid_career" />
+          中途
         </label>
         <label>
           <input
             type="radio"
-            name="remote_work"
-            value="サンプル"
+            name="recruitment_type"
+            class="recruitment_type"
+            value="both"
             required
           />
           どちらでも
@@ -133,6 +97,76 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         </select>
       </div>
 
+      <!--
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>部署・役職名
+        </div>
+        <select id="position" name="position" multiple required></select>
+        <input type="text" name="add_position" id="add_position" placeholder="など" />
+        <button class="add" type="button">＋追加</button>
+        <div class="form-description">
+          募集されるポジション（役職または部署）を記載してください
+        </div>
+      </div>
+      -->
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>仕事内容
+        </div>
+        <textarea name="work_detail" rows="6" required></textarea>
+        <div class="form-description">
+          仕事内容やミッションをわかりやすくご記載ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label"><span class="recommended-tag">歓迎</span>労働条件</div>
+        <textarea name="working_conditions" rows="6"></textarea>
+        <div class="form-description"></div>
+      </div>
+
+      <!--
+      <div class="form-item">
+        <div class="item-label"><span class="required-tag">必須</span>勤務地</div>
+        <select id="location" name="location" multiple required></select>
+        <button class="add" type="button">＋追加</button>
+
+        <div>
+          <label>
+            <input type="checkbox" name="example" value="サンプル" />
+            勤務地問わず
+          </label>
+        </div>
+      </div>
+      -->
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>リモートワーク
+        </div>
+        <label>
+          <input type="radio" name="remote_work" value="true" />
+          可
+        </label>
+        <label>
+          <input type="radio" name="remote_work" value="false" />
+          不可
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="remote_work"
+            value="both"
+            required
+          />
+          どちらでも
+        </label>
+      </div>
+
+
+
       <div class="form-item">
         <div class="item-label">
           <span class="required-tag">必須</span>掲載期間
@@ -146,13 +180,20 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         </div>
         <div>
           <input type="radio" name="date_period_type" value="fromto" />
-          <input type="date" id="start" name="trip_start" />
+          <input type="date" id="start" name="trip_start" style="width:40%"/>
           　〜　
-          <input type="date" id="start" name="trip_last" />
+          <input type="date" id="start" name="trip_last" style="width:40%"/>
+        </div>
+      </div>
+      <div class="form-buttons">
+        <input type="submit" class="button draft" value="下書き保存" />
+        <div style="margin-left: 8px">
+          <input type="submit" class="button confirm" value="更新する" />
         </div>
       </div>
 
     </div>
+    <!--
     <div class="job-information">
       <h3>企業情報</h3>
 
@@ -195,7 +236,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>PR文
+          <span class="recommended-tag">歓迎</span>PR文
         </div>
         <textarea name="company_pr" rows="6"></textarea>
         <div class="form-description">
@@ -214,11 +255,11 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>過去の実績
+          <span class="recommended-tag">歓迎</span>過去の実績
         </div>
         <textarea name="company_achievement" rows="6"></textarea>
         <div class="form-description">
-        貴社のこれまでの実績をご記入ください
+          貴社のこれまでの実績をご記入ください
         </div>
       </div>
 
@@ -226,9 +267,9 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>勤務時間
         </div>
-        <textarea name="company_office_hour" rows="6" ></textarea>
+        <textarea name="company_office_hour" rows="6"></textarea>
         <div class="form-description">
-        貴社の普段の勤務時間や営業時間をご記入ください
+          貴社の普段の勤務時間や営業時間をご記入ください
         </div>
       </div>
 
@@ -238,7 +279,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         </div>
         <textarea name="company_benefits" rows="6"></textarea>
         <div class="form-description">
-        貴社の待遇・福利厚生・支援制度などをご記入ください
+          貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
       </div>
 
@@ -255,9 +296,10 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
       <div class="form-buttons">
         <input type="submit" class="button draft" value="下書き保存" />
         <div style="margin-left: 8px">
-          <input type="submit" class="button confirm" value="投稿する" />
+          <input type="submit" class="button confirm" value="更新する" />
         </div>
       </div>
+    -->
     </div>
   </form>
 
