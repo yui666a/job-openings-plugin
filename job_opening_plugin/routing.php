@@ -10,6 +10,7 @@ include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/editJob.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_company.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_card.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/company.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'controller/job_opening.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/jobTable.php');
 
 

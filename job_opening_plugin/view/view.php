@@ -143,7 +143,21 @@ function user_job_openings()
 {
   $html = "";
   $html .= bbb_head();
-  $html .= bbb();
+
+  $posts = getPublishedCard();
+  foreach ($posts as $post){
+    setup_postdata($post);
+    $post_id = get_the_ID();
+    $title = get_the_title();
+    $author = get_the_author();
+    $post_date = get_the_date();
+    $permalink = get_permalink($post_id);
+    $job_expires = get_post_meta($post_id, '_job_expires', true);
+    $job_location = get_post_meta($post_id, '_job_location', true);
+
+    $html .= bbb();
+  }
+
   $html .= bbb_foot();
   return $html;
 }
