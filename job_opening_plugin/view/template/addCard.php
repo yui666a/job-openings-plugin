@@ -76,6 +76,27 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </label>
       </div>
 
+      <div class="form-item">
+        <div class="item-label"><span class="required-tag">必須</span>職種</div>
+        <select name="occupation" id="occupation">
+          <option value="">--選択してください--</option>
+          <option value="dog">営業</option>
+          <option value="cat">事務・管理</option>
+          <option value="hamster">企画・マーケティング・経営・管理職</option>
+          <option value="parrot">サービス・販売・外食</option>
+          <option value="spider">Web・インターネット・ゲーム</option>
+          <option value="goldfish">クリエイティブ（メディア・アパレル・デザイン）</option>
+          <option value="dog">専門職（コンサルタント・士業・金融・不動産）</option>
+          <option value="dog">ITエンジニア（システム開発・SE・インフラ）</option>
+          <option value="dog">エンジニア（機械・電気・電子・半導体・制御）</option>
+          <option value="dog">素材・化学・食品・医薬品技術職</option>
+          <option value="dog">建築・土木技術職</option>
+          <option value="dog">技能工・設備・交通・運輸</option>
+          <option value="dog">医療・福祉・介護</option>
+          <option value="dog">教育・保育・公務員・農林水産・その他</option>
+        </select>
+      </div>
+
       <!--
       <div class="form-item">
         <div class="item-label">
@@ -142,27 +163,6 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           />
           どちらでも
         </label>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label"><span class="required-tag">必須</span>職種</div>
-        <select name="occupation" id="occupation">
-          <option value="">--選択してください--</option>
-          <option value="dog">営業</option>
-          <option value="cat">事務・管理</option>
-          <option value="hamster">企画・マーケティング・経営・管理職</option>
-          <option value="parrot">サービス・販売・外食</option>
-          <option value="spider">Web・インターネット・ゲーム</option>
-          <option value="goldfish">クリエイティブ（メディア・アパレル・デザイン）</option>
-          <option value="dog">専門職（コンサルタント・士業・金融・不動産）</option>
-          <option value="dog">ITエンジニア（システム開発・SE・インフラ）</option>
-          <option value="dog">エンジニア（機械・電気・電子・半導体・制御）</option>
-          <option value="dog">素材・化学・食品・医薬品技術職</option>
-          <option value="dog">建築・土木技術職</option>
-          <option value="dog">技能工・設備・交通・運輸</option>
-          <option value="dog">医療・福祉・介護</option>
-          <option value="dog">教育・保育・公務員・農林水産・その他</option>
-        </select>
       </div>
 
       <div class="form-item">
