@@ -1,6 +1,6 @@
 <?php
 
-include_once(JOB_OPENING__PLUGIN_DIR . 'view/jobTable.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/userJobOpening.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/jobTable.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/companyTable.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCard.php');
@@ -10,6 +10,7 @@ include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/editJob.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_company.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_card.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/company.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/jobTable.php');
 
 
 

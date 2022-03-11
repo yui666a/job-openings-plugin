@@ -36,9 +36,6 @@ function job_openings_list()
   } else {
     $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
   }
-
-
-
   return $html;
 }
 
@@ -144,9 +141,9 @@ function settings()
  */
 function user_job_openings()
 {
-  $user = wp_get_current_user();
   $html = "";
-  $html .= create_company($user);
-
+  $html .= bbb_head();
+  $html .= bbb();
+  $html .= bbb_foot();
   return $html;
 }

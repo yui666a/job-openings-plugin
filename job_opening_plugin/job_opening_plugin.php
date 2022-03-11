@@ -54,6 +54,7 @@ function add_files()
   // CSS
   wp_enqueue_style('jo-normalize', plugin_dir_url(__FILE__) . 'css/normalize.css', "", "0.1");
   wp_enqueue_style('jo-main', plugin_dir_url(__FILE__) . 'css/style.css', "", "0.1");
+  wp_enqueue_style('jo-user', plugin_dir_url(__FILE__) . 'css/userStyle.css', "", "0.1");
 }
 /**
  * wp_enqueue_scripts – フロントエンドをイベントトリガーにする
