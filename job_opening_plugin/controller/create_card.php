@@ -73,6 +73,12 @@ EOF;
       add_post_meta($post_id, '_expired_date', $expired_date);
       add_post_meta($post_id, '_company_id', $company_id);
       add_post_meta($post_id, '_recruitment_type', $recruitment_type);
+      add_post_meta($post_id, '_url', $url);
+      add_post_meta($post_id, '_position', $position);
+      add_post_meta($post_id, '_working_conditions', $working_conditions);
+      add_post_meta($post_id, '_occupation', $occupation);
+      add_post_meta($post_id, '_remote_work', $remote_work);
+      add_post_meta($post_id, '_location', $location);
 
       $message = '登録処理が完了しました';
     } else {
