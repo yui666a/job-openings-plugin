@@ -2,11 +2,27 @@
 
 function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 {
+  $post = get_post($job_id, "ARRAY_A");
+  $published_date = explode(" ", $post["post_date"])[0];
+  $expired_date = get_post_meta($job_id, '_expired_date', true);
+  $publishing_date = 1 + (strtotime($expired_date) - strtotime($published_date)) / 86400;
+  $company_id = get_post_meta($job_id, '_company_id', true);
+  $recruitment_type =  get_post_meta($job_id, '_recruitment_type', true);
+  $url = get_post_meta($job_id, '_url', true);
+  get_post_meta($job_id, '_position', true);
+  $working_conditions = get_post_meta($job_id, '_working_conditions', true);
+  $occupation = get_post_meta($job_id, '_occupation', true);
+  $remote_work = get_post_meta($job_id, '_remote_work', true);
+  get_post_meta($job_id, '_location', true);
+
+  // 企業セレクタの作成
   $companies_selector = '<select name="company_id" id="company_id"> <option value="">--選択してください--</option>';
   session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
-    $companies_selector .= '<option value="' . $data->co_id . '">' . $data->co_name . '</option>';
+    $isSelected = $data->co_id == $company_id  ? 'selected' : '';
+    $companies_selector .= '<option value="' . $data->co_id . '" ' . $isSelected . '>' . $data->co_name . '</option>';
+
     $multi_dimensional_array[] = array(
       'co_id' => $data->co_id,
       'co_name' => $data->co_name,
@@ -24,6 +40,48 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $companies_selector .= '</select>';
   $encoded_data = json_encode($multi_dimensional_array);
   $companies_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+
+  // 求人タイプ
+  $recruitment_options = array(["新卒", "new_graduate"], ["中途", "mid_career"], ["どちらでも", "both"]);
+  $recruitment_radio = "";
+  foreach ($recruitment_options as $option) {
+    $isChecked = $option[1] == $recruitment_type  ? 'checked' : '';
+    $recruitment_radio .= '<label> <input required type="radio" ' . $isChecked . ' name="recruitment_type" class="recruitment_type" value="' . $option[1] . '" />' . $option[0] . '</label>';
+  }
+
+  // 職種
+  $occupation_options = array(
+    ["", "--選択してください--"],
+    ["sales_associate", "営業"],
+    ["clerk", "事務・管理"],
+    ["marketer", "企画・マーケティング・経営・管理職"],
+    ["service", "サービス・販売・外食"],
+    ["web", "Web・インターネット・ゲーム"],
+    ["creative", "クリエイティブ（メディア・アパレル・デザイン）"],
+    ["expert", "専門職（コンサルタント・士業・金融・不動産）"],
+    ["it_engineer", "ITエンジニア（システム開発・SE・インフラ）"],
+    ["engineer", "エンジニア（機械・電気・電子・半導体・制御）"],
+    ["chemical_engineer", "素材・化学・食品・医薬品技術職"],
+    ["civil_engineer", "建築・土木技術職"],
+    ["transporter", "技能工・設備・交通・運輸"],
+    ["medical_welfare", "医療・福祉・介護"],
+    ["public_servant", "教育・保育・公務員・農林水産・その他"],
+  );
+
+  $occupation_selector = '<select name="occupation" id="occupation">';
+  foreach ($occupation_options as $option) {
+    $isSelected = $option[0] == $occupation  ? 'selected' : '';
+    $occupation_selector .= '<option ' . $isSelected . ' value="' . $option[0] . '">' . $option[1] . '</option>';
+  }
+  $occupation_selector .= '</select>';
+
+  // リモートワーク
+  $remote_options = array(["可", "true"], ["不可", "false"], ["どちらでも", "both"]);
+  $remote_radio = "";
+  foreach ($remote_options as $option) {
+    $isChecked = $option[1] == $remote_work  ? 'checked' : '';
+    $remote_radio .= '<label> <input required type="radio" ' . $isChecked . ' name="remote_work" class="remote_work" value="' . $option[1] . '" />' . $option[0] . '</label>';
+  }
 
   $html = <<<EOF
 
@@ -46,7 +104,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">求人管理</div>
-        <input type="text" name="url" id="url" placeholder="35470, https://~~~ など" />
+        <input type="text" name="url" id="url" placeholder="35470, https://~~~ など" value={$url}/>
         <div class="form-description">
           任意のID（貴社内の求人管理ID等）または，URLをご入力いただけます
         </div>
@@ -56,45 +114,12 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
           <span class="required-tag">必須</span>求人タイプ
         </div>
-        <label>
-          <input type="radio" name="recruitment_type" class="recruitment_type" value="new_graduate" />
-          新卒
-        </label>
-        <label>
-          <input type="radio" name="recruitment_type" class="recruitment_type" value="mid_career" />
-          中途
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="recruitment_type"
-            class="recruitment_type"
-            value="both"
-            required
-          />
-          どちらでも
-        </label>
+        {$recruitment_radio}
       </div>
 
       <div class="form-item">
         <div class="item-label"><span class="required-tag">必須</span>職種</div>
-        <select name="occupation" id="occupation">
-          <option value="">--選択してください--</option>
-          <option value="dog">営業</option>
-          <option value="cat">事務・管理</option>
-          <option value="hamster">企画・マーケティング・経営・管理職</option>
-          <option value="parrot">サービス・販売・外食</option>
-          <option value="spider">Web・インターネット・ゲーム</option>
-          <option value="goldfish">クリエイティブ（メディア・アパレル・デザイン）</option>
-          <option value="dog">専門職（コンサルタント・士業・金融・不動産）</option>
-          <option value="dog">ITエンジニア（システム開発・SE・インフラ）</option>
-          <option value="dog">エンジニア（機械・電気・電子・半導体・制御）</option>
-          <option value="dog">素材・化学・食品・医薬品技術職</option>
-          <option value="dog">建築・土木技術職</option>
-          <option value="dog">技能工・設備・交通・運輸</option>
-          <option value="dog">医療・福祉・介護</option>
-          <option value="dog">教育・保育・公務員・農林水産・その他</option>
-        </select>
+        {$occupation_selector}
       </div>
 
       <!--
@@ -123,7 +148,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label"><span class="recommended-tag">歓迎</span>労働条件</div>
-        <textarea name="working_conditions" rows="6"></textarea>
+        <textarea name="working_conditions" rows="6">{$working_conditions}</textarea>
         <div class="form-description"></div>
       </div>
 
@@ -146,26 +171,8 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
           <span class="required-tag">必須</span>リモートワーク
         </div>
-        <label>
-          <input type="radio" name="remote_work" value="true" />
-          可
-        </label>
-        <label>
-          <input type="radio" name="remote_work" value="false" />
-          不可
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="remote_work"
-            value="both"
-            required
-          />
-          どちらでも
-        </label>
+        {$remote_radio}
       </div>
-
-
 
       <div class="form-item">
         <div class="item-label">
@@ -175,14 +182,14 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div style="margin-bottom: 4px">
           <input type="radio" name="date_period_type" value="period" checked />
           本日から
-          <input type="tel" id="start" name="trip_period" value="90" style="width: 50px" />
+          <input type="tel" id="start" name="trip_period" value="{$publishing_date}" style="width: 50px" />
           日間表示する
         </div>
         <div>
           <input type="radio" name="date_period_type" value="fromto" />
-          <input type="date" id="start" name="trip_start" style="width:40%"/>
+          <input type="date" id="start" name="trip_start" value="{$published_date}" style="width:40%"/>
           　〜　
-          <input type="date" id="start" name="trip_last" style="width:40%"/>
+          <input type="date" id="start" name="trip_last" value="{$expired_date}" style="width:40%"/>
         </div>
       </div>
       <div class="form-buttons">
