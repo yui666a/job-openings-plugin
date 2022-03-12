@@ -91,6 +91,8 @@ EOF;
         <p><strong>{$message}</strong></p>
       </div>
 EOF;
+    $session_key = md5(sha1(uniqid(mt_rand(), true)));
+    $_SESSION['key'] = $session_key;
   }
 
   // ワンタイムチケットの生成とセッションへの保存
