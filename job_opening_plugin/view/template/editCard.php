@@ -51,7 +51,6 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
   // 職種
   $occupation_options = array(
-    ["", "--選択してください--"],
     ["sales_associate", "営業"],
     ["clerk", "事務・管理"],
     ["marketer", "企画・マーケティング・経営・管理職"],
@@ -68,7 +67,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
     ["public_servant", "教育・保育・公務員・農林水産・その他"],
   );
 
-  $occupation_selector = '<select name="occupation" id="occupation">';
+  $occupation_selector = '<select required name="occupation" id="occupation"> <option hidden value="">--選択してください--</option>';
   foreach ($occupation_options as $option) {
     $isSelected = $option[0] == $occupation  ? 'selected' : '';
     $occupation_selector .= '<option ' . $isSelected . ' value="' . $option[0] . '">' . $option[1] . '</option>';
