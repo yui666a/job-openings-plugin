@@ -26,7 +26,8 @@ function job_openings_list()
       $html .= editJob($user, $joid);
     }
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
   return $html;
 }
@@ -65,7 +66,8 @@ function company_list()
     $html .=  make_company_table_head();
     // ob_get_clean();
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
 
   return $html;
@@ -88,7 +90,8 @@ function job_openings_add()
     // echo create_card($user);
     $html .= create_card($user);
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
 
   return $html;
@@ -111,7 +114,8 @@ function company_add()
     // echo create_card($user);
     $html .= create_company($user);
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
 
   return $html;
