@@ -3,7 +3,6 @@ $(function() {
   //セレクトボックスが切り替わったら発動
   $("[name=company_id]").change(function() {
     var companies_data = JSON.parse($("[name=companies_data]").val());
-    console.log(companies_data);
 
     //選択したvalue値を変数に格納
     var id = $("[name=company_id]").val();
