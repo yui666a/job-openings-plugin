@@ -3,7 +3,9 @@
 function aaa($user)
 {
   $html = "";
-  $html .= "<strong>" . $user->display_name . "としてログインしています</strong>";
+  $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+  $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
+
   $args = array(
     'post_type' => 'post',  // 投稿タイプ
     // 'category_name' => 'カテゴリのスラッグ',	// 絞り込むカテゴリ
@@ -11,12 +13,14 @@ function aaa($user)
     // 's' => '検索文字列',	// 検索文字列
     // 'posts_per_page' => 3,	// 表示件数
     'offset' => 0,
-    'post_status' => 'publish, inherit, pending, private, future, draft, trash',  // 全て取得
+    'post_status' => 'publish, inherit, pending, private, future, draft',  // 全て取得
+    // 'post_status' => 'publish, inherit, pending, private, future, draft, trash',  // 全て取得
     // 'post_type' => array('job_opening', 'job_listing','job_openings'),
     'post_type' => array('job_openings'),
     'orderby'=>'post_date',  //新着順
     'order' => 'DESC',  // 降順 昇順(ASC)
     'numberposts' => -1, //全件取得
+    'author'=>$user->ID
   );
 
   $posts = get_posts($args);
