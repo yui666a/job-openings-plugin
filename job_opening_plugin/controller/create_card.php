@@ -71,6 +71,7 @@ EOF;
       $wp_error = null;
       $post_id = wp_insert_post($post, $wp_error);
       add_post_meta($post_id, '_expired_date', $expired_date);
+      add_post_meta($post_id, '_work_detail', $work_detail);
       add_post_meta($post_id, '_company_id', $company_id);
       add_post_meta($post_id, '_recruitment_type', $recruitment_type);
       add_post_meta($post_id, '_url', $url);

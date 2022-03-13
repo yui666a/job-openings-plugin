@@ -9,6 +9,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $company_id = get_post_meta($job_id, '_company_id', true);
   $recruitment_type =  get_post_meta($job_id, '_recruitment_type', true);
   $url = get_post_meta($job_id, '_url', true);
+  $work_detail =  get_post_meta($job_id, '_work_detail', true);
   get_post_meta($job_id, '_position', true);
   $working_conditions = get_post_meta($job_id, '_working_conditions', true);
   $occupation = get_post_meta($job_id, '_occupation', true);
@@ -139,7 +140,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
           <span class="required-tag">必須</span>仕事内容
         </div>
-        <textarea name="work_detail" rows="6" required></textarea>
+        <textarea name="work_detail" rows="6" required>{$work_detail}</textarea>
         <div class="form-description">
           仕事内容やミッションをわかりやすくご記載ください
         </div>
