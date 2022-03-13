@@ -181,13 +181,20 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
       </div>
       <div class="form-buttons">
-        <input type="submit" class="button draft" value="下書き保存" />
-        <div style="margin-left: 8px">
-          <input type="submit" class="button confirm" value="投稿する" />
-        </div>
+        <button type="submit" class="button draft" name='action' value='draft'>下書き保存</button>
+        <button type="submit" class="button confirm" name='action' value='post'>投稿する</button>
       </div>
-
     </div>
+
+
+
+
+
+
+
+
+
+
     <!--
     <div class="job-information">
       <h3>企業情報</h3>

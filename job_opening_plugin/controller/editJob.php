@@ -3,6 +3,13 @@
 function editJob($user, $job_id)
 {
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
+    $post_status = "";
+    if ($_POST['action'] == 'update') {
+      $post_status = "publish";
+    } else if ($_POST['action'] == 'draft') {
+      $post_status = "draft";
+    }
+
     global $wpdb;
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
@@ -48,7 +55,7 @@ EOF;
         'post_name'      => $work_detail, // 投稿のスラッグ。
         'post_title'     => wp_strip_all_tags($work_detail), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
-        'post_status'    => 'publish', // 公開ステータス。デフォルトは 'draft'。
+        'post_status'    => $post_status, // 公開ステータス。デフォルトは 'draft'。
         'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'
         // 'post_author'    => [ <ユーザー ID> ],  // 作成者のユーザー ID。デフォルトはログイン中のユーザーの ID。
         'ping_status'    => 'open', // 'open' ならピンバック・トラックバックを許可。デフォルトはオプション 'default_ping_status' の値。

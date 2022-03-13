@@ -4,6 +4,13 @@ function create_card($user)
 {
   // $post_id = wp_insert_post( array( 'post_title'=>'テスト投稿', 'post_content'=>'この投稿はテストです。' ) );
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
+    $post_status = "";
+    if ($_POST['action'] == 'post') {
+      $post_status = "publish";
+    } else if ($_POST['action'] == 'draft') {
+      $post_status = "draft";
+    }
+
     global $wpdb;
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
@@ -49,7 +56,7 @@ EOF;
         'post_name'      => $title, // 投稿のスラッグ。
         'post_title'     => wp_strip_all_tags($title), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
-        'post_status'    => 'publish', // 公開ステータス。デフォルトは 'draft'。
+        'post_status'    => $post_status, // 公開ステータス。デフォルトは 'draft'。
         'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'
         // 'post_author'    => [ <ユーザー ID> ],  // 作成者のユーザー ID。デフォルトはログイン中のユーザーの ID。
         'ping_status'    => 'open', // 'open' ならピンバック・トラックバックを許可。デフォルトはオプション 'default_ping_status' の値。

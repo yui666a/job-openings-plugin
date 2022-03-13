@@ -5,7 +5,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $post = get_post($job_id, "ARRAY_A");
   $published_date = explode(" ", $post["post_date"])[0];
   $expired_date = get_post_meta($job_id, '_expired_date', true);
-  $publishing_date = (strtotime($expired_date) - strtotime($published_date)) / 86400;
+  // $publishing_date = (strtotime($expired_date) - strtotime($published_date)) / 86400;
   $company_id = get_post_meta($job_id, '_company_id', true);
   $recruitment_type =  get_post_meta($job_id, '_recruitment_type', true);
   $url = get_post_meta($job_id, '_url', true);
@@ -196,27 +196,32 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
           <span class="required-tag">必須</span>掲載期間
         </div>
 
-        <div style="margin-bottom: 4px">
-          <input type="radio" name="date_period_type" value="period" checked />
-          本日から
-          <input type="tel" id="start" name="trip_period" value="{$publishing_date}" style="width: 50px" />
-          日間表示する
-        </div>
         <div>
-          <input type="radio" name="date_period_type" value="fromto" />
           <input type="date" id="start" name="trip_start" value="{$published_date}" style="width:40%"/>
           　〜　
           <input type="date" id="start" name="trip_last" value="{$expired_date}" style="width:40%"/>
         </div>
       </div>
       <div class="form-buttons">
-        <input type="submit" class="button draft" value="下書き保存" />
+        <button type="submit" class="button draft" name='action' value='reset'>リセット</button>
         <div style="margin-left: 8px">
-          <input type="submit" class="button confirm" value="更新する" />
+          <button type="submit" class="button draft" name='action' value='draft'>下書き保存</button>
+        </div>
+        <div style="margin-left: 8px">
+          <button type='submit' class="button confirm" name='action' value='update'>更新する</button>
         </div>
       </div>
-
     </div>
+
+
+
+
+
+
+
+
+
+
     <!--
     <div class="job-information">
       <h3>企業情報</h3>
