@@ -83,6 +83,14 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       </div>
 
       <div class="form-item">
+        <div class="item-label">求人名（表示するタイトル）</div>
+        <input type="text" name="title" id="title" placeholder="" />
+        <div class="form-description">
+          求人ページの見出し(求人名)をご入力いただけます
+        </div>
+      </div>
+
+      <div class="form-item">
         <div class="item-label">求人管理</div>
         <input type="text" name="url" id="url" placeholder="35470, https://~~~ など" />
         <div class="form-description">

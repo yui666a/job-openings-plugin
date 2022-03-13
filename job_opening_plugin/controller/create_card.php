@@ -8,6 +8,7 @@ function create_card($user)
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
     $recruitment_type = $_POST['recruitment_type'];
+    $title = $_POST['title'];
     $url = $_POST['url'];
     $position = $_POST['position'];
     $work_detail = $_POST['work_detail'];
@@ -45,8 +46,8 @@ EOF;
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
         'post_content'   => $content, // 投稿の全文。
-        'post_name'      => $work_detail, // 投稿のスラッグ。
-        'post_title'     => wp_strip_all_tags($work_detail), // 投稿のタイトル。
+        'post_name'      => $title, // 投稿のスラッグ。
+        'post_title'     => wp_strip_all_tags($title), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
         'post_status'    => 'publish', // 公開ステータス。デフォルトは 'draft'。
         'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'
@@ -75,6 +76,7 @@ EOF;
       add_post_meta($post_id, '_company_id', $company_id);
       add_post_meta($post_id, '_recruitment_type', $recruitment_type);
       add_post_meta($post_id, '_url', $url);
+      add_post_meta($post_id, '_title', $title);
       add_post_meta($post_id, '_position', $position);
       add_post_meta($post_id, '_working_conditions', $working_conditions);
       add_post_meta($post_id, '_occupation', $occupation);

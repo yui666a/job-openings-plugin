@@ -5,10 +5,11 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $post = get_post($job_id, "ARRAY_A");
   $published_date = explode(" ", $post["post_date"])[0];
   $expired_date = get_post_meta($job_id, '_expired_date', true);
-  $publishing_date = 1 + (strtotime($expired_date) - strtotime($published_date)) / 86400;
+  $publishing_date = (strtotime($expired_date) - strtotime($published_date)) / 86400;
   $company_id = get_post_meta($job_id, '_company_id', true);
   $recruitment_type =  get_post_meta($job_id, '_recruitment_type', true);
   $url = get_post_meta($job_id, '_url', true);
+  $title = get_post_meta($job_id, '_title', true);
   $work_detail =  get_post_meta($job_id, '_work_detail', true);
   get_post_meta($job_id, '_position', true);
   $working_conditions = get_post_meta($job_id, '_working_conditions', true);
@@ -41,6 +42,14 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $companies_selector .= '</select>';
   $encoded_data = json_encode($multi_dimensional_array);
   $companies_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+
+  // 求人管理URL
+  $url_text = "";
+  if ($url == "") {
+    $url_text = '<input type="text" name="url" id="url" placeholder="35470, https://~~~ など" />';
+  } else {
+    $url_text = '<input type="text" name="url" id="url" placeholder="35470, https://~~~ など" value={' . $url . '}/>';
+  }
 
   // 求人タイプ
   $recruitment_options = array(["新卒", "new_graduate"], ["中途", "mid_career"], ["どちらでも", "both"]);
@@ -103,8 +112,16 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
       </div>
 
       <div class="form-item">
+        <div class="item-label">求人名（表示するタイトル）</div>
+        <input type="text" name="title" id="title" placeholder="" value="{$title}"/>
+        <div class="form-description">
+          求人ページの見出し(求人名)をご入力いただけます
+        </div>
+      </div>
+
+      <div class="form-item">
         <div class="item-label">求人管理</div>
-        <input type="text" name="url" id="url" placeholder="35470, https://~~~ など" value={$url}/>
+        {$url_text}
         <div class="form-description">
           任意のID（貴社内の求人管理ID等）または，URLをご入力いただけます
         </div>
