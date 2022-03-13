@@ -46,7 +46,8 @@ function company_list()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $html .= "<strong>" . $user->display_name . "としてログインしています</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
 
     global $wpdb;
     $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=" . wp_get_current_user()->ID . ";";
@@ -86,8 +87,8 @@ function job_openings_add()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $html .= "<strong>" . $user->display_name . "としてログインしています</strong>";
-    // echo create_card($user);
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";    // echo create_card($user);
     $html .= create_card($user);
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -110,7 +111,8 @@ function company_add()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $html .= "<strong>" . $user->display_name . "としてログインしています</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
     // echo create_card($user);
     $html .= create_company($user);
   } else {
