@@ -6,6 +6,23 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
   $root_url = esc_url(get_site_url());
   $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
   $current_request = $_SERVER["REQUEST_URI"];
+  $recruitment_type = "";
+  switch (get_post_meta($post_id, '_recruitment_type', true)) {
+    case "new_graduate":
+      $recruitment_type = "新卒";
+      break;
+    case "mid_career":
+      $recruitment_type = "中途";
+      break;
+    case "both":
+      $recruitment_type = "新卒・中途";
+      break;
+    default:
+      $recruitment_type = "";
+      break;
+  };
+
+
   $job_openings_table_main = <<<EOF
     <tr
       id="post-{$post_id}"
@@ -33,11 +50,6 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
             data-tip="ID: {$post_id}"
             >{$title}</a
           >
-          <img
-            class="company_logo"
-            src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
-            alt="{$author}"
-          />
         </div>
         <button type="button" class="toggle-row">
           <span class="screen-reader-text">詳細を追加表示</span>
@@ -47,7 +59,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
         class="job_listing_type column-job_listing_type"
         data-colname="タイプ"
       >
-        <span class="job-type full-time">Full Time</span>
+        <span class="job-type">{$recruitment_type}</span>
       </td>
       <td class="job_location column-job_location" data-colname="社名・勤務地">
       <div class="company">
@@ -56,6 +68,11 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
               {$author}
             </span>
           </div>
+          <img
+            class="company_logo"
+            src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
+            alt="{$author}"
+          />
         <a
           class="google_map_link"
           href="https://maps.google.com/maps?q={$job_location}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
