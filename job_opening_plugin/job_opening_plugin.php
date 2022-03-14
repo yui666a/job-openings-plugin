@@ -138,7 +138,7 @@ function add_custom_post_type()
     'show_ui'            => true,
     'show_in_menu'       => true,
     'query_var'          => true,
-    'rewrite'            => array('slug' => 'book'),
+    'rewrite'            => array('slug' => 'job_openings', 'with_front' => false),
     'capability_type'    => 'post',
     'has_archive'        => true,
     'hierarchical'       => false,
@@ -148,8 +148,8 @@ function add_custom_post_type()
       'title',
       'editor',
       'author',
-      // 'thumbnail', // サムネイル
-      // 'excerpt', // 抜粋
+      'thumbnail', // サムネイル
+      'excerpt', // 抜粋
       // 'comments', // コメント
       'custom-fields',
       'custom_feature' => [

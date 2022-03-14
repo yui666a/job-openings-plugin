@@ -94,7 +94,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
           <div>
             <a
               class="button button-icon tips icon-edit"
-              href="{$current_request}&action=edit&post={$post_id}"
+              href="{$current_request}?&action=edit&post={$post_id}"
               data-tip="編集"
               >編集</a
             >
