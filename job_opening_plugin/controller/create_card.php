@@ -44,7 +44,23 @@ function create_card($user)
 
 
       $co_data = getCompanyById($company_id)[0];
-      $content = create_job_openingssss();
+      $content = create_job_openingssss(
+        $company_id,
+        $recruitment_type ,
+        $title ,
+        $url ,
+        $position ,
+        $work_detail ,
+        $application_conditions ,
+        $working_conditions ,
+        $location ,
+        $remote_work ,
+        $occupation ,
+        $date_period_type ,
+        $trip_period ,
+        $trip_start ,
+        $trip_last
+      );
 
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
