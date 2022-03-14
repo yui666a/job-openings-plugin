@@ -1,240 +1,278 @@
-@charset "utf-8";
-html,body{
-    height:100%;
-    width: 100%;
-    -webkit-text-size-adjust:none}
-body,div,p,ul,ol,li,dl,dt,dd,table,th,td,img,h1,h2,h3,h4,h5,h6,form,select{
-    margin:0;
-    padding:0}
-pre{
-    text-align: left;
-    font-family:'Hiragino Kaku Gothic ProN',Meiryo,'MS PGothic',Sans-serif}
-a{
-    text-decoration: none;
+/* @charset "utf-8";
+html,
+body {
+  height: 100%;
+  width: 100%;
+  -webkit-text-size-adjust: none;
 }
-ul,ol,li{
-    list-style:none}
-img{
-    border:0;
-    vertical-align:middle}
-table{
-    border-collapse:collapse}
-input,select{
-    vertical-align:middle;
-    font-family:'Hiragino Kaku Gothic ProN',Meiryo,'MS PGothic',Sans-serif}
-body{
-    font-size:12px;
-    line-height:1.5;
-    font-family:'Hiragino Kaku Gothic ProN',Meiryo,'MS PGothic',Sans-serif}
-
-.header-wrapper{
-    margin-top: 15px;
-    text-align: center;
-    }
-.container-header{
-    width: 1000px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:left;
-    display: inline-block}
-.job-list-text-link{
-    margin-top: 20px;
-    font-size: 30px;
-    font-weight: bold;
-    padding-left:10px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    margin-bottom: 5px;
-    border-left: 6px solid #223a70;
-    color: #000}
-.job-list-tag-box{
-    margin-top: 10px}
-.job-list-tag li{
-    display: inline-block;
-    font-size: 16px;
-    padding-left: 3px;
-    padding-right: 3px;
-    margin-right: 5px;
-    color: #223a70;
-    border: 1px solid #223a70;
-    border-radius: 5px;
-    width: auto;
-    text-align: center}
-.job-list-all-link-box{
-    display: inline-block;
-    padding-top: 6px;
-    font-size: 18px;
-    color: #223a70;
+body,
+div,
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+table,
+th,
+td,
+img,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+select {
+  margin: 0;
+  padding: 0;
 }
-.job-list-all-link-box:hover{
-    display: inline-block;
-    padding-top: 6px;
-    font-size: 18px;
-    color: #1470CC;
-    text-decoration: underline;
+pre {
+  text-align: left;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+}
+a {
+  text-decoration: none;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+img {
+  border: 0;
+  vertical-align: middle;
+}
+table {
+  border-collapse: collapse;
+}
+input,
+select {
+  vertical-align: middle;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+}
+body {
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
 }
 
-.job-list-img-wrapper{
-    width: 1000px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top: 20px;
-    box-shadow: 1px 1px 1px 1px #E6E6E6;
+.header-wrapper {
+  margin-top: 15px;
+  text-align: center;
 }
-.page-wrapper{
-    width: 1000px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align: left;
-    margin-top: 20px;
+.container-header {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  display: inline-block;
 }
-.page-items{
-    height: auto;
-    background-color: #E6E6E6;
+.job-list-text-link {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  margin-bottom: 5px;
+  border-left: 6px solid #223a70;
+  color: #000;
 }
-.page-items li{
-    display: inline-block;
-    background-color: #E6E6E6;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 10px 70px 10px 70px;
-    text-align: center;
+.job-list-tag-box {
+  margin-top: 10px;
 }
-.page-items>li>a{
-    color: #000;
+.job-list-tag li {
+  display: inline-block;
+  font-size: 16px;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 5px;
+  color: #223a70;
+  border: 1px solid #223a70;
+  border-radius: 5px;
+  width: auto;
+  text-align: center;
 }
-.page-items>li:hover{
-    background: #afafb0;
+.job-list-all-link-box {
+  display: inline-block;
+  padding-top: 6px;
+  font-size: 18px;
+  color: #223a70;
 }
-.main-box{
-    width: 1000px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align: left;
-    display: table;
-    margin-top: 40px;
-}
-
-.work-detail-header-title{
-    width: 650px;
-    display: table-cell;
-    font-size: 40px;
-    font-weight: bold;
-    padding-left:10px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    margin-bottom: 5px;
-    border-left: 6px solid #223a70;
-    color: #000}
-
-.work-detail-text-box{
-    display: inline-block;
-    width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
+.job-list-all-link-box:hover {
+  display: inline-block;
+  padding-top: 6px;
+  font-size: 18px;
+  color: #1470cc;
+  text-decoration: underline;
 }
 
-.work-detail-text{
-    font-size: 16px;
-    text-align: left;
+.job-list-img-wrapper {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  box-shadow: 1px 1px 1px 1px #e6e6e6;
+}
+.page-wrapper {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  margin-top: 20px;
+}
+.page-items {
+  height: auto;
+  background-color: #e6e6e6;
+}
+.page-items li {
+  display: inline-block;
+  background-color: #e6e6e6;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 70px 10px 70px;
+  text-align: center;
+}
+.page-items > li > a {
+  color: #000;
+}
+.page-items > li:hover {
+  background: #afafb0;
+}
+.main-box {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  display: table;
+  margin-top: 40px;
 }
 
-.assignment-table-box{
-    margin-top: 5px;
-}
-.assignment-table{
-    width: 650px;
-}
-.assignment-table-items{
-    width: 160px;
-    font-size: 13px;
-    padding-left: 10px;
-    height: auto;
-    background-color: #E6E6E6;
-}
-.assignment-table-contents{
-    width: 490px;
-    font-size: 13px;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: auto;
+.work-detail-header-title {
+  width: 650px;
+  display: table-cell;
+  font-size: 40px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  margin-bottom: 5px;
+  border-left: 6px solid #223a70;
+  color: #000;
 }
 
-.company-information-table-box{
-    margin-top: 40px;
+.work-detail-text-box {
+  display: inline-block;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
-.side-box{
-    display: table-cell;
-    width: 280px;
-    background-color: #E6E6E6;
-    
+.work-detail-text {
+  font-size: 16px;
+  text-align: left;
 }
 
-.btn-application-text{
-    text-align: center;
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 250px;
-    font-size: 16px;
-    background:#223a70;
-    color:#fff;
-    border:1px solid #223a70;
-    border-radius:20px;
-    padding: 10px}
-
-.btn-application-text:hover{
-    opacity: 0.6;
+.assignment-table-box {
+  margin-top: 5px;
+}
+.assignment-table {
+  width: 650px;
+}
+.assignment-table-items {
+  width: 160px;
+  font-size: 13px;
+  padding-left: 10px;
+  height: auto;
+  background-color: #e6e6e6;
+}
+.assignment-table-contents {
+  width: 490px;
+  font-size: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: auto;
 }
 
-.google-map-box{
-    display: table-cell;
-    width: 280x;
-    height: auto;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    padding: 10px;
+.company-information-table-box {
+  margin-top: 40px;
 }
 
-.google-map-address{
-    color: #223a70;
-    font-size: 13px;
-    padding: 10px;
+.side-box {
+  display: table-cell;
+  width: 280px;
+  background-color: #e6e6e6;
 }
 
-.google-map-address:hover{
-    color: #1470CC;
-    text-decoration: underline;
+.btn-application-text {
+  text-align: center;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  font-size: 16px;
+  background: #223a70;
+  color: #fff;
+  border: 1px solid #223a70;
+  border-radius: 20px;
+  padding: 10px;
 }
 
-.company-address{
-    font-size: 14px;
-    padding-left:10px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    margin-bottom: 5px;
-    border-left: 6px solid #223a70;
-    color: #000
+.btn-application-text:hover {
+  opacity: 0.6;
 }
 
-.btn-application-under-text{
-    text-align: center;
-    margin-top: 40px;
-    width: 660px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-    display: block;
-    font-size: 16px;
-    background:#223a70;
-    color:#fff;
-    border:1px solid #223a70;
-    border-radius:20px;
-    padding: 10px}
-
-.btn-application-under-text:hover{
-    opacity: 0.6;
+.google-map-box {
+  display: table-cell;
+  width: 280x;
+  height: auto;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 10px;
 }
+
+.google-map-address {
+  color: #223a70;
+  font-size: 13px;
+  padding: 10px;
+}
+
+.google-map-address:hover {
+  color: #1470cc;
+  text-decoration: underline;
+}
+
+.company-address {
+  font-size: 14px;
+  padding-left: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  margin-bottom: 5px;
+  border-left: 6px solid #223a70;
+  color: #000;
+}
+
+.btn-application-under-text {
+  text-align: center;
+  margin-top: 40px;
+  width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  display: block;
+  font-size: 16px;
+  background: #223a70;
+  color: #fff;
+  border: 1px solid #223a70;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.btn-application-under-text:hover {
+  opacity: 0.6;
+} */

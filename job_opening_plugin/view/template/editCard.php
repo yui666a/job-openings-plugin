@@ -11,6 +11,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $url = get_post_meta($job_id, '_url', true);
   $title = get_post_meta($job_id, '_title', true);
   $work_detail =  get_post_meta($job_id, '_work_detail', true);
+  $application_conditions =  get_post_meta($job_id, '_application_conditions', true);
   get_post_meta($job_id, '_position', true);
   $working_conditions = get_post_meta($job_id, '_working_conditions', true);
   $occupation = get_post_meta($job_id, '_occupation', true);
@@ -160,6 +161,16 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <textarea name="work_detail" rows="6" required>{$work_detail}</textarea>
         <div class="form-description">
           仕事内容やミッションをわかりやすくご記載ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>募集要件
+        </div>
+        <textarea name="application_conditions" rows="6" required>{$application_conditions}</textarea>
+        <div class="form-description">
+          必須条件、歓迎条件、求める人物像などをご記載ください
         </div>
       </div>
 

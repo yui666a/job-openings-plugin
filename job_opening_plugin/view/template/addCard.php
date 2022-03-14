@@ -135,6 +135,16 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       </div>
 
       <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>募集要件
+        </div>
+        <textarea name="application_conditions" rows="6" required></textarea>
+        <div class="form-description">
+          必須条件、歓迎条件、求める人物像などをご記載ください
+        </div>
+      </div>
+
+      <div class="form-item">
         <div class="item-label"><span class="recommended-tag">歓迎</span>労働条件</div>
         <textarea name="working_conditions" rows="6"></textarea>
         <div class="form-description"></div>

@@ -6,6 +6,9 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
   $root_url = esc_url(get_site_url());
   $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
   $current_request = $_SERVER["REQUEST_URI"];
+  $company_id = get_post_meta($post_id, '_company_id', true);
+  $company = getCompanyById($company_id)[0];
+
   $recruitment_type = "";
   switch (get_post_meta($post_id, '_recruitment_type', true)) {
     case "new_graduate":
@@ -48,17 +51,16 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
         <span class="job-type">{$recruitment_type}</span>
       </td>
       <td class="job_location column-job_location" data-colname="社名・勤務地">
-      <div class="company">
-            <span class="tips" data-tip="asdf">
-              <!--TODO 作者をa tagリンクにする-->
-              {$author}
-            </span>
-          </div>
-          <img
-            class="company_logo"
-            src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
-            alt="{$author}"
-          />
+        <div class="company">
+          <span class="tips" data-tip="asdf">
+            {$company->co_name}
+          </span>
+        </div>
+        <img
+          class="company_logo"
+          src="{$company->co_logo}"
+          alt="{$company->co_name}"
+        />
         <a
           class="google_map_link"
           href="https://maps.google.com/maps?q={$job_location}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"

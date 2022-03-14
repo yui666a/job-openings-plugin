@@ -11,6 +11,7 @@ function bbb($post_id)
   $url = get_post_meta($post_id, '_url', true);
   $title = get_post_meta($post_id, '_title', true);
   $work_detail =  get_post_meta($post_id, '_work_detail', true);
+  $application_conditions =  get_post_meta($post_id, '_application_conditions', true);
   get_post_meta($post_id, '_position', true);
   $working_conditions = get_post_meta($post_id, '_working_conditions', true);
   $occupation = get_post_meta($post_id, '_occupation', true);
@@ -19,6 +20,27 @@ function bbb($post_id)
   $company = getCompanyById($company_id)[0];
   $permalink = get_permalink($post_id);
 
+  $main_text = "";
+  if($work_detail != ""){
+    $main_text .= "[仕事内容] ".$work_detail;
+  }
+  if($application_conditions != ""){
+    $main_text .= " [募集要件] ".$application_conditions;
+  }
+  $main_text = substr($main_text, 0, 200);
+
+  $tags = "";
+  if($recruitment_type == "new_graduate"){
+    $tags .= "<li>新卒</li>";
+  }else if($recruitment_type == "mid_career"){
+    $tags .= "<li>中途</li>";
+  }else {
+    $tags .= "<li>新卒</li><li>中途</li>";
+  }
+
+  if($remote_work == "true"){
+    $tags .= "<li>リモートワーク可</li>";
+  }
 
   $html = <<<EOF
   <div class="job-list-fream">
@@ -34,26 +56,21 @@ function bbb($post_id)
             />
           </div>
           <div class="job-list-text-wrapper">
-            <h3 class="job-list-text-link">
+            <div class="job-title">
               {$title}
-            </h3>
+            </div>
             <div class="job-list-tag-box">
               <ul class="job-list-tag">
-                <span
-                  ><li>(TODO: タグの内容を表示)</li>
-                  <li>(TODO: タグの内容を表示)</li>
-                  <li>(TODO: タグの内容を表示)</li>
-                  <li>(TODO: タグの内容を表示)</li></span
-                >
+                <span>
+                  {$tags}
+                </span>
               </ul>
             </div>
             <div class="job-list-detail-box">
+              <span class="job-list-detail-text">{$main_text}</span>
               <div class="job-list-detail-link">
                 <span>…続きを見る</span>
               </div>
-              <p class="job-list-detail-text">
-                <span> {$work_detail} </span>
-              </p>
             </div>
           </div>
         </div>

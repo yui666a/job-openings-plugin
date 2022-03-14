@@ -19,6 +19,7 @@ function create_card($user)
     $url = $_POST['url'];
     $position = $_POST['position'];
     $work_detail = $_POST['work_detail'];
+    $application_conditions = $_POST['application_conditions'];
     $working_conditions = $_POST['working_conditions'];
     $location = $_POST['location'];
     $remote_work = $_POST['remote_work'];
@@ -43,7 +44,23 @@ function create_card($user)
 
 
       $co_data = getCompanyById($company_id)[0];
-      $content = create_job_openingssss();
+      $content = create_job_openingssss(
+        $company_id,
+        $recruitment_type ,
+        $title ,
+        $url ,
+        $position ,
+        $work_detail ,
+        $application_conditions ,
+        $working_conditions ,
+        $location ,
+        $remote_work ,
+        $occupation ,
+        $date_period_type ,
+        $trip_period ,
+        $trip_start ,
+        $trip_last
+      );
 
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
@@ -80,6 +97,7 @@ function create_card($user)
       add_post_meta($post_id, '_url', $url);
       add_post_meta($post_id, '_title', $title);
       add_post_meta($post_id, '_position', $position);
+      add_post_meta($post_id, '_application_conditions', $application_conditions);
       add_post_meta($post_id, '_working_conditions', $working_conditions);
       add_post_meta($post_id, '_occupation', $occupation);
       add_post_meta($post_id, '_remote_work', $remote_work);
