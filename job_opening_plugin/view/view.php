@@ -143,6 +143,7 @@ function user_job_openings()
   $html .= bbb_head();
 
   $posts = getPublishedCard();
+  global $post;
   foreach ($posts as $post) {
     setup_postdata($post);
     $post_id = get_the_ID();
@@ -153,7 +154,7 @@ function user_job_openings()
     $job_expires = get_post_meta($post_id, '_job_expires', true);
     $job_location = get_post_meta($post_id, '_job_location', true);
 
-    $html .= bbb();
+    $html .= bbb($post_id);
   }
 
   $html .= bbb_foot();

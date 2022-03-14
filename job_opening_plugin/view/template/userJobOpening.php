@@ -1,47 +1,66 @@
 <?php
 
-function bbb()
+function bbb($post_id)
 {
+  $post = get_post($post_id, "ARRAY_A");
+  console_log($post);
+  $published_date = explode(" ", $post["post_date"])[0];
+  $expired_date = get_post_meta($post_id, '_expired_date', true);
+  // $publishing_date = (strtotime($expired_date) - strtotime($published_date)) / 86400;
+  $company_id = get_post_meta($post_id, '_company_id', true);
+  $recruitment_type =  get_post_meta($post_id, '_recruitment_type', true);
+  $url = get_post_meta($post_id, '_url', true);
+  $title = get_post_meta($post_id, '_title', true);
+  console_log("title");
+  console_log($title);
+  $work_detail =  get_post_meta($post_id, '_work_detail', true);
+  get_post_meta($post_id, '_position', true);
+  $working_conditions = get_post_meta($post_id, '_working_conditions', true);
+  $occupation = get_post_meta($post_id, '_occupation', true);
+  $remote_work = get_post_meta($post_id, '_remote_work', true);
+  get_post_meta($post_id, '_location', true);
+
+
   $html = <<<EOF
   <div class="job-list-fream">
-            <a href="#" class="job-list-box-wrapper">
-              <div class="job-list-contents">
-                <div class="job-list-box-caption">
-                  <div class="job-list-img-wrapper">
-                    <img
-                      src="/Users/takuhirouzawa/Desktop/学生プラットフォーム/Nagaoka_worker/img/Nagaoka_worker_logo.jpeg"
-                      alt=""
-                      width="100%"
-                      height="100%"
-                    />
-                  </div>
-                  <div class="job-list-text-wrapper">
-                    <h3 class="job-list-text-link">サンプルタイトル</h3>
-                    <div class="job-list-tag-box">
-                      <ul class="job-list-tag">
-                        <span
-                          ><li>sample</li>
-                          <li>sample</li>
-                          <li>sample</li>
-                          <li>sample</li></span
-                        >
-                      </ul>
-                    </div>
-                    <div class="job-list-detail-box">
-                      <div class="job-list-detail-link">
-                        <span>…続きを見る</span>
-                      </div>
-                      <p class="job-list-detail-text">
-                        <span>
-                          サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。サンプルです。
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
+    <a href="#" class="job-list-box-wrapper">
+      <div class="job-list-contents">
+        <div class="job-list-box-caption">
+          <div class="job-list-img-wrapper">
+            <img
+              src="/Users/takuhirouzawa/Desktop/学生プラットフォーム/Nagaoka_worker/img/Nagaoka_worker_logo.jpeg"
+              alt=""
+              width="100%"
+              height="100%"
+            />
           </div>
+          <div class="job-list-text-wrapper">
+            <h3 class="job-list-text-link">
+              {$title}
+            </h3>
+            <div class="job-list-tag-box">
+              <ul class="job-list-tag">
+                <span
+                  ><li>(TODO: タグの内容を表示)</li>
+                  <li>(TODO: タグの内容を表示)</li>
+                  <li>(TODO: タグの内容を表示)</li>
+                  <li>(TODO: タグの内容を表示)</li></span
+                >
+              </ul>
+            </div>
+            <div class="job-list-detail-box">
+              <div class="job-list-detail-link">
+                <span>…続きを見る</span>
+              </div>
+              <p class="job-list-detail-text">
+                <span> {$work_detail} </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
 EOF;
   return $html;
 }
