@@ -19,6 +19,7 @@ function create_card($user)
     $url = $_POST['url'];
     $position = $_POST['position'];
     $work_detail = $_POST['work_detail'];
+    $application_conditions = $_POST['application_conditions'];
     $working_conditions = $_POST['working_conditions'];
     $location = $_POST['location'];
     $remote_work = $_POST['remote_work'];
@@ -80,6 +81,7 @@ function create_card($user)
       add_post_meta($post_id, '_url', $url);
       add_post_meta($post_id, '_title', $title);
       add_post_meta($post_id, '_position', $position);
+      add_post_meta($post_id, '_application_conditions', $application_conditions);
       add_post_meta($post_id, '_working_conditions', $working_conditions);
       add_post_meta($post_id, '_occupation', $occupation);
       add_post_meta($post_id, '_remote_work', $remote_work);

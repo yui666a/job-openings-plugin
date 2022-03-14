@@ -18,6 +18,7 @@ function editJob($user, $job_id)
     $title = $_POST['title'];
     $position = $_POST['position'];
     $work_detail = $_POST['work_detail'];
+    $application_conditions = $_POST['application_conditions'];
     $working_conditions = $_POST['working_conditions'];
     $location = $_POST['location'];
     $remote_work = $_POST['remote_work'];
@@ -83,6 +84,7 @@ EOF;
       update_post_meta($post_id, '_url', $url);
       update_post_meta($post_id, '_title', $title);
       update_post_meta($post_id, '_work_detail', $work_detail);
+      update_post_meta($post_id, '_application_conditions', $application_conditions);
       update_post_meta($post_id, '_position', $position);
       update_post_meta($post_id, '_working_conditions', $working_conditions);
       update_post_meta($post_id, '_occupation', $occupation);

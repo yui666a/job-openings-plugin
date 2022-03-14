@@ -28,7 +28,7 @@ function create_job_openingssss()
 
     <div class="job-list-work-detail">
       <div class="work-detial-header">
-        <h1 class="work-detail-header-title">募集要項</h1>
+        <h1 class="work-detail-header-title">募集要件</h1>
       </div>
       <div class="work-detail-text-box">
         <pre class="work-detail-text">
