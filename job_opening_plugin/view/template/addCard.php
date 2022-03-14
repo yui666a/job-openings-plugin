@@ -2,7 +2,8 @@
 
 function create_job_opening($user, $action_url, $session_key, $companies)
 {
-  $companies_selector = '<select name="company_id" id="company_id"> <option value="">--選択してください--</option>';
+  // 企業セレクタの作成
+  $companies_selector = '<select name="company_id" id="company_id"> <option value="" hidden>--選択してください--</option>';
   session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
@@ -25,8 +26,45 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   $encoded_data = json_encode($multi_dimensional_array);
   $companies_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 
-  $html = <<<EOF
+  // 求人タイプ
+  $recruitment_options = array(["新卒", "new_graduate"], ["中途", "mid_career"], ["どちらでも", "both"]);
+  $recruitment_radio = "";
+  foreach ($recruitment_options as $option) {
+    $recruitment_radio .= '<label> <input required type="radio" name="recruitment_type" class="recruitment_type" value="' . $option[1] . '" />' . $option[0] . '</label>';
+  }
 
+  // 職種
+  $occupation_options = array(
+    ["sales_associate", "営業"],
+    ["clerk", "事務・管理"],
+    ["marketer", "企画・マーケティング・経営・管理職"],
+    ["service", "サービス・販売・外食"],
+    ["web", "Web・インターネット・ゲーム"],
+    ["creative", "クリエイティブ（メディア・アパレル・デザイン）"],
+    ["expert", "専門職（コンサルタント・士業・金融・不動産）"],
+    ["it_engineer", "ITエンジニア（システム開発・SE・インフラ）"],
+    ["engineer", "エンジニア（機械・電気・電子・半導体・制御）"],
+    ["chemical_engineer", "素材・化学・食品・医薬品技術職"],
+    ["civil_engineer", "建築・土木技術職"],
+    ["transporter", "技能工・設備・交通・運輸"],
+    ["medical_welfare", "医療・福祉・介護"],
+    ["public_servant", "教育・保育・公務員・農林水産・その他"],
+  );
+  $occupation_selector = '<select required name="occupation" id="occupation"> <option hidden value="">--選択してください--</option>';
+  foreach ($occupation_options as $option) {
+    $occupation_selector .= '<option value="' . $option[0] . '">' . $option[1] . '</option>';
+  }
+  $occupation_selector .= '</select>';
+
+  // リモートワーク
+  $remote_options = array(["可", "true"], ["不可", "false"], ["どちらでも", "both"]);
+  $remote_radio = "";
+  foreach ($remote_options as $option) {
+    $remote_radio .= '<label> <input required type="radio" name="remote_work" class="remote_work" value="' . $option[1] . '" />' . $option[0] . '</label>';
+  }
+
+
+  $html = <<<EOF
   <!-- main -->
   <form action="{$action_url}" method="post">
     <div class="job-information">
@@ -37,8 +75,19 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       <input type="hidden" name="companies_data" value="{$companies_data}">
 
       <div class="form-item">
-        <div class="item-label">募集企業名</div>
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          募集企業名
+        </div>
         {$companies_selector}
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">求人名（表示するタイトル）</div>
+        <input type="text" name="title" id="title" placeholder="" />
+        <div class="form-description">
+          求人ページの見出し(求人名)をご入力いただけます
+        </div>
       </div>
 
       <div class="form-item">
@@ -51,14 +100,29 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
+          <span class="required-tag">必須</span>求人タイプ
+        </div>
+        {$recruitment_radio}
+      </div>
+
+      <div class="form-item">
+        <div class="item-label"><span class="required-tag">必須</span>職種</div>
+        {$occupation_selector}
+      </div>
+
+      <!--
+      <div class="form-item">
+        <div class="item-label">
           <span class="required-tag">必須</span>部署・役職名
         </div>
         <select id="position" name="position" multiple required></select>
+        <input type="text" name="add_position" id="add_position" placeholder="など" />
         <button class="add" type="button">＋追加</button>
         <div class="form-description">
           募集されるポジション（役職または部署）を記載してください
         </div>
       </div>
+      -->
 
       <div class="form-item">
         <div class="item-label">
@@ -76,6 +140,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         <div class="form-description"></div>
       </div>
 
+      <!--
       <div class="form-item">
         <div class="item-label"><span class="required-tag">必須</span>勤務地</div>
         <select id="location" name="location" multiple required></select>
@@ -88,49 +153,13 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           </label>
         </div>
       </div>
+      -->
 
       <div class="form-item">
         <div class="item-label">
           <span class="required-tag">必須</span>リモートワーク
         </div>
-        <label>
-          <input type="radio" name="remote_work" value="サンプル" />
-          可
-        </label>
-        <label>
-          <input type="radio" name="remote_work" value="サンプル" />
-          不可
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="remote_work"
-            value="サンプル"
-            required
-          />
-          どちらでも
-        </label>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label"><span class="required-tag">必須</span>職種</div>
-        <select name="occupation" id="occupation">
-          <option value="">--選択してください--</option>
-          <option value="dog">営業</option>
-          <option value="cat">事務・管理</option>
-          <option value="hamster">企画・マーケティング・経営・管理職</option>
-          <option value="parrot">サービス・販売・外食</option>
-          <option value="spider">Web・インターネット・ゲーム</option>
-          <option value="goldfish">クリエイティブ（メディア・アパレル・デザイン）</option>
-          <option value="dog">専門職（コンサルタント・士業・金融・不動産）</option>
-          <option value="dog">ITエンジニア（システム開発・SE・インフラ）</option>
-          <option value="dog">エンジニア（機械・電気・電子・半導体・制御）</option>
-          <option value="dog">素材・化学・食品・医薬品技術職</option>
-          <option value="dog">建築・土木技術職</option>
-          <option value="dog">技能工・設備・交通・運輸</option>
-          <option value="dog">医療・福祉・介護</option>
-          <option value="dog">教育・保育・公務員・農林水産・その他</option>
-        </select>
+        {$remote_radio}
       </div>
 
       <div class="form-item">
@@ -146,13 +175,27 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
         <div>
           <input type="radio" name="date_period_type" value="fromto" />
-          <input type="date" id="start" name="trip_start" />
+          <input type="date" id="start" name="trip_start" style="width:40%"/>
           　〜　
-          <input type="date" id="start" name="trip_last" />
+          <input type="date" id="start" name="trip_last" style="width:40%"/>
         </div>
       </div>
-
+      <div class="form-buttons">
+        <button type="submit" class="button draft" name='action' value='draft'>下書き保存</button>
+        <button type="submit" class="button confirm" name='action' value='post'>投稿する</button>
+      </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+    <!--
     <div class="job-information">
       <h3>企業情報</h3>
 
@@ -251,13 +294,13 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         貴社の休日や休暇面をご記入ください
         </div>
       </div>
-
       <div class="form-buttons">
         <input type="submit" class="button draft" value="下書き保存" />
         <div style="margin-left: 8px">
           <input type="submit" class="button confirm" value="投稿する" />
         </div>
       </div>
+    -->
     </div>
   </form>
 

@@ -17,16 +17,8 @@ function job_openings_list()
     || current_user_can('contributor')
   ) {
     $url = $_SERVER['REQUEST_URI'];
-    $mode = strstr($url, 'action=');
-    $mode = strstr($mode, '&', true);
-    if ($mode) {
-      $mode = explode("action=", $mode)[1];
-    }
-
-    $joid = strstr($url, 'post=');
-    if ($joid) {
-      $joid = explode("post=", $joid)[1];
-    }
+    $mode = $_GET["action"];
+    $joid = $_GET["post"];
 
     if (!$mode && !$joid) {
       $html .= aaa($user);
@@ -34,7 +26,8 @@ function job_openings_list()
       $html .= editJob($user, $joid);
     }
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
   return $html;
 }
@@ -53,7 +46,8 @@ function company_list()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $html .= "<strong>" . $user->display_name . "としてログインしています</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
 
     global $wpdb;
     $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=" . wp_get_current_user()->ID . ";";
@@ -73,7 +67,8 @@ function company_list()
     $html .=  make_company_table_head();
     // ob_get_clean();
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
 
   return $html;
@@ -92,11 +87,12 @@ function job_openings_add()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $html .= "<strong>" . $user->display_name . "としてログインしています</strong>";
-    // echo create_card($user);
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";    // echo create_card($user);
     $html .= create_card($user);
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
 
   return $html;
@@ -115,11 +111,13 @@ function company_add()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $html .= "<strong>" . $user->display_name . "としてログインしています</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
     // echo create_card($user);
     $html .= create_company($user);
   } else {
-    $html .= "<strong>このページは閲覧できません．ログインしてください</strong>";
+    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
+    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
 
   return $html;
@@ -145,7 +143,8 @@ function user_job_openings()
   $html .= bbb_head();
 
   $posts = getPublishedCard();
-  foreach ($posts as $post){
+  global $post;
+  foreach ($posts as $post) {
     setup_postdata($post);
     $post_id = get_the_ID();
     $title = get_the_title();
@@ -155,7 +154,7 @@ function user_job_openings()
     $job_expires = get_post_meta($post_id, '_job_expires', true);
     $job_location = get_post_meta($post_id, '_job_location', true);
 
-    $html .= bbb();
+    $html .= bbb($post_id);
   }
 
   $html .= bbb_foot();
