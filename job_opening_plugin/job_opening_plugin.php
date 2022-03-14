@@ -54,6 +54,7 @@ function add_files()
   wp_enqueue_style('jo-normalize', plugin_dir_url(__FILE__) . 'css/normalize.css', "", "0.1");
   wp_enqueue_style('jo-main', plugin_dir_url(__FILE__) . 'css/style.css', "", "0.1");
   wp_enqueue_style('jo-user', plugin_dir_url(__FILE__) . 'css/userStyle.css', "", "0.1");
+  wp_enqueue_style('jo-card', plugin_dir_url(__FILE__) . 'css/cardStyle.css', "", "0.1");
 }
 /**
  * wp_enqueue_scripts – フロントエンドをイベントトリガーにする
@@ -138,7 +139,7 @@ function add_custom_post_type()
     'show_ui'            => true,
     'show_in_menu'       => true,
     'query_var'          => true,
-    'rewrite'            => array('slug' => 'book'),
+    'rewrite'            => array('slug' => 'job_openings', 'with_front' => false),
     'capability_type'    => 'post',
     'has_archive'        => true,
     'hierarchical'       => false,
@@ -148,8 +149,8 @@ function add_custom_post_type()
       'title',
       'editor',
       'author',
-      // 'thumbnail', // サムネイル
-      // 'excerpt', // 抜粋
+      'thumbnail', // サムネイル
+      'excerpt', // 抜粋
       // 'comments', // コメント
       'custom-fields',
       'custom_feature' => [

@@ -16,14 +16,13 @@ function bbb($post_id)
   $occupation = get_post_meta($post_id, '_occupation', true);
   $remote_work = get_post_meta($post_id, '_remote_work', true);
   get_post_meta($post_id, '_location', true);
-  console_log("company_id: ".$company_id);
   $company = getCompanyById($company_id)[0];
-  console_log("company logo: ".$company->co_logo);
+  $permalink = get_permalink($post_id);
 
 
   $html = <<<EOF
   <div class="job-list-fream">
-    <a href="#" class="job-list-box-wrapper">
+    <a href="{$permalink}" class="job-list-box-wrapper">
       <div class="job-list-contents">
         <div class="job-list-box-caption">
           <div class="job-list-img-wrapper">
