@@ -24,8 +24,7 @@ function create_company($user)
       $uploaded_path = UPLOAD_DIR["basedir"] . '/sac_jo/company_images/' . $filename;
       $result = move_uploaded_file($_FILES['company_logo']['tmp_name'], $uploaded_path);
       if ($result) {
-        $co_logo = $uploaded_path;
-      } else {
+        $co_logo = UPLOAD_DIR["baseurl"] . '/sac_jo/company_images/' . $filename;
       }
 
       $wpdb->insert(
