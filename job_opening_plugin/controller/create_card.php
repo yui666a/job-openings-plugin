@@ -43,12 +43,7 @@ function create_card($user)
 
 
       $co_data = getCompanyById($company_id)[0];
-      $content = <<<EOF
-            <div>あたらしい文字★★求人情報★★</div>
-            <div>★★企業について★★</div>
-            <div>社名{$co_data->co_name}</div>
-            <div>PRポイント{$co_data->co_pr_point}</div>
-EOF;
+      $content = create_job_openingssss();
 
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
