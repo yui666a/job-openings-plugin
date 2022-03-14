@@ -1,11 +1,10 @@
 <?php
 
-function create_card($user)
+function editJob($user, $job_id)
 {
-  // $post_id = wp_insert_post( array( 'post_title'=>'テスト投稿', 'post_content'=>'この投稿はテストです。' ) );
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
     $post_status = "";
-    if ($_POST['action'] == 'post') {
+    if ($_POST['action'] == 'update') {
       $post_status = "publish";
     } else if ($_POST['action'] == 'draft') {
       $post_status = "draft";
@@ -15,8 +14,8 @@ function create_card($user)
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
     $recruitment_type = $_POST['recruitment_type'];
-    $title = $_POST['title'];
     $url = $_POST['url'];
+    $title = $_POST['title'];
     $position = $_POST['position'];
     $work_detail = $_POST['work_detail'];
     $working_conditions = $_POST['working_conditions'];
@@ -44,17 +43,17 @@ function create_card($user)
 
       $co_data = getCompanyById($company_id)[0];
       $content = <<<EOF
-            <div>あたらしい文字★★求人情報★★</div>
-            <div>★★企業について★★</div>
-            <div>社名{$co_data->co_name}</div>
-            <div>PRポイント{$co_data->co_pr_point}</div>
+              <div>あたらしい文字★★求人情報★★</div>
+              <div>★★企業について★★</div>
+              <div>社名{$co_data->co_name}</div>
+              <div>PRポイント{$co_data->co_pr_point}</div>
 EOF;
 
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
         'post_content'   => $content, // 投稿の全文。
-        'post_name'      => $title, // 投稿のスラッグ。
-        'post_title'     => wp_strip_all_tags($title), // 投稿のタイトル。
+        'post_name'      => $work_detail, // 投稿のスラッグ。
+        'post_title'     => wp_strip_all_tags($work_detail), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
         'post_status'    => $post_status, // 公開ステータス。デフォルトは 'draft'。
         'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'
@@ -76,19 +75,19 @@ EOF;
         // 'tax_input'      => [ array( <タクソノミー> => <array | string>, ...) ],  // カスタムタクソノミーとターム。デフォルトは空。
         // 'page_template'  => [ <文字列> ],  // テンプレートファイルの名前、例えば template.php 等。デフォルトは空。
       );
-      $wp_error = null;
-      $post_id = wp_insert_post($post, $wp_error);
-      add_post_meta($post_id, '_expired_date', $expired_date);
-      add_post_meta($post_id, '_work_detail', $work_detail);
-      add_post_meta($post_id, '_company_id', $company_id);
-      add_post_meta($post_id, '_recruitment_type', $recruitment_type);
-      add_post_meta($post_id, '_url', $url);
-      add_post_meta($post_id, '_title', $title);
-      add_post_meta($post_id, '_position', $position);
-      add_post_meta($post_id, '_working_conditions', $working_conditions);
-      add_post_meta($post_id, '_occupation', $occupation);
-      add_post_meta($post_id, '_remote_work', $remote_work);
-      add_post_meta($post_id, '_location', $location);
+      $post_id = $job_id;
+      // TODO: postのアップデート
+      update_post_meta($post_id, '_expired_date', $expired_date);
+      update_post_meta($post_id, '_company_id', $company_id);
+      update_post_meta($post_id, '_recruitment_type', $recruitment_type);
+      update_post_meta($post_id, '_url', $url);
+      update_post_meta($post_id, '_title', $title);
+      update_post_meta($post_id, '_work_detail', $work_detail);
+      update_post_meta($post_id, '_position', $position);
+      update_post_meta($post_id, '_working_conditions', $working_conditions);
+      update_post_meta($post_id, '_occupation', $occupation);
+      update_post_meta($post_id, '_remote_work', $remote_work);
+      update_post_meta($post_id, '_location', $location);
 
       $message = '登録処理が完了しました';
     } else {
@@ -98,9 +97,9 @@ EOF;
     // セッションの破棄
     unset($_SESSION['key']);
     echo <<<EOF
-    <div class="updated">
-      <p><strong>{$message}</strong></p>
-    </div>
+      <div class="updated">
+        <p><strong>{$message}</strong></p>
+      </div>
 EOF;
     $session_key = md5(sha1(uniqid(mt_rand(), true)));
     $_SESSION['key'] = $session_key;
@@ -116,5 +115,6 @@ EOF;
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  return create_job_opening($user, $action_url, $session_key, $companies);
+  $html = edit_job_opening($user, $action_url, $session_key, $companies, $job_id);
+  return $html;
 }

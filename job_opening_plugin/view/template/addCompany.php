@@ -2,8 +2,30 @@
 
 function create_company_template($user, $action_url, $session_key)
 {
-  $html = <<<EOF
 
+  // 業種
+  $sector_options = array(
+    ["1", "金融・保険"],
+    ["2", "建設・不動産"],
+    ["3", "コンサルティング・士業"],
+    ["4", "IT・インターネット"],
+    ["5", "メーカー・商社"],
+    ["6", "流通・小売・サービス"],
+    ["7", "メディカル"],
+    ["8", "マスコミ・メディア"],
+    ["9", "エンターテインメント"],
+    ["10", "運輸・物流"],
+    ["11", "エネルギー"],
+    ["12", "その他"],
+  );
+  $sector_selector = '<select required name="company_sector" id="company_sector"> <option hidden value="">--選択してください--</option>';
+  foreach ($sector_options as $option) {
+    $sector_selector .= '<option value="' . $option[0] . '">' . $option[1] . '</option>';
+  }
+  $sector_selector .= '</select>';
+
+
+  $html = <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
     <form action="{$action_url}" method="post">
@@ -12,7 +34,7 @@ function create_company_template($user, $action_url, $session_key)
       <input type="hidden" name="ticket" value="{$session_key}">
 
       <div class="form-item">
-        <div class="item-label">募集企業名</div>
+        <div class="item-label"> <span class="required-tag">必須</span>募集企業名</div>
         <input
           type="text"
           name="company_name"
@@ -34,26 +56,12 @@ function create_company_template($user, $action_url, $session_key)
       </div>
 
       <div class="form-item">
-        <div class="item-label"><span class="required-tag">必須</span>業種</div>
-        <select name="company_sector" id="company_sector">
-          <option value="">--選択してください--</option>
-          <option value="1">金融・保険</option>
-          <option value="2">建設・不動産</option>
-          <option value="3">コンサルティング・士業</option>
-          <option value="4">IT・インターネット</option>
-          <option value="5">メーカー・商社</option>
-          <option value="6">流通・小売・サービス</option>
-          <option value="7">メディカル</option>
-          <option value="8">マスコミ・メディア</option>
-          <option value="9">エンターテインメント</option>
-          <option value="10">運輸・物流</option>
-          <option value="11">エネルギー</option>
-          <option value="12">その他</option>
-        </select>
+        <div class="item-label"> <span class="required-tag">必須</span>業種</div>
+        {$sector_selector}
       </div>
 
       <div class="form-item">
-        <div class="item-label"><span class="recommended-tag">歓迎</span>企業HP URL</div>
+        <div class="item-label"> <span class="recommended-tag">歓迎</span>企業HP URL</div>
         <input type="text" name="company_url" id="name" placeholder="https://~~~" />
         <div class="form-description">
           貴社ホームページのURLをご入力いただけます
@@ -72,11 +80,11 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>本社所在地
+          <span class="recommended-tag">歓迎</span>本社所在地
         </div>
 
-        〒<input type="text" name="company_zipcode" required placeholder="999-9999" style="width: 100px;"></input>
-        <input type="text" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F" required></input>
+        〒<input type="text" name="company_zipcode" placeholder="999-9999" style="width: 100px;"></input>
+        <input type="text" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F"></input>
       </div>
 
       <div class="form-item">

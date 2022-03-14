@@ -73,6 +73,7 @@ function on_activate()
 {
   include_once(JOB_OPENING__PLUGIN_DIR . 'model/createDB.php');
   create_table();
+  create_table_meta();
 }
 register_activation_hook(__FILE__, 'on_activate');
 

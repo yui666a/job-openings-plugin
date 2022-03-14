@@ -44,3 +44,39 @@ function create_table()
   dbDelta($sql);
 }
 
+
+
+function create_table_meta()
+{
+  global $wpdb;
+
+  $sql = "";
+  $charset_collate = "";
+
+  // 接頭辞の追加（socal_count_cache）
+  $table_name = $wpdb->prefix . 'sac_job_opening_companies_meta';
+
+  // charsetを指定
+  if (!empty($wpdb->charset))
+    $charset_collate = "DEFAULT CHARACTER SET {$wpdb->charset} ";
+
+  // 照合順序を指定
+  if (!empty($wpdb->collate))
+    $charset_collate .= "COLLATE {$wpdb->collate}";
+
+  // 企業情報のDB作成クエリ
+  $sql = "
+    CREATE TABLE IF NOT EXISTS {$table_name} (
+      id bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+      co_id bigint NOT NULL,
+      meta_type VARCHAR(20) NOT NULL,
+      meta_value VARCHAR(100) NOT NULL,
+      created_at TIMESTAMP DEFAULT 0,
+      updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (id)
+    ) {$charset_collate};";
+
+  require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+  dbDelta($sql);
+}
+
