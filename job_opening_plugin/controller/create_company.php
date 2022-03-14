@@ -4,7 +4,7 @@ function create_company($user)
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
     global $wpdb;
     $userId = $_POST['userId'];
-    $co_logo = $_POST['company_logo'];
+    $co_logo = "";
     $co_name = $_POST['company_name'];
     $co_sector = $_POST['company_sector'];
     $co_url = $_POST['company_url'];
@@ -18,6 +18,16 @@ function create_company($user)
 
     // セッションキーとチケットが一致しているどうか
     if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
+      // ファイル名を取得
+      $filename = $_FILES['company_logo']['name'];
+      //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
+      $uploaded_path = UPLOAD_DIR["basedir"] . '/sac_jo/company_images/' . $filename;
+      $result = move_uploaded_file($_FILES['company_logo']['tmp_name'], $uploaded_path);
+      if ($result) {
+        $co_logo = $uploaded_path;
+      } else {
+      }
+
       $wpdb->insert(
         $wpdb->prefix . 'sac_job_opening_companies',
         array(

@@ -28,7 +28,7 @@ function create_company_template($user, $action_url, $session_key)
   $html = <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
-    <form action="{$action_url}" method="post">
+    <form action="{$action_url}" method="post" enctype="multipart/form-data">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
