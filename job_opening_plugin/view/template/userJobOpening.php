@@ -29,6 +29,19 @@ function bbb($post_id)
   }
   $main_text = substr($main_text, 0, 200);
 
+  $tags = "";
+  if($recruitment_type == "new_graduate"){
+    $tags .= "<li>新卒</li>";
+  }else if($recruitment_type == "mid_career"){
+    $tags .= "<li>中途</li>";
+  }else {
+    $tags .= "<li>新卒</li><li>中途</li>";
+  }
+
+  if($remote_work == "true"){
+    $tags .= "<li>リモートワーク可</li>";
+  }
+
   $html = <<<EOF
   <div class="job-list-fream">
     <a href="{$permalink}" class="job-list-box-wrapper">
@@ -48,10 +61,9 @@ function bbb($post_id)
             </div>
             <div class="job-list-tag-box">
               <ul class="job-list-tag">
-                <span
-                  ><li>(TODO: タグの内容を表示)(TODO: タグの内容を表示)(TODO: タグの内容を表示)(TODO: タグの内容を表示)(TODO: タグの内容を表示)</li>
-                  <li>(TODO: タグの内容を表示)</li></span
-                >
+                <span>
+                  {$tags}
+                </span>
               </ul>
             </div>
             <div class="job-list-detail-box">
