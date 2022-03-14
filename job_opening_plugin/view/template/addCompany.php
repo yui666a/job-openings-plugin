@@ -28,7 +28,7 @@ function create_company_template($user, $action_url, $session_key)
   $html = <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
-    <form action="{$action_url}" method="post">
+    <form action="{$action_url}" method="post" enctype="multipart/form-data">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -44,6 +44,14 @@ function create_company_template($user, $action_url, $session_key)
         />
         <div class="form-description">
           未入力の場合は，貴社アカウント名で登録されます
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label"><span class="recommended-tag">歓迎</span>企業ロゴ</div>
+        <input type="file" name="company_logo" id="company_logo" accept="image/jpeg, image/png">
+        <div class="form-description">
+          貴社ロゴを挿入いただけます(約15MB以下のファイルに限ります)
         </div>
       </div>
 

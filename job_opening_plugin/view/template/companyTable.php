@@ -32,7 +32,7 @@ function make_company_table_row($data)
           >
           <img
             class="company_logo"
-            src="/wp-content/uploads/job-manager-uploads/company_logo/2022/02/SAIN_logo-150x150.png"
+            src="{$data->co_logo}"
             alt="{$data->co_name}"
           />
         </div>

@@ -26,7 +26,8 @@ function console_error($data)
 // 定数定義
 define('JOB_OPENING_VERSION', '0.1');
 define('JOB_OPENING__PLUGIN_DIR', plugin_dir_path(__FILE__));
-define( 'JOB_OPENING__MINIMUM_WP_VERSION', '5.9' );
+define('JOB_OPENING__MINIMUM_WP_VERSION', '5.9');
+define('UPLOAD_DIR', wp_upload_dir());
 
 // セッションの開始
 session_start();
@@ -74,6 +75,9 @@ function on_activate()
   include_once(JOB_OPENING__PLUGIN_DIR . 'model/createDB.php');
   create_table();
   create_table_meta();
+  //作成したいディレクトリ（のパス）
+  $directory_path = "/sac_jo/company_images";
+  wp_mkdir_p(UPLOAD_DIR["basedir"] . $directory_path);
 }
 register_activation_hook(__FILE__, 'on_activate');
 
@@ -99,12 +103,13 @@ add_shortcode('user_job_openings', 'user_job_openings');
 /**
  * テンプレートの指定
  */
-function get_custom_page_template( $page_template ) {
+function get_custom_page_template($page_template)
+{
   $page_template = JOB_OPENING__PLUGIN_DIR . 'view/template/single-job_openings.php';
   return $page_template;
 }
 // add_filter( 'page_template', 'get_custom_page_template' );
-add_filter( 'single_template', 'get_custom_page_template' );
+add_filter('single_template', 'get_custom_page_template');
 
 
 
