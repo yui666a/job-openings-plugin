@@ -118,7 +118,6 @@ function company_add()
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
-
   return $html;
 }
 
@@ -164,11 +163,15 @@ function user_job_openings()
 // 管理画面（wp-adminページ用）
 //=================================================
 function job_openings_list_admin(){
-  echo job_openings_list();
+  if (current_user_can('administrator') || current_user_can('editor')) {
+    echo job_openings_list();
+  }
 }
 
 function company_list_admin(){
-  echo company_list();
+  if (current_user_can('administrator') || current_user_can('editor')) {
+    echo company_list();
+  }
 }
 
 function job_openings_add_admin(){
