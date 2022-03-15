@@ -141,38 +141,24 @@ function create_job_openingssss(
               <th class="assignment-table-items">本社所在地</th>
               <td class="assignment-table-contents">
                 <pre><a href="https://maps.google.com/maps?q={$company->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-                >{$company->co_address}</a
+                >〒{$company->co_zip_code}  {$company->co_address}</a
               ></pre>
+              </td>
+            </tr>
+            <tr>
+              <th class="assignment-table-items">勤務地の所在地</th>
+              <td class="assignment-table-contents">
+                <pre><a href="https://maps.google.com/maps?q={$company->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
+                >〒{$company->co_zip_code}  {$company->co_address}
+              </a></pre>
               </td>
             </tr>
           </table>
         </div>
       </div>
-      <div class="side-box">
-        <div class="google-map">
-          <div class="google-map-box">
-            <p class="company-address">勤務地の所在地</p>
-            <a href="https://maps.google.com/maps?q={$company->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-              >{$company->co_address}</a
-            >
-            <!--iframe要素はgoogle mapのHTMLコピーで260px × 260pxのカスタムサイズで貼り付けています-->
-            <!--<iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7694570079743!2d139.7145596152575!3d35.6334095802055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b1ea8e63243%3A0x12338cc78949be38!2z44CSMTQxLTAwMjEg5p2x5Lqs6YO95ZOB5bed5Yy65LiK5aSn5bSO77yT5LiB55uu77yR4oiS77yRIOebrum7kuOCu-ODs-ODiOODqeODq-OCueOCr-OCqOOCog!5e0!3m2!1sja!2sjp!4v1647010839521!5m2!1sja!2sjp"
-              width="260"
-              height="260"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe>-->
-          </div>
-        </div>
-        <div class="btn-application">
-          <a href="#" class="btn-application-text">応募画面に進む</a>
-        </div>
-      </div>
     </div>
     <div class="btn-application-under">
-      <a href="#" class="btn-application-under-text">応募画面に進む</a>
+      <a href="#" class="btn-application-under-text">応募メールを送る</a>
     </div>
   </div>
 </div>

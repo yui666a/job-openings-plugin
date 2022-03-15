@@ -13,6 +13,19 @@
   --yellow: rgb(235, 200, 0);
 }
 
+div.wrap{
+  width: 100%;
+}
+img.company_logo{
+  max-width: 200px;
+}
+#job_actions {
+  width: 4em;
+}
+.job_actions .button{
+  padding: 4px;
+}
+
 html {
   background: #f7f7f7;
   color: var(--gr800);
@@ -706,7 +719,7 @@ button.add-confirm:disabled {
 }
 
 .contents-card-wrapper .container-header {
-  width: 1000px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -758,7 +771,7 @@ button.add-confirm:disabled {
 }
 
 .contents-card-wrapper .job-list-img-wrapper {
-  width: 1000px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -767,7 +780,7 @@ button.add-confirm:disabled {
 }
 
 .contents-card-wrapper .page-wrapper {
-  width: 1000px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -797,16 +810,16 @@ button.add-confirm:disabled {
 }
 
 .contents-card-wrapper .main-box {
-  width: 1000px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  display: table;
+  /* display: table; */
   margin-top: 40px;
 }
 
 .contents-card-wrapper .work-detail-header-title {
-  width: 650px;
+  width: 65%;
   display: table-cell;
   font-size: 40px;
   font-weight: bold;
@@ -820,9 +833,8 @@ button.add-confirm:disabled {
 
 .contents-card-wrapper .work-detail-text-box {
   display: inline-block;
-  width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  padding: 20px;
   text-align: left;
 }
 
@@ -836,11 +848,11 @@ button.add-confirm:disabled {
 }
 
 .contents-card-wrapper .assignment-table {
-  width: 650px;
+  width: 65%;
 }
 
 .contents-card-wrapper .assignment-table-items {
-  width: 160px;
+  width: 16%;
   font-size: 13px;
   padding-left: 10px;
   height: auto;
@@ -848,10 +860,8 @@ button.add-confirm:disabled {
 }
 
 .contents-card-wrapper .assignment-table-contents {
-  width: 490px;
+  width: 49%;
   font-size: 13px;
-  padding-left: 10px;
-  padding-right: 10px;
   height: auto;
 }
 
@@ -861,8 +871,8 @@ button.add-confirm:disabled {
 
 .contents-card-wrapper .side-box {
   display: table-cell;
-  width: 280px;
-  background-color: #e6e6e6;
+  width: 28%;
+  /* background-color: #e6e6e6; */
 }
 
 .contents-card-wrapper .btn-application-text {
@@ -871,7 +881,7 @@ button.add-confirm:disabled {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 250px;
+  width: 25%;
   font-size: 16px;
   background: #223a70;
   color: #fff;
@@ -917,7 +927,7 @@ button.add-confirm:disabled {
 .contents-card-wrapper .btn-application-under-text {
   text-align: center;
   margin-top: 40px;
-  width: 660px;
+  width: 66%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 40px;

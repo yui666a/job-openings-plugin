@@ -70,18 +70,18 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       <td class="job_status column-job_status" data-colname="ステータス">
         {$status_icon}
       </td>
-      <td class="job_posted column-job_posted" data-colname="作成日">
-        <strong>{$post_date}</strong>
+      <td class="job_posted column-job_posted" data-colname="期限">
+        <strong>{$post_date} 〜 {$job_expires}</strong>
       </td>
-      <td class="job_expires column-job_expires" data-colname="期限">
+      <!--<td class="job_expires column-job_expires" data-colname="期限">
         <strong>{$job_expires}</strong>
-      </td>
-      <td
+      </td>-->
+      <!--<td
         class="job_listing_category column-job_listing_category"
         data-colname="カテゴリー"
       >
         <span class="na">–</span>
-      </td>
+      </td>-->
       <td class="filled column-filled" data-colname="採用済み ?">–</td>
       <td class="job_actions column-job_actions" data-colname="操作">
         <div class="actions">
@@ -154,24 +154,24 @@ function make_job_openings_table_head()
         id="job_posted"
         class="manage-column column-job_posted sortable desc"
       >
-        <span>作成日</span><span class="sorting-indicator"></span
+        <span>期限</span><span class="sorting-indicator"></span
         >
       </th>
-      <th
+      <!--<th
         scope="col"
         id="job_expires"
         class="manage-column column-job_expires sortable desc"
       >
       <span>期限</span><span class="sorting-indicator"></span
         >
-      </th>
-      <th
+      </th>-->
+      <!--<th
         scope="col"
         id="job_listing_category"
         class="manage-column column-job_listing_category"
       >
         カテゴリー
-      </th>
+      </th>-->
       <th scope="col" id="filled" class="manage-column column-filled">
         <span class="tips" data-tip="採用済み ?">採用済み ?</span>
       </th>
