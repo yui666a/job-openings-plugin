@@ -102,8 +102,11 @@ function create_card($user)
       add_post_meta($post_id, '_occupation', $occupation);
       add_post_meta($post_id, '_remote_work', $remote_work);
       add_post_meta($post_id, '_location', $location);
-
-      $message = '登録処理が完了しました';
+      
+      // 一覧ページに遷移する
+      header("Location:".HOME_URL."/".get_option("sac_job_openings_list"));
+      exit();
+      // $message = '登録処理が完了しました';
     } else {
       $message = 'すでに送信済みです';
     }
