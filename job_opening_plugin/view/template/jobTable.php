@@ -119,12 +119,10 @@ EOF;
 
 function make_job_openings_table_head()
 {
-  $add_card_url = HOME_URL."/".get_option("sac_job_openings_add");
-  $company_list_url = HOME_URL."/".get_option("sac_company_list");
 
-  $header = <<<EOF
-  <a href="{$add_card_url}">求人を新規作成</a>
-  <a href="{$company_list_url}">企業一覧ページへ</a>
+  $header =header_link_buttons();
+  $header .= <<<EOF
+
   <table class="wp-list-table widefat fixed striped table-view-list posts">
   <thead>
     <tr>

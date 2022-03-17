@@ -25,7 +25,8 @@ function create_company_template($user, $action_url, $session_key)
   $sector_selector .= '</select>';
 
 
-  $html = <<<EOF
+  $html =header_link_buttons();
+  $html .= <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
     <form action="{$action_url}" method="post" enctype="multipart/form-data">

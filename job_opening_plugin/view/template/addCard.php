@@ -64,7 +64,8 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   }
 
 
-  $html = <<<EOF
+  $html =header_link_buttons();
+  $html .= <<<EOF
   <!-- main -->
   <form action="{$action_url}" method="post">
     <div class="job-information">
