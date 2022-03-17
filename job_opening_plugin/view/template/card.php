@@ -32,10 +32,6 @@ function create_job_openingssss(
             </span>
           </ul>
         </div>
-
-        <a href="{$aaa}" class="job-list-all-link-box">
-          <p class="job-list-all-link">長岡ワーカーの全ての求人を確認する</p>
-        </a>
       </div>
     </div>
 

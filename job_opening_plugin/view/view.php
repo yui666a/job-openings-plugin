@@ -16,7 +16,6 @@ function job_openings_list()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $url = $_SERVER['REQUEST_URI'];
     $mode = $_GET["action"];
     $joid = $_GET["post"];
 
@@ -46,26 +45,14 @@ function company_list()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
+    $mode = $_GET["action"];
+    $co_id = $_GET["id"];
 
-    global $wpdb;
-    $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=" . wp_get_current_user()->ID . ";";
-    $companies = $wpdb->get_results($query, OBJECT);
-
-    // 表 ヘッダーの表示
-    $html .=  make_company_table_head();
-
-    $html .=  '<tbody id="the-list">';
-    // ob_start();
-    foreach ($companies as $data) :
-      $html .=  make_company_table_row($data);
-    endforeach;
-    $html .=  '</tbody>';
-
-    // 表 フッターの表示
-    $html .= '</table>';
-    // ob_get_clean();
+    if (!$mode && !$co_id) {
+      $html .= abab($user);
+    } else if ($mode == "edit") {
+      $html .= editCompany($user, $co_id);
+    }
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';

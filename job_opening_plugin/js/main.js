@@ -1,8 +1,19 @@
-const position = [
-  { id: 0, text: "契約社員" },
-  { id: 1, text: "正社員" },
-  { id: 2, text: "課長" },
-  { id: 3, text: "エンジニア" },
+const position = [{
+    id: 0,
+    text: "契約社員"
+  },
+  {
+    id: 1,
+    text: "正社員"
+  },
+  {
+    id: 2,
+    text: "課長"
+  },
+  {
+    id: 3,
+    text: "エンジニア"
+  },
 ];
 
 $(function () {
@@ -17,10 +28,18 @@ $(function () {
   // });
 });
 
-const locations = [
-  { id: 0, text: "長岡" },
-  { id: 1, text: "大阪" },
-  { id: 2, text: "渋田" },
+const locations = [{
+    id: 0,
+    text: "長岡"
+  },
+  {
+    id: 1,
+    text: "大阪"
+  },
+  {
+    id: 2,
+    text: "渋田"
+  },
 ];
 
 $(function () {
@@ -35,3 +54,10 @@ $(function () {
   // });
 });
 
+$('#company_logo').on('change', function (e) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+      $("#logo_preview").attr('src', e.target.result);
+  }
+  reader.readAsDataURL(e.target.files[0]);
+});

@@ -1,7 +1,8 @@
 <?php
 
-function create_company_template($user, $action_url, $session_key)
+function edit_company($user, $company_id, $action_url, $session_key)
 {
+  $company = getCompanyById($company_id);
 
   // 業種
   $sector_options = array(
@@ -20,10 +21,10 @@ function create_company_template($user, $action_url, $session_key)
   );
   $sector_selector = '<select required name="company_sector" id="company_sector"> <option hidden value="">--選択してください--</option>';
   foreach ($sector_options as $option) {
-    $sector_selector .= '<option value="' . $option[0] . '">' . $option[1] . '</option>';
+    $isSelected = $option[0] == $company->co_sector  ? 'selected' : '';
+    $sector_selector .= '<option value="' . $option[0] . ' ' . $isSelected . '">' . $option[1] . '</option>';
   }
   $sector_selector .= '</select>';
-
 
   $html =header_link_buttons();
   $html .= <<<EOF
@@ -40,7 +41,7 @@ function create_company_template($user, $action_url, $session_key)
           type="text"
           name="company_name"
           id="name"
-          value="{$user->display_name}"
+          value="{$company->co_name}"
           placeholder="株式会社 XXXX-XXXX HOLDINGS"
         />
         <div class="form-description">
@@ -55,7 +56,7 @@ function create_company_template($user, $action_url, $session_key)
           貴社ロゴを挿入いただけます(約15MB以下のファイルに限ります)
         </div>
         Preview:<br>
-        <img id="logo_preview" style="width:auto;height:200px;" >
+        <img src="{$company->co_logo}" id="logo_preview" style="width:auto;height:200px;" >
       </div>
 
       <div class="form-item">
@@ -65,7 +66,7 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label"> <span class="recommended-tag">歓迎</span>企業HP URL</div>
-        <input type="text" name="company_url" id="name" placeholder="https://~~~" />
+        <input type="text" value="{$company->co_url}" name="company_url" id="name" placeholder="https://~~~" />
         <div class="form-description">
           貴社ホームページのURLをご入力いただけます
         </div>
@@ -75,7 +76,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>PR文
         </div>
-        <textarea class="rich" name="company_pr" rows="6"></textarea>
+        <textarea class="rich" name="company_pr" rows="6">{$company->co_pr}</textarea>
         <div class="form-description">
           貴社の強みや，メリットなどPR文をお書きください
         </div>
@@ -86,15 +87,15 @@ function create_company_template($user, $action_url, $session_key)
           <span class="recommended-tag">歓迎</span>本社所在地
         </div>
 
-        〒<input type="text" name="company_zipcode" placeholder="999-9999" style="width: 100px;"></input>
-        <input type="text" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F"></input>
+        〒<input type="text" value="{$company->co_zip_code}" name="company_zipcode" placeholder="999-9999" style="width: 120px;"></input>
+        <input type="text" value="{$company->co_address}" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F"></input>
       </div>
 
       <div class="form-item">
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>過去の実績
         </div>
-        <textarea class="rich" name="company_achievement" rows="6"></textarea>
+        <textarea class="rich" name="company_achievement" rows="6">{$company->co_achievement}</textarea>
         <div class="form-description">
           貴社のこれまでの実績をご記入ください
         </div>
@@ -104,7 +105,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>勤務時間
         </div>
-        <textarea class="rich" name="company_office_hour" rows="6"></textarea>
+        <textarea class="rich" name="company_office_hour" rows="6">{$company->co_hour}</textarea>
         <div class="form-description">
           貴社の普段の勤務時間や営業時間をご記入ください
         </div>
@@ -114,7 +115,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
         </div>
-        <textarea class="rich" name="company_benefits" rows="6"></textarea>
+        <textarea class="rich" name="company_benefits" rows="6">{$company->co_benefits}</textarea>
         <div class="form-description">
         貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
@@ -124,7 +125,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>休日・休暇
         </div>
-        <textarea class="rich" name="company_day_off" rows="6"></textarea>
+        <textarea class="rich" name="company_day_off" rows="6">{$company->co_day_off}</textarea>
         <div class="form-description">
         貴社の休日や休暇面をご記入ください
         </div>

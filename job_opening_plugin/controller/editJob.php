@@ -43,18 +43,29 @@ function editJob($user, $job_id)
 
 
       $co_data = getCompanyById($company_id)[0];
-      $content = <<<EOF
-              <div>あたらしい文字★★求人情報★★</div>
-              <div>★★企業について★★</div>
-              <div>社名{$co_data->co_name}</div>
-              <div>PRポイント{$co_data->co_pr_point}</div>
-EOF;
+      $content = create_job_openingssss(
+        $company_id,
+        $recruitment_type ,
+        $title ,
+        $url ,
+        $position ,
+        $work_detail ,
+        $application_conditions ,
+        $working_conditions ,
+        $location ,
+        $remote_work ,
+        $occupation ,
+        $date_period_type ,
+        $trip_period ,
+        $trip_start ,
+        $trip_last
+      );
 
       $post = array(
         // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
         'post_content'   => $content, // 投稿の全文。
-        'post_name'      => $work_detail, // 投稿のスラッグ。
-        'post_title'     => wp_strip_all_tags($work_detail), // 投稿のタイトル。
+        'post_name'      => $title, // 投稿のスラッグ。
+        'post_title'     => wp_strip_all_tags($title), // 投稿のタイトル。
         // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
         'post_status'    => $post_status, // 公開ステータス。デフォルトは 'draft'。
         'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'
@@ -79,13 +90,13 @@ EOF;
       $post_id = $job_id;
       // TODO: postのアップデート
       update_post_meta($post_id, '_expired_date', $expired_date);
+      update_post_meta($post_id, '_work_detail', $work_detail);
       update_post_meta($post_id, '_company_id', $company_id);
       update_post_meta($post_id, '_recruitment_type', $recruitment_type);
       update_post_meta($post_id, '_url', $url);
       update_post_meta($post_id, '_title', $title);
-      update_post_meta($post_id, '_work_detail', $work_detail);
-      update_post_meta($post_id, '_application_conditions', $application_conditions);
       update_post_meta($post_id, '_position', $position);
+      update_post_meta($post_id, '_application_conditions', $application_conditions);
       update_post_meta($post_id, '_working_conditions', $working_conditions);
       update_post_meta($post_id, '_occupation', $occupation);
       update_post_meta($post_id, '_remote_work', $remote_work);
@@ -99,9 +110,9 @@ EOF;
     // セッションの破棄
     unset($_SESSION['key']);
     echo <<<EOF
-      <div class="updated">
-        <p><strong>{$message}</strong></p>
-      </div>
+    <div class="updated">
+      <p><strong>{$message}</strong></p>
+    </div>
 EOF;
     $session_key = md5(sha1(uniqid(mt_rand(), true)));
     $_SESSION['key'] = $session_key;
@@ -117,6 +128,5 @@ EOF;
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  $html = edit_job_opening($user, $action_url, $session_key, $companies, $job_id);
-  return $html;
+  return edit_job_opening($user, $action_url, $session_key, $companies, $job_id);
 }

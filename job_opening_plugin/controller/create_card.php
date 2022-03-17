@@ -14,8 +14,8 @@ function create_card($user)
     $userId = $_POST['userId'];
     $company_id = $_POST['company_id'];
     $recruitment_type = $_POST['recruitment_type'];
-    $title = $_POST['title'];
     $url = $_POST['url'];
+    $title = $_POST['title'];
     $position = $_POST['position'];
     $work_detail = $_POST['work_detail'];
     $application_conditions = $_POST['application_conditions'];

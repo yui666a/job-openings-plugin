@@ -1,5 +1,5 @@
 <?php
-function create_company($user)
+function editCompany($user, $company_id)
 {
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
     global $wpdb;
@@ -27,7 +27,7 @@ function create_company($user)
         $co_logo = UPLOAD_DIR["baseurl"] . '/sac_jo/company_images/' . $filename;
       }
 
-      $wpdb->insert(
+      $wpdb->update(
         $wpdb->prefix . 'sac_job_opening_companies',
         array(
           'co_name' => $co_name,
@@ -42,9 +42,10 @@ function create_company($user)
           'co_office_hours' => $co_hour,
           'co_employee_benefits' => $co_benefits,
           'co_day_off' => $co_day_off,
-          'created_at' => current_time('mysql', 0)
         ),
-        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
+        array('co_id' => $company_id),
+        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'),
+        array('%d')
       );
       // 一覧ページに遷移する
       header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
@@ -68,7 +69,5 @@ EOF;
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  return create_company_template($user, $action_url, $session_key);
+  return edit_company($user, $company_id, $action_url, $session_key);
 }
-
-// add_filter('the_content', 'page_form_sample');
