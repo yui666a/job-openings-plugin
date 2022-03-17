@@ -64,7 +64,7 @@ function company_list()
     $html .=  '</tbody>';
 
     // 表 フッターの表示
-    $html .=  make_company_table_head();
+    $html .= '</table>';
     // ob_get_clean();
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
