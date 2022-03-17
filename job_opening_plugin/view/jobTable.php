@@ -68,6 +68,6 @@ function aaa($user)
 
   wp_reset_postdata(); // 投稿データのリセット
   // 表 フッターの表示
-  $html .=  make_job_openings_table_head();
+  $html .=  '</table>';
   return $html;
 }

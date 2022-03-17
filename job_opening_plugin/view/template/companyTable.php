@@ -83,7 +83,13 @@ function make_company_table_head()
 {
   $admin_url = esc_url(get_admin_url(''));
 
+  $add_company_url = HOME_URL."/".get_option("sac_company_add");
+  $job_opening_list_url = HOME_URL."/".get_option("sac_job_openings_list");
+
   $header = <<<EOF
+  <a href="{$add_company_url}">企業を新規作成</a>
+  <a href="{$job_opening_list_url}">求人一覧ページへ</a>
+
   <table class="wp-list-table widefat fixed striped table-view-list posts">
   <thead>
     <tr>
