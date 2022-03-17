@@ -1,12 +1,15 @@
 $(function () {
+  console.log("tinymce.init begin");
   tinymce.init({
-    selector: "textarea.rich", //class="rich" のtextareaに適応
-    forced_root_block: "div", //デフォルトの要素を<p>から<div>に変更
-    language: "ja", // 言語 日本語
+    selector: "textarea.rich", // <textarea class="rich"...></textarea>
+    forced_root_block: "div", // modify default tag <p> -> <div>
+    language: "ja",
+    branding: false, // remove credit
     setup: function (editor) {
       editor.on("change", function () {
         tinymce.triggerSave();
       });
     },
   });
+  console.log("tinymce.init ends");
 });

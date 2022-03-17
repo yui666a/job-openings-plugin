@@ -61,32 +61,6 @@ function editJob($user, $job_id)
         $trip_last
       );
 
-      $post = array(
-        // 'ID'             => [ <投稿 ID> ] // 既存の投稿を更新する場合に指定。
-        'post_content'   => $content, // 投稿の全文。
-        'post_name'      => $title, // 投稿のスラッグ。
-        'post_title'     => wp_strip_all_tags($title), // 投稿のタイトル。
-        // 'post_status'    => [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | 登録済みカスタムステータス ],  // 公開ステータス。デフォルトは 'draft'。
-        'post_status'    => $post_status, // 公開ステータス。デフォルトは 'draft'。
-        'post_type'      => 'job_openings', // 投稿タイプ。デフォルトは 'post'
-        // 'post_author'    => [ <ユーザー ID> ],  // 作成者のユーザー ID。デフォルトはログイン中のユーザーの ID。
-        'ping_status'    => 'open', // 'open' ならピンバック・トラックバックを許可。デフォルトはオプション 'default_ping_status' の値。
-        // 'post_parent'    => [ <投稿 ID> ],  // 親投稿の ID。デフォルトは 0。
-        // 'menu_order'     => [ <順序値> ],  // 固定ページを追加する場合、メニュー内の並び順を指定。デフォルトは 0。
-        // 'to_ping'        => // スペースまたは改行で区切った、ピンを打つ予定の URL のリスト。デフォルトは空文字列。
-        // 'pinged'         => // スペースまたは改行で区切った、ピンを打った URL のリスト。デフォルトは空文字列。
-        // 'post_password'  => [ <文字列> ],  // 投稿パスワード。デフォルトは空文字列。
-        // 'guid'           => // 普通はこれを指定せず WordPress に任せてください。
-        // 'post_content_filtered' => // 普通はこれを指定せず WordPress に任せてください。
-        // 'post_excerpt'   => [ <文字列> ],  // 投稿の抜粋。
-        'post_date'      => $post_date,  // 投稿の作成日時。date('Y-m-d H:i:s')
-        // 'post_date_gmt'  => [ Y-m-d H:i:s ],  // 投稿の作成日時（GMT）。
-        'comment_status' => 'closed',  // 'open' ならコメントを許可。デフォルトはオプション 'default_comment_status' の値、または 'closed'。
-        // 'post_category'  => [ array(<カテゴリー ID>, ...) ],  // 投稿カテゴリー。デフォルトは空（カテゴリーなし）。
-        // 'tags_input'     => [ '<tag>, <tag>, ...' | array ],  // 投稿タグ。デフォルトは空（タグなし）。
-        // 'tax_input'      => [ array( <タクソノミー> => <array | string>, ...) ],  // カスタムタクソノミーとターム。デフォルトは空。
-        // 'page_template'  => [ <文字列> ],  // テンプレートファイルの名前、例えば template.php 等。デフォルトは空。
-      );
       $post_id = $job_id;
       // TODO: postのアップデート
       update_post_meta($post_id, '_expired_date', $expired_date);

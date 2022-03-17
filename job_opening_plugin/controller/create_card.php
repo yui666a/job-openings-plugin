@@ -82,11 +82,12 @@ function create_card($user)
         'post_date'      => $post_date,  // 投稿の作成日時。date('Y-m-d H:i:s')
         // 'post_date_gmt'  => [ Y-m-d H:i:s ],  // 投稿の作成日時（GMT）。
         'comment_status' => 'closed',  // 'open' ならコメントを許可。デフォルトはオプション 'default_comment_status' の値、または 'closed'。
-        // 'post_category'  => [ array(<カテゴリー ID>, ...) ],  // 投稿カテゴリー。デフォルトは空（カテゴリーなし）。
+        'post_category'  => "job_openings",  // 投稿カテゴリー。デフォルトは空（カテゴリーなし）。
         // 'tags_input'     => [ '<tag>, <tag>, ...' | array ],  // 投稿タグ。デフォルトは空（タグなし）。
         // 'tax_input'      => [ array( <タクソノミー> => <array | string>, ...) ],  // カスタムタクソノミーとターム。デフォルトは空。
         // 'page_template'  => [ <文字列> ],  // テンプレートファイルの名前、例えば template.php 等。デフォルトは空。
       );
+
       $wp_error = null;
       $post_id = wp_insert_post($post, $wp_error);
       add_post_meta($post_id, '_expired_date', $expired_date);
