@@ -6,6 +6,7 @@ include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/companyTable.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCard.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/editCard.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCompany.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/header.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/card.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/editJob.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_company.php');
@@ -43,7 +44,7 @@ add_action('admin_menu', function () {
     '求人一覧', // サブメニューとして表示されるテキスト
     'manage_options', // 必要な権限 manage_options は通常 administrator のみに与えられた権限
     'job_openings',  // サブメニューのスラッグ名。この名前を親メニューのスラッグと同じにすると親メニューを押したときにこのサブメニューを表示します。一般的にはこの形式を採用していることが多い。
-    'job_openings_list', //（任意）このページのコンテンツを出力するために呼び出される関数
+    'job_openings_list_admin', //（任意）このページのコンテンツを出力するために呼び出される関数
     10
   );
 
@@ -53,7 +54,7 @@ add_action('admin_menu', function () {
     '企業一覧',
     'manage_options',
     'job_openings-companies',
-    'company_list',
+    'company_list_admin',
     20
   );
 
@@ -63,7 +64,7 @@ add_action('admin_menu', function () {
     '求人 新規作成',
     'manage_options',
     'job_openings-add-card',
-    'job_openings_add',
+    'job_openings_add_admin',
     30
   );
 
@@ -73,7 +74,7 @@ add_action('admin_menu', function () {
     '企業 新規作成',
     'manage_options',
     'job_openings-add-company',
-    'company_add',
+    'company_add_admin',
     40
   );
 
@@ -83,7 +84,7 @@ add_action('admin_menu', function () {
     '設定',
     'manage_options',
     'job_openings-settings',
-    'settings',
+    'settings', // TODO: not implemented
     50
   );
 

@@ -1,76 +1,89 @@
-/* @charset "utf-8";
-html,
-body {
+.job-opening-card html,
+.job-opening-card body {
   height: 100%;
   width: 100%;
   -webkit-text-size-adjust: none;
 }
-body,
-div,
-p,
-ul,
-ol,
-li,
-dl,
-dt,
-dd,
-table,
-th,
-td,
-img,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-form,
-select {
+
+.job-opening-card body,
+.job-opening-card div,
+.job-opening-card p,
+.job-opening-card ul,
+.job-opening-card ol,
+.job-opening-card li,
+.job-opening-card dl,
+.job-opening-card dt,
+.job-opening-card dd,
+.job-opening-card table,
+.job-opening-card th,
+.job-opening-card td,
+.job-opening-card img,
+.job-opening-card h1,
+.job-opening-card h2,
+.job-opening-card h3,
+.job-opening-card h4,
+.job-opening-card h5,
+.job-opening-card h6,
+.job-opening-card form,
+.job-opening-card select {
   margin: 0;
   padding: 0;
 }
-pre {
+
+.job-opening-card pre {
   text-align: left;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  background-color: transparent;
+  border: none;
 }
-a {
+
+.job-opening-card a {
   text-decoration: none;
 }
-ul,
-ol,
-li {
+
+.job-opening-card ul,
+.job-opening-card ol,
+.job-opening-card li {
   list-style: none;
 }
-img {
+
+.job-opening-card img {
   border: 0;
   vertical-align: middle;
+  width: auto;
+  height: 100%;
 }
-table {
+
+.job-opening-card table {
   border-collapse: collapse;
 }
-input,
-select {
+
+.job-opening-card input,
+.job-opening-card select {
   vertical-align: middle;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
 }
-body {
+
+.job-opening-card body {
   font-size: 12px;
   line-height: 1.5;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
 }
 
-.header-wrapper {
+.job-opening-card .header-wrapper {
   margin-top: 15px;
   text-align: center;
 }
-.container-header {
-  width: 1000px;
+
+.job-opening-card .container-header {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
   display: inline-block;
 }
-.job-list-text-link {
+
+.job-opening-card .job-list-text-link {
   margin-top: 20px;
   font-size: 30px;
   font-weight: bold;
@@ -81,10 +94,12 @@ body {
   border-left: 6px solid #223a70;
   color: #000;
 }
-.job-list-tag-box {
+
+.job-opening-card .job-list-tag-box {
   margin-top: 10px;
 }
-.job-list-tag li {
+
+.job-opening-card .job-list-tag li {
   display: inline-block;
   font-size: 16px;
   padding-left: 3px;
@@ -96,13 +111,15 @@ body {
   width: auto;
   text-align: center;
 }
-.job-list-all-link-box {
+
+.job-opening-card .job-list-all-link-box {
   display: inline-block;
   padding-top: 6px;
   font-size: 18px;
   color: #223a70;
 }
-.job-list-all-link-box:hover {
+
+.job-opening-card .job-list-all-link-box:hover {
   display: inline-block;
   padding-top: 6px;
   font-size: 18px;
@@ -110,25 +127,36 @@ body {
   text-decoration: underline;
 }
 
-.job-list-img-wrapper {
-  width: 1000px;
+.job-opening-card .job-list-img-wrapper {
+  width: 100%;
+  height: 200px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  box-shadow: 1px 1px 1px 1px #e6e6e6;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
-.page-wrapper {
-  width: 1000px;
+
+.job-opening-card .page-wrapper {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
   margin-top: 20px;
 }
-.page-items {
+
+.job-opening-card .page-items {
   height: auto;
   background-color: #e6e6e6;
 }
-.page-items li {
+
+.job-opening-card .page-items li {
   display: inline-block;
   background-color: #e6e6e6;
   font-size: 20px;
@@ -136,24 +164,27 @@ body {
   padding: 10px 70px 10px 70px;
   text-align: center;
 }
-.page-items > li > a {
+
+.job-opening-card .page-items > li > a {
   color: #000;
 }
-.page-items > li:hover {
+
+.job-opening-card .page-items > li:hover {
   background: #afafb0;
 }
-.main-box {
-  width: 1000px;
+
+.job-opening-card .main-box {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  display: table;
+  position: relative;
   margin-top: 40px;
 }
 
-.work-detail-header-title {
+.job-opening-card .work-detail-header-title {
   width: 650px;
-  display: table-cell;
+  /* display: table-cell; */
   font-size: 40px;
   font-weight: bold;
   padding-left: 10px;
@@ -164,51 +195,59 @@ body {
   color: #000;
 }
 
-.work-detail-text-box {
+.job-opening-card .work-detail-text-box {
   display: inline-block;
-  width: 700px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
 }
 
-.work-detail-text {
+.job-opening-card .work-detail-text {
   font-size: 16px;
   text-align: left;
 }
 
-.assignment-table-box {
+.job-opening-card .assignment-table-box {
   margin-top: 5px;
 }
-.assignment-table {
+
+.job-opening-card .assignment-table {
   width: 650px;
 }
-.assignment-table-items {
-  width: 160px;
+
+.job-opening-card .assignment {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.job-opening-card .assignment-item-label {
+  width: 20%;
   font-size: 13px;
   padding-left: 10px;
   height: auto;
   background-color: #e6e6e6;
 }
-.assignment-table-contents {
-  width: 490px;
+
+.job-opening-card .assignment-item-value {
+  width: 80%;
   font-size: 13px;
-  padding-left: 10px;
-  padding-right: 10px;
   height: auto;
 }
 
-.company-information-table-box {
+.job-opening-card .company-information-table-box {
   margin-top: 40px;
 }
 
-.side-box {
-  display: table-cell;
+.job-opening-card .side-box {
+  /* display: table-cell; */
   width: 280px;
   background-color: #e6e6e6;
 }
 
-.btn-application-text {
+.job-opening-card .btn-application-text {
   text-align: center;
   margin-top: 20px;
   display: block;
@@ -223,12 +262,11 @@ body {
   padding: 10px;
 }
 
-.btn-application-text:hover {
+.job-opening-card .btn-application-text:hover {
   opacity: 0.6;
 }
 
-.google-map-box {
-  display: table-cell;
+.job-opening-card .google-map-box {
   width: 280x;
   height: auto;
   margin-bottom: 10px;
@@ -236,18 +274,18 @@ body {
   padding: 10px;
 }
 
-.google-map-address {
+.job-opening-card .google-map-address {
   color: #223a70;
   font-size: 13px;
   padding: 10px;
 }
 
-.google-map-address:hover {
+.job-opening-card .google-map-address:hover {
   color: #1470cc;
   text-decoration: underline;
 }
 
-.company-address {
+.job-opening-card .company-address {
   font-size: 14px;
   padding-left: 10px;
   padding-top: 1px;
@@ -257,13 +295,18 @@ body {
   color: #000;
 }
 
-.btn-application-under-text {
+.job-opening-card .btn-application-under {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.job-opening-card .btn-application-under-text {
   text-align: center;
-  margin-top: 40px;
+  margin: 20px auto;
   width: 660px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
   display: block;
   font-size: 16px;
   background: #223a70;
@@ -273,6 +316,7 @@ body {
   padding: 10px;
 }
 
-.btn-application-under-text:hover {
+.job-opening-card .btn-application-under-text:hover {
   opacity: 0.6;
-} */
+}
+/*# sourceMappingURL=cardStyle.css.map */

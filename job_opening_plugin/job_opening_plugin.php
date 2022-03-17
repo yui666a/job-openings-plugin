@@ -28,6 +28,7 @@ define('JOB_OPENING_VERSION', '0.1');
 define('JOB_OPENING__PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('JOB_OPENING__MINIMUM_WP_VERSION', '5.9');
 define('UPLOAD_DIR', wp_upload_dir());
+define('HOME_URL', get_option("home"));
 
 // セッションの開始
 session_start();
@@ -55,8 +56,9 @@ function add_files()
   // CSS
   wp_enqueue_style('jo-normalize', plugin_dir_url(__FILE__) . 'css/normalize.css', "", "0.1");
   wp_enqueue_style('jo-main', plugin_dir_url(__FILE__) . 'css/style.css', "", "0.1");
-  wp_enqueue_style('jo-user', plugin_dir_url(__FILE__) . 'css/userStyle.css', "", "0.1");
+  // wp_enqueue_style('jo-user', plugin_dir_url(__FILE__) . 'css/userStyle.css', "", "0.1");
   wp_enqueue_style('jo-card', plugin_dir_url(__FILE__) . 'css/cardStyle.css', "", "0.1");
+  wp_enqueue_style('jo-header', plugin_dir_url(__FILE__) . 'css/header.css', "", "0.1");
 }
 /**
  * wp_enqueue_scripts – フロントエンドをイベントトリガーにする
@@ -81,6 +83,25 @@ function on_activate()
   //作成したいディレクトリ（のパス）
   $directory_path = "/sac_jo/company_images";
   wp_mkdir_p(UPLOAD_DIR["basedir"] . $directory_path);
+
+  // オプションを追加
+  add_option('sac_job_openings_list', 'job_opening_list', '', 'yes');
+  add_option('sac_company_list', 'company_list', '', 'yes');
+  add_option('sac_job_openings_add', 'add_job_opening', '', 'yes');
+  add_option('sac_company_add', 'add_company', '', 'yes');
+  add_option('sac_user_job_openings', 'user_job_openings', '', 'yes');
+  update_option("sac_job_openings_list", "job_opening_list");
+  update_option("sac_company_list", "company_list");
+  update_option("sac_job_openings_add", "add_job_opening");
+  update_option("sac_company_add", "add_company");
+  update_option("sac_user_job_openings", "user_job_openings");
+
+  // 固定ページを作成
+  wp_insert_post(array('post_title' => '作成した求人一覧', 'post_content'  => '[job_openings_list]',  'post_name' => "job_opening_list", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
+  wp_insert_post(array('post_title' => '作成した企業一覧', 'post_content'  => '[company_list]',       'post_name' => "company_list", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
+  wp_insert_post(array('post_title' => '求人情報を作成', 'post_content'  => '[job_openings_add]',     'post_name' => "add_job_opening", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
+  wp_insert_post(array('post_title' => '企業情報を作成', 'post_content'  => '[company_add]',          'post_name' => "add_company", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
+  wp_insert_post(array('post_title' => '求人一覧', 'post_content'  => '[user_job_openings]',         'post_name' => "job_openings_table", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
 }
 register_activation_hook(__FILE__, 'on_activate');
 

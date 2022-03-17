@@ -46,7 +46,9 @@ function create_company($user)
         ),
         array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
       );
-      $message = '登録処理が完了しました';
+      // 一覧ページに遷移する
+      header("Location:".HOME_URL."/".get_option("sac_company_list"));
+      exit();
     } else {
       $message = 'すでに送信済みです';
     }

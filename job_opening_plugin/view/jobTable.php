@@ -37,7 +37,7 @@ function aaa($user)
     $author = get_the_author();
     $post_date = get_the_date();
     $permalink = get_permalink($post_id);
-    $job_expires = get_post_meta($post_id, '_job_expires', true);
+    $job_expires = get_post_meta($post_id, '_expired_date', true);
     $job_location = get_post_meta($post_id, '_job_location', true);
 
     $status_icon = "";
@@ -68,6 +68,6 @@ function aaa($user)
 
   wp_reset_postdata(); // 投稿データのリセット
   // 表 フッターの表示
-  $html .=  make_job_openings_table_head();
+  $html .=  '</table>';
   return $html;
 }

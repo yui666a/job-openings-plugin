@@ -24,7 +24,9 @@
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <!-- [endif] -->
     <script type="text/javascript" src="./js/main.js"></script>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <!-- <link rel="stylesheet" href="./css/style.css" /> -->
   </head>
 
   <body>
@@ -34,6 +36,28 @@
     </header>
 
     <!-- main -->
+    <div class="step-wrapper">
+      <!-- <div class="step-number" id="step1-index">1</div> -->
+      <div class="step-text" id="step1-label">
+        <a href="http://">企業情報を新規追加</a>
+      </div>
+
+      <!-- <div class="step-number" id="step2-index">2</div> -->
+      <div class="step-text" id="step2-label">
+        <a href="http://">作成した企業一覧</a>
+      </div>
+
+      <!-- <div class="step-number" id="step3-index">3</div> -->
+      <div class="step-text" id="step3-label">
+        <a href="http://">求人情報を新規追加</a>
+      </div>
+
+      <!-- <div class="step-number" id="step4-index">4</div> -->
+      <div class="step-text" id="step4-label">
+        <a href="http://">作成した求人一覧</a>
+      </div>
+    </div>
+
     <div class="job-information">
       <h3>求人情報</h3>
       <form action="" method="get">
@@ -84,7 +108,12 @@
           <div class="item-label">
             <span class="required-tag">必須</span>仕事内容
           </div>
-          <textarea name="work-detail" rows="6" required></textarea>
+          <textarea
+            class="rich"
+            name="work-detail"
+            rows="6"
+            required
+          ></textarea>
           <div class="form-description">
             仕事内容やミッションをわかりやすくご記載ください
           </div>
@@ -92,7 +121,7 @@
 
         <div class="form-item">
           <div class="item-label">労働条件</div>
-          <textarea name="Working-conditions" rows="6"></textarea>
+          <textarea class="rich" name="Working-conditions" rows="6"></textarea>
           <div class="form-description"></div>
         </div>
 

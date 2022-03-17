@@ -64,7 +64,7 @@ function company_list()
     $html .=  '</tbody>';
 
     // 表 フッターの表示
-    $html .=  make_company_table_head();
+    $html .= '</table>';
     // ob_get_clean();
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -88,7 +88,7 @@ function job_openings_add()
     || current_user_can('contributor')
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";    // echo create_card($user);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
     $html .= create_card($user);
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -113,13 +113,11 @@ function company_add()
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
-    // echo create_card($user);
     $html .= create_company($user);
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
-
   return $html;
 }
 
@@ -129,7 +127,6 @@ function company_add()
 function settings()
 {
   $user = wp_get_current_user();
-  // echo create_company($user);
 }
 
 
@@ -159,4 +156,28 @@ function user_job_openings()
 
   $html .= bbb_foot();
   return $html;
+}
+
+
+//=================================================
+// 管理画面（wp-adminページ用）
+//=================================================
+function job_openings_list_admin(){
+  if (current_user_can('administrator') || current_user_can('editor')) {
+    echo job_openings_list();
+  }
+}
+
+function company_list_admin(){
+  if (current_user_can('administrator') || current_user_can('editor')) {
+    echo company_list();
+  }
+}
+
+function job_openings_add_admin(){
+  echo job_openings_add();
+}
+
+function company_add_admin(){
+  echo company_add();
 }

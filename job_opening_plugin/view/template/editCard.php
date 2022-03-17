@@ -158,7 +158,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
           <span class="required-tag">必須</span>仕事内容
         </div>
-        <textarea name="work_detail" rows="6" required>{$work_detail}</textarea>
+        <textarea class="rich" name="work_detail" rows="6" required>{$work_detail}</textarea>
         <div class="form-description">
           仕事内容やミッションをわかりやすくご記載ください
         </div>
@@ -168,7 +168,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
           <span class="required-tag">必須</span>募集要件
         </div>
-        <textarea name="application_conditions" rows="6" required>{$application_conditions}</textarea>
+        <textarea class="rich" name="application_conditions" rows="6" required>{$application_conditions}</textarea>
         <div class="form-description">
           必須条件、歓迎条件、求める人物像などをご記載ください
         </div>
@@ -176,7 +176,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label"><span class="recommended-tag">歓迎</span>労働条件</div>
-        <textarea name="working_conditions" rows="6">{$working_conditions}</textarea>
+        <textarea class="rich" name="working_conditions" rows="6">{$working_conditions}</textarea>
         <div class="form-description"></div>
       </div>
 
@@ -278,7 +278,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>PR文
         </div>
-        <textarea name="company_pr" rows="6"></textarea>
+        <textarea class="rich" name="company_pr" rows="6"></textarea>
         <div class="form-description">
           貴社の強みや，メリットなどPR文をお書きください
         </div>
@@ -297,7 +297,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>過去の実績
         </div>
-        <textarea name="company_achievement" rows="6"></textarea>
+        <textarea class="rich" name="company_achievement" rows="6"></textarea>
         <div class="form-description">
           貴社のこれまでの実績をご記入ください
         </div>
@@ -307,7 +307,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>勤務時間
         </div>
-        <textarea name="company_office_hour" rows="6"></textarea>
+        <textarea class="rich" name="company_office_hour" rows="6"></textarea>
         <div class="form-description">
           貴社の普段の勤務時間や営業時間をご記入ください
         </div>
@@ -317,7 +317,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
         </div>
-        <textarea name="company_benefits" rows="6"></textarea>
+        <textarea class="rich" name="company_benefits" rows="6"></textarea>
         <div class="form-description">
           貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
@@ -327,7 +327,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>休日・休暇
         </div>
-        <textarea name="company_day_off" rows="6"></textarea>
+        <textarea class="rich" name="company_day_off" rows="6"></textarea>
         <div class="form-description">
         貴社の休日や休暇面をご記入ください
         </div>
