@@ -37,7 +37,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       >
         <div class="job_position">
           <a
-            href="{$admin_url}post.php?post={$post_id}&amp;action=edit"
+            href="{$current_request}?&action=edit&post={$post_id}"
             class="tips job_title"
             data-tip="ID: {$post_id}"
             >{$title}</a
@@ -119,9 +119,12 @@ EOF;
 
 function make_job_openings_table_head()
 {
-  $admin_url = esc_url(get_admin_url(''));
+  $add_card_url = HOME_URL."/".get_option("sac_job_openings_add");
+  $company_list_url = HOME_URL."/".get_option("sac_company_list");
 
   $header = <<<EOF
+  <a href="{$add_card_url}">求人を新規作成</a>
+  <a href="{$company_list_url}">企業一覧ページへ</a>
   <table class="wp-list-table widefat fixed striped table-view-list posts">
   <thead>
     <tr>

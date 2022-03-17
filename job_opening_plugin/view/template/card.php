@@ -18,6 +18,7 @@ function create_job_openingssss(
   $trip_last
 ) {
   $company = getCompanyById($company_id)[0];
+  $aaa = HOME_URL."/".get_option("sac_job_openings_list");
 
   $html = <<<EOF
   <div class="job-opening-card">
@@ -31,7 +32,8 @@ function create_job_openingssss(
             </span>
           </ul>
         </div>
-        <a href="#" class="job-list-all-link-box">
+
+        <a href="{$aaa}" class="job-list-all-link-box">
           <p class="job-list-all-link">長岡ワーカーの全ての求人を確認する</p>
         </a>
       </div>

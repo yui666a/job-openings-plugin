@@ -2,7 +2,6 @@
 
 function create_card($user)
 {
-  // $post_id = wp_insert_post( array( 'post_title'=>'テスト投稿', 'post_content'=>'この投稿はテストです。' ) );
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
     $post_status = "";
     if ($_POST['action'] == 'post') {

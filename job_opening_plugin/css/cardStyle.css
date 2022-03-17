@@ -33,6 +33,8 @@
 .job-opening-card pre {
   text-align: left;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  background-color: transparent;
+  border: none;
 }
 
 .job-opening-card a {
@@ -48,6 +50,8 @@
 .job-opening-card img {
   border: 0;
   vertical-align: middle;
+  width: auto;
+  height: 100%;
 }
 
 .job-opening-card table {
@@ -125,11 +129,18 @@
 
 .job-opening-card .job-list-img-wrapper {
   width: 100%;
+  height: 200px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  -webkit-box-shadow: 1px 1px 1px 1px #e6e6e6;
-          box-shadow: 1px 1px 1px 1px #e6e6e6;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .job-opening-card .page-wrapper {
@@ -167,7 +178,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  display: table;
+  position: relative;
   margin-top: 40px;
 }
 
@@ -186,7 +197,7 @@
 
 .job-opening-card .work-detail-text-box {
   display: inline-block;
-  width: 700px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -223,8 +234,6 @@
 .job-opening-card .assignment-item-value {
   width: 80%;
   font-size: 13px;
-  padding-left: 10px;
-  padding-right: 10px;
   height: auto;
 }
 
@@ -286,13 +295,18 @@
   color: #000;
 }
 
+.job-opening-card .btn-application-under {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
 .job-opening-card .btn-application-under-text {
   text-align: center;
-  margin-top: 40px;
+  margin: 20px auto;
   width: 660px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
   display: block;
   font-size: 16px;
   background: #223a70;
