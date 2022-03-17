@@ -5,24 +5,33 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
-#step1-index,
-#step1-label,
-#step2-index,
-#step2-label,
-#step3-index,
-#step3-label,
-#step4-index,
-#step4-label {
+.step-index,
+.step-label{
   justify-items: center;
   text-align: center;
 }
 
-#step1-index,
-#step2-index,
-#step3-index,
-#step4-index {
+.step-index {
   justify-items: center;
   text-align: center;
+}
+
+.step-text {
+  justify-items: center;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  transition: all 0.5s 0s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
 }
 
 #step1-index {
@@ -49,9 +58,3 @@
 #step4-label {
   grid-area: 2 / 4 / 3 / 5;
 }
-
-
-
-
-
-
