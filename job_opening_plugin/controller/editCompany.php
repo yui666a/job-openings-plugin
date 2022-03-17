@@ -18,6 +18,22 @@ function editCompany($user, $company_id)
 
     // セッションキーとチケットが一致しているどうか
     if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
+      $query = array(
+        'co_name' => $co_name,
+        'user_id' => $userId,
+        'co_sector' => $co_sector,
+        'co_url' => $co_url,
+        'co_pr_point' => $co_pr,
+        'co_zip_code' => $co_zip_code,
+        'co_address' => $co_address,
+        'co_achievement' => $co_achievement,
+        'co_office_hours' => $co_hour,
+        'co_employee_benefits' => $co_benefits,
+        'co_day_off' => $co_day_off,
+      );
+      $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
+
+
       // ファイル名を取得
       $filename = $_FILES['company_logo']['name'];
       //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
@@ -25,26 +41,16 @@ function editCompany($user, $company_id)
       $result = move_uploaded_file($_FILES['company_logo']['tmp_name'], $uploaded_path);
       if ($result) {
         $co_logo = UPLOAD_DIR["baseurl"] . '/sac_jo/company_images/' . $filename;
+        $query = array_merge($query, array('co_logo' => $co_logo));
+        array_push($query_format, "%s");
       }
+
 
       $wpdb->update(
         $wpdb->prefix . 'sac_job_opening_companies',
-        array(
-          'co_name' => $co_name,
-          'co_logo' => $co_logo,
-          'user_id' => $userId,
-          'co_sector' => $co_sector,
-          'co_url' => $co_url,
-          'co_pr_point' => $co_pr,
-          'co_zip_code' => $co_zip_code,
-          'co_address' => $co_address,
-          'co_achievement' => $co_achievement,
-          'co_office_hours' => $co_hour,
-          'co_employee_benefits' => $co_benefits,
-          'co_day_off' => $co_day_off,
-        ),
+        $query,
         array('co_id' => $company_id),
-        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'),
+        $query_format,
         array('%d')
       );
       // 一覧ページに遷移する

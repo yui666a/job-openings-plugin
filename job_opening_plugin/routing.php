@@ -5,15 +5,18 @@ include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/jobTable.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/companyTable.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCard.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/editCard.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/editCompany.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addCompany.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/header.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/card.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/editJob.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'controller/editCompany.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_company.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/create_card.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/company.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/job_opening.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/jobTable.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/companyTable.php');
 
 
 

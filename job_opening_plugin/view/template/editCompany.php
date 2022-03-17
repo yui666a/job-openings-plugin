@@ -2,7 +2,7 @@
 
 function edit_company($user, $company_id, $action_url, $session_key)
 {
-  $company = getCompanyById($company_id);
+  $company = getCompanyById($company_id)[0];
 
   // 業種
   $sector_options = array(
@@ -22,7 +22,7 @@ function edit_company($user, $company_id, $action_url, $session_key)
   $sector_selector = '<select required name="company_sector" id="company_sector"> <option hidden value="">--選択してください--</option>';
   foreach ($sector_options as $option) {
     $isSelected = $option[0] == $company->co_sector  ? 'selected' : '';
-    $sector_selector .= '<option value="' . $option[0] . ' ' . $isSelected . '">' . $option[1] . '</option>';
+    $sector_selector .= '<option value="' . $option[0] . '" ' . $isSelected . '>' . $option[1] . '</option>';
   }
   $sector_selector .= '</select>';
 
@@ -76,7 +76,7 @@ function edit_company($user, $company_id, $action_url, $session_key)
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>PR文
         </div>
-        <textarea class="rich" name="company_pr" rows="6">{$company->co_pr}</textarea>
+        <textarea class="rich" name="company_pr" rows="6">{$company->co_pr_point}</textarea>
         <div class="form-description">
           貴社の強みや，メリットなどPR文をお書きください
         </div>
@@ -105,7 +105,7 @@ function edit_company($user, $company_id, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>勤務時間
         </div>
-        <textarea class="rich" name="company_office_hour" rows="6">{$company->co_hour}</textarea>
+        <textarea class="rich" name="company_office_hour" rows="6">{$company->co_office_hours}</textarea>
         <div class="form-description">
           貴社の普段の勤務時間や営業時間をご記入ください
         </div>
@@ -115,7 +115,7 @@ function edit_company($user, $company_id, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
         </div>
-        <textarea class="rich" name="company_benefits" rows="6">{$company->co_benefits}</textarea>
+        <textarea class="rich" name="company_benefits" rows="6">{$company->co_employee_benefits}</textarea>
         <div class="form-description">
         貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
