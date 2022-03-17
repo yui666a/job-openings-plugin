@@ -1,0 +1,57 @@
+.step-wrapper {
+  display: grid;
+  grid-template-columns: "1fr 1fr 1fr 1fr 1fr";
+  grid-template-rows: "1fr 1fr 1fr 1fr 1fr";
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+#step1-index,
+#step1-label,
+#step2-index,
+#step2-label,
+#step3-index,
+#step3-label,
+#step4-index,
+#step4-label {
+  justify-items: center;
+  text-align: center;
+}
+
+#step1-index,
+#step2-index,
+#step3-index,
+#step4-index {
+  justify-items: center;
+  text-align: center;
+}
+
+#step1-index {
+  grid-area: 1 / 1 / 2 / 2;
+}
+#step1-label {
+  grid-area: 2 / 1 / 3 / 2;
+}
+#step2-index {
+  grid-area: 1 / 2 / 2 / 3;
+}
+#step2-label {
+  grid-area: 2 / 2 / 3 / 3;
+}
+#step3-index {
+  grid-area: 1 / 3 / 2 / 4;
+}
+#step3-label {
+  grid-area: 2 / 3 / 3 / 4;
+}
+#step4-index {
+  grid-area: 1 / 4 / 2 / 5;
+}
+#step4-label {
+  grid-area: 2 / 4 / 3 / 5;
+}
+
+
+
+
+
+
