@@ -72,7 +72,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>PR文
         </div>
-        <textarea name="company_pr" rows="6"></textarea>
+        <textarea class="rich" name="company_pr" rows="6"></textarea>
         <div class="form-description">
           貴社の強みや，メリットなどPR文をお書きください
         </div>
@@ -91,7 +91,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>過去の実績
         </div>
-        <textarea name="company_achievement" rows="6"></textarea>
+        <textarea class="rich" name="company_achievement" rows="6"></textarea>
         <div class="form-description">
           貴社のこれまでの実績をご記入ください
         </div>
@@ -101,7 +101,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>勤務時間
         </div>
-        <textarea name="company_office_hour" rows="6"></textarea>
+        <textarea class="rich" name="company_office_hour" rows="6"></textarea>
         <div class="form-description">
           貴社の普段の勤務時間や営業時間をご記入ください
         </div>
@@ -111,7 +111,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
         </div>
-        <textarea name="company_benefits" rows="6"></textarea>
+        <textarea class="rich" name="company_benefits" rows="6"></textarea>
         <div class="form-description">
         貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
@@ -121,7 +121,7 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
         <span class="recommended-tag">歓迎</span>休日・休暇
         </div>
-        <textarea name="company_day_off" rows="6"></textarea>
+        <textarea class="rich" name="company_day_off" rows="6"></textarea>
         <div class="form-description">
         貴社の休日や休暇面をご記入ください
         </div>
