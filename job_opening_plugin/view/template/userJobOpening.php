@@ -29,6 +29,7 @@ function bbb($post_id)
   }
 
   $main_text = str_replace("\n", " ", $main_text);
+  $main_text = strip_tags($main_text);
   $main_text = substr($main_text, 0, 200);
 
   $tags = addTags($recruitment_type, $remote_work);
