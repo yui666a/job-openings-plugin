@@ -17,6 +17,20 @@ function create_job_openingssss(
   $trip_start,
   $trip_last
 ) {
+
+  $tags = "";
+  if($recruitment_type == "new_graduate"){
+    $tags .= "<li>新卒</li>";
+  }else if($recruitment_type == "mid_career"){
+    $tags .= "<li>中途</li>";
+  }else {
+    $tags .= "<li>新卒</li><li>中途</li>";
+  }
+
+  if($remote_work == "true"){
+    $tags .= "<li>リモートワーク可</li>";
+  }
+
   $company = getCompanyById($company_id)[0];
   $aaa = HOME_URL."/".get_option("sac_job_openings_list");
 
@@ -27,9 +41,7 @@ function create_job_openingssss(
         <h3 class="job-list-text-link">{$title}</h3>
         <div class="job-list-tag-box">
           <ul class="job-list-tag">
-            <span>
-              <li>(TODO: タグの内容を表示)</li>
-            </span>
+            <span>{$tags}</span>
           </ul>
         </div>
       </div>
