@@ -18,18 +18,7 @@ function create_job_openingssss(
   $trip_last
 ) {
 
-  $tags = "";
-  if($recruitment_type == "new_graduate"){
-    $tags .= "<li>新卒</li>";
-  }else if($recruitment_type == "mid_career"){
-    $tags .= "<li>中途</li>";
-  }else {
-    $tags .= "<li>新卒</li><li>中途</li>";
-  }
-
-  if($remote_work == "true"){
-    $tags .= "<li>リモートワーク可</li>";
-  }
+  $tags = addTags($recruitment_type, $remote_work);
 
   $company = getCompanyById($company_id)[0];
   $aaa = HOME_URL."/".get_option("sac_job_openings_list");

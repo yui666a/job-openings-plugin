@@ -21,26 +21,17 @@ function bbb($post_id)
   $permalink = get_permalink($post_id);
 
   $main_text = "";
-  if($work_detail != ""){
-    $main_text .= "[仕事内容] ".$work_detail;
+  if ($work_detail != "") {
+    $main_text .= "[仕事内容] " . $work_detail;
   }
-  if($application_conditions != ""){
-    $main_text .= " [募集要件] ".$application_conditions;
+  if ($application_conditions != "") {
+    $main_text .= " [募集要件] " . $application_conditions;
   }
+
+  $main_text = str_replace("\n", " ", $main_text);
   $main_text = substr($main_text, 0, 200);
 
-  $tags = "";
-  if($recruitment_type == "new_graduate"){
-    $tags .= "<li>新卒</li>";
-  }else if($recruitment_type == "mid_career"){
-    $tags .= "<li>中途</li>";
-  }else {
-    $tags .= "<li>新卒</li><li>中途</li>";
-  }
-
-  if($remote_work == "true"){
-    $tags .= "<li>リモートワーク可</li>";
-  }
+  $tags = addTags($recruitment_type, $remote_work);
 
   $html = <<<EOF
   <div class="job-list-fream">
