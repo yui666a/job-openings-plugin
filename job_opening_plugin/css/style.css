@@ -241,7 +241,7 @@ header .close-button::after {
 .job-information .form-item select,
 .company-information .form-item input[type="text"],
 .company-information .form-item select {
-  height: 1.3em;
+  height: 3em;
 }
 
 .job-information .form-item input[type="text"],
