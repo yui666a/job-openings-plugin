@@ -11,6 +11,7 @@ function create_company($user)
     $co_pr = $_POST['company_pr'];
     $co_zip_code = $_POST['company_zipcode'];
     $co_address = $_POST['company_address'];
+    $co_address2 = $_POST['company_address_2'];
     $co_achievement = $_POST['company_achievement'];
     $co_hour = $_POST['company_office_hour'];
     $co_benefits = $_POST['company_benefits'];
@@ -38,13 +39,14 @@ function create_company($user)
           'co_pr_point' => $co_pr,
           'co_zip_code' => $co_zip_code,
           'co_address' => $co_address,
+          'co_address2' => $co_address2,
           'co_achievement' => $co_achievement,
           'co_office_hours' => $co_hour,
           'co_employee_benefits' => $co_benefits,
           'co_day_off' => $co_day_off,
           'created_at' => current_time('mysql', 0)
         ),
-        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
+        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
       );
       // 一覧ページに遷移する
       header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));

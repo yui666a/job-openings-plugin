@@ -30,6 +30,7 @@ function create_table()
       co_pr_point LONGTEXT,
       co_zip_code VARCHAR(8),
       co_address VARCHAR(100),
+      co_address2 VARCHAR(100),
       co_sector VARCHAR(100),
       co_achievement LONGTEXT,
       co_office_hours LONGTEXT,
