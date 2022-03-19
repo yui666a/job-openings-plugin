@@ -1,5 +1,4 @@
 $(function () {
-  console.log("tinymce.init begin");
   tinymce.init({
     selector: "textarea.rich", // <textarea class="rich"...></textarea>
     forced_root_block: "div", // modify default tag <p> -> <div>
@@ -11,7 +10,6 @@ $(function () {
       });
     },
   });
-  console.log("tinymce.init ends");
 });
 
 $('textarea.rich').tinymce({
