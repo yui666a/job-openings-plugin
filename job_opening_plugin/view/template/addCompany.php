@@ -29,7 +29,7 @@ function create_company_template($user, $action_url, $session_key)
   $html .= <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
-    <form action="{$action_url}" method="post" enctype="multipart/form-data">
+    <form action="{$action_url}" method="post" enctype="multipart/form-data" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -43,9 +43,6 @@ function create_company_template($user, $action_url, $session_key)
           value="{$user->display_name}"
           placeholder="株式会社 XXXX-XXXX HOLDINGS"
         />
-        <div class="form-description">
-          未入力の場合は，貴社アカウント名で登録されます
-        </div>
       </div>
 
       <div class="form-item">
@@ -85,9 +82,10 @@ function create_company_template($user, $action_url, $session_key)
         <div class="item-label">
           <span class="recommended-tag">歓迎</span>本社所在地
         </div>
-
-        〒<input type="text" name="company_zipcode" placeholder="999-9999" style="width: 100px;"></input>
-        <input type="text" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F"></input>
+        <input type="hidden" class="p-country-name" value="Japan">
+        〒<input type="text" placeholder="999-9999" name="company_zipcode" class="p-postal-code" size="8" maxlength="8" style="width: 130px;"><br>
+        <input type="text" placeholder="〇〇県〇〇市９−９−９" name="company_address" class="p-region p-locality p-street-address p-extended-address" /><br>
+        <input type="text" placeholder="△△ビル 3F" name="company_address_2" class="" /><br>
       </div>
 
       <div class="form-item">

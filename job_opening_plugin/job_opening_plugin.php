@@ -47,6 +47,9 @@ function add_files()
   wp_enqueue_style('select2css', '//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css', "", "0.1");
   wp_enqueue_script('select2js', '//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js', "", "0.1", false);
   // end select2ライブラリ読み込み
+  // 郵便番号自動入力
+  // see: https://github.com/yubinbango/yubinbango
+  wp_enqueue_script('yubinBango', '//yubinbango.github.io/yubinbango/yubinbango.js', "", "0.1", false);
 
   // JS
   wp_enqueue_script('jo-main-script', plugin_dir_url(__FILE__) . 'js/main.js', array('jquery'), "0.1", true);
