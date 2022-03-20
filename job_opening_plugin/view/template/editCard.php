@@ -9,7 +9,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $company_id = get_post_meta($job_id, '_company_id', true);
   $recruitment_type =  get_post_meta($job_id, '_recruitment_type', true);
   $apply_link = get_post_meta($job_id, '_apply_link', true);
-  $url = get_post_meta($job_id, '_url', true);
+  $manage_id = get_post_meta($job_id, '_manage_id', true);
   $title = get_post_meta($job_id, '_title', true);
   $work_detail =  get_post_meta($job_id, '_work_detail', true);
   $application_conditions =  get_post_meta($job_id, '_application_conditions', true);
@@ -51,11 +51,11 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $companies_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 
   // 求人管理URL
-  $url_text = "";
-  if ($url == "") {
-    $url_text = '<input type="text" name="url" id="url" placeholder="35470, https://~~~ など" />';
+  $manage_id = "";
+  if ($manage_id == "") {
+    $manage_id = '<input type="text" name="manage_id" id="manage_id" placeholder="35470, https://~~~ など" />';
   } else {
-    $url_text = '<input type="text" name="url" id="url" placeholder="35470, https://~~~ など" value={' . $url . '}/>';
+    $manage_id = '<input type="text" name="manage_id" id="manage_id" placeholder="35470, https://~~~ など" value=' . $manage_id . '/>';
   }
 
   // 求人タイプ
@@ -142,7 +142,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">求人管理</div>
-        {$url_text}
+          {$manage_id}
         <div class="form-description">
           任意のID（貴社内の求人管理ID等）または，URLをご入力いただけます
         </div>

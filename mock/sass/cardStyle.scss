@@ -1,0 +1,226 @@
+.job-opening-card {
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    -webkit-text-size-adjust: none;
+  }
+
+  pre {
+    text-align: left;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+    background-color: transparent;
+    border: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  ul,
+  ol,
+  li {
+    list-style: none;
+  }
+  img {
+    border: 0;
+    vertical-align: middle;
+    width: auto;
+    height: 100%;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  input,
+  select {
+    vertical-align: middle;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  }
+  body {
+    line-height: 1.5;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  }
+
+  .header-wrapper {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .container-header {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    display: inline-block;
+  }
+  .job-opening-title {
+    margin: 20px auto 5px;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 1px 0 1px 10px;
+    border-left: 6px solid #223a70;
+    color: #000;
+  }
+  .job-list-tag-box {
+    margin-top: 10px;
+  }
+  .job-list-tag li {
+    display: inline-block;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 5px;
+    color: #223a70;
+    border: 1px solid #223a70;
+    border-radius: 5px;
+    width: auto;
+    text-align: center;
+  }
+  .job-list-all-link-box {
+    display: inline-block;
+    padding-top: 6px;
+    font-size: 18px;
+    color: #223a70;
+  }
+  
+  .job-list-all-link-box:hover {
+    display: inline-block;
+    padding-top: 6px;
+    color: #1470cc;
+    text-decoration: underline;
+  }
+
+  .job-list-img-wrapper {
+    width: 100%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .page-wrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    margin-top: 20px;
+  }
+  .page-items {
+    height: auto;
+    background-color: #e6e6e6;
+  }
+  .page-items li {
+    display: inline-block;
+    background-color: #e6e6e6;
+    font-weight: bold;
+    padding: 10px 70px 10px 70px;
+    text-align: center;
+  }
+  .page-items > li > a {
+    color: #000;
+  }
+  .page-items > li:hover {
+    background: #afafb0;
+  }
+  .main-box {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    position: relative;
+    margin-top: 40px;
+  }
+
+  .work-detail-header-title {
+    padding-left: 10px;
+    border-left: 6px solid #223a70;
+  }
+
+  .work-detail-text-box {
+    display: block;
+    width: 90%;
+    margin: auto;
+    text-align: left;
+  }
+
+  .work-detail-text {
+    text-align: left;
+  }
+
+  .assignments {
+    margin: 2rem 0;
+  }
+
+  .assignment {
+    display: flex;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    &:first-child {
+      border-top: 1px solid grey;
+    }
+  }
+
+  .assignment-item-label {
+    width: 20%;
+    padding-left: 10px;
+    height: auto;
+    font-weight: bolder;
+    background-color: #e6e6e6;
+  }
+
+  .assignment-item-value {
+    width: 80%;
+    height: auto;
+    padding-left: 15px;
+  }
+
+  .btn-application-text {
+    text-align: center;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    background: #223a70;
+    color: #fff;
+    border: 1px solid #223a70;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .btn-application-text:hover {
+    opacity: 0.6;
+  }
+
+  .company-address {
+    padding-left: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+    border-left: 6px solid #223a70;
+    color: #000;
+  }
+
+  .btn-application-under {
+    position: sticky;
+    bottom: 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .btn-application-under-text {
+    text-align: center;
+    margin: 20px auto;
+    width: 100%;
+    display: block;
+    background: #223a70;
+    color: #fff;
+    border: 1px solid #223a70;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .btn-application-under-text:hover {
+    opacity: 0.6;
+  }
+
+}

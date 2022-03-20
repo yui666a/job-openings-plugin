@@ -15,7 +15,7 @@ function editJob($user, $job_id)
     $company_id = $_POST['company_id']; // 企業
     $title = $_POST['title']; // 求人タイトル
     $apply_link = $_POST['apply_link']; // 応募URLや宛先メールアドレス
-    $url = $_POST['url']; // 求人管理
+    $manage_id = $_POST['manage_id']; // 求人管理
     $recruitment_type = $_POST['recruitment_type']; // 求人タイプ
     $occupation = $_POST['occupation']; // 職種
     $position = $_POST['position']; // 部署・役職名
@@ -53,7 +53,7 @@ function editJob($user, $job_id)
         $company_id,
         $recruitment_type,
         $title,
-        $url,
+        $manage_id,
         $position,
         $work_detail,
         $application_conditions,
@@ -85,7 +85,7 @@ function editJob($user, $job_id)
       update_post_meta($post_id, '_work_detail', $work_detail);
       update_post_meta($post_id, '_company_id', $company_id);
       update_post_meta($post_id, '_recruitment_type', $recruitment_type);
-      update_post_meta($post_id, '_url', $url);
+      update_post_meta($post_id, '_manage_id', $manage_id);
       update_post_meta($post_id, '_title', $title);
       update_post_meta($post_id, '_position', $position);
       update_post_meta($post_id, '_application_conditions', $application_conditions);

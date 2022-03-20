@@ -111,7 +111,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">求人管理</div>
-        <input type="text" name="url" id="url" placeholder="35470, https://~~~ など" />
+        <input type="text" name="manage_id" id="manage_id" placeholder="35470, https://~~~ など" />
         <div class="form-description">
           任意のID（貴社内の求人管理ID等）または，URLをご入力いただけます
         </div>

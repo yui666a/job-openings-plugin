@@ -7,6 +7,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
   $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
   $current_request = $_SERVER["REQUEST_URI"];
   $company_id = get_post_meta($post_id, '_company_id', true);
+  $manage_id = get_post_meta($post_id, '_manage_id', true);
   $company = getCompanyById($company_id)[0];
 
   $recruitment_type = "";
@@ -41,7 +42,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
             class="tips job_title"
             data-tip="ID: {$post_id}"
             >{$title}</a
-          >
+          >(管理番号: {$manage_id})
         </div>
       </td>
       <td

@@ -92,6 +92,19 @@ function create_job_openingssss(
       break;
   }
 
+  $co_logo_wrapper = "";
+  if($company->co_logo != ""){
+    $co_logo_wrapper =<<<EOF
+    <div class="job-list-img-wrapper">
+      <img
+      src="{$company->co_logo}"
+      alt="{$company->co_name}のロゴ"
+      width="100%"
+      height="100%"
+      />
+    </div>
+EOF;
+  }
 
 
   $aaa = HOME_URL . "/" . get_option("sac_job_openings_list");
@@ -100,7 +113,7 @@ function create_job_openingssss(
   <div class="job-opening-card">
     <div class="header-wrapper">
       <div class="container-header">
-        <h3 class="job-list-text-link">{$title}</h3>
+        <h3 class="job-opening-title">{$title}</h3>
         <div class="job-list-tag-box">
           <ul class="job-list-tag">
             <span>{$tags}</span>
@@ -110,38 +123,33 @@ function create_job_openingssss(
     </div>
 
     <div class="main-box">
-      <div class="job-list-img-wrapper">
-        <img
-        src="{$company->co_logo}"
-        alt="{$company->co_name}のロゴ"
-        width="100%"
-        height="100%"
-        />
-      </div>
+      {$co_logo_wrapper}
+
       <div class="job-list-work-detail">
         <div class="work-detial-header">
           <h1 class="work-detail-header-title">仕事内容</h1>
         </div>
         <div class="work-detail-text-box">
-          <pre class="work-detail-text">{$work_detail}</pre>
+          <div class="work-detail-text">{$work_detail}</div>
         </div>
-        <div style="border-collapse: collapse" border-color="EEE">
+
+        <div class="assignments">
           <div class="assignment">
             <div class="assignment-item-label">職種 / 募集ポジション</div>
             <div class="assignment-item-value">
-              <pre>{$occupation_text}</pre>
+              <div>{$occupation_text}</div>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">雇用形態</div>
             <div class="assignment-item-value">
-              <pre>{$working_conditions}</pre>
+              <div>{$working_conditions}</div>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">給与</div>
             <div class="assignment-item-value">
-              <pre>{$company_salary}</pre>
+              <div>{$company_salary}</div>
             </div>
           </div>
           <div class="assignment">
@@ -153,19 +161,19 @@ function create_job_openingssss(
           <div class="assignment">
             <div class="assignment-item-label">就業時間</div>
             <div class="assignment-item-value">
-              <pre>{$company->co_office_hours}</pre>
+              <div>{$company->co_office_hours}</div>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">休日</div>
             <div class="assignment-item-value">
-              <pre>{$company->co_day_off}</pre>
+              <div>{$company->co_day_off}</div>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">制度・福利厚生</div>
             <div class="assignment-item-value">
-              <pre>{$company->co_employee_benefits}</pre>
+              <div>{$company->co_employee_benefits}</div>
             </div>
           </div>
         </div>
@@ -176,7 +184,7 @@ function create_job_openingssss(
           <h1 class="work-detail-header-title">募集要項</h1>
         </div>
         <div class="work-detail-text-box">
-          <pre class="work-detail-text">{$application_conditions}</pre>
+          <div class="work-detail-text">{$application_conditions}</div>
         </div>
       </div>
 
@@ -185,13 +193,13 @@ function create_job_openingssss(
           <h1 class="work-detail-header-title">会社概要</h1>
         </div>
 
-        <div class="assignment-table-box">
+        <div class="assignments">
           <div class="company-information-table-box">
             <div style="border-collapse: collapse" border-color="EEE">
               <div class="assignment">
                 <div class="assignment-item-label">会社名</div>
                 <div class="assignment-item-value">
-                  <pre>{$company->co_name}</pre>
+                  <div>{$company->co_name}</div>
                 </div>
               </div>
 
@@ -199,14 +207,14 @@ function create_job_openingssss(
               <div class="assignment">
                 <div class="assignment-item-label">グループについて</div>
                 <div class="assignment-item-value">
-                  <pre>(TODO: グループについての情報を表示)</pre>
+                  <div>(TODO: グループについての情報を表示)</div>
                 </div>
               </div>
 
               <div class="assignment">
                 <div class="assignment-item-label">事業会社一覧</div>
                 <div class="assignment-item-value">
-                  <pre>(TODO: 事業会社一覧の情報を表示)</pre>
+                  <div>(TODO: 事業会社一覧の情報を表示)</div>
                 </div>
               </div>
               -->
@@ -224,7 +232,7 @@ function create_job_openingssss(
         </div>
 
         <div class="work-detail-text-box">
-          <pre class="work-detail-text">{$company->co_pr_point}</pre>
+          <div class="work-detail-text">{$company->co_pr_point}</div>
         </div>
       </div>
 
