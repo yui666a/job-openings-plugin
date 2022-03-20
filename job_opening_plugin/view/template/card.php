@@ -106,6 +106,36 @@ function create_job_openingssss(
 EOF;
   }
 
+  $sector_options = array(
+    ["1", "金融・保険"],
+    ["2", "建設・不動産"],
+    ["3", "コンサルティング・士業"],
+    ["4", "IT・インターネット"],
+    ["5", "メーカー・商社"],
+    ["6", "流通・小売・サービス"],
+    ["7", "メディカル"],
+    ["8", "マスコミ・メディア"],
+    ["9", "エンターテインメント"],
+    ["10", "運輸・物流"],
+    ["11", "エネルギー"],
+    ["12", "その他"],
+  );
+  $sector = "";
+  switch ($company->co_sector){
+    case "1" : $sector = "金融・保険"; break;
+    case "2" : $sector = "建設・不動産"; break;
+    case "3" : $sector = "コンサルティング・士業"; break;
+    case "4" : $sector = "IT・インターネット"; break;
+    case "5" : $sector = "メーカー・商社"; break;
+    case "6" : $sector = "流通・小売・サービス"; break;
+    case "7" : $sector = "メディカル"; break;
+    case "8" : $sector = "マスコミ・メディア"; break;
+    case "9" : $sector = "エンターテインメント"; break;
+    case "10" : $sector = "運輸・物流"; break;
+    case "11" : $sector = "エネルギー"; break;
+    case "12" : $sector = "その他"; break;
+  }
+
 
   $aaa = HOME_URL . "/" . get_option("sac_job_openings_list");
 
@@ -147,7 +177,7 @@ EOF;
             </div>
           </div>
           <div class="assignment">
-            <div class="assignment-item-label">給与</div>
+            <div class="assignment-item-label">待遇</div>
             <div class="assignment-item-value">
               <div>{$company_salary}</div>
             </div>
@@ -195,37 +225,33 @@ EOF;
 
         <div class="assignments">
           <div class="company-information-table-box">
-            <div style="border-collapse: collapse" border-color="EEE">
-              <div class="assignment">
-                <div class="assignment-item-label">会社名</div>
-                <div class="assignment-item-value">
-                  <div>{$company->co_name}</div>
-                </div>
+            <div class="assignment">
+              <div class="assignment-item-label">会社名</div>
+              <div class="assignment-item-value">
+                <div>{$company->co_name}</div>
               </div>
+            </div>
 
-              <!--
-              <div class="assignment">
-                <div class="assignment-item-label">グループについて</div>
-                <div class="assignment-item-value">
-                  <div>(TODO: グループについての情報を表示)</div>
-                </div>
+            <div class="assignment">
+              <div class="assignment-item-label">業種</div>
+              <div class="assignment-item-value">
+                <div>{$sector}</div>
               </div>
+            </div>
 
-              <div class="assignment">
-                <div class="assignment-item-label">事業会社一覧</div>
-                <div class="assignment-item-value">
-                  <div>(TODO: 事業会社一覧の情報を表示)</div>
-                </div>
+            <div class="assignment">
+              <div class="assignment-item-label">本社所在地</div>
+              <div class="assignment-item-value">
+                <a href="https://maps.google.com/maps?q={$company->co_address}{$company->co_address2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
+                >〒{$company->co_zip_code} {$company->co_address} {$company->co_address2}</a
+              >
               </div>
-              -->
+            </div>
 
-              <div class="assignment">
-                <div class="assignment-item-label">本社所在地</div>
-                <div class="assignment-item-value">
-                  <a href="https://maps.google.com/maps?q={$company->co_address}{$company->co_address2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-                  >〒{$company->co_zip_code} {$company->co_address} {$company->co_address2}</a
-                >
-                </div>
+            <div class="assignment">
+              <div class="assignment-item-label">HP</div>
+              <div class="assignment-item-value">
+                <div><a href="{$company->co_url}">{$company->co_url}</a></div>
               </div>
             </div>
           </div>
