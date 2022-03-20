@@ -49,12 +49,12 @@ function make_company_table_row($data)
             data-tip="編集"
             >編集
           </a>
-          <a
+          <!--<a
             class="button button-icon tips icon-delete"
             href="{$admin_url}post.php?post={$data->co_id}&amp;action=trash&amp;_wpnonce=cf3bb74013"
             data-tip="削除"
             >削除
-          </a>
+          </a>-->
         </div>
       </td>
     </tr>

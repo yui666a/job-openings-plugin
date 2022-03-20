@@ -16,7 +16,7 @@ get_header();
           while ( have_posts() ) :
             the_post();
             // get_template_part( JOB_OPENING__PLUGIN_DIR . 'view/template/sub' );
-            echo get_the_title();
+            // echo get_the_title();
             echo the_content();
             // If comments are open or we have at least one comment, load up the comment template.
             // if ( comments_open() || get_comments_number() ) :

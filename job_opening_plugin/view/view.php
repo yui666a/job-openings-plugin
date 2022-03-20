@@ -119,7 +119,7 @@ function settings()
 
 
 /**
- * 企業追加ページ用の関数
+ * ユーザ画面 求人一覧ページ用の関数
  */
 function user_job_openings()
 {

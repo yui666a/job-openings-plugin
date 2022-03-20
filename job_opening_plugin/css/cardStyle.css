@@ -5,31 +5,6 @@
   -webkit-text-size-adjust: none;
 }
 
-.job-opening-card body,
-.job-opening-card div,
-.job-opening-card p,
-.job-opening-card ul,
-.job-opening-card ol,
-.job-opening-card li,
-.job-opening-card dl,
-.job-opening-card dt,
-.job-opening-card dd,
-.job-opening-card table,
-.job-opening-card th,
-.job-opening-card td,
-.job-opening-card img,
-.job-opening-card h1,
-.job-opening-card h2,
-.job-opening-card h3,
-.job-opening-card h4,
-.job-opening-card h5,
-.job-opening-card h6,
-.job-opening-card form,
-.job-opening-card select {
-  margin: 0;
-  padding: 0;
-}
-
 .job-opening-card pre {
   text-align: left;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
@@ -220,6 +195,13 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
+.job-opening-card .assignment:first-child {
+  border-top: 1px solid grey;
 }
 
 .job-opening-card .assignment-item-label {
@@ -227,6 +209,7 @@
   font-size: 13px;
   padding-left: 10px;
   height: auto;
+  font-weight: bolder;
   background-color: #e6e6e6;
 }
 
@@ -305,7 +288,7 @@
 .job-opening-card .btn-application-under-text {
   text-align: center;
   margin: 20px auto;
-  width: 660px;
+  width: 100%;
   display: block;
   font-size: 16px;
   background: #223a70;

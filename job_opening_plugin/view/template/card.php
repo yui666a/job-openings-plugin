@@ -41,7 +41,59 @@ function create_job_openingssss(
     $converted_address = str_replace($search, $replace, $apply_link);
     $qwer = "mailto:" . $converted_address . '?subject=' . $title . '&body=' . $main_text . '%0D%0A（メールアドレス中の□を@に変更してください）"';
     //  target="_blank" rel="noopener noreferrer';
+  }else{
+    $qwer = $apply_link;
   }
+
+  // 職種
+  $occupation_text = "";
+  switch ($occupation) {
+    case "sales_associate":
+      $occupation_text = "営業";
+      break;
+    case "clerk":
+      $occupation_text = "事務・管理";
+      break;
+    case "marketer":
+      $occupation_text = "企画・マーケティング・経営・管理職";
+      break;
+    case "service":
+      $occupation_text = "サービス・販売・外食";
+      break;
+    case "web":
+      $occupation_text = "Web・インターネット・ゲーム";
+      break;
+    case "creative":
+      $occupation_text = "クリエイティブ（メディア・アパレル・デザイン）";
+      break;
+    case "expert":
+      $occupation_text = "専門職（コンサルタント・士業・金融・不動産）";
+      break;
+    case "it_engineer":
+      $occupation_text = "ITエンジニア（システム開発・SE・インフラ）";
+      break;
+    case "engineer":
+      $occupation_text = "エンジニア（機械・電気・電子・半導体・制御）";
+      break;
+    case "chemical_engineer":
+      $occupation_text = "素材・化学・食品・医薬品技術職";
+      break;
+    case "civil_engineer":
+      $occupation_text = "建築・土木技術職";
+      break;
+    case "transporter":
+      $occupation_text = "技能工・設備・交通・運輸";
+      break;
+    case "medical_welfare":
+      $occupation_text = "医療・福祉・介護";
+      break;
+    case "public_servant":
+      $occupation_text = "教育・保育・公務員・農林水産・その他";
+      break;
+  }
+
+
+
   $aaa = HOME_URL . "/" . get_option("sac_job_openings_list");
 
   $html = <<<EOF
@@ -77,7 +129,7 @@ function create_job_openingssss(
           <div class="assignment">
             <div class="assignment-item-label">職種 / 募集ポジション</div>
             <div class="assignment-item-value">
-              <pre>{$occupation}</pre>
+              <pre>{$occupation_text}</pre>
             </div>
           </div>
           <div class="assignment">
@@ -96,18 +148,7 @@ function create_job_openingssss(
             <div class="assignment-item-label">勤務地</div>
             <div class="assignment-item-value">
               <a href="https://maps.google.com/maps?q={$address}{$address_2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-              >〒{$zipcode}  {$address} {$address_2}
-            </a> {$can_remote_work}
-              <!--iframe要素はgoogle mapのHTMLコピーで260px × 260pxのカスタムサイズで貼り付けています-->
-              <!-- <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7694570079743!2d139.7145596152575!3d35.6334095802055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b1ea8e63243%3A0x12338cc78949be38!2z44CSMTQxLTAwMjEg5p2x5Lqs6YO95ZOB5bed5Yy65LiK5aSn5bSO77yT5LiB55uu77yR4oiS77yRIOebrum7kuOCu-ODs-ODiOODqeODq-OCueOCr-OCqOOCog!5e0!3m2!1sja!2sjp!4v1647010839521!5m2!1sja!2sjp"
-              width="260"
-              height="260"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe> -->
-            </div>
+              >〒{$zipcode}  {$address} {$address_2}</a> {$can_remote_work}</div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">就業時間</div>
@@ -146,45 +187,47 @@ function create_job_openingssss(
         <div class="work-detail-text-box">
           <pre class="work-detail-text">{$company->co_pr_point}</pre>
         </div>
-      </div>
 
-      <div class="assignment-table-box">
-        <div class="company-information-table-box">
-          <div style="border-collapse: collapse" border-color="EEE">
-            <div class="assignment">
-              <div class="assignment-item-label">会社名</div>
-              <div class="assignment-item-value">
-                <pre>{$company->co_name}</pre>
+        <div class="assignment-table-box">
+          <div class="company-information-table-box">
+            <div style="border-collapse: collapse" border-color="EEE">
+              <div class="assignment">
+                <div class="assignment-item-label">会社名</div>
+                <div class="assignment-item-value">
+                  <pre>{$company->co_name}</pre>
+                </div>
               </div>
-            </div>
 
-            <!--
-            <div class="assignment">
-              <div class="assignment-item-label">グループについて</div>
-              <div class="assignment-item-value">
-                <pre>(TODO: グループについての情報を表示)</pre>
+              <!--
+              <div class="assignment">
+                <div class="assignment-item-label">グループについて</div>
+                <div class="assignment-item-value">
+                  <pre>(TODO: グループについての情報を表示)</pre>
+                </div>
               </div>
-            </div>
 
-            <div class="assignment">
-              <div class="assignment-item-label">事業会社一覧</div>
-              <div class="assignment-item-value">
-                <pre>(TODO: 事業会社一覧の情報を表示)</pre>
+              <div class="assignment">
+                <div class="assignment-item-label">事業会社一覧</div>
+                <div class="assignment-item-value">
+                  <pre>(TODO: 事業会社一覧の情報を表示)</pre>
+                </div>
               </div>
-            </div>
-            -->
+              -->
 
-            <div class="assignment">
-              <div class="assignment-item-label">本社所在地</div>
-              <div class="assignment-item-value">
-                <a href="https://maps.google.com/maps?q={$company->co_address}{$company->co_address2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-                >〒{$company->co_zip_code} {$company->co_address} {$company->co_address2}</a
-              >
+              <div class="assignment">
+                <div class="assignment-item-label">本社所在地</div>
+                <div class="assignment-item-value">
+                  <a href="https://maps.google.com/maps?q={$company->co_address}{$company->co_address2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
+                  >〒{$company->co_zip_code} {$company->co_address} {$company->co_address2}</a
+                >
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      
       <div class="btn-application-under">
         <a href="{$qwer}" class="btn-application-under-text">応募画面に進む</a>
       </div>

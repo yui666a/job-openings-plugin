@@ -115,6 +115,19 @@ register_activation_hook(__FILE__, 'on_activate');
  */
 function on_deactivation()
 {
+  global $wpdb;
+  //➀テーブル名があったら
+  if ($wpdb->get_var("show tables like '" . $wpdb->prefix . "sac_job_opening_companies" . "'") == $wpdb->prefix . "sac_job_opening_companies") { // 「==」へ変更
+    //➁DROP TABLEを実行
+    $sql = "DROP TABLE " . $wpdb->prefix . "sac_job_opening_companies";
+    $wpdb->query( $sql );
+  }
+  //➀テーブル名があったら
+  if ($wpdb->get_var("show tables like '" . $wpdb->prefix . "sac_job_opening_companies_meta" . "'") == $wpdb->prefix . "sac_job_opening_companies_meta") { // 「==」へ変更
+    //➁DROP TABLEを実行
+    $sql = "DROP TABLE " . $wpdb->prefix . "sac_job_opening_companies_meta";
+    $wpdb->query( $sql );
+  }
 }
 register_deactivation_hook(__FILE__, 'on_deactivation');
 
