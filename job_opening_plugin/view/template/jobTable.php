@@ -83,7 +83,6 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       >
         <span class="na">–</span>
       </td>-->
-      <td class="filled column-filled" data-colname="採用済み ?">–</td>
       <td class="job_actions column-job_actions" data-colname="操作">
         <div class="actions">
           <div>
@@ -174,9 +173,6 @@ function make_job_openings_table_head()
       >
         カテゴリー
       </th>-->
-      <th scope="col" id="filled" class="manage-column column-filled">
-        <span class="tips" data-tip="採用済み ?">採用済み ?</span>
-      </th>
       <th scope="col" id="job_actions" class="manage-column column-job_actions">
         操作
       </th>
