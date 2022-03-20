@@ -103,16 +103,6 @@ function edit_company($user, $company_id, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>過去の実績
-        </div>
-        <textarea class="rich" name="company_achievement" rows="6">{$company->co_achievement}</textarea>
-        <div class="form-description">
-          貴社のこれまでの実績をご記入ください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
           <span class="required-tag">必須</span>勤務時間
         </div>
         <textarea required class="rich" name="company_office_hour" rows="6">{$company->co_office_hours}</textarea>

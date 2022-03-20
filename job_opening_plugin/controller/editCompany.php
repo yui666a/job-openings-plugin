@@ -13,7 +13,6 @@ function editCompany($user, $company_id)
     $co_zip_code = $_POST['company_zipcode'];
     $co_address = $_POST['company_address'];
     $co_address2 = $_POST['company_address_2'];
-    $co_achievement = $_POST['company_achievement'];
     $co_hour = $_POST['company_office_hour'];
     $co_benefits = $_POST['company_benefits'];
     $co_day_off = $_POST['company_day_off'];
@@ -31,12 +30,11 @@ function editCompany($user, $company_id)
         'co_zip_code' => $co_zip_code,
         'co_address' => $co_address,
         'co_address2' => $co_address2,
-        'co_achievement' => $co_achievement,
         'co_office_hours' => $co_hour,
         'co_employee_benefits' => $co_benefits,
         'co_day_off' => $co_day_off,
       );
-      $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
+      $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
 
 
       // ファイル名を取得

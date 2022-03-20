@@ -33,7 +33,6 @@ function create_table()
       co_address VARCHAR(100),
       co_address2 VARCHAR(100),
       co_sector VARCHAR(100),
-      co_achievement LONGTEXT,
       co_office_hours LONGTEXT,
       co_employee_benefits LONGTEXT,
       co_day_off LONGTEXT,
