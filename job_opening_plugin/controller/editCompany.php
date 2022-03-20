@@ -8,6 +8,7 @@ function editCompany($user, $company_id)
     $co_name = $_POST['company_name'];
     $co_sector = $_POST['company_sector'];
     $co_url = $_POST['company_url'];
+    $co_summary = $_POST['company_summary'];
     $co_pr = $_POST['company_pr'];
     $co_zip_code = $_POST['company_zipcode'];
     $co_address = $_POST['company_address'];
@@ -19,12 +20,13 @@ function editCompany($user, $company_id)
 
     // セッションキーとチケットが一致しているどうか
     // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-    if(true) {
+    if (true) {
       $query = array(
         'co_name' => $co_name,
         'user_id' => $userId,
         'co_sector' => $co_sector,
         'co_url' => $co_url,
+        'co_summary' => $co_summary,
         'co_pr_point' => $co_pr,
         'co_zip_code' => $co_zip_code,
         'co_address' => $co_address,
@@ -34,7 +36,7 @@ function editCompany($user, $company_id)
         'co_employee_benefits' => $co_benefits,
         'co_day_off' => $co_day_off,
       );
-      $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
+      $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
 
 
       // ファイル名を取得

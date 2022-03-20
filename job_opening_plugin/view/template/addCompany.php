@@ -70,11 +70,21 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
+          <span class="recommended-tag">歓迎</span>会社概要
+        </div>
+        <textarea class="rich" name="company_summary" rows="6"></textarea>
+        <div class="form-description">
+          募集企業の概要をご記載ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
           <span class="recommended-tag">歓迎</span>PR文
         </div>
         <textarea class="rich" name="company_pr" rows="6"></textarea>
         <div class="form-description">
-          貴社の強みや，メリットなどPR文をお書きください
+          貴社の強みなどPR文をお書きください
         </div>
       </div>
 

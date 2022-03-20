@@ -27,6 +27,7 @@ function create_table()
       status VARCHAR(20) NOT NULL,
       co_logo VARCHAR(200),
       co_url TEXT,
+      co_summary LONGTEXT,
       co_pr_point LONGTEXT,
       co_zip_code VARCHAR(8),
       co_address VARCHAR(100),

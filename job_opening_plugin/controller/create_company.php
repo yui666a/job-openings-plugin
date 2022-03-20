@@ -8,6 +8,7 @@ function create_company($user)
     $co_name = $_POST['company_name'];
     $co_sector = $_POST['company_sector'];
     $co_url = $_POST['company_url'];
+    $co_summary = $_POST['company_summary'];
     $co_pr = $_POST['company_pr'];
     $co_zip_code = $_POST['company_zipcode'];
     $co_address = $_POST['company_address'];
@@ -19,7 +20,7 @@ function create_company($user)
 
     // セッションキーとチケットが一致しているどうか
     // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-    if(true) {
+    if (true) {
       // ファイル名を取得
       $filename = $_FILES['company_logo']['name'];
       //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
@@ -37,6 +38,7 @@ function create_company($user)
           'user_id' => $userId,
           'co_sector' => $co_sector,
           'co_url' => $co_url,
+          'co_summary' => $co_summary,
           'co_pr_point' => $co_pr,
           'co_zip_code' => $co_zip_code,
           'co_address' => $co_address,
@@ -47,7 +49,7 @@ function create_company($user)
           'co_day_off' => $co_day_off,
           'created_at' => current_time('mysql', 0)
         ),
-        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
+        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
       );
       // 一覧ページに遷移する
       header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
