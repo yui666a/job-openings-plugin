@@ -12,24 +12,30 @@ function editJob($user, $job_id)
 
     global $wpdb;
     $userId = $_POST['userId'];
-    $company_id = $_POST['company_id'];
-    $recruitment_type = $_POST['recruitment_type'];
-    $url = $_POST['url'];
-    $title = $_POST['title'];
-    $position = $_POST['position'];
-    $work_detail = $_POST['work_detail'];
-    $application_conditions = $_POST['application_conditions'];
-    $working_conditions = $_POST['working_conditions'];
-    $location = $_POST['location'];
-    $remote_work = $_POST['remote_work'];
-    $occupation = $_POST['occupation'];
-    $date_period_type = $_POST['date_period_type'];
-    $trip_period = $_POST['trip_period'];
-    $trip_start = $_POST['trip_start'];
-    $trip_last = $_POST['trip_last'];
+    $company_id = $_POST['company_id']; // 企業
+    $title = $_POST['title']; // 求人タイトル
+    $apply_link = $_POST['apply_link']; // 応募URLや宛先メールアドレス
+    $url = $_POST['url']; // 求人管理
+    $recruitment_type = $_POST['recruitment_type']; // 求人タイプ
+    $occupation = $_POST['occupation']; // 職種
+    $position = $_POST['position']; // 部署・役職名
+    $work_detail = $_POST['work_detail']; // 仕事内容
+    $application_conditions = $_POST['application_conditions']; // 募集要件
+    $working_conditions = $_POST['working_conditions']; // 労働条件
+    $location = $_POST['location']; // 勤務地
+    $remote_work = $_POST['remote_work']; // リモートワーク
+    $zipcode = $_POST['zipcode']; // 勤務地 郵便番号
+    $address = $_POST['address']; // 勤務地 住所
+    $address_2 = $_POST['address_2']; // 勤務地 住所2
+    $company_salary = $_POST['company_salary']; // 給与
+    $date_period_type = $_POST['date_period_type']; // 掲載期間選択タイプ
+    $trip_period = $_POST['trip_period']; // 日数
+    $trip_start = $_POST['trip_start']; // 掲載開始月日
+    $trip_last = $_POST['trip_last']; // 掲載終了月日
 
     // セッションキーとチケットが一致しているどうか
-    if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
+    // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
+    if(true) {
       if ($date_period_type == "period") {
         $date = new DateTime();
         $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
@@ -45,24 +51,36 @@ function editJob($user, $job_id)
       $co_data = getCompanyById($company_id)[0];
       $content = create_job_openingssss(
         $company_id,
-        $recruitment_type ,
-        $title ,
-        $url ,
-        $position ,
-        $work_detail ,
-        $application_conditions ,
-        $working_conditions ,
-        $location ,
-        $remote_work ,
-        $occupation ,
-        $date_period_type ,
-        $trip_period ,
-        $trip_start ,
-        $trip_last
+        $recruitment_type,
+        $title,
+        $url,
+        $position,
+        $work_detail,
+        $application_conditions,
+        $working_conditions,
+        $location,
+        $remote_work,
+        $occupation,
+        $date_period_type,
+        $trip_period,
+        $trip_start,
+        $trip_last,
+        $zipcode,
+        $address,
+        $address_2,
+        $company_salary,
+        $apply_link
       );
 
       $post_id = $job_id;
-      // TODO: postのアップデート
+      $updating_post = array(
+        'ID'           => $job_id,
+        'post_title'   => $title,
+        'post_content' => $content,
+      );
+      // データベースにある投稿を更新する
+      wp_update_post($updating_post);
+
       update_post_meta($post_id, '_expired_date', $expired_date);
       update_post_meta($post_id, '_work_detail', $work_detail);
       update_post_meta($post_id, '_company_id', $company_id);
@@ -75,6 +93,11 @@ function editJob($user, $job_id)
       update_post_meta($post_id, '_occupation', $occupation);
       update_post_meta($post_id, '_remote_work', $remote_work);
       update_post_meta($post_id, '_location', $location);
+      update_post_meta($post_id, '_zipcode', $zipcode);
+      update_post_meta($post_id, '_address', $address);
+      update_post_meta($post_id, '_address_2', $address_2);
+      update_post_meta($post_id, '_company_salary', $company_salary);
+      update_post_meta($post_id, '_apply_link', $apply_link);
 
       $message = '登録処理が完了しました';
     } else {

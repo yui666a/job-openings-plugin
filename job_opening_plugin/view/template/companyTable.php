@@ -15,11 +15,11 @@ function make_company_table_row($data)
       >
         <div class="job_position">
           <a
-            href="{$admin_url}post.php?post={$data->co_id}&amp;action=edit"
-            class="tips job_title"
+            href="{$current_request}?&action=edit&id={$data->co_id}"
             data-tip="ID: {$data->co_id}"
-            >{$data->co_name}</a
-          >
+            >
+            {$data->co_name}</a>
+            <br/>
           <img
             class="company_logo"
             src="{$data->co_logo}"
@@ -45,7 +45,6 @@ function make_company_table_row($data)
         <div class="actions">
           <a
             class="button button-icon tips icon-edit"
-            http://aisohitoshi.wp.xdomain.jp/company_list/
             href="{$current_request}?&action=edit&id={$data->co_id}"
             data-tip="編集"
             >編集
@@ -68,7 +67,7 @@ function make_company_table_head()
 {
   $admin_url = esc_url(get_admin_url(''));
 
-  $header =header_link_buttons();
+  $header = header_link_buttons();
   $header .= <<<EOF
 
   <table class="wp-list-table widefat fixed striped table-view-list posts">

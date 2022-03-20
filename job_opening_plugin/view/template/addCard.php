@@ -8,6 +8,8 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
     $companies_selector .= '<option value="' . $data->co_id . '">' . $data->co_name . '</option>';
+
+
     $multi_dimensional_array[] = array(
       'co_id' => $data->co_id,
       'co_name' => $data->co_name,
@@ -50,6 +52,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
     ["medical_welfare", "医療・福祉・介護"],
     ["public_servant", "教育・保育・公務員・農林水産・その他"],
   );
+
   $occupation_selector = '<select required name="occupation" id="occupation"> <option hidden value="">--選択してください--</option>';
   foreach ($occupation_options as $option) {
     $occupation_selector .= '<option value="' . $option[0] . '">' . $option[1] . '</option>';
@@ -64,12 +67,12 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   }
 
 
-  $html =header_link_buttons();
+  $html = header_link_buttons();
   $html .= <<<EOF
   <!-- main -->
-  <form action="{$action_url}" method="post">
-    <div class="job-information">
-      <h3>求人情報</h3>
+  <div class="job-information">
+    <h3>求人情報</h3>
+    <form action="{$action_url}" method="post" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -84,10 +87,24 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       </div>
 
       <div class="form-item">
-        <div class="item-label">求人名（表示するタイトル）</div>
-        <input type="text" name="title" id="title" placeholder="" />
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          求人名（表示するタイトル）
+        </div>
+        <input required type="text" name="title" id="title" placeholder="" />
         <div class="form-description">
           求人ページの見出し(求人名)をご入力いただけます
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          応募URLや宛先メールアドレス
+        </div>
+        <input required type="text" name="apply_link" id="apply_link" placeholder="" />
+        <div class="form-description">
+          応募者が遷移するURLや宛先eメールアドレスをご入力ください
         </div>
       </div>
 
@@ -101,13 +118,17 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>求人タイプ
+          <span class="required-tag">必須</span>
+          求人タイプ
         </div>
         {$recruitment_radio}
       </div>
 
       <div class="form-item">
-        <div class="item-label"><span class="required-tag">必須</span>職種</div>
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          職種
+        </div>
         {$occupation_selector}
       </div>
 
@@ -127,7 +148,8 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>仕事内容
+          <span class="required-tag">必須</span>
+          仕事内容
         </div>
         <textarea class="rich" name="work_detail" rows="6" required></textarea>
         <div class="form-description">
@@ -137,7 +159,8 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>募集要件
+          <span class="required-tag">必須</span>
+          募集要件
         </div>
         <textarea class="rich" name="application_conditions" rows="6" required></textarea>
         <div class="form-description">
@@ -146,9 +169,12 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       </div>
 
       <div class="form-item">
-        <div class="item-label"><span class="recommended-tag">歓迎</span>労働条件</div>
+        <div class="item-label">
+          <span class="recommended-tag">歓迎</span>
+          労働条件
+        </div>
         <textarea class="rich" name="working_conditions" rows="6"></textarea>
-        <div class="form-description"></div>
+        <div class="form-description">雇用形態や労働契約の期間についてご記入ください</div>
       </div>
 
       <!--
@@ -168,14 +194,37 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>リモートワーク
+          <span class="required-tag">必須</span>
+          リモートワーク
         </div>
         {$remote_radio}
       </div>
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>掲載期間
+          <span class="recommended-tag">歓迎</span>
+          勤務地住所
+        </div>
+        <input type="hidden" class="p-country-name" value="Japan">
+        〒<input type="text" placeholder="999-9999" name="zipcode" class="p-postal-code" size="8" maxlength="8" style="width: 130px;"><br>
+        <input type="text" placeholder="〇〇県〇〇市９−９−９" name="address" class="p-region p-locality p-street-address p-extended-address" /><br>
+        <input type="text" placeholder="△△ビル 3F" name="address_2" class="" /><br>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="recommended-tag">歓迎</span>給与
+        </div>
+        <textarea class="rich" name="company_salary" rows="6"></textarea>
+        <div class="form-description">
+          給与やボーナスについてご記入ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          掲載期間
         </div>
 
         <div style="margin-bottom: 4px">
@@ -191,130 +240,13 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           <input type="date" id="start" name="trip_last" style="width:40%"/>
         </div>
       </div>
+
       <div class="form-buttons">
         <button type="submit" class="button draft" name='action' value='draft'>下書き保存</button>
         <button type="submit" class="button confirm" name='action' value='post'>投稿する</button>
       </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-    <!--
-    <div class="job-information">
-      <h3>企業情報</h3>
-
-      <div class="form-item">
-        <div class="item-label">募集企業名</div>
-        <input
-          type="text"
-          name="company_name"
-          id="company_name"
-          placeholder="株式会社 XXXX-XXXX HOLDINGS"
-        />
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">業種</div>
-        <select name="company_sector" id="company_sector">
-          <option value="">--選択してください--</option>
-          <option value="1">金融・保険</option>
-          <option value="2">建設・不動産</option>
-          <option value="3">コンサルティング・士業</option>
-          <option value="4">IT・インターネット</option>
-          <option value="5">メーカー・商社</option>
-          <option value="6">流通・小売・サービス</option>
-          <option value="7">メディカル</option>
-          <option value="8">マスコミ・メディア</option>
-          <option value="9">エンターテインメント</option>
-          <option value="10">運輸・物流</option>
-          <option value="11">エネルギー</option>
-          <option value="12">その他</option>
-        </select>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">企業HP URL</div>
-        <input type="text" name="company_url" id="name" placeholder="https://~~~" />
-        <div class="form-description">
-          貴社ホームページのURLをご入力いただけます
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-          <span class="recommended-tag">歓迎</span>PR文
-        </div>
-        <textarea class="rich" name="company_pr" rows="6"></textarea>
-        <div class="form-description">
-          貴社の強みや，メリットなどPR文をお書きください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-        <span class="required-tag">必須</span>本社所在地
-        </div>
-
-        〒<input required type="text" name="company_zipcode" placeholder="999-9999" style="width: 100px;"></input>
-        <input type="text" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F" required></input>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-          <span class="recommended-tag">歓迎</span>過去の実績
-        </div>
-        <textarea class="rich" name="company_achievement" rows="6"></textarea>
-        <div class="form-description">
-          貴社のこれまでの実績をご記入ください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-        <span class="recommended-tag">歓迎</span>勤務時間
-        </div>
-        <textarea class="rich" name="company_office_hour" rows="6"></textarea>
-        <div class="form-description">
-          貴社の普段の勤務時間や営業時間をご記入ください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-        <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
-        </div>
-        <textarea class="rich" name="company_benefits" rows="6"></textarea>
-        <div class="form-description">
-          貴社の待遇・福利厚生・支援制度などをご記入ください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-        <span class="recommended-tag">歓迎</span>休日・休暇
-        </div>
-        <textarea class="rich" name="company_day_off" rows="6"></textarea>
-        <div class="form-description">
-        貴社の休日や休暇面をご記入ください
-        </div>
-      </div>
-      <div class="form-buttons">
-        <input type="submit" class="button draft" value="下書き保存" />
-        <div style="margin-left: 8px">
-          <input type="submit" class="button confirm" value="投稿する" />
-        </div>
-      </div>
-    -->
-    </div>
-  </form>
-
+    </form>
+  </div>
 EOF;
   return $html;
 }

@@ -10,7 +10,7 @@
   --gr800: #333;
   --gr900: #1a1a1a;
   --red: rgb(235, 0, 0);
-  --yellow: rgb(235, 200, 0);
+  --yellow: rgb(255, 218, 0);
 }
 
 div.wrap {
@@ -113,7 +113,7 @@ header {
   display: inline-block;
   border-radius: 3px;
   background: var(--yellow);
-  color: var(--gr800);
+  color: var(--gr700);
   font-weight: bold;
   padding: 2px;
   margin: 2px;

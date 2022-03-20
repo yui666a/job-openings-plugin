@@ -15,13 +15,34 @@ function create_job_openingssss(
   $date_period_type,
   $trip_period,
   $trip_start,
-  $trip_last
+  $trip_last,
+  $zipcode,
+  $address,
+  $address_2,
+  $company_salary,
+  $apply_link
 ) {
 
   $tags = addTags($recruitment_type, $remote_work);
-
+  $can_remote_work = $remote_work == "true" ? "(リモートワーク可)" : "";
   $company = getCompanyById($company_id)[0];
-  $aaa = HOME_URL."/".get_option("sac_job_openings_list");
+
+  $reg_str = "/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/";
+  if (preg_match($reg_str, $apply_link)) {
+    $content  = $company->co_name . "<br />NAGAOKA WORKER募集担当　様<br /><br />";
+    $content .= 'NAGAOKA WORKERホームページ掲載の貴社求人を拝見し、応募させていただきたくご連絡を差し上げました。<br /><br />';
+    $content .= '求人No: <br />';
+    $content .= '募集職種・役職: <br /><br />';
+    $content .= '応募書類を添付申し上げます。<br />ぜひ一度、面接の機会をいただきたく、ご検討のほどどうぞよろしくお願い申し上げます。<br />※このメールに履歴書、職務経歴書二点の添付をお願いいたします。';
+
+    $search = array('<br />', '@', '\n', '&');
+    $replace = array('%0D%0A', '□', '%0D%0A', '&amp;');
+    $main_text = str_replace($search, $replace, $content);
+    $converted_address = str_replace($search, $replace, $apply_link);
+    $qwer = "mailto:" . $converted_address . '?subject=' . $title . '&body=' . $main_text . '%0D%0A（メールアドレス中の□を@に変更してください）"';
+    //  target="_blank" rel="noopener noreferrer';
+  }
+  $aaa = HOME_URL . "/" . get_option("sac_job_openings_list");
 
   $html = <<<EOF
   <div class="job-opening-card">
@@ -68,15 +89,24 @@ function create_job_openingssss(
           <div class="assignment">
             <div class="assignment-item-label">給与</div>
             <div class="assignment-item-value">
-              <pre>(TODO: 給与の情報を表示)</pre>
+              <pre>{$company_salary}</pre>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">勤務地</div>
             <div class="assignment-item-value">
-            <pre><a href="https://maps.google.com/maps?q={$company->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-            >〒{$company->co_zip_code}  {$company->co_address}
-          </a></pre>
+              <a href="https://maps.google.com/maps?q={$address}{$address_2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
+              >〒{$zipcode}  {$address} {$address_2}
+            </a> {$can_remote_work}
+              <!--iframe要素はgoogle mapのHTMLコピーで260px × 260pxのカスタムサイズで貼り付けています-->
+              <!-- <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7694570079743!2d139.7145596152575!3d35.6334095802055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b1ea8e63243%3A0x12338cc78949be38!2z44CSMTQxLTAwMjEg5p2x5Lqs6YO95ZOB5bed5Yy65LiK5aSn5bSO77yT5LiB55uu77yR4oiS77yRIOebrum7kuOCu-ODs-ODiOODqeODq-OCueOCr-OCqOOCog!5e0!3m2!1sja!2sjp!4v1647010839521!5m2!1sja!2sjp"
+              width="260"
+              height="260"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe> -->
             </div>
           </div>
           <div class="assignment">
@@ -95,23 +125,6 @@ function create_job_openingssss(
             <div class="assignment-item-label">制度・福利厚生</div>
             <div class="assignment-item-value">
               <pre>{$company->co_employee_benefits}</pre>
-            </div>
-          </div>
-          <div class="assignment">
-            <div class="assignment-item-label">勤務地の所在地</div>
-            <div class="assignment-item-value">
-              <pre><a href="https://maps.google.com/maps?q={$company->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-              >〒{$company->co_zip_code}  {$company->co_address}
-            </a></pre>
-              <!--iframe要素はgoogle mapのHTMLコピーで260px × 260pxのカスタムサイズで貼り付けています-->
-              <!-- <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.7694570079743!2d139.7145596152575!3d35.6334095802055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b1ea8e63243%3A0x12338cc78949be38!2z44CSMTQxLTAwMjEg5p2x5Lqs6YO95ZOB5bed5Yy65LiK5aSn5bSO77yT5LiB55uu77yR4oiS77yRIOebrum7kuOCu-ODs-ODiOODqeODq-OCueOCr-OCqOOCog!5e0!3m2!1sja!2sjp!4v1647010839521!5m2!1sja!2sjp"
-              width="260"
-              height="260"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe> -->
             </div>
           </div>
         </div>
@@ -164,16 +177,16 @@ function create_job_openingssss(
             <div class="assignment">
               <div class="assignment-item-label">本社所在地</div>
               <div class="assignment-item-value">
-                <pre><a href="https://maps.google.com/maps?q={$company->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-                >〒{$company->co_zip_code}  {$company->co_address}</a
-              ></pre>
+                <a href="https://maps.google.com/maps?q={$company->co_address}{$company->co_address2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
+                >〒{$company->co_zip_code} {$company->co_address} {$company->co_address2}</a
+              >
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="btn-application-under">
-        <a href="#" class="btn-application-under-text">応募画面に進む</a>
+        <a href="{$qwer}" class="btn-application-under-text">応募画面に進む</a>
       </div>
     </div>
   </div>
