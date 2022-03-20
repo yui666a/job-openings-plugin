@@ -136,6 +136,14 @@ EOF;
     case "12" : $sector = "その他"; break;
   }
 
+  $recruitment_type_text = "";
+  if($recruitment_type == "new_graduate"){
+    $recruitment_type_text .= "新卒";
+  }else if($recruitment_type == "mid_career"){
+    $recruitment_type_text .= "中途";
+  }else {
+    $recruitment_type_text .= "新卒 / 中途";
+  }
 
   $aaa = HOME_URL . "/" . get_option("sac_job_openings_list");
 
@@ -171,8 +179,16 @@ EOF;
               <div>{$position}</div>
             </div>
           </div>
+
           <div class="assignment">
-            <div class="assignment-item-label">雇用形態</div>
+            <div class="assignment-item-label">新卒 / 中途</div>
+            <div class="assignment-item-value">
+              <div>{$recruitment_type_text}</div>
+            </div>
+          </div>
+
+          <div class="assignment">
+            <div class="assignment-item-label">労働条件</div>
             <div class="assignment-item-value">
               <div>{$working_conditions}</div>
             </div>
@@ -196,7 +212,7 @@ EOF;
             </div>
           </div>
           <div class="assignment">
-            <div class="assignment-item-label">休日</div>
+            <div class="assignment-item-label">休日・休暇</div>
             <div class="assignment-item-value">
               <div>{$company->co_day_off}</div>
             </div>
