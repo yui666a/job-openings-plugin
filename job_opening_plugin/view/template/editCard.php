@@ -241,9 +241,10 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>待遇
+          <span class="required-tag">必須</span>
+          待遇
         </div>
-        <textarea class="rich" name="company_salary" rows="6">{$company_salary}</textarea>
+        <textarea required class="rich" name="company_salary" rows="6">{$company_salary}</textarea>
         <div class="form-description">
           給与やボーナスについてご記入ください
         </div>

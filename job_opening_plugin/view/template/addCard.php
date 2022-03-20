@@ -3,7 +3,8 @@
 function create_job_opening($user, $action_url, $session_key, $companies)
 {
   // 企業セレクタの作成
-  $companies_selector = '<select name="company_id" id="company_id"> <option value="" hidden>--選択してください--</option>';
+  $companies_selector = '<select name="company_id" id="company_id">';
+  //  ' <option value="" hidden>--選択してください--</option>';
   session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
@@ -209,9 +210,10 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>待遇
+          <span class="required-tag">必須</span>
+          待遇
         </div>
-        <textarea class="rich" name="company_salary" rows="6"></textarea>
+        <textarea required class="rich" name="company_salary" rows="6"></textarea>
         <div class="form-description">
           給与やボーナスについてご記入ください
         </div>
