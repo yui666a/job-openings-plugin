@@ -27,24 +27,6 @@ function create_job_openingssss(
   $can_remote_work = $remote_work == "true" ? "(リモートワーク可)" : "";
   $company = getCompanyById($company_id)[0];
 
-  $reg_str = "/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/";
-  if (preg_match($reg_str, $apply_link)) {
-    $content  = $company->co_name . "<br />NAGAOKA WORKER募集担当　様<br /><br />";
-    $content .= 'NAGAOKA WORKERホームページ掲載の貴社求人を拝見し、応募させていただきたくご連絡を差し上げました。<br /><br />';
-    $content .= '求人No: <br />';
-    $content .= '募集職種・役職: <br /><br />';
-    $content .= '応募書類を添付申し上げます。<br />ぜひ一度、面接の機会をいただきたく、ご検討のほどどうぞよろしくお願い申し上げます。<br />※このメールに履歴書、職務経歴書二点の添付をお願いいたします。';
-
-    $search = array('<br />', '@', '\n', '&');
-    $replace = array('%0D%0A', '□', '%0D%0A', '&amp;');
-    $main_text = str_replace($search, $replace, $content);
-    $converted_address = str_replace($search, $replace, $apply_link);
-    $qwer = "mailto:" . $converted_address . '?subject=' . $title . '&body=' . $main_text . '%0D%0A（メールアドレス中の□を@に変更してください）"';
-    //  target="_blank" rel="noopener noreferrer';
-  }else{
-    $qwer = $apply_link;
-  }
-
   // 職種
   $occupation_text = "";
   switch ($occupation) {
@@ -92,9 +74,32 @@ function create_job_openingssss(
       break;
   }
 
+  $reg_str = "/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/";
+  if (preg_match($reg_str, $apply_link)) {
+    global $wp;
+    $content  = $company->co_name . "<br />NAGAOKA WORKER募集担当　様<br /><br />";
+    $content .= 'NAGAOKA WORKERホームページ掲載の貴社求人を拝見し、応募させていただきたくご連絡を差し上げました。<br /><br />';
+    $content .= '求人タイトル: ' . $title . '<br />';
+    $content .= '募集職種・役職: ' . $occupation_text . ' ' . $position . '<br /><br />';
+    // $content .= '該当URL: ' . home_url( $wp->request ) . '<br /><br />';
+    $content .= '応募書類を添付申し上げます。<br />ぜひ一度、面接の機会をいただきたく、ご検討のほどどうぞよろしくお願い申し上げます。<br />※このメールに履歴書、職務経歴書二点の添付をお願いいたします。';
+
+    // $search = array('<br />', '@', '\n');
+    // $replacements = array('%0D%0A', '□', '%0D%0A',);
+    // $main_text = str_replace($search, $replace, $content);
+    $search = array('%0D%0A', '□', '%0D%0A', '%26');
+    $replacements = array('<br />', '@', '\n', "&");
+    $main_text =  str_replace($replacements, $search, $content);
+    $converted_address = str_replace($search, $replacements, $apply_link);
+    $qwer = "mailto:" . $converted_address . '?subject=' . $title . '&body=' . $main_text . '%0D%0A%0D%0A（メールアドレス中の□を@に変更してください）"';
+    //  target="_blank" rel="noopener noreferrer';
+  } else {
+    $qwer = $apply_link;
+  }
+
   $co_logo_wrapper = "";
-  if($company->co_logo != ""){
-    $co_logo_wrapper =<<<EOF
+  if ($company->co_logo != "") {
+    $co_logo_wrapper = <<<EOF
     <div class="job-list-img-wrapper">
       <img
       src="{$company->co_logo}"
@@ -121,27 +126,51 @@ EOF;
     ["12", "その他"],
   );
   $sector = "";
-  switch ($company->co_sector){
-    case "1" : $sector = "金融・保険"; break;
-    case "2" : $sector = "建設・不動産"; break;
-    case "3" : $sector = "コンサルティング・士業"; break;
-    case "4" : $sector = "IT・インターネット"; break;
-    case "5" : $sector = "メーカー・商社"; break;
-    case "6" : $sector = "流通・小売・サービス"; break;
-    case "7" : $sector = "メディカル"; break;
-    case "8" : $sector = "マスコミ・メディア"; break;
-    case "9" : $sector = "エンターテインメント"; break;
-    case "10" : $sector = "運輸・物流"; break;
-    case "11" : $sector = "エネルギー"; break;
-    case "12" : $sector = "その他"; break;
+  switch ($company->co_sector) {
+    case "1":
+      $sector = "金融・保険";
+      break;
+    case "2":
+      $sector = "建設・不動産";
+      break;
+    case "3":
+      $sector = "コンサルティング・士業";
+      break;
+    case "4":
+      $sector = "IT・インターネット";
+      break;
+    case "5":
+      $sector = "メーカー・商社";
+      break;
+    case "6":
+      $sector = "流通・小売・サービス";
+      break;
+    case "7":
+      $sector = "メディカル";
+      break;
+    case "8":
+      $sector = "マスコミ・メディア";
+      break;
+    case "9":
+      $sector = "エンターテインメント";
+      break;
+    case "10":
+      $sector = "運輸・物流";
+      break;
+    case "11":
+      $sector = "エネルギー";
+      break;
+    case "12":
+      $sector = "その他";
+      break;
   }
 
   $recruitment_type_text = "";
-  if($recruitment_type == "new_graduate"){
+  if ($recruitment_type == "new_graduate") {
     $recruitment_type_text .= "新卒";
-  }else if($recruitment_type == "mid_career"){
+  } else if ($recruitment_type == "mid_career") {
     $recruitment_type_text .= "中途";
-  }else {
+  } else {
     $recruitment_type_text .= "新卒 / 中途";
   }
 
