@@ -113,21 +113,21 @@ function edit_company($user, $company_id, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>福利厚生・支援制度など
-        </div>
-        <textarea required class="rich" name="company_benefits" rows="6">{$company->co_employee_benefits}</textarea>
-        <div class="form-description">
-          貴社の待遇・福利厚生・支援制度などをご記入ください
-        </div>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
           <span class="required-tag">必須</span>休日・休暇
         </div>
         <textarea required class="rich" name="company_day_off" rows="6">{$company->co_day_off}</textarea>
         <div class="form-description">
           貴社の休日や休暇面をご記入ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>福利厚生・支援制度など
+        </div>
+        <textarea required class="rich" name="company_benefits" rows="6">{$company->co_employee_benefits}</textarea>
+        <div class="form-description">
+          貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
       </div>
 

@@ -184,9 +184,6 @@ function create_job_openingssss(
         <div class="work-detial-header">
           <h1 class="work-detail-header-title">会社概要</h1>
         </div>
-        <div class="work-detail-text-box">
-          <pre class="work-detail-text">{$company->co_pr_point}</pre>
-        </div>
 
         <div class="assignment-table-box">
           <div class="company-information-table-box">
@@ -225,9 +222,12 @@ function create_job_openingssss(
             </div>
           </div>
         </div>
+
+        <div class="work-detail-text-box">
+          <pre class="work-detail-text">{$company->co_pr_point}</pre>
+        </div>
       </div>
 
-      
       <div class="btn-application-under">
         <a href="{$qwer}" class="btn-application-under-text">応募画面に進む</a>
       </div>
