@@ -102,7 +102,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           <span class="required-tag">必須</span>
           応募URLや宛先メールアドレス
         </div>
-        <input required type="text" name="apply_link" id="apply_link" placeholder="" />
+        <input required type="text" name="apply_link" id="apply_link" placeholder="https://~, xxx@gmail.com" />
         <div class="form-description">
           応募者が遷移するURLや宛先eメールアドレスをご入力ください
         </div>
@@ -132,19 +132,15 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         {$occupation_selector}
       </div>
 
-      <!--
       <div class="form-item">
         <div class="item-label">
           <span class="required-tag">必須</span>部署・役職名
         </div>
-        <select id="position" name="position" multiple required></select>
-        <input type="text" name="add_position" id="add_position" placeholder="など" />
-        <button class="add" type="button">＋追加</button>
+        <input type="text" required placeholder="" name="position" class="position"  />
         <div class="form-description">
           募集されるポジション（役職または部署）を記載してください
         </div>
       </div>
-      -->
 
       <div class="form-item">
         <div class="item-label">
@@ -170,10 +166,10 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>
+          <span class="required-tag">必須</span>
           労働条件
         </div>
-        <textarea class="rich" name="working_conditions" rows="6"></textarea>
+        <textarea required class="rich" name="working_conditions" rows="6"></textarea>
         <div class="form-description">雇用形態や労働契約の期間についてご記入ください</div>
       </div>
 
@@ -213,7 +209,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>給与
+          <span class="recommended-tag">歓迎</span>待遇
         </div>
         <textarea class="rich" name="company_salary" rows="6"></textarea>
         <div class="form-description">

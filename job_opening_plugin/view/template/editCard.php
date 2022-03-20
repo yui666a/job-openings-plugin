@@ -13,13 +13,14 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $title = get_post_meta($job_id, '_title', true);
   $work_detail =  get_post_meta($job_id, '_work_detail', true);
   $application_conditions =  get_post_meta($job_id, '_application_conditions', true);
-  get_post_meta($job_id, '_position', true);
+  $position = get_post_meta($job_id, '_position', true);
   $working_conditions = get_post_meta($job_id, '_working_conditions', true);
   $occupation = get_post_meta($job_id, '_occupation', true);
   $remote_work = get_post_meta($job_id, '_remote_work', true);
   $company_salary = get_post_meta($job_id, '_company_salary', true);
   $zipcode = get_post_meta($job_id, '_zipcode', true);
   $address = get_post_meta($job_id, '_address', true);
+  $address_2 = get_post_meta($job_id, '_address_2', true);
   $address_2 = get_post_meta($job_id, '_address_2', true);
   get_post_meta($job_id, '_location', true);
 
@@ -122,7 +123,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
           <span class="required-tag">必須</span>
           求人名（表示するタイトル）
         </div>
-        <input type="text" name="title" id="title" placeholder="" value="{$title}"/>
+        <input required type="text" name="title" id="title" placeholder="" value="{$title}"/>
         <div class="form-description">
           求人ページの見出し(求人名)をご入力いただけます
         </div>
@@ -163,19 +164,15 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
         {$occupation_selector}
       </div>
 
-      <!--
       <div class="form-item">
         <div class="item-label">
           <span class="required-tag">必須</span>部署・役職名
         </div>
-        <select id="position" name="position" multiple required></select>
-        <input type="text" name="add_position" id="add_position" placeholder="など" />
-        <button class="add" type="button">＋追加</button>
+        <input type="text" required placeholder="" name="position" class="position" value="{$position}" />
         <div class="form-description">
           募集されるポジション（役職または部署）を記載してください
         </div>
       </div>
-      -->
 
       <div class="form-item">
         <div class="item-label">
@@ -190,7 +187,8 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="required-tag">必須</span>募集要件
+          <span class="required-tag">必須</span>
+          募集要件
         </div>
         <textarea class="rich" name="application_conditions" rows="6" required>{$application_conditions}</textarea>
         <div class="form-description">
@@ -200,11 +198,11 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>
+          <span class="required-tag">必須</span>
           労働条件
         </div>
-        <textarea class="rich" name="working_conditions" rows="6">{$working_conditions}</textarea>
-        <div class="form-description"></div>
+        <textarea required class="rich" name="working_conditions" rows="6">{$working_conditions}</textarea>
+        <div class="form-description">雇用形態や労働契約の期間についてご記入ください</div>
       </div>
 
       <!--
@@ -243,7 +241,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>給与
+          <span class="recommended-tag">歓迎</span>待遇
         </div>
         <textarea class="rich" name="company_salary" rows="6">{$company_salary}</textarea>
         <div class="form-description">
