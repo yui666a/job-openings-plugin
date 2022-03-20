@@ -27,7 +27,7 @@ function edit_company($user, $company_id, $action_url, $session_key)
   $sector_selector .= '</select>';
 
 
-  $html =header_link_buttons();
+  $html = header_link_buttons();
   $html .= <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
@@ -39,6 +39,7 @@ function edit_company($user, $company_id, $action_url, $session_key)
       <div class="form-item">
         <div class="item-label"> <span class="required-tag">必須</span>募集企業名</div>
         <input
+          required
           type="text"
           name="company_name"
           id="name"
@@ -112,9 +113,9 @@ function edit_company($user, $company_id, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>勤務時間
+          <span class="required-tag">必須</span>勤務時間
         </div>
-        <textarea class="rich" name="company_office_hour" rows="6">{$company->co_office_hours}</textarea>
+        <textarea required class="rich" name="company_office_hour" rows="6">{$company->co_office_hours}</textarea>
         <div class="form-description">
           貴社の普段の勤務時間や営業時間をご記入ください
         </div>
@@ -122,21 +123,21 @@ function edit_company($user, $company_id, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
+          <span class="required-tag">必須</span>福利厚生・支援制度など
         </div>
-        <textarea class="rich" name="company_benefits" rows="6">{$company->co_employee_benefits}</textarea>
+        <textarea required class="rich" name="company_benefits" rows="6">{$company->co_employee_benefits}</textarea>
         <div class="form-description">
-        貴社の待遇・福利厚生・支援制度などをご記入ください
+          貴社の待遇・福利厚生・支援制度などをご記入ください
         </div>
       </div>
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>休日・休暇
+          <span class="required-tag">必須</span>休日・休暇
         </div>
-        <textarea class="rich" name="company_day_off" rows="6">{$company->co_day_off}</textarea>
+        <textarea required class="rich" name="company_day_off" rows="6">{$company->co_day_off}</textarea>
         <div class="form-description">
-        貴社の休日や休暇面をご記入ください
+          貴社の休日や休暇面をご記入ください
         </div>
       </div>
 
