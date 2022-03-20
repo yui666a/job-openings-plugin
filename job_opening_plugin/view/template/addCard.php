@@ -215,7 +215,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         </div>
         <textarea required class="rich" name="company_salary" rows="6"></textarea>
         <div class="form-description">
-          給与やボーナスについてご記入ください
+          待遇や給与、ボーナスなどについてご記入ください
         </div>
       </div>
 
