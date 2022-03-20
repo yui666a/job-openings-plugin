@@ -165,9 +165,10 @@ EOF;
 
         <div class="assignments">
           <div class="assignment">
-            <div class="assignment-item-label">職種 / 募集ポジション</div>
+            <div class="assignment-item-label">職種<br />募集ポジション</div>
             <div class="assignment-item-value">
               <div>{$occupation_text}</div>
+              <div>{$position}</div>
             </div>
           </div>
           <div class="assignment">
