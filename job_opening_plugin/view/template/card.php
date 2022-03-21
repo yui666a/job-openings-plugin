@@ -174,6 +174,8 @@ EOF;
     $recruitment_type_text .= "新卒 / 中途";
   }
 
+  $zipcode_text = $zipcode != "" ? "〒" . $zipcode : "";
+  $co_zipcode_text = $company->co_zip_code != "" ? "〒" . $company->co_zip_code : "";
   $aaa = HOME_URL . "/" . get_option("sac_job_openings_list");
 
   $html = <<<EOF
@@ -226,7 +228,7 @@ EOF;
             <div class="assignment-item-label">勤務地</div>
             <div class="assignment-item-value">
               <a href="https://maps.google.com/maps?q={$address}{$address_2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-              >〒{$zipcode}  {$address} {$address_2}</a> {$can_remote_work}</div>
+              >{$zipcode_text}  {$address} {$address_2}</a> {$can_remote_work}</div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">就業時間</div>
@@ -283,7 +285,7 @@ EOF;
               <div class="assignment-item-label">本社所在地</div>
               <div class="assignment-item-value">
                 <a href="https://maps.google.com/maps?q={$company->co_address}{$company->co_address2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-                >〒{$company->co_zip_code} {$company->co_address} {$company->co_address2}</a
+                >{$co_zipcode_text} {$company->co_address} {$company->co_address2}</a
               >
               </div>
             </div>
