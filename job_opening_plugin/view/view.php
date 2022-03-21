@@ -23,6 +23,13 @@ function job_openings_list()
       $html .= aaa($user);
     } else if ($mode == "edit") {
       $html .= editJob($user, $joid);
+    } else if ($mode == "draft") {
+      global $wpdb;
+      wp_update_post([
+        'ID'           => $joid,
+        'post_status'   => 'draft',
+      ]);
+      $html .= aaa($user);
     }
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -75,7 +82,7 @@ function job_openings_add()
     || current_user_can('contributor')
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_card($user);
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -99,7 +106,7 @@ function company_add()
     || current_user_can('contributor')
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_company($user);
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -149,22 +156,26 @@ function user_job_openings()
 //=================================================
 // 管理画面（wp-adminページ用）
 //=================================================
-function job_openings_list_admin(){
+function job_openings_list_admin()
+{
   if (current_user_can('administrator') || current_user_can('editor')) {
     echo job_openings_list();
   }
 }
 
-function company_list_admin(){
+function company_list_admin()
+{
   if (current_user_can('administrator') || current_user_can('editor')) {
     echo company_list();
   }
 }
 
-function job_openings_add_admin(){
+function job_openings_add_admin()
+{
   echo job_openings_add();
 }
 
-function company_add_admin(){
+function company_add_admin()
+{
   echo company_add();
 }

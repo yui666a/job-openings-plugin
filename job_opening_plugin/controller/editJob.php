@@ -77,6 +77,7 @@ function editJob($user, $job_id)
         'ID'           => $job_id,
         'post_title'   => $title,
         'post_content' => $content,
+        'post_status'   => 'publish',
       );
       // データベースにある投稿を更新する
       wp_update_post($updating_post);
