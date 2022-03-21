@@ -63,7 +63,7 @@ $(document).ready(function () {
     $("#occupation").select2({
       multiple: "multiple",
       maximumSelectionLength: 3,
-      placeholder: "最大3つまで選択できます",
+      placeholder: "最大3つまで選択いただけます",
       language: {
         maximumSelected: (args) => args.maximum + "つ以下にしてください",
       },
@@ -75,6 +75,7 @@ $(document).ready(function () {
     );
     $("#occupation").val(selected_occupations).trigger("change");
   } catch (e) {
+    console.error("エラー");
     console.error(e.message);
   }
 });

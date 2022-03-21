@@ -4,7 +4,6 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 {
   // 企業セレクタの作成
   $companies_selector = '<select name="company_id" id="company_id">';
-  //  ' <option value="" hidden>--選択してください--</option>';
   session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
@@ -54,11 +53,6 @@ function create_job_opening($user, $action_url, $session_key, $companies)
     ["public_servant", "教育・保育・公務員・農林水産・その他"],
   );
 
-  $occupation_selector = '<select required name="occupation" id="occupation"> <option hidden value="">--選択してください--</option>';
-  foreach ($occupation_options as $option) {
-    $occupation_selector .= '<option value="' . $option[0] . '">' . $option[1] . '</option>';
-  }
-  $occupation_selector .= '</select>';
 
   // リモートワーク
   $remote_options = array(["可", "true"], ["不可", "false"], ["どちらでも", "both"]);

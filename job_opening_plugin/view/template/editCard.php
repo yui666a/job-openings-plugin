@@ -25,7 +25,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   get_post_meta($job_id, '_location', true);
 
   // 企業セレクタの作成
-  $companies_selector = '<select name="company_id" id="company_id"> <option value="" hidden>--選択してください--</option>';
+  $companies_selector = '<select name="company_id" id="company_id">';
   session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
@@ -86,12 +86,6 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
   $encoded_data = json_encode($occupation);
   $selected_occupations_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
-  // $occupation_selector = '<select required name="occupation" id="occupation"> <option hidden value="">--選択してください--</option>';
-  // foreach ($occupation_options as $option) {
-  //   $isSelected = $option[0] == $occupation  ? 'selected' : '';
-  //   $occupation_selector .= '<option ' . $isSelected . ' value="' . $option[0] . '">' . $option[1] . '</option>';
-  // }
-  // $occupation_selector .= '</select>';
 
   // リモートワーク
   $remote_options = array(["可", "true"], ["不可", "false"], ["どちらでも", "both"]);
@@ -202,7 +196,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
       <div class="form-item">
         <div class="item-label">
           <span class="required-tag">必須</span>
-          待遇・労働条件
+          待遇・労働条件など
         </div>
         <textarea required class="rich" name="working_conditions" rows="6">{$working_conditions}</textarea>
         <div class="form-description">雇用形態や労働契約の期間、待遇などについてご記入ください</div>

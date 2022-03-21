@@ -73,6 +73,11 @@ function create_job_openingssss(
       $occupation_text = "教育・保育・公務員・農林水産・その他";
       break;
   }
+  $qwert = "";
+  foreach ($occupation as $data) {
+    $qwert .= get_occupation_ja($data) . "、";
+  }
+  $qwert = mb_substr($qwert, 0, -1, 'UTF-8');
 
   $reg_str = "/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/";
   if (preg_match($reg_str, $apply_link)) {
@@ -80,7 +85,7 @@ function create_job_openingssss(
     $content  = $company->co_name . "<br />NAGAOKA WORKER募集担当　様<br /><br />";
     $content .= 'NAGAOKA WORKERホームページ掲載の貴社求人を拝見し、応募させていただきたくご連絡を差し上げました。<br /><br />';
     $content .= '求人タイトル: ' . $title . '<br />';
-    $content .= '募集職種・役職: ' . $occupation_text . ' ' . $position . '<br /><br />';
+    $content .= '募集職種・役職: ' . $qwert . ' ' . $position . '<br /><br />';
     // $content .= '該当URL: ' . home_url( $wp->request ) . '<br /><br />';
     $content .= '応募書類を添付申し上げます。<br />ぜひ一度、面接の機会をいただきたく、ご検討のほどどうぞよろしくお願い申し上げます。<br />※このメールに履歴書、職務経歴書二点の添付をお願いいたします。';
 
@@ -206,7 +211,7 @@ EOF;
           <div class="assignment">
             <div class="assignment-item-label">職種 /<br />募集ポジション</div>
             <div class="assignment-item-value">
-              <div>{$occupation_text}</div>
+              <div>{$qwert}</div>
               <div>{$position}</div>
             </div>
           </div>
