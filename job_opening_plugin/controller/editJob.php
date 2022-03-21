@@ -35,7 +35,7 @@ function editJob($user, $job_id)
 
     // セッションキーとチケットが一致しているどうか
     // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-    if(true) {
+    if (true) {
       if ($date_period_type == "period") {
         $date = new DateTime();
         $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
@@ -99,7 +99,7 @@ function editJob($user, $job_id)
       update_post_meta($post_id, '_company_salary', $company_salary);
       update_post_meta($post_id, '_apply_link', $apply_link);
 
-      $message = '登録処理が完了しました';
+      $message = '登録処理が完了しました（<a href="' . HOME_URL . "/" . get_option("sac_job_openings_list") . '">一覧にもどる</a>）';
     } else {
       $message = 'すでに送信済みです';
     }

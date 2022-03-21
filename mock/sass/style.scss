@@ -42,7 +42,7 @@ img.company_logo {
   background-color: var(--gr000);
 }
 
-input[type='submit'].confirm {
+input[type="submit"].confirm {
   color: var(--gr000);
   background-color: rgb(240, 161, 15);
   border: 1px solid rgb(240, 161, 15);
@@ -153,8 +153,6 @@ header {
     opacity: 0.8;
   }
 }
-
-
 
 .job-information,
 .company-information {
@@ -455,24 +453,23 @@ button {
     padding-left: 12px;
   }
   .job-list-box-caption {
-    display: table;
+    display: flex;
     width: 100%;
-    table-layout: fixed;
   }
-  .job-list-img-wrapper,
+  .job-list-img-wrapper {
+    max-height: 200px;
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    img{
+      height: 100%;
+      width: auto;
+    }
+  }
   .job-list-text-wrapper {
-    display: table-cell;
-    padding-right: 10px;
-    vertical-align: top;
+    width: 70%;
   }
-  .job-list-img-wrapper {
-    display: table-cell;
-    padding-right: 16px;
-    vertical-align: top;
-  }
-  .job-list-img-wrapper {
-    width: 40%;
-  }
+
   .job-list-title-text {
     font-size: 16px;
     font-weight: 400;
@@ -512,14 +509,9 @@ button {
     position: relative;
   }
   .job-list-detail-link {
-    z-index: 1;
-    width: auto;
-    height: auto;
     color: #223a70;
-    box-shadow: 0 0 7px 7px #fff;
     text-align: right;
-    font-size: 16px;
-    background-color: #fff;
+    font-size: 0.9em;
   }
   .job-list-detail-text {
     overflow: hidden;

@@ -99,8 +99,8 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
     $remote_radio .= '<label> <input required type="radio" ' . $isChecked . ' name="remote_work" class="remote_work" value="' . $option[1] . '" />' . $option[0] . '</label>';
   }
 
-  $html = <<<EOF
-
+  $html = header_link_buttons();
+  $html .= <<<EOF
   <!-- main -->
   <div class="job-information">
     <h3>求人情報</h3>
