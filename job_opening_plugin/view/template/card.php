@@ -19,7 +19,7 @@ function create_job_openingssss(
   $zipcode,
   $address,
   $address_2,
-  $company_salary,
+  // $company_salary,
   $apply_link
 ) {
 
@@ -202,7 +202,7 @@ EOF;
 
         <div class="assignments">
           <div class="assignment">
-            <div class="assignment-item-label">職種<br />募集ポジション</div>
+            <div class="assignment-item-label">職種 /<br />募集ポジション</div>
             <div class="assignment-item-value">
               <div>{$occupation_text}</div>
               <div>{$position}</div>
@@ -217,15 +217,9 @@ EOF;
           </div>
 
           <div class="assignment">
-            <div class="assignment-item-label">労働条件</div>
+            <div class="assignment-item-label">待遇・労働条件など</div>
             <div class="assignment-item-value">
               <div>{$working_conditions}</div>
-            </div>
-          </div>
-          <div class="assignment">
-            <div class="assignment-item-label">待遇</div>
-            <div class="assignment-item-value">
-              <div>{$company_salary}</div>
             </div>
           </div>
           <div class="assignment">

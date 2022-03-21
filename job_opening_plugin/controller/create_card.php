@@ -27,7 +27,7 @@ function create_card($user)
     $zipcode = $_POST['zipcode']; // 勤務地 郵便番号
     $address = $_POST['address']; // 勤務地 住所
     $address_2 = $_POST['address_2']; // 勤務地 住所2
-    $company_salary = $_POST['company_salary']; // 待遇
+    // $company_salary = $_POST['company_salary']; // 待遇
     $date_period_type = $_POST['date_period_type']; // 掲載期間選択タイプ
     $trip_period = $_POST['trip_period']; // 日数
     $trip_start = $_POST['trip_start']; // 掲載開始月日
@@ -68,7 +68,7 @@ function create_card($user)
         $zipcode,
         $address,
         $address_2,
-        $company_salary,
+        // $company_salary,
         $apply_link
       );
 
@@ -116,7 +116,7 @@ function create_card($user)
       add_post_meta($post_id, '_zipcode', $zipcode);
       add_post_meta($post_id, '_address', $address);
       add_post_meta($post_id, '_address_2', $address_2);
-      add_post_meta($post_id, '_company_salary', $company_salary);
+      // add_post_meta($post_id, '_company_salary', $company_salary);
       add_post_meta($post_id, '_apply_link', $apply_link);
 
       // 一覧ページに遷移する

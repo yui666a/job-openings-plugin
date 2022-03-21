@@ -168,10 +168,10 @@ function create_job_opening($user, $action_url, $session_key, $companies)
       <div class="form-item">
         <div class="item-label">
           <span class="required-tag">必須</span>
-          労働条件
+          待遇・労働条件など
         </div>
         <textarea required class="rich" name="working_conditions" rows="6"></textarea>
-        <div class="form-description">雇用形態や労働契約の期間についてご記入ください</div>
+        <div class="form-description">雇用形態や労働契約の期間、待遇などについてご記入ください</div>
       </div>
 
       <!--
@@ -206,17 +206,6 @@ function create_job_opening($user, $action_url, $session_key, $companies)
         〒<input type="text" placeholder="999-9999" name="zipcode" class="p-postal-code" size="8" maxlength="8" style="width: 130px;"><br>
         <input type="text" placeholder="〇〇県〇〇市９−９−９" name="address" class="p-region p-locality p-street-address p-extended-address" /><br>
         <input type="text" placeholder="△△ビル 3F" name="address_2" class="" /><br>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-          <span class="required-tag">必須</span>
-          待遇
-        </div>
-        <textarea required class="rich" name="company_salary" rows="6"></textarea>
-        <div class="form-description">
-          待遇や給与、ボーナスなどについてご記入ください
-        </div>
       </div>
 
       <div class="form-item">
