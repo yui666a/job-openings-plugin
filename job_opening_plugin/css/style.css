@@ -265,7 +265,7 @@ header .close-button::after {
 
 .job-information .form-item .select2-selection,
 .company-information .form-item .select2-selection {
-  height: 2em;
+  height: 8em;
 }
 
 .job-information .form-item .form-description,
@@ -627,15 +627,9 @@ button.add-confirm:disabled {
 }
 
 .contents-header-wrapper .job-list-detail-link {
-  z-index: 1;
-  width: auto;
-  height: auto;
   color: #223a70;
-  -webkit-box-shadow: 0 0 7px 7px #fff;
-  box-shadow: 0 0 7px 7px #fff;
   text-align: right;
-  font-size: 16px;
-  background-color: #fff;
+  font-size: 0.9em;
 }
 
 .contents-header-wrapper .job-list-detail-text {

@@ -198,7 +198,7 @@ header {
     }
 
     .select2-selection {
-      height: 2em;
+      height: 8em;
     }
 
     .form-description {
@@ -211,12 +211,6 @@ header {
     display: flex;
     justify-content: flex-end;
   }
-}
-
-.select2-container--default
-  .select2-selection--multiple
-  .select2-selection__choice {
-  // background: rgb(0, 117, 143);
 }
 
 button {

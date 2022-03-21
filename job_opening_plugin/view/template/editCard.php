@@ -84,12 +84,14 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
     ["public_servant", "教育・保育・公務員・農林水産・その他"],
   );
 
-  $occupation_selector = '<select required name="occupation" id="occupation"> <option hidden value="">--選択してください--</option>';
-  foreach ($occupation_options as $option) {
-    $isSelected = $option[0] == $occupation  ? 'selected' : '';
-    $occupation_selector .= '<option ' . $isSelected . ' value="' . $option[0] . '">' . $option[1] . '</option>';
-  }
-  $occupation_selector .= '</select>';
+  $encoded_data = json_encode($occupation);
+  $selected_occupations_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+  // $occupation_selector = '<select required name="occupation" id="occupation"> <option hidden value="">--選択してください--</option>';
+  // foreach ($occupation_options as $option) {
+  //   $isSelected = $option[0] == $occupation  ? 'selected' : '';
+  //   $occupation_selector .= '<option ' . $isSelected . ' value="' . $option[0] . '">' . $option[1] . '</option>';
+  // }
+  // $occupation_selector .= '</select>';
 
   // リモートワーク
   $remote_options = array(["可", "true"], ["不可", "false"], ["どちらでも", "both"]);
@@ -109,6 +111,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
       <input type="hidden" name="companies_data" value="{$companies_data}">
+      <input type="hidden" name="selected_occupations" value="{$selected_occupations_data}">
 
       <div class="form-item">
         <div class="item-label">
@@ -161,7 +164,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
           <span class="required-tag">必須</span>
           職種
         </div>
-        {$occupation_selector}
+        <select name="occupation[]" id="occupation" multiple="multiple" required></select>
       </div>
 
       <div class="form-item">

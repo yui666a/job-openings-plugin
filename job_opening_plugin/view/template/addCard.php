@@ -130,7 +130,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
           <span class="required-tag">必須</span>
           職種
         </div>
-        {$occupation_selector}
+        <select name="occupation[]" id="occupation" multiple="multiple" required></select>
       </div>
 
       <div class="form-item">
