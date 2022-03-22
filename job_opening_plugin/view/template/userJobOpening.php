@@ -77,9 +77,8 @@ function bbb_head()
 {
   $html = <<<EOF
   <div class="contents-header-wrapper">
-  <p class="job-list-all-title">長岡ワーカーの全ての求人</p>
-  <div class="contents-wrapper" id="jsi-content-wrapper">
-    <div class="contents-job-list-wrapper">
+    <div class="contents-wrapper" id="jsi-content-wrapper">
+      <div class="contents-job-list-wrapper">
 EOF;
   return $html;
 }
