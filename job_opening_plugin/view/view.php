@@ -8,6 +8,7 @@
  */
 function job_openings_list()
 {
+  global $wpdb;
   $user = wp_get_current_user();
   $html = "";
   if (
@@ -24,10 +25,15 @@ function job_openings_list()
     } else if ($mode == "edit") {
       $html .= editJob($user, $joid);
     } else if ($mode == "draft") {
-      global $wpdb;
       wp_update_post([
         'ID'           => $joid,
         'post_status'   => 'draft',
+      ]);
+      $html .= aaa($user);
+    } else if ($mode == "publish") {
+      wp_update_post([
+        'ID'           => $joid,
+        'post_status'   => 'publish',
       ]);
       $html .= aaa($user);
     }

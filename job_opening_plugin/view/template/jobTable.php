@@ -27,6 +27,22 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       break;
   };
 
+  $post_status_link = "";
+  if (get_post_status($post_id) == "draft") {
+    $post_status_link = '<a
+      class="button button-icon tips icon-view"
+      href="{$job_table_url}?&action=publish&post={$post_id}";
+      data-tip="公開する"
+      >公開する</a
+      >';
+  } else {
+    $post_status_link = '<a
+      class="button button-icon tips icon-view"
+      href="{$job_table_url}?&action=draft&post={$post_id}";
+      data-tip="非公開にする"
+      >非公開にする</a
+      >';
+  }
 
   $job_openings_table_main = <<<EOF
     <tr
@@ -103,12 +119,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
             >
           </div>
           <div>
-            <a
-              class="button button-icon tips icon-view"
-              href="{$job_table_url}?&action=draft&post={$post_id}";
-              data-tip="非公開にする"
-              >非公開にする</a
-            >
+            {$post_status_link}
           </div>
           <div>
             <a
@@ -129,7 +140,7 @@ EOF;
 function make_job_openings_table_head()
 {
 
-  $header =header_link_buttons();
+  $header = header_link_buttons();
   $header .= <<<EOF
 
   <table class="wp-list-table widefat fixed striped table-view-list posts">
