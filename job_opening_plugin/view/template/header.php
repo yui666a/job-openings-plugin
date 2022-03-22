@@ -9,7 +9,7 @@ function header_link_buttons()
   $sac_company_add = HOME_URL."/".get_option("sac_company_add");
 
   $html = <<<EOF
-  <div class="step-wrapper">
+  <div class="step-wrapper margin4">
     <!-- <div class="step-number" id="step1-index">1</div> -->
     <div class="step-text" id="step1-label">
       <a href="{$sac_company_add}">企業情報を新規追加</a>

@@ -70,7 +70,7 @@ function make_company_table_head()
   $header = header_link_buttons();
   $header .= <<<EOF
 
-  <table class="wp-list-table widefat fixed striped table-view-list posts">
+  <table class="margin4 wp-list-table widefat fixed striped table-view-list posts">
   <thead>
     <tr>
       <th

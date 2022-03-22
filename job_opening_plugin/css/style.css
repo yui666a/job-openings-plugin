@@ -35,6 +35,11 @@ img.company_logo {
   border: 1px solid #f0a10f;
 }
 
+.margin4 {
+  margin: 3%;
+  width: 94%;
+}
+
 .button {
   border-radius: 5px;
   border: 1px solid var(--gr400);
@@ -331,6 +336,14 @@ button.add-confirm:disabled {
   color: var(--gr400);
 }
 
+.contents-header-wrapper {
+  padding: 2rem 4%;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+
 .contents-header-wrapper html,
 .contents-header-wrapper body {
   height: 100%;
@@ -410,13 +423,6 @@ button.add-confirm:disabled {
   font-size: 40px;
   float: left;
   margin-left: auto;
-}
-
-.contents-header-wrapper .contents-header-wrapper {
-  margin-top: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
 }
 
 .contents-header-wrapper .nav-wrapper {

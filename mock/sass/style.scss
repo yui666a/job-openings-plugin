@@ -30,6 +30,10 @@ img.company_logo {
   background-color: #f0a10f;
   border: 1px solid #f0a10f;
 }
+.margin4{
+  margin: 3%;
+  width: 94%;
+}
 
 .button {
   border-radius: 5px;
@@ -253,6 +257,12 @@ button {
 }
 
 .contents-header-wrapper {
+  padding: 2rem 4%;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+
   html,
   body {
     height: 100%;
@@ -323,12 +333,6 @@ button {
     font-size: 40px;
     float: left;
     margin-left: auto;
-  }
-  .contents-header-wrapper {
-    margin-top: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
   }
   .nav-wrapper {
     float: right;
@@ -455,7 +459,7 @@ button {
     display: flex;
     justify-content: center;
     width: 30%;
-    img{
+    img {
       height: 100%;
       width: auto;
     }
