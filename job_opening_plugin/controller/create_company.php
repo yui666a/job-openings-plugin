@@ -21,7 +21,7 @@ function create_company($user)
     // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
     if (true) {
       // ファイル名を取得
-      $filename = $_FILES['company_logo']['name'];
+      $filename = $_FILES['company_logo']['name'] . "_" . $userId;
       //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
       $uploaded_path = UPLOAD_DIR["basedir"] . '/sac_jo/company_images/' . $filename;
       $result = move_uploaded_file($_FILES['company_logo']['tmp_name'], $uploaded_path);

@@ -35,11 +35,11 @@ function editCompany($user, $company_id)
         'co_day_off' => $co_day_off,
       );
       $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
-
+      console_log("更新まえの前");
 
       // ファイル名を取得
-      $filename = $_FILES['company_logo']['name'];
-      //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
+      $filename = $_FILES['company_logo']['name'] . "_" . $userId;
+      // move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
       $uploaded_path = UPLOAD_DIR["basedir"] . '/sac_jo/company_images/' . $filename;
       $result = move_uploaded_file($_FILES['company_logo']['tmp_name'], $uploaded_path);
       if ($result) {
