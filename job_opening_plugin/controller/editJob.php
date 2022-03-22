@@ -47,8 +47,6 @@ function editJob($user, $job_id)
         $expired_date = $trip_last; // 掲載終了日
       }
 
-
-      $co_data = getCompanyById($company_id)[0];
       $content = create_job_openingssss(
         $company_id,
         $recruitment_type,

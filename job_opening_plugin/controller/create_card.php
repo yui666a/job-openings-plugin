@@ -48,7 +48,7 @@ function create_card($user)
       }
 
 
-      $co_data = getCompanyById($company_id)[0];
+      $co_data = getCompanyById($company_id);
       $content = create_job_openingssss(
         $company_id,
         $recruitment_type,

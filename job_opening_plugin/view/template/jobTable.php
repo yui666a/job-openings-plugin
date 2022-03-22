@@ -9,7 +9,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
   $current_request = $_SERVER["REQUEST_URI"];
   $company_id = get_post_meta($post_id, '_company_id', true);
   $manage_id = get_post_meta($post_id, '_manage_id', true);
-  $company = getCompanyById($company_id)[0];
+  $company = getCompanyById($company_id);
 
   $recruitment_type = "";
   switch (get_post_meta($post_id, '_recruitment_type', true)) {

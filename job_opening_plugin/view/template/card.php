@@ -25,7 +25,7 @@ function create_job_openingssss(
 
   $tags = addTags($recruitment_type, $remote_work);
   $can_remote_work = $remote_work == "true" ? "(リモートワーク可)" : "";
-  $company = getCompanyById($company_id)[0];
+  $company = getCompanyById($company_id);
 
   // 職種
   $occupation_text = "";

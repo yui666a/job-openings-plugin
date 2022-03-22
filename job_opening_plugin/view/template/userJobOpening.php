@@ -16,7 +16,7 @@ function bbb($post_id)
   $occupation = get_post_meta($post_id, '_occupation', true);
   $remote_work = get_post_meta($post_id, '_remote_work', true);
   get_post_meta($post_id, '_location', true);
-  $company = getCompanyById($company_id)[0];
+  $company = getCompanyById($company_id);
   $permalink = get_permalink($post_id);
 
   $main_text = "";

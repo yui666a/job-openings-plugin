@@ -2,7 +2,7 @@
 
 function edit_company($user, $company_id, $action_url, $session_key)
 {
-  $company = getCompanyById($company_id)[0];
+  $company = getCompanyById($company_id);
 
   // 業種
   $sector_options = array(

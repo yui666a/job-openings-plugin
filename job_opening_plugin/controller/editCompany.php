@@ -82,7 +82,7 @@ function editCompany($user, $company_id)
           $occupation = get_post_meta($post_id, '_occupation', true);
           $remote_work = get_post_meta($post_id, '_remote_work', true);
           $location = get_post_meta($post_id, '_location', true);
-          $company = getCompanyById($company_id)[0];
+          $company = getCompanyById($company_id);
           $permalink = get_permalink($post_id);
           $zipcode = get_post_meta($post_id, '_zipcode', true);
           $address = get_post_meta($post_id, '_address', true);
