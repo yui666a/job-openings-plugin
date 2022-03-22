@@ -20,21 +20,29 @@ function job_openings_list()
     $mode = $_GET["action"];
     $joid = $_GET["post"];
 
-    if (!$mode && !$joid) {
-      $html .= aaa($user);
-    } else if ($mode == "edit") {
-      $html .= editJob($user, $joid);
-    } else if ($mode == "draft") {
-      wp_update_post([
-        'ID'           => $joid,
-        'post_status'   => 'draft',
-      ]);
-      $html .= aaa($user);
-    } else if ($mode == "publish") {
-      wp_update_post([
-        'ID'           => $joid,
-        'post_status'   => 'publish',
-      ]);
+    // ユーザとジョブIDの一致を検証する
+    $post = get_post($joid, "ARRAY_A");
+    $post_author = explode(" ", $post["post_author"])[0];
+
+    if ($mode && $joid && ($user->ID == $post_author)) {
+      if ($mode == "edit") {
+        $html .= editJob($user, $joid);
+      } else if ($mode == "draft") {
+        wp_update_post([
+          'ID'           => $joid,
+          'post_status'   => 'draft',
+        ]);
+        $html .= aaa($user);
+      } else if ($mode == "publish") {
+        wp_update_post([
+          'ID'           => $joid,
+          'post_status'   => 'publish',
+        ]);
+        $html .= aaa($user);
+      } else {
+        $html .= '<strong>このページは閲覧できません．</strong>';
+      }
+    } else {
       $html .= aaa($user);
     }
   } else {
@@ -61,10 +69,16 @@ function company_list()
     $mode = $_GET["action"];
     $co_id = $_GET["id"];
 
-    if (!$mode && !$co_id) {
+    // ユーザとジョブIDの一致を検証する
+    $company = getCompanyById($co_id)[0];
+    if ($mode && $co_id && ($user->ID == $company->co_id)) {
+      if ($mode == "edit") {
+        $html .= editCompany($user, $co_id);
+      } else {
+        $html .= '<strong>このページは閲覧できません．</strong>';
+      }
+    } else {
       $html .= abab($user);
-    } else if ($mode == "edit") {
-      $html .= editCompany($user, $co_id);
     }
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
