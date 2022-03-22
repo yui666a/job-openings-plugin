@@ -8,7 +8,6 @@ function bbb($post_id)
   // $publishing_date = (strtotime($expired_date) - strtotime($published_date)) / 86400;
   $company_id = get_post_meta($post_id, '_company_id', true);
   $recruitment_type =  get_post_meta($post_id, '_recruitment_type', true);
-  $url = get_post_meta($post_id, '_url', true);
   $title = get_post_meta($post_id, '_title', true);
   $work_detail =  get_post_meta($post_id, '_work_detail', true);
   $application_conditions =  get_post_meta($post_id, '_application_conditions', true);

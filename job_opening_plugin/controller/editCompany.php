@@ -35,7 +35,6 @@ function editCompany($user, $company_id)
         'co_day_off' => $co_day_off,
       );
       $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
-      console_log("更新まえの前");
 
       // ファイル名を取得
       $filename = $_FILES['company_logo']['name'] . "_" . $userId;
@@ -56,9 +55,74 @@ function editCompany($user, $company_id)
         $query_format,
         array('%d')
       );
+
+      // 変更した企業の求人記事を書き直す
+      $args = array(
+        'post_type' => array('job_openings'),
+        'offset' => 0,
+        'post_status' => 'draft,publish,pending,future,private',
+        'numberposts' => -1, //全件取得
+        'author' => $user->ID
+      );
+      $posts = get_posts($args);
+      foreach ($posts as $post) :
+        setup_postdata($post);
+        $post_id = $post->ID;
+        $meta_company_id = get_post_meta($post_id, '_company_id', true);
+        if ($meta_company_id == $company_id) {
+          $post = get_post($post_id, "ARRAY_A");
+          $company_id = get_post_meta($post_id, '_company_id', true);
+          $recruitment_type =  get_post_meta($post_id, '_recruitment_type', true);
+          $manage_id = get_post_meta($post_id, '_manage_id', true);
+          $title = get_post_meta($post_id, '_title', true);
+          $work_detail =  get_post_meta($post_id, '_work_detail', true);
+          $application_conditions =  get_post_meta($post_id, '_application_conditions', true);
+          $position = get_post_meta($post_id, '_position', true);
+          $working_conditions = get_post_meta($post_id, '_working_conditions', true);
+          $occupation = get_post_meta($post_id, '_occupation', true);
+          $remote_work = get_post_meta($post_id, '_remote_work', true);
+          $location = get_post_meta($post_id, '_location', true);
+          $company = getCompanyById($company_id)[0];
+          $permalink = get_permalink($post_id);
+          $zipcode = get_post_meta($post_id, '_zipcode', true);
+          $address = get_post_meta($post_id, '_address', true);
+          $address_2 = get_post_meta($post_id, '_address_2', true);
+          // $company_salary,
+          $apply_link = get_post_meta($post_id, '_apply_link', true);
+          $content = create_job_openingssss(
+            $company_id,
+            $recruitment_type,
+            $title,
+            $manage_id,
+            $position,
+            $work_detail,
+            $application_conditions,
+            $working_conditions,
+            $location,
+            $remote_work,
+            $occupation,
+            "date_period_type",
+            "trip_period",
+            "trip_start",
+            "trip_last",
+            $zipcode,
+            $address,
+            $address_2,
+            // $company_salary,
+            $apply_link
+          );
+
+          // データベースにある投稿を更新する
+          wp_update_post([
+            'ID'           => $post_id,
+            'post_content' => $content
+          ]);
+        }
+      endforeach;
+
       // 一覧ページに遷移する
-      header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
-      exit();
+      // header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
+      // exit();
     } else {
       $message = 'すでに送信済みです';
     }
