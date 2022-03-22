@@ -70,7 +70,7 @@ function company_list()
     $co_id = $_GET["id"];
 
     // ユーザとジョブIDの一致を検証する
-    $company = getCompanyById($co_id)[0];
+    $company = getCompanyById($co_id);
     if ($mode && $co_id && ($user->ID == $company->user_id)) {
       if ($mode == "edit") {
         $html .= editCompany($user, $co_id);

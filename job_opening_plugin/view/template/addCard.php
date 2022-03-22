@@ -9,7 +9,6 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   foreach ($companies as $data) :
     $companies_selector .= '<option value="' . $data->co_id . '">' . $data->co_name . '</option>';
 
-
     $multi_dimensional_array[] = array(
       'co_id' => $data->co_id,
       'co_name' => $data->co_name,
@@ -36,7 +35,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   }
 
   // リモートワーク
-  $remote_options = array(["可", "true"], ["不可", "false"], ["どちらでも", "both"]);
+  $remote_options = array(["可", "true"], ["不可", "false"], ["未選択", "both"]);
   $remote_radio = "";
   foreach ($remote_options as $option) {
     $remote_radio .= '<label> <input required type="radio" name="remote_work" class="remote_work" value="' . $option[1] . '" />' . $option[0] . '</label>';

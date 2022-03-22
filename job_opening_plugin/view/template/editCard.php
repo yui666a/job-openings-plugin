@@ -68,7 +68,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $selected_occupations_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 
   // リモートワーク
-  $remote_options = array(["可", "true"], ["不可", "false"], ["どちらでも", "both"]);
+  $remote_options = array(["可", "true"], ["不可", "false"], ["未選択", "both"]);
   $remote_radio = "";
   foreach ($remote_options as $option) {
     $isChecked = $option[1] == $remote_work  ? 'checked' : '';
