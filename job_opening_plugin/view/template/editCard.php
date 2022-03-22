@@ -5,7 +5,6 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $post = get_post($job_id, "ARRAY_A");
   $published_date = explode(" ", $post["post_date"])[0];
   $expired_date = get_post_meta($job_id, '_expired_date', true);
-  // $publishing_date = (strtotime($expired_date) - strtotime($published_date)) / 86400;
   $company_id = get_post_meta($job_id, '_company_id', true);
   $recruitment_type =  get_post_meta($job_id, '_recruitment_type', true);
   $apply_link = get_post_meta($job_id, '_apply_link', true);
@@ -17,7 +16,6 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $working_conditions = get_post_meta($job_id, '_working_conditions', true);
   $occupation = get_post_meta($job_id, '_occupation', true);
   $remote_work = get_post_meta($job_id, '_remote_work', true);
-  $company_salary = get_post_meta($job_id, '_company_salary', true);
   $zipcode = get_post_meta($job_id, '_zipcode', true);
   $address = get_post_meta($job_id, '_address', true);
   $address_2 = get_post_meta($job_id, '_address_2', true);
@@ -65,24 +63,6 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
     $isChecked = $option[1] == $recruitment_type  ? 'checked' : '';
     $recruitment_radio .= '<label> <input required type="radio" ' . $isChecked . ' name="recruitment_type" class="recruitment_type" value="' . $option[1] . '" />' . $option[0] . '</label>';
   }
-
-  // 職種
-  $occupation_options = array(
-    ["sales_associate", "営業"],
-    ["clerk", "事務・管理"],
-    ["marketer", "企画・マーケティング・経営・管理職"],
-    ["service", "サービス・販売・外食"],
-    ["web", "Web・インターネット・ゲーム"],
-    ["creative", "クリエイティブ（メディア・アパレル・デザイン）"],
-    ["expert", "専門職（コンサルタント・士業・金融・不動産）"],
-    ["it_engineer", "ITエンジニア（システム開発・SE・インフラ）"],
-    ["engineer", "エンジニア（機械・電気・電子・半導体・制御）"],
-    ["chemical_engineer", "素材・化学・食品・医薬品技術職"],
-    ["civil_engineer", "建築・土木技術職"],
-    ["transporter", "技能工・設備・交通・運輸"],
-    ["medical_welfare", "医療・福祉・介護"],
-    ["public_servant", "教育・保育・公務員・農林水産・その他"],
-  );
 
   $encoded_data = json_encode($occupation);
   $selected_occupations_data = htmlspecialchars($encoded_data, ENT_COMPAT | ENT_HTML401, 'UTF-8');

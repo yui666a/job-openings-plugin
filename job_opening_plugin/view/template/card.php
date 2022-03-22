@@ -19,7 +19,6 @@ function create_job_openingssss(
   $zipcode,
   $address,
   $address_2,
-  // $company_salary,
   $apply_link
 ) {
 
@@ -27,52 +26,6 @@ function create_job_openingssss(
   $can_remote_work = $remote_work == "true" ? "(リモートワーク可)" : "";
   $company = getCompanyById($company_id);
 
-  // 職種
-  $occupation_text = "";
-  switch ($occupation) {
-    case "sales_associate":
-      $occupation_text = "営業";
-      break;
-    case "clerk":
-      $occupation_text = "事務・管理";
-      break;
-    case "marketer":
-      $occupation_text = "企画・マーケティング・経営・管理職";
-      break;
-    case "service":
-      $occupation_text = "サービス・販売・外食";
-      break;
-    case "web":
-      $occupation_text = "Web・インターネット・ゲーム";
-      break;
-    case "creative":
-      $occupation_text = "クリエイティブ（メディア・アパレル・デザイン）";
-      break;
-    case "expert":
-      $occupation_text = "専門職（コンサルタント・士業・金融・不動産）";
-      break;
-    case "it_engineer":
-      $occupation_text = "ITエンジニア（システム開発・SE・インフラ）";
-      break;
-    case "engineer":
-      $occupation_text = "エンジニア（機械・電気・電子・半導体・制御）";
-      break;
-    case "chemical_engineer":
-      $occupation_text = "素材・化学・食品・医薬品技術職";
-      break;
-    case "civil_engineer":
-      $occupation_text = "建築・土木技術職";
-      break;
-    case "transporter":
-      $occupation_text = "技能工・設備・交通・運輸";
-      break;
-    case "medical_welfare":
-      $occupation_text = "医療・福祉・介護";
-      break;
-    case "public_servant":
-      $occupation_text = "教育・保育・公務員・農林水産・その他";
-      break;
-  }
   $qwert = "";
   foreach ($occupation as $data) {
     $qwert .= get_occupation_ja($data) . "、";
@@ -116,20 +69,6 @@ function create_job_openingssss(
 EOF;
   }
 
-  $sector_options = array(
-    ["1", "金融・保険"],
-    ["2", "建設・不動産"],
-    ["3", "コンサルティング・士業"],
-    ["4", "IT・インターネット"],
-    ["5", "メーカー・商社"],
-    ["6", "流通・小売・サービス"],
-    ["7", "メディカル"],
-    ["8", "マスコミ・メディア"],
-    ["9", "エンターテインメント"],
-    ["10", "運輸・物流"],
-    ["11", "エネルギー"],
-    ["12", "その他"],
-  );
   $sector = "";
   switch ($company->co_sector) {
     case "1":
@@ -181,7 +120,6 @@ EOF;
 
   $zipcode_text = $zipcode != "" ? "〒" . $zipcode : "";
   $co_zipcode_text = $company->co_zip_code != "" ? "〒" . $company->co_zip_code : "";
-  $aaa = HOME_URL . "/" . get_option("sac_job_openings_list");
 
   $html = <<<EOF
   <div class="job-opening-card">

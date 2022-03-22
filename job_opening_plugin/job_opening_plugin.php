@@ -33,7 +33,7 @@ define('HOME_URL', get_option("home"));
 // セッションの開始
 session_start();
 
-/** 
+/**
  * JS・CSSファイルを読み込む
  */
 function add_files()
@@ -120,13 +120,13 @@ function on_deactivation()
   if ($wpdb->get_var("show tables like '" . $wpdb->prefix . "sac_job_opening_companies" . "'") == $wpdb->prefix . "sac_job_opening_companies") { // 「==」へ変更
     //➁DROP TABLEを実行
     $sql = "DROP TABLE " . $wpdb->prefix . "sac_job_opening_companies";
-    $wpdb->query( $sql );
+    $wpdb->query($sql);
   }
   //➀テーブル名があったら
   if ($wpdb->get_var("show tables like '" . $wpdb->prefix . "sac_job_opening_companies_meta" . "'") == $wpdb->prefix . "sac_job_opening_companies_meta") { // 「==」へ変更
     //➁DROP TABLEを実行
     $sql = "DROP TABLE " . $wpdb->prefix . "sac_job_opening_companies_meta";
-    $wpdb->query( $sql );
+    $wpdb->query($sql);
   }
 }
 register_deactivation_hook(__FILE__, 'on_deactivation');

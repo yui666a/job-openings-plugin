@@ -3,7 +3,6 @@
 function make_company_table_row($data)
 {
   $coTable_page = HOME_URL . "/" . get_option("sac_company_list");
-  $admin_url = esc_url(get_admin_url(''));
   $job_openings_table_main = <<<EOF
     <tr
       id="post-{$data->co_id}"
@@ -65,7 +64,6 @@ EOF;
 
 function make_company_table_head()
 {
-  $admin_url = esc_url(get_admin_url(''));
 
   $header = header_link_buttons();
   $header .= <<<EOF

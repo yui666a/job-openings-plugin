@@ -82,8 +82,6 @@ function editCompany($user, $company_id)
           $occupation = get_post_meta($post_id, '_occupation', true);
           $remote_work = get_post_meta($post_id, '_remote_work', true);
           $location = get_post_meta($post_id, '_location', true);
-          $company = getCompanyById($company_id);
-          $permalink = get_permalink($post_id);
           $zipcode = get_post_meta($post_id, '_zipcode', true);
           $address = get_post_meta($post_id, '_address', true);
           $address_2 = get_post_meta($post_id, '_address_2', true);
@@ -121,8 +119,8 @@ function editCompany($user, $company_id)
       endforeach;
 
       // 一覧ページに遷移する
-      // header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
-      // exit();
+      header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
+      exit();
     } else {
       $message = 'すでに送信済みです';
     }

@@ -3,7 +3,6 @@
 function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon, $permalink)
 {
   $admin_url = esc_url(get_admin_url(''));
-  $root_url = esc_url(get_site_url());
   $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
   $job_table_url = HOME_URL . "/" . get_option("sac_job_openings_list");
   $current_request = $_SERVER["REQUEST_URI"];
@@ -29,19 +28,23 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
 
   $post_status_link = "";
   if (get_post_status($post_id) == "draft") {
-    $post_status_link = '<a
+    $post_status_link = <<<EOF
+    <a
       class="button button-icon tips icon-view"
       href="{$job_table_url}?&action=publish&post={$post_id}";
       data-tip="公開する"
       >公開する</a
-      >';
+      >
+EOF;
   } else {
-    $post_status_link = '<a
+    $post_status_link = <<<EOF
+    <a
       class="button button-icon tips icon-view"
       href="{$job_table_url}?&action=draft&post={$post_id}";
       data-tip="非公開にする"
       >非公開にする</a
-      >';
+      >
+EOF;
   }
 
   $job_openings_table_main = <<<EOF
