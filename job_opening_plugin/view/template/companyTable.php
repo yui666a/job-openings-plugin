@@ -2,7 +2,7 @@
 
 function make_company_table_row($data)
 {
-  $current_request = $_SERVER["REQUEST_URI"];
+  $coTable_page = HOME_URL . "/" . get_option("sac_company_list");
   $admin_url = esc_url(get_admin_url(''));
   $job_openings_table_main = <<<EOF
     <tr
@@ -15,7 +15,7 @@ function make_company_table_row($data)
       >
         <div class="job_position">
           <a
-            href="{$current_request}?&action=edit&id={$data->co_id}"
+            href="{$coTable_page}?&action=edit&id={$data->co_id}"
             data-tip="ID: {$data->co_id}"
             >
             {$data->co_name}</a>
@@ -45,16 +45,16 @@ function make_company_table_row($data)
         <div class="actions">
           <a
             class="button button-icon tips icon-edit"
-            href="{$current_request}?&action=edit&id={$data->co_id}"
+            href="{$coTable_page}?&action=edit&id={$data->co_id}"
             data-tip="編集"
             >編集
           </a>
-          <!--<a
+          <a
             class="button button-icon tips icon-delete"
-            href="{$admin_url}post.php?post={$data->co_id}&amp;action=trash&amp;_wpnonce=cf3bb74013"
+            href="{$coTable_page}?&action=remove&id={$data->co_id}"
             data-tip="削除"
             >削除
-          </a>-->
+          </a>
         </div>
       </td>
     </tr>

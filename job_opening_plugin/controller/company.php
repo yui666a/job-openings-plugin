@@ -23,3 +23,10 @@ function getCompanyById($companyId)
   $companies = $wpdb->get_results($query, OBJECT);
   return $companies;
 }
+
+function deleteCompaniesByCompanyId($companyId)
+{
+  global $wpdb;
+  $query = "DELETE FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE " . $wpdb->prefix . "sac_job_opening_companies.co_id = " . $companyId . ";";
+  $wpdb->get_results($query, OBJECT);
+}

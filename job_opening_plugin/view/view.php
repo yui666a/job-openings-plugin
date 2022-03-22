@@ -71,10 +71,14 @@ function company_list()
 
     // ユーザとジョブIDの一致を検証する
     $company = getCompanyById($co_id)[0];
-    if ($mode && $co_id && ($user->ID == $company->co_id)) {
+    if ($mode && $co_id && ($user->ID == $company->user_id)) {
       if ($mode == "edit") {
         $html .= editCompany($user, $co_id);
-      } else {
+      } else if ($mode == "remove") {
+        deleteCompaniesByCompanyId($co_id);
+        $html .= abab($user);
+      }
+      else {
         $html .= '<strong>このページは閲覧できません．</strong>';
       }
     } else {
