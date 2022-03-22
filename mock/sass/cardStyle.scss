@@ -1,4 +1,5 @@
 .job-opening-card {
+  padding: 5%;
   html,
   body {
     height: 100%;
@@ -78,7 +79,7 @@
     font-size: 18px;
     color: #223a70;
   }
-  
+
   .job-list-all-link-box:hover {
     display: inline-block;
     padding-top: 6px;
@@ -146,7 +147,8 @@
   }
 
   .assignments {
-    margin: 2rem 0;
+    width: 90%;
+    margin: 2rem auto;
   }
 
   .assignment {
@@ -222,5 +224,4 @@
   .btn-application-under-text:hover {
     opacity: 0.6;
   }
-
 }

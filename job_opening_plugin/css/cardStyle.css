@@ -1,3 +1,7 @@
+.job-opening-card {
+  padding: 5%;
+}
+
 .job-opening-card html,
 .job-opening-card body {
   height: 100%;
@@ -167,7 +171,8 @@
 }
 
 .job-opening-card .assignments {
-  margin: 2rem 0;
+  width: 90%;
+  margin: 2rem auto;
 }
 
 .job-opening-card .assignment {
