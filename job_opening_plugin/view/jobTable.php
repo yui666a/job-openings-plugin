@@ -1,6 +1,6 @@
 <?php
 
-function aaa($user)
+function jobTable($user)
 {
   $html = "";
   $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);

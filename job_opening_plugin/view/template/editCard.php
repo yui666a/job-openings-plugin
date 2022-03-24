@@ -19,7 +19,6 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $zipcode = get_post_meta($job_id, '_zipcode', true);
   $address = get_post_meta($job_id, '_address', true);
   $address_2 = get_post_meta($job_id, '_address_2', true);
-  $address_2 = get_post_meta($job_id, '_address_2', true);
   get_post_meta($job_id, '_location', true);
 
   // 企業セレクタの作成

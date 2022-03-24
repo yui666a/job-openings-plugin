@@ -1,6 +1,6 @@
 <?php
 
-function abab($user)
+function companyTable($user)
 {
   $html = "";
   $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);

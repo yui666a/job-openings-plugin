@@ -32,18 +32,18 @@ function job_openings_list()
           'ID'           => $joid,
           'post_status'   => 'draft',
         ]);
-        $html .= aaa($user);
+        $html .= jobTable($user);
       } else if ($mode == "publish") {
         wp_update_post([
           'ID'           => $joid,
           'post_status'   => 'publish',
         ]);
-        $html .= aaa($user);
+        $html .= jobTable($user);
       } else {
         $html .= '<strong>このページは閲覧できません．</strong>';
       }
     } else {
-      $html .= aaa($user);
+      $html .= jobTable($user);
     }
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -76,13 +76,13 @@ function company_list()
         $html .= editCompany($user, $co_id);
       } else if ($mode == "remove") {
         deleteCompaniesByCompanyId($co_id);
-        $html .= abab($user);
+        $html .= companyTable($user);
       }
       else {
         $html .= '<strong>このページは閲覧できません．</strong>';
       }
     } else {
-      $html .= abab($user);
+      $html .= companyTable($user);
     }
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -155,7 +155,7 @@ function settings()
 function user_job_openings()
 {
   $html = "";
-  $html .= bbb_head();
+  $html .= userJobTable_head();
 
   $posts = getPublishedCard();
   global $post;
@@ -169,10 +169,10 @@ function user_job_openings()
     $job_expires = get_post_meta($post_id, '_job_expires', true);
     $job_location = get_post_meta($post_id, '_job_location', true);
 
-    $html .= bbb($post_id);
+    $html .= userJobTable($post_id);
   }
 
-  $html .= bbb_foot();
+  $html .= userJobTable_foot();
   return $html;
 }
 

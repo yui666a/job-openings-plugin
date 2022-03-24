@@ -1,6 +1,6 @@
 <?php
 
-function bbb($post_id)
+function userJobTable($post_id)
 {
   $post = get_post($post_id, "ARRAY_A");
   $published_date = explode(" ", $post["post_date"])[0];
@@ -72,7 +72,7 @@ EOF;
   return $html;
 }
 
-function bbb_head()
+function userJobTable_head()
 {
   $html = <<<EOF
   <div class="contents-header-wrapper">
@@ -82,7 +82,7 @@ EOF;
   return $html;
 }
 
-function bbb_foot()
+function userJobTable_foot()
 {
   $html = <<<EOF
   </div>

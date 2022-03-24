@@ -49,7 +49,7 @@ function create_job_openingssss(
     $replacements = array('<br />', '@', '\n', "&");
     $main_text =  str_replace($replacements, $search, $content);
     $converted_address = str_replace($search, $replacements, $apply_link);
-    $qwer = "mailto:" . $converted_address . '?subject=' . $title . '&body=' . $main_text . '%0D%0A%0D%0A（メールアドレス中の□を@に変更してください）"';
+    $qwer = 'mailto:' . $converted_address . '?subject=' . $title . '&body=' . $main_text . '%0D%0A%0D%0A（メールアドレス中の□を@に変更してください）';
     //  target="_blank" rel="noopener noreferrer';
   } else {
     $qwer = $apply_link;
@@ -253,5 +253,6 @@ EOF;
     </div>
   </div>
 EOF;
+  console_log($html);
   return $html;
 }

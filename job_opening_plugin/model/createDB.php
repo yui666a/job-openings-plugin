@@ -7,7 +7,7 @@ function create_table()
   $sql = "";
   $charset_collate = "";
 
-  // 接頭辞の追加（socal_count_cache）
+  // 接頭辞の追加
   $table_name = $wpdb->prefix . 'sac_job_opening_companies';
 
   // charsetを指定
@@ -54,7 +54,7 @@ function create_table_meta()
   $sql = "";
   $charset_collate = "";
 
-  // 接頭辞の追加（socal_count_cache）
+  // 接頭辞の追加
   $table_name = $wpdb->prefix . 'sac_job_opening_companies_meta';
 
   // charsetを指定
