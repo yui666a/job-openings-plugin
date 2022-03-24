@@ -47,7 +47,7 @@ function create_company_template($user, $action_url, $session_key)
       </div>
 
       <div class="form-item">
-        <div class="item-label"><span class="recommended-tag">歓迎</span>企業ロゴ</div>
+        <div class="item-label"><span class="recommended-tag">任意</span>企業ロゴ</div>
         <input type="file" name="company_logo" id="company_logo" accept="image/*">
         <div class="form-description">
           貴社ロゴを挿入いただけます(約15MB以下のファイルに限ります)
@@ -62,7 +62,7 @@ function create_company_template($user, $action_url, $session_key)
       </div>
 
       <div class="form-item">
-        <div class="item-label"> <span class="recommended-tag">歓迎</span>企業HP URL</div>
+        <div class="item-label"> <span class="recommended-tag">任意</span>企業HP URL</div>
         <input type="text" name="company_url" id="name" placeholder="https://~~~" />
         <div class="form-description">
           貴社ホームページのURLをご入力いただけます
@@ -71,7 +71,7 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>会社概要
+          <span class="recommended-tag">任意</span>会社概要
         </div>
         <textarea class="rich" name="company_summary" rows="6"></textarea>
         <div class="form-description">
@@ -81,7 +81,7 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>PR文
+          <span class="recommended-tag">任意</span>PR文
         </div>
         <textarea class="rich" name="company_pr" rows="6"></textarea>
         <div class="form-description">
@@ -91,7 +91,7 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>本社所在地
+          <span class="recommended-tag">任意</span>本社所在地
         </div>
         <input type="hidden" class="p-country-name" value="Japan">
         〒<input type="text" placeholder="999-9999" name="company_zipcode" class="p-postal-code" size="8" maxlength="8" style="width: 130px;"><br>

@@ -173,7 +173,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>
+          <span class="recommended-tag">任意</span>
           勤務地住所
         </div>
         <input type="hidden" class="p-country-name" value="Japan">
