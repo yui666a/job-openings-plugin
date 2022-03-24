@@ -33,19 +33,25 @@ function userJobTable($post_id)
 
   $tags = addTags($recruitment_type, $remote_work);
 
+  $co_logo_img = "";
+  if ($company->co_logo != "") {
+    $co_logo_img = <<<EOF
+      <div class="job-list-img-wrapper">
+        <img
+          src="{$company->co_logo}"
+          alt="{$company->co_name}のロゴ"
+        />
+      </div>
+EOF;
+  }
+
+
   $html = <<<EOF
   <div class="job-list-fream">
     <a href="{$permalink}" class="job-list-box-wrapper">
       <div class="job-list-contents">
         <div class="job-list-box-caption">
-          <div class="job-list-img-wrapper">
-            <img
-              src="{$company->co_logo}"
-              alt=""
-              width="100%"
-              height="100%"
-            />
-          </div>
+          {$co_logo_img}
           <div class="job-list-text-wrapper">
             <div class="job-title">
               {$title}
