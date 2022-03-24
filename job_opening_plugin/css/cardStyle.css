@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .job-opening-card {
   padding: 5%;
 }
@@ -252,5 +253,35 @@
 
 .job-opening-card .btn-application-under-text:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 959px) {
+  /* 959px以下に適用されるCSS（タブレット用） */
+}
+
+@media screen and (max-width: 480px) {
+  /* 480px以下に適用されるCSS（スマホ用） */
+  .contents-header-wrapper .job-list-box-caption {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .contents-header-wrapper .job-list-img-wrapper {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  .contents-header-wrapper .job-list-text-wrapper {
+    width: 100%;
+  }
+  .contents-header-wrapper .job-list-text-wrapper img {
+    height: auto;
+    width: 50%;
+  }
 }
 /*# sourceMappingURL=cardStyle.css.map */

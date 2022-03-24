@@ -225,3 +225,27 @@
     opacity: 0.6;
   }
 }
+
+@media screen and (max-width: 959px) {
+  /* 959px以下に適用されるCSS（タブレット用） */
+}
+@media screen and (max-width: 480px) {
+  /* 480px以下に適用されるCSS（スマホ用） */
+  .contents-header-wrapper {
+    .job-list-box-caption {
+      flex-direction: column;
+    }
+    .job-list-img-wrapper {
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+    }
+    .job-list-text-wrapper {
+      width: 100%;
+      img {
+        height: auto;
+        width: 50%;
+      }
+    }
+  }
+}
