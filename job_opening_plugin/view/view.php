@@ -27,6 +27,8 @@ function job_openings_list()
     if ($mode && $joid && ($user->ID == $post_author)) {
       if ($mode == "edit") {
         $html .= editJob($user, $joid);
+      } else if ($mode == "copy") {
+        $html .= editJob2($user, $joid);
       } else if ($mode == "draft") {
         wp_update_post([
           'ID'           => $joid,
@@ -77,8 +79,7 @@ function company_list()
       } else if ($mode == "remove") {
         deleteCompaniesByCompanyId($co_id);
         $html .= companyTable($user);
-      }
-      else {
+      } else {
         $html .= '<strong>このページは閲覧できません．</strong>';
       }
     } else {
