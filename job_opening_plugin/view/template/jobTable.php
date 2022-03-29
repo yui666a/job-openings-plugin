@@ -132,6 +132,14 @@ EOF;
               >削除</a
             >
           </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="{$current_request}?&action=copy&post={$post_id}"
+              data-tip="コピーして新規作成"
+              >コピーして新規作成</a
+            >
+          </div>
         </div>
       </td>
     </tr>

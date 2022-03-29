@@ -120,7 +120,7 @@ function editJob2($user, $job_id)
 {
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['post_method'] == 'Y') {
 
-    $post_status = "";
+    $post_status = "publish";
     if ($_POST['action'] == 'post') {
       $post_status = "publish";
     } else if ($_POST['action'] == 'draft') {
@@ -231,7 +231,10 @@ function editJob2($user, $job_id)
       add_post_meta($post_id, '_address_2', $address_2);
       add_post_meta($post_id, '_apply_link', $apply_link);
 
-      $message = '登録処理が完了しました（<a href="' . HOME_URL . "/" . get_option("sac_job_openings_list") . '">一覧にもどる</a>）';
+      // 一覧ページに遷移する
+      header("Location:" . HOME_URL . "/" . get_option("sac_job_openings_list"));
+      exit();
+      // $message = '登録処理が完了しました（<a href="' . HOME_URL . "/" . get_option("sac_job_openings_list") . '">一覧にもどる</a>）';
     } else {
       $message = 'すでに送信済みです';
     }
@@ -253,12 +256,5 @@ EOF;
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  return edit_job_opening($user, $action_url, $session_key, $companies, $job_id);
+  return copy_job_opening($user, $action_url, $session_key, $companies, $job_id);
 }
-
-
-
-
-
-
-
