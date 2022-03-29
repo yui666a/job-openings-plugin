@@ -17,7 +17,7 @@ function jobTable($user)
     // 'post_status' => 'publish, inherit, pending, private, future, draft, trash',  // 全て取得
     // 'post_type' => array('job_opening', 'job_listing','job_openings'),
     'post_type' => array('job_openings'),
-    'orderby'=>'post_date',  //新着順
+    'orderby'=>'ID',  //ID順 post_date(新着順)
     'order' => 'DESC',  // 降順 昇順(ASC)
     'numberposts' => -1, //全件取得
     'author'=>$user->ID

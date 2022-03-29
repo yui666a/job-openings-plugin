@@ -122,7 +122,7 @@ EOF;
   $co_zipcode_text = $company->co_zip_code != "" ? "〒" . $company->co_zip_code : "";
 
   $html = <<<EOF
-  <div class="job-opening-card">
+  <div class="job-opening-card" id="job-opening-card">
     <div class="header-wrapper">
       <div class="container-header">
         <h3 class="job-opening-title">{$title}</h3>
@@ -253,6 +253,5 @@ EOF;
     </div>
   </div>
 EOF;
-  console_log($html);
   return $html;
 }
