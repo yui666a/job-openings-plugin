@@ -163,14 +163,19 @@ function user_job_openings()
   foreach ($posts as $post) {
     setup_postdata($post);
     $post_id = get_the_ID();
-    $title = get_the_title();
-    $author = get_the_author();
-    $post_date = get_the_date();
-    $permalink = get_permalink($post_id);
-    $job_expires = get_post_meta($post_id, '_job_expires', true);
-    $job_location = get_post_meta($post_id, '_job_location', true);
-
-    $html .= userJobTable($post_id);
+    $job_expires = get_post_meta($post_id, '_expired_date', true);
+    
+    $today = date("Y/m/d");
+    $target_day = $job_expires;
+    if(strtotime($today) === strtotime($target_day)){
+      // console_log("ターゲット日付は今日です");
+      $html .= userJobTable($post_id);
+    }else if(strtotime($today) < strtotime($target_day)){
+      // console_log("ターゲット日付は未来です");
+      $html .= userJobTable($post_id);
+    }else{
+      // 期限切れ
+    }
   }
 
   $html .= userJobTable_foot();
