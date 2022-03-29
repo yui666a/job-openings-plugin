@@ -25,10 +25,11 @@ function create_company_template($user, $action_url, $session_key)
   $sector_selector .= '</select>';
 
 
-  $html = <<<EOF
+  $html = header_link_buttons();
+  $html .= <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
-    <form action="{$action_url}" method="post" enctype="multipart/form-data">
+    <form action="{$action_url}" method="post" enctype="multipart/form-data" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -36,23 +37,23 @@ function create_company_template($user, $action_url, $session_key)
       <div class="form-item">
         <div class="item-label"> <span class="required-tag">必須</span>募集企業名</div>
         <input
+          required
           type="text"
           name="company_name"
           id="name"
           value="{$user->display_name}"
           placeholder="株式会社 XXXX-XXXX HOLDINGS"
         />
-        <div class="form-description">
-          未入力の場合は，貴社アカウント名で登録されます
-        </div>
       </div>
 
       <div class="form-item">
-        <div class="item-label"><span class="recommended-tag">歓迎</span>企業ロゴ</div>
-        <input type="file" name="company_logo" id="company_logo" accept="image/jpeg, image/png">
+        <div class="item-label"><span class="recommended-tag">任意</span>企業ロゴ</div>
+        <input type="file" name="company_logo" id="company_logo" accept="image/*">
         <div class="form-description">
           貴社ロゴを挿入いただけます(約15MB以下のファイルに限ります)
         </div>
+        Preview:<br>
+        <img id="logo_preview" style="width:auto;height:200px;" >
       </div>
 
       <div class="form-item">
@@ -61,7 +62,7 @@ function create_company_template($user, $action_url, $session_key)
       </div>
 
       <div class="form-item">
-        <div class="item-label"> <span class="recommended-tag">歓迎</span>企業HP URL</div>
+        <div class="item-label"> <span class="recommended-tag">任意</span>企業HP URL</div>
         <input type="text" name="company_url" id="name" placeholder="https://~~~" />
         <div class="form-description">
           貴社ホームページのURLをご入力いただけます
@@ -70,38 +71,39 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>PR文
+          <span class="recommended-tag">任意</span>会社概要
         </div>
-        <textarea name="company_pr" rows="6"></textarea>
+        <textarea class="rich" name="company_summary" rows="6"></textarea>
         <div class="form-description">
-          貴社の強みや，メリットなどPR文をお書きください
+          募集企業の概要をご記載ください
         </div>
       </div>
 
       <div class="form-item">
         <div class="item-label">
-          <span class="recommended-tag">歓迎</span>本社所在地
+          <span class="recommended-tag">任意</span>PR文
         </div>
-
-        〒<input type="text" name="company_zipcode" placeholder="999-9999" style="width: 100px;"></input>
-        <input type="text" name="company_address" placeholder="〇〇県〇〇市９−９−９ △△ビル 3F"></input>
-      </div>
-
-      <div class="form-item">
-        <div class="item-label">
-          <span class="recommended-tag">歓迎</span>過去の実績
-        </div>
-        <textarea name="company_achievement" rows="6"></textarea>
+        <textarea class="rich" name="company_pr" rows="6"></textarea>
         <div class="form-description">
-          貴社のこれまでの実績をご記入ください
+          貴社の強みなどPR文をお書きください
         </div>
       </div>
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>勤務時間
+          <span class="recommended-tag">任意</span>本社所在地
         </div>
-        <textarea name="company_office_hour" rows="6"></textarea>
+        <input type="hidden" class="p-country-name" value="Japan">
+        〒<input type="text" placeholder="999-9999" name="company_zipcode" class="p-postal-code" size="8" maxlength="8" style="width: 130px;"><br>
+        <input type="text" placeholder="〇〇県〇〇市９−９−９" name="company_address" class="p-region p-locality p-street-address p-extended-address" /><br>
+        <input type="text" placeholder="△△ビル 3F" name="company_address_2" class="" /><br>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>勤務時間
+        </div>
+        <textarea required class="rich" name="company_office_hour" rows="6"></textarea>
         <div class="form-description">
           貴社の普段の勤務時間や営業時間をご記入ください
         </div>
@@ -109,21 +111,21 @@ function create_company_template($user, $action_url, $session_key)
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>待遇・福利厚生・支援制度など
+          <span class="required-tag">必須</span>休日・休暇
         </div>
-        <textarea name="company_benefits" rows="6"></textarea>
+        <textarea required class="rich" name="company_day_off" rows="6"></textarea>
         <div class="form-description">
-        貴社の待遇・福利厚生・支援制度などをご記入ください
+          貴社の休日や休暇面をご記入ください
         </div>
       </div>
 
       <div class="form-item">
         <div class="item-label">
-        <span class="recommended-tag">歓迎</span>休日・休暇
+          <span class="required-tag">必須</span>福利厚生・支援制度など
         </div>
-        <textarea name="company_day_off" rows="6"></textarea>
+        <textarea required class="rich" name="company_benefits" rows="6"></textarea>
         <div class="form-description">
-        貴社の休日や休暇面をご記入ください
+          貴社の福利厚生・支援制度などをご記入ください
         </div>
       </div>
 

@@ -10,7 +10,46 @@
   --gr800: #333;
   --gr900: #1a1a1a;
   --red: rgb(235, 0, 0);
-  --yellow: rgb(235, 200, 0);
+  --yellow: rgb(255, 218, 0);
+}
+
+div.wrap {
+  width: 100%;
+}
+img.company_logo {
+  max-width: 200px;
+}
+#job_actions {
+  width: 12em;
+}
+.job_actions .button {
+  padding: 4px;
+}
+.confirm {
+  color: var(--gr000);
+  background-color: #f0a10f;
+  border: 1px solid #f0a10f;
+}
+.margin4{
+  margin: 3%;
+  width: 94%;
+}
+
+.button {
+  border-radius: 5px;
+  border: 1px solid var(--gr400);
+  padding: 8px;
+  transition: all 0.5s 0s ease;
+}
+.draft {
+  color: var(--gr300);
+  background-color: var(--gr000);
+}
+
+input[type="submit"].confirm {
+  color: var(--gr000);
+  background-color: rgb(240, 161, 15);
+  border: 1px solid rgb(240, 161, 15);
 }
 
 html {
@@ -100,7 +139,7 @@ header {
   display: inline-block;
   border-radius: 3px;
   background: var(--yellow);
-  color: var(--gr800);
+  color: var(--gr700);
   font-weight: bold;
   padding: 2px;
   margin: 2px;
@@ -117,17 +156,6 @@ header {
   &:hover {
     opacity: 0.8;
   }
-}
-
-.draft {
-  color: var(--gr300);
-  background-color: var(--gr000);
-}
-
-.confirm {
-  color: var(--gr000);
-  background-color: rgb(240, 161, 15);
-  border: 1px solid rgb(240, 161, 15);
 }
 
 .job-information,
@@ -167,14 +195,14 @@ header {
     }
     input[type="text"],
     select {
-      height: 1.3em;
+      height: 3em;
     }
     input[type="text"] {
       border: 1px solid var(--gr400);
     }
 
     .select2-selection {
-      height: 2em;
+      height: 8em;
     }
 
     .form-description {
@@ -187,12 +215,6 @@ header {
     display: flex;
     justify-content: flex-end;
   }
-}
-
-.select2-container--default
-  .select2-selection--multiple
-  .select2-selection__choice {
-  // background: rgb(0, 117, 143);
 }
 
 button {
@@ -231,5 +253,571 @@ button {
       background: var(--gr100);
       color: var(--gr400);
     }
+  }
+}
+
+.contents-header-wrapper {
+  padding: 2rem 4%;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    -webkit-text-size-adjust: none;
+  }
+  body,
+  div,
+  p,
+  ul,
+  ol,
+  li,
+  dl,
+  dt,
+  dd,
+  table,
+  th,
+  td,
+  img,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  form,
+  select {
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  ul,
+  ol,
+  li {
+    list-style: none;
+  }
+  img {
+    border: 0;
+    vertical-align: middle;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  input,
+  select {
+    vertical-align: middle;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  }
+  body {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  }
+
+  .header-wrapper {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .nav-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+  .logo {
+    font-size: 40px;
+    float: left;
+    margin-left: auto;
+  }
+  .nav-wrapper {
+    float: right;
+    margin-top: 60px;
+    margin-right: auto;
+  }
+  .nav-items > li {
+    border-left: 1px dotted #999;
+    float: left;
+    text-decoration: underline;
+    color: #223a70;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 15px;
+    padding-left: 10px;
+    margin-left: 10px;
+  }
+  .nav-items > li:first-child {
+    border-left: 0;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .nav-items > li > a:link,
+  .nav-items > li > a:hover,
+  .nav-items > li > a:visited {
+    color: #223a70;
+    font-size: 20px;
+  }
+
+  .contents-wrapper:after,
+  .contents-hd-wrap:after,
+  .container-single .container-top .contents-hd-inner:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+  }
+  .contents-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  .single-contents-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  .contents-wrapper {
+    padding-bottom: 50px;
+    width: auto;
+  }
+  .contents-job-list-wrapper {
+    float: left;
+    margin-top: 15px;
+    padding-bottom: 50px;
+    width: 100%;
+  }
+  .contents-job-list-wrapper {
+    width: 100%;
+  }
+  .contents-job-list-wrapper {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .job-list-fream {
+    margin-top: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .job-list-all-title {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+    border-left: 6px solid #223a70;
+    color: #000;
+  }
+  .job-list-box-wrapper {
+    display: block;
+    border-radius: 5px;
+    position: relative;
+    border: solid 1px #e6e6e6;
+    margin-top: 10px;
+    background: #fff;
+  }
+  .job-title {
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 5px;
+    text-decoration: underline;
+  }
+  .job-list-box-wrapper:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    display: block;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: relative;
+    border: solid 1px #e6e6e6;
+    margin-top: 10px;
+    background: #fbfbfb;
+    text-decoration: none;
+  }
+  .job-list-contents {
+    padding-top: 14px;
+    padding-right: 12px;
+    padding-bottom: 14px;
+    padding-left: 12px;
+  }
+  .job-list-box-caption {
+    display: flex;
+    width: 100%;
+  }
+  .job-list-img-wrapper {
+    max-height: 200px;
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+  .job-list-text-wrapper {
+    width: 70%;
+  }
+
+  .job-list-title-text {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-left: 7px;
+    overflow: hidden;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .job-list-tag-box {
+    margin-top: 5px;
+  }
+  .job-list-tag li {
+    display: inline-block;
+    font-size: 16px;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 5px;
+    color: #223a70;
+    border: 1px solid #223a70;
+    border-radius: 5px;
+    width: auto;
+    text-align: center;
+  }
+  .job-list-address {
+    width: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+  }
+  .job-list-detail-box {
+    margin-top: 5px;
+    position: relative;
+  }
+  .job-list-detail-link {
+    color: #223a70;
+    text-align: right;
+    font-size: 0.9em;
+  }
+  .job-list-detail-text {
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000;
+  }
+
+  .blank-box {
+    display: block;
+    height: 40px;
+  }
+  .top-page-jump-box {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .top-page-jump {
+    display: inline-block;
+    margin-top: 30px;
+    padding-top: 6px;
+    font-size: 18px;
+    color: #223a70;
+  }
+  .top-page-jump:hover {
+    text-align: center;
+    display: inline-block;
+    margin-top: 30px;
+    padding-top: 6px;
+    font-size: 18px;
+    color: #1470cc;
+    text-decoration: underline;
+  }
+}
+
+.contents-card-wrapper {
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    -webkit-text-size-adjust: none;
+  }
+  body,
+  div,
+  p,
+  ul,
+  ol,
+  li,
+  dl,
+  dt,
+  dd,
+  table,
+  th,
+  td,
+  img,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  form,
+  select {
+    margin: 0;
+    padding: 0;
+  }
+  pre {
+    text-align: left;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  }
+  a {
+    text-decoration: none;
+  }
+  ul,
+  ol,
+  li {
+    list-style: none;
+  }
+  img {
+    border: 0;
+    vertical-align: middle;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  input,
+  select {
+    vertical-align: middle;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  }
+  body {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
+  }
+
+  .header-wrapper {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .container-header {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    display: inline-block;
+  }
+  .job-list-text-link {
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+    border-left: 6px solid #223a70;
+    color: #000;
+  }
+  .job-list-tag-box {
+    margin-top: 10px;
+  }
+  .job-list-tag li {
+    display: inline-block;
+    font-size: 16px;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 5px;
+    color: #223a70;
+    border: 1px solid #223a70;
+    border-radius: 5px;
+    width: auto;
+    text-align: center;
+  }
+  .job-list-all-link-box {
+    display: inline-block;
+    padding-top: 6px;
+    font-size: 18px;
+    color: #223a70;
+  }
+  .job-list-all-link-box:hover {
+    display: inline-block;
+    padding-top: 6px;
+    font-size: 18px;
+    color: #1470cc;
+    text-decoration: underline;
+  }
+
+  .job-list-img-wrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    box-shadow: 1px 1px 1px 1px #e6e6e6;
+  }
+  .page-wrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    margin-top: 20px;
+  }
+  .page-items {
+    height: auto;
+    background-color: #e6e6e6;
+  }
+  .page-items li {
+    display: inline-block;
+    background-color: #e6e6e6;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 70px 10px 70px;
+    text-align: center;
+  }
+  .page-items > li > a {
+    color: #000;
+  }
+  .page-items > li:hover {
+    background: #afafb0;
+  }
+  .main-box {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    // display: table;
+    margin-top: 40px;
+  }
+
+  .work-detail-header-title {
+    width: 65%;
+    display: table-cell;
+    font-size: 40px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+    border-left: 6px solid #223a70;
+    color: #000;
+  }
+
+  .work-detail-text-box {
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .work-detail-text {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .assignment-table-box {
+    margin-top: 5px;
+  }
+  .assignment-table {
+    width: 65%;
+  }
+  .assignment-table-items {
+    width: 16%;
+    font-size: 13px;
+    padding-left: 10px;
+    height: auto;
+    background-color: #e6e6e6;
+  }
+  .assignment-table-contents {
+    width: 49%;
+    font-size: 13px;
+    height: auto;
+  }
+
+  .company-information-table-box {
+    margin-top: 40px;
+  }
+
+  .side-box {
+    display: table-cell;
+    width: 28%;
+    // background-color: #e6e6e6;
+  }
+
+  .btn-application-text {
+    text-align: center;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    font-size: 16px;
+    background: #223a70;
+    color: #fff;
+    border: 1px solid #223a70;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .btn-application-text:hover {
+    opacity: 0.6;
+  }
+
+  .google-map-box {
+    display: table-cell;
+    width: 280x;
+    height: auto;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding: 10px;
+  }
+
+  .google-map-address {
+    color: #223a70;
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .google-map-address:hover {
+    color: #1470cc;
+    text-decoration: underline;
+  }
+
+  .company-address {
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+    border-left: 6px solid #223a70;
+    color: #000;
+  }
+
+  .btn-application-under-text {
+    text-align: center;
+    margin-top: 40px;
+    width: 66%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: block;
+    font-size: 16px;
+    background: #223a70;
+    color: #fff;
+    border: 1px solid #223a70;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .btn-application-under-text:hover {
+    opacity: 0.6;
   }
 }

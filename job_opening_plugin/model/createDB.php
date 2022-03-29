@@ -7,7 +7,7 @@ function create_table()
   $sql = "";
   $charset_collate = "";
 
-  // 接頭辞の追加（socal_count_cache）
+  // 接頭辞の追加
   $table_name = $wpdb->prefix . 'sac_job_opening_companies';
 
   // charsetを指定
@@ -27,11 +27,12 @@ function create_table()
       status VARCHAR(20) NOT NULL,
       co_logo VARCHAR(200),
       co_url TEXT,
+      co_summary LONGTEXT,
       co_pr_point LONGTEXT,
       co_zip_code VARCHAR(8),
       co_address VARCHAR(100),
+      co_address2 VARCHAR(100),
       co_sector VARCHAR(100),
-      co_achievement LONGTEXT,
       co_office_hours LONGTEXT,
       co_employee_benefits LONGTEXT,
       co_day_off LONGTEXT,
@@ -53,7 +54,7 @@ function create_table_meta()
   $sql = "";
   $charset_collate = "";
 
-  // 接頭辞の追加（socal_count_cache）
+  // 接頭辞の追加
   $table_name = $wpdb->prefix . 'sac_job_opening_companies_meta';
 
   // charsetを指定

@@ -8,6 +8,7 @@
  */
 function job_openings_list()
 {
+  global $wpdb;
   $user = wp_get_current_user();
   $html = "";
   if (
@@ -16,14 +17,35 @@ function job_openings_list()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $url = $_SERVER['REQUEST_URI'];
     $mode = $_GET["action"];
     $joid = $_GET["post"];
 
-    if (!$mode && !$joid) {
-      $html .= aaa($user);
-    } else if ($mode == "edit") {
-      $html .= editJob($user, $joid);
+    // ユーザとジョブIDの一致を検証する
+    $post = get_post($joid, "ARRAY_A");
+    $post_author = explode(" ", $post["post_author"])[0];
+
+    if ($mode && $joid && ($user->ID == $post_author)) {
+      if ($mode == "edit") {
+        $html .= editJob($user, $joid);
+      } else if ($mode == "copy") {
+        $html .= editJob2($user, $joid);
+      } else if ($mode == "draft") {
+        wp_update_post([
+          'ID'           => $joid,
+          'post_status'   => 'draft',
+        ]);
+        $html .= jobTable($user);
+      } else if ($mode == "publish") {
+        wp_update_post([
+          'ID'           => $joid,
+          'post_status'   => 'publish',
+        ]);
+        $html .= jobTable($user);
+      } else {
+        $html .= '<strong>このページは閲覧できません．</strong>';
+      }
+    } else {
+      $html .= jobTable($user);
     }
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -46,26 +68,23 @@ function company_list()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
+    $mode = $_GET["action"];
+    $co_id = $_GET["id"];
 
-    global $wpdb;
-    $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=" . wp_get_current_user()->ID . ";";
-    $companies = $wpdb->get_results($query, OBJECT);
-
-    // 表 ヘッダーの表示
-    $html .=  make_company_table_head();
-
-    $html .=  '<tbody id="the-list">';
-    // ob_start();
-    foreach ($companies as $data) :
-      $html .=  make_company_table_row($data);
-    endforeach;
-    $html .=  '</tbody>';
-
-    // 表 フッターの表示
-    $html .=  make_company_table_head();
-    // ob_get_clean();
+    // ユーザとジョブIDの一致を検証する
+    $company = getCompanyById($co_id);
+    if ($mode && $co_id && ($user->ID == $company->user_id)) {
+      if ($mode == "edit") {
+        $html .= editCompany($user, $co_id);
+      } else if ($mode == "remove") {
+        deleteCompaniesByCompanyId($co_id);
+        $html .= companyTable($user);
+      } else {
+        $html .= '<strong>このページは閲覧できません．</strong>';
+      }
+    } else {
+      $html .= companyTable($user);
+    }
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
@@ -88,7 +107,7 @@ function job_openings_add()
     || current_user_can('contributor')
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";    // echo create_card($user);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_card($user);
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
@@ -112,14 +131,12 @@ function company_add()
     || current_user_can('contributor')
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(".$loginout."する)</strong>";
-    // echo create_card($user);
+    $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_company($user);
   } else {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
   }
-
   return $html;
 }
 
@@ -129,34 +146,66 @@ function company_add()
 function settings()
 {
   $user = wp_get_current_user();
-  // echo create_company($user);
 }
 
 
 
 /**
- * 企業追加ページ用の関数
+ * ユーザ画面 求人一覧ページ用の関数
  */
 function user_job_openings()
 {
   $html = "";
-  $html .= bbb_head();
+  $html .= userJobTable_head();
 
   $posts = getPublishedCard();
   global $post;
   foreach ($posts as $post) {
     setup_postdata($post);
     $post_id = get_the_ID();
-    $title = get_the_title();
-    $author = get_the_author();
-    $post_date = get_the_date();
-    $permalink = get_permalink($post_id);
-    $job_expires = get_post_meta($post_id, '_job_expires', true);
-    $job_location = get_post_meta($post_id, '_job_location', true);
-
-    $html .= bbb($post_id);
+    $job_expires = get_post_meta($post_id, '_expired_date', true);
+    
+    $today = date("Y/m/d");
+    $target_day = $job_expires;
+    if(strtotime($today) === strtotime($target_day)){
+      // console_log("ターゲット日付は今日です");
+      $html .= userJobTable($post_id);
+    }else if(strtotime($today) < strtotime($target_day)){
+      // console_log("ターゲット日付は未来です");
+      $html .= userJobTable($post_id);
+    }else{
+      // 期限切れ
+    }
   }
 
-  $html .= bbb_foot();
+  $html .= userJobTable_foot();
   return $html;
+}
+
+
+//=================================================
+// 管理画面（wp-adminページ用）
+//=================================================
+function job_openings_list_admin()
+{
+  if (current_user_can('administrator') || current_user_can('editor')) {
+    echo job_openings_list();
+  }
+}
+
+function company_list_admin()
+{
+  if (current_user_can('administrator') || current_user_can('editor')) {
+    echo company_list();
+  }
+}
+
+function job_openings_add_admin()
+{
+  echo job_openings_add();
+}
+
+function company_add_admin()
+{
+  echo company_add();
 }

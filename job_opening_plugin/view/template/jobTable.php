@@ -3,11 +3,12 @@
 function make_job_openings_table_row($post_id, $title, $author, $post_date, $job_expires, $job_location, $status_icon, $permalink)
 {
   $admin_url = esc_url(get_admin_url(''));
-  $root_url = esc_url(get_site_url());
   $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
+  $job_table_url = HOME_URL . "/" . get_option("sac_job_openings_list");
   $current_request = $_SERVER["REQUEST_URI"];
   $company_id = get_post_meta($post_id, '_company_id', true);
-  $company = getCompanyById($company_id)[0];
+  $manage_id = get_post_meta($post_id, '_manage_id', true);
+  $company = getCompanyById($company_id);
 
   $recruitment_type = "";
   switch (get_post_meta($post_id, '_recruitment_type', true)) {
@@ -25,6 +26,26 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       break;
   };
 
+  $post_status_link = "";
+  if (get_post_status($post_id) == "draft") {
+    $post_status_link = <<<EOF
+    <a
+      class="button button-icon tips icon-view"
+      href="{$job_table_url}?&action=publish&post={$post_id}";
+      data-tip="公開する"
+      >公開する</a
+      >
+EOF;
+  } else {
+    $post_status_link = <<<EOF
+    <a
+      class="button button-icon tips icon-view"
+      href="{$job_table_url}?&action=draft&post={$post_id}";
+      data-tip="非公開にする"
+      >非公開にする</a
+      >
+EOF;
+  }
 
   $job_openings_table_main = <<<EOF
     <tr
@@ -37,11 +58,11 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       >
         <div class="job_position">
           <a
-            href="{$admin_url}post.php?post={$post_id}&amp;action=edit"
+            href="{$current_request}?&action=edit&post={$post_id}"
             class="tips job_title"
             data-tip="ID: {$post_id}"
             >{$title}</a
-          >
+          ><br/>(管理番号: {$manage_id})
         </div>
       </td>
       <td
@@ -70,19 +91,15 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       <td class="job_status column-job_status" data-colname="ステータス">
         {$status_icon}
       </td>
-      <td class="job_posted column-job_posted" data-colname="作成日">
-        <strong>{$post_date}</strong>
+      <td class="job_posted column-job_posted" data-colname="期限">
+        <strong>{$post_date}<br/>〜 {$job_expires}</strong>
       </td>
-      <td class="job_expires column-job_expires" data-colname="期限">
-        <strong>{$job_expires}</strong>
-      </td>
-      <td
+      <!--<td
         class="job_listing_category column-job_listing_category"
         data-colname="カテゴリー"
       >
         <span class="na">–</span>
-      </td>
-      <td class="filled column-filled" data-colname="採用済み ?">–</td>
+      </td>-->
       <td class="job_actions column-job_actions" data-colname="操作">
         <div class="actions">
           <div>
@@ -109,6 +126,17 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
               >削除</a
             >
           </div>
+          <div>
+            {$post_status_link}
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="{$current_request}?&action=copy&post={$post_id}"
+              data-tip="コピーして新規作成"
+              >コピーして新規作成</a
+            >
+          </div>
         </div>
       </td>
     </tr>
@@ -119,10 +147,11 @@ EOF;
 
 function make_job_openings_table_head()
 {
-  $admin_url = esc_url(get_admin_url(''));
 
-  $header = <<<EOF
-  <table class="wp-list-table widefat fixed striped table-view-list posts">
+  $header = header_link_buttons();
+  $header .= <<<EOF
+
+  <table class="margin4 wp-list-table widefat fixed striped table-view-list posts">
   <thead>
     <tr>
       <th
@@ -154,27 +183,24 @@ function make_job_openings_table_head()
         id="job_posted"
         class="manage-column column-job_posted sortable desc"
       >
-        <span>作成日</span><span class="sorting-indicator"></span
+        <span>期限</span><span class="sorting-indicator"></span
         >
       </th>
-      <th
+      <!--<th
         scope="col"
         id="job_expires"
         class="manage-column column-job_expires sortable desc"
       >
       <span>期限</span><span class="sorting-indicator"></span
         >
-      </th>
-      <th
+      </th>-->
+      <!--<th
         scope="col"
         id="job_listing_category"
         class="manage-column column-job_listing_category"
       >
         カテゴリー
-      </th>
-      <th scope="col" id="filled" class="manage-column column-filled">
-        <span class="tips" data-tip="採用済み ?">採用済み ?</span>
-      </th>
+      </th>-->
       <th scope="col" id="job_actions" class="manage-column column-job_actions">
         操作
       </th>
