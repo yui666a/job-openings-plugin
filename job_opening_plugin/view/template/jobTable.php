@@ -62,7 +62,7 @@ EOF;
             class="tips job_title"
             data-tip="ID: {$post_id}"
             >{$title}</a
-          >(管理番号: {$manage_id})
+          ><br/>(管理番号: {$manage_id})
         </div>
       </td>
       <td
@@ -92,11 +92,8 @@ EOF;
         {$status_icon}
       </td>
       <td class="job_posted column-job_posted" data-colname="期限">
-        <strong>{$post_date} 〜 {$job_expires}</strong>
+        <strong>{$post_date}<br/>〜 {$job_expires}</strong>
       </td>
-      <!--<td class="job_expires column-job_expires" data-colname="期限">
-        <strong>{$job_expires}</strong>
-      </td>-->
       <!--<td
         class="job_listing_category column-job_listing_category"
         data-colname="カテゴリー"
@@ -122,15 +119,15 @@ EOF;
             >
           </div>
           <div>
-            {$post_status_link}
-          </div>
-          <div>
             <a
               class="button button-icon tips icon-delete"
               href="{$delete_url}"
               data-tip="削除"
               >削除</a
             >
+          </div>
+          <div>
+            {$post_status_link}
           </div>
           <div>
             <a
