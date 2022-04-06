@@ -48,8 +48,8 @@ function job_openings_list()
       $html .= jobTable($user);
     }
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= '<strong>このページは閲覧できません．ログインしてください</strong>
+    <div><button class="button confirm" onclick="location.href=\''.wp_login_url(get_permalink()).'\'">ログイン画面へ</button></div>';
   }
   return $html;
 }
@@ -80,14 +80,15 @@ function company_list()
         deleteCompaniesByCompanyId($co_id);
         $html .= companyTable($user);
       } else {
-        $html .= '<strong>このページは閲覧できません．</strong>';
+        $html .= '<strong>このページは閲覧できません．ログインしてください</strong>
+        <div><button class="button confirm" onclick="location.href=\''.wp_login_url(get_permalink()).'\'">ログイン画面へ</button></div>';
       }
     } else {
       $html .= companyTable($user);
     }
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= '<strong>このページは閲覧できません．ログインしてください</strong>
+    <div><button class="button confirm" onclick="location.href=\''.wp_login_url(get_permalink()).'\'">ログイン画面へ</button></div>';
   }
 
   return $html;
@@ -110,8 +111,8 @@ function job_openings_add()
     $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_card($user);
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= '<strong>このページは閲覧できません．ログインしてください</strong>
+    <div><button class="button confirm" onclick="location.href=\''.wp_login_url(get_permalink()).'\'">ログイン画面へ</button></div>';
   }
 
   return $html;
@@ -134,8 +135,8 @@ function company_add()
     $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_company($user);
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= '<strong>このページは閲覧できません．ログインしてください</strong>
+    <div><button class="button confirm" onclick="location.href=\''.wp_login_url(get_permalink()).'\'">ログイン画面へ</button></div>';
   }
   return $html;
 }
