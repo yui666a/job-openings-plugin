@@ -64,6 +64,7 @@ function add_files()
   // wp_enqueue_style('jo-user', plugin_dir_url(__FILE__) . 'css/userStyle.css', "", "0.1");
   wp_enqueue_style('jo-card', plugin_dir_url(__FILE__) . 'css/cardStyle.css', "", "0.1");
   wp_enqueue_style('jo-header', plugin_dir_url(__FILE__) . 'css/header.css', "", "0.1");
+  wp_enqueue_style('jo-entry', plugin_dir_url(__FILE__) . 'css/entry.css', "", "0.1");
 }
 /**
  * wp_enqueue_scripts – フロントエンドをイベントトリガーにする
@@ -107,6 +108,7 @@ function on_activate()
   wp_insert_post(array('post_title' => '求人情報を作成', 'post_content'  => '[job_openings_add]',     'post_name' => "add_job_opening", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
   wp_insert_post(array('post_title' => '企業情報を作成', 'post_content'  => '[company_add]',          'post_name' => "add_company", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
   wp_insert_post(array('post_title' => '求人一覧', 'post_content'  => '[user_job_openings]',         'post_name' => "job_openings_table", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
+  wp_insert_post(array('post_title' => '求人管理画面一覧', 'post_content'  => '[entry_page]',          'post_name' => "entry page", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
 }
 register_activation_hook(__FILE__, 'on_activate');
 
@@ -140,6 +142,7 @@ add_shortcode('job_openings_add', 'job_openings_add');
 add_shortcode('company_list', 'company_list');
 add_shortcode('company_add', 'company_add');
 add_shortcode('user_job_openings', 'user_job_openings');
+add_shortcode('entry_page', 'entry_page');
 
 
 /**
