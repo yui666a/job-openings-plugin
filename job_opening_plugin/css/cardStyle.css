@@ -1,80 +1,68 @@
 @charset "UTF-8";
-.job-opening-card,
-#job-opening-card {
+.job-opening-card, #job-opening-card {
   padding: 5%;
 }
 
 .job-opening-card html,
-.job-opening-card body,
-#job-opening-card html,
+.job-opening-card body, #job-opening-card html,
 #job-opening-card body {
   height: 100%;
   width: 100%;
   -webkit-text-size-adjust: none;
 }
 
-.job-opening-card pre,
-#job-opening-card pre {
+.job-opening-card pre, #job-opening-card pre {
   text-align: left;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
   background-color: transparent;
   border: none;
 }
 
-.job-opening-card a,
-#job-opening-card a {
+.job-opening-card a, #job-opening-card a {
   text-decoration: none;
 }
 
 .job-opening-card ul,
 .job-opening-card ol,
-.job-opening-card li,
-#job-opening-card ul,
+.job-opening-card li, #job-opening-card ul,
 #job-opening-card ol,
 #job-opening-card li {
   list-style: none;
 }
 
-.job-opening-card img,
-#job-opening-card img {
+.job-opening-card img, #job-opening-card img {
   border: 0;
   vertical-align: middle;
   width: auto;
   height: 100%;
 }
 
-.job-opening-card table,
-#job-opening-card table {
+.job-opening-card table, #job-opening-card table {
   border-collapse: collapse;
 }
 
 .job-opening-card input,
-.job-opening-card select,
-#job-opening-card input,
+.job-opening-card select, #job-opening-card input,
 #job-opening-card select {
   vertical-align: middle;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
 }
 
-.job-opening-card body,
-#job-opening-card body {
+.job-opening-card body, #job-opening-card body {
   line-height: 1.5;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, "MS PGothic", Sans-serif;
 }
 
-.job-opening-card p,
-#job-opening-card p {
-  padding: 0.8em 0;
+.job-opening-card p, #job-opening-card p {
+  padding: 1%;
 }
 
-.job-opening-card .header-wrapper,
-#job-opening-card .header-wrapper {
+.job-opening-card .header-wrapper, #job-opening-card .header-wrapper {
   margin-top: 15px;
   text-align: center;
 }
 
-.job-opening-card .container-header,
-#job-opening-card .container-header {
+.job-opening-card .container-header, #job-opening-card .container-header {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -82,8 +70,7 @@
   display: inline-block;
 }
 
-.job-opening-card .job-opening-title,
-#job-opening-card .job-opening-title {
+.job-opening-card .job-opening-title, #job-opening-card .job-opening-title {
   margin: 20px auto 5px;
   font-size: 30px;
   font-weight: bold;
@@ -92,13 +79,11 @@
   color: #000;
 }
 
-.job-opening-card .job-list-tag-box,
-#job-opening-card .job-list-tag-box {
+.job-opening-card .job-list-tag-box, #job-opening-card .job-list-tag-box {
   margin-top: 10px;
 }
 
-.job-opening-card .job-list-tag li,
-#job-opening-card .job-list-tag li {
+.job-opening-card .job-list-tag li, #job-opening-card .job-list-tag li {
   display: inline-block;
   padding-left: 3px;
   padding-right: 3px;
@@ -110,24 +95,21 @@
   text-align: center;
 }
 
-.job-opening-card .job-list-all-link-box,
-#job-opening-card .job-list-all-link-box {
+.job-opening-card .job-list-all-link-box, #job-opening-card .job-list-all-link-box {
   display: inline-block;
   padding-top: 6px;
   font-size: 18px;
   color: #223a70;
 }
 
-.job-opening-card .job-list-all-link-box:hover,
-#job-opening-card .job-list-all-link-box:hover {
+.job-opening-card .job-list-all-link-box:hover, #job-opening-card .job-list-all-link-box:hover {
   display: inline-block;
   padding-top: 6px;
   color: #1470cc;
   text-decoration: underline;
 }
 
-.job-opening-card .job-list-img-wrapper,
-#job-opening-card .job-list-img-wrapper {
+.job-opening-card .job-list-img-wrapper, #job-opening-card .job-list-img-wrapper {
   width: 100%;
   height: 200px;
   margin-left: auto;
@@ -143,8 +125,7 @@
           justify-content: center;
 }
 
-.job-opening-card .page-wrapper,
-#job-opening-card .page-wrapper {
+.job-opening-card .page-wrapper, #job-opening-card .page-wrapper {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -152,14 +133,12 @@
   margin-top: 20px;
 }
 
-.job-opening-card .page-items,
-#job-opening-card .page-items {
+.job-opening-card .page-items, #job-opening-card .page-items {
   height: auto;
   background-color: #e6e6e6;
 }
 
-.job-opening-card .page-items li,
-#job-opening-card .page-items li {
+.job-opening-card .page-items li, #job-opening-card .page-items li {
   display: inline-block;
   background-color: #e6e6e6;
   font-weight: bold;
@@ -167,18 +146,15 @@
   text-align: center;
 }
 
-.job-opening-card .page-items > li > a,
-#job-opening-card .page-items > li > a {
+.job-opening-card .page-items > li > a, #job-opening-card .page-items > li > a {
   color: #000;
 }
 
-.job-opening-card .page-items > li:hover,
-#job-opening-card .page-items > li:hover {
+.job-opening-card .page-items > li:hover, #job-opening-card .page-items > li:hover {
   background: #afafb0;
 }
 
-.job-opening-card .main-box,
-#job-opening-card .main-box {
+.job-opening-card .main-box, #job-opening-card .main-box {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -187,33 +163,28 @@
   margin-top: 40px;
 }
 
-.job-opening-card .work-detail-header-title,
-#job-opening-card .work-detail-header-title {
+.job-opening-card .work-detail-header-title, #job-opening-card .work-detail-header-title {
   padding-left: 10px;
   border-left: 6px solid #223a70;
 }
 
-.job-opening-card .work-detail-text-box,
-#job-opening-card .work-detail-text-box {
+.job-opening-card .work-detail-text-box, #job-opening-card .work-detail-text-box {
   display: block;
   width: 90%;
   margin: auto;
   text-align: left;
 }
 
-.job-opening-card .work-detail-text,
-#job-opening-card .work-detail-text {
+.job-opening-card .work-detail-text, #job-opening-card .work-detail-text {
   text-align: left;
 }
 
-.job-opening-card .assignments,
-#job-opening-card .assignments {
+.job-opening-card .assignments, #job-opening-card .assignments {
   width: 90%;
   margin: 2rem auto;
 }
 
-.job-opening-card .assignment,
-#job-opening-card .assignment {
+.job-opening-card .assignment, #job-opening-card .assignment {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -223,13 +194,11 @@
   border-bottom: 1px solid grey;
 }
 
-.job-opening-card .assignment:first-child,
-#job-opening-card .assignment:first-child {
+.job-opening-card .assignment:first-child, #job-opening-card .assignment:first-child {
   border-top: 1px solid grey;
 }
 
-.job-opening-card .assignment-item-label,
-#job-opening-card .assignment-item-label {
+.job-opening-card .assignment-item-label, #job-opening-card .assignment-item-label {
   width: 20%;
   padding-left: 10px;
   height: auto;
@@ -237,15 +206,13 @@
   background-color: #e6e6e6;
 }
 
-.job-opening-card .assignment-item-value,
-#job-opening-card .assignment-item-value {
+.job-opening-card .assignment-item-value, #job-opening-card .assignment-item-value {
   width: 80%;
   height: auto;
   padding-left: 15px;
 }
 
-.job-opening-card .btn-application-text,
-#job-opening-card .btn-application-text {
+.job-opening-card .btn-application-text, #job-opening-card .btn-application-text {
   text-align: center;
   margin-top: 20px;
   display: block;
@@ -259,13 +226,11 @@
   padding: 10px;
 }
 
-.job-opening-card .btn-application-text:hover,
-#job-opening-card .btn-application-text:hover {
+.job-opening-card .btn-application-text:hover, #job-opening-card .btn-application-text:hover {
   opacity: 0.6;
 }
 
-.job-opening-card .company-address,
-#job-opening-card .company-address {
+.job-opening-card .company-address, #job-opening-card .company-address {
   padding-left: 10px;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -274,8 +239,7 @@
   color: #000;
 }
 
-.job-opening-card .btn-application-under,
-#job-opening-card .btn-application-under {
+.job-opening-card .btn-application-under, #job-opening-card .btn-application-under {
   position: -webkit-sticky;
   position: sticky;
   bottom: 0;
@@ -283,8 +247,7 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
-.job-opening-card .btn-application-under-text,
-#job-opening-card .btn-application-under-text {
+.job-opening-card .btn-application-under-text, #job-opening-card .btn-application-under-text {
   text-align: center;
   margin: 20px auto;
   width: 100%;
@@ -296,8 +259,7 @@
   padding: 10px;
 }
 
-.job-opening-card .btn-application-under-text:hover,
-#job-opening-card .btn-application-under-text:hover {
+.job-opening-card .btn-application-under-text:hover, #job-opening-card .btn-application-under-text:hover {
   opacity: 0.6;
 }
 
