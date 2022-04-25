@@ -1,37 +1,70 @@
 <!DOCTYPE html>
 <html lang="ja">
- <head>
- <meta charset="utf-8">
- <title>サイトタイトル</title>
- <meta name="description" content="ディスクリプションを入力">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" href="style.css">
- <!-- [if lt IE 9] -->
- <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
- <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
- <!-- [endif] -->
- <script src="main.js"></script>
- </head>
- <body>
- <!----- header----->
- <headeer>マイページ</header>
- <!----- /header ----->
- 
- <!----- main ----->
- <article>
-    <nav class="global">
-        <ul>
-            <a href="リンク先のURLを記入" class="btn">企業情報に新規追加</a>
-            <a href="リンク先のURLを記入" class="btn">作成した企業一覧</a>
-            <a href="リンク先のURLを記入" class="btn">求人情報を新規追加</a>
-            <a href="リンク先のURLを記入" class="btn">作成した求人一覧</a>
-        </ul>
-      </nav>
- </article>
- <!----- /main ----->
- 
- <!----- footer ----->
- <footer>NAGAOKAWORKER</footer>
- <!----- /footer ----->
- </body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="entry.css" />
+  </head>
+  <body>
+    <!----- main ----->
+
+    <div class="jo-entry">
+      <div class="page-area">
+        <div class="title">企業情報を新規追加</div>
+        <div class="description">
+          <div class="img-wrapper">
+            <img
+              src="https://nagaoka-worker.jp/wp-content/uploads/2022/04/icon-co-add.png"
+            />
+          </div>
+          求人情報を投稿したい企業情報を新たに作成します
+          <div>
+            <a href="/add_company" class="btn">ページに移動する</a>
+          </div>
+        </div>
+      </div>
+      <div class="page-area">
+        <div class="title">作成した企業一覧</div>
+        <div class="description">
+          <div class="img-wrapper">
+            <img
+              src="https://nagaoka-worker.jp/wp-content/uploads/2022/04/icon-co-list.png"
+            />
+          </div>
+          作成した企業情報を確認・修正できます
+          <div>
+            <a href="/company_list" class="btn">ページに移動する</a>
+          </div>
+        </div>
+      </div>
+      <div class="page-area">
+        <div class="title">求人情報を新規追加</div>
+        <div class="description">
+          <div class="img-wrapper">
+            <img
+              src="https://nagaoka-worker.jp/wp-content/uploads/2022/04/icon-jo-add.png"
+            />
+          </div>
+          求人情報を新たに作成します
+          <div>
+            <a href="/add_job_opening" class="btn">ページに移動する</a>
+          </div>
+        </div>
+      </div>
+      <div class="page-area">
+        <div class="title">作成した求人一覧</div>
+        <div class="description">
+          <div class="img-wrapper">
+            <img
+              src="https://nagaoka-worker.jp/wp-content/uploads/2022/04/icon-jo-list.png"
+            />
+          </div>
+          作成した求人を確認・修正できます
+          <div>
+            <a href="/job_opening_list" class="btn">ページに移動する</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
 </html>
