@@ -6,6 +6,28 @@
 /**
  * 求人一覧ページ用の関数
  */
+function entry_page()
+{
+  $user = wp_get_current_user();
+  $html = "";
+  if (
+    current_user_can('administrator')
+    || current_user_can('editor')
+    || current_user_can('author')
+    || current_user_can('contributor')
+  ) {
+    // ユーザとジョブIDの一致を検証する
+    $html .= entryPage();
+  } else {
+    $html .= notLogin();
+  }
+  return $html;
+}
+
+
+/**
+ * 求人一覧ページ用の関数
+ */
 function job_openings_list()
 {
   global $wpdb;
@@ -42,14 +64,13 @@ function job_openings_list()
         ]);
         $html .= jobTable($user);
       } else {
-        $html .= '<strong>このページは閲覧できません．</strong>';
+        $html .= notLogin();
       }
     } else {
       $html .= jobTable($user);
     }
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= notLogin();
   }
   return $html;
 }
@@ -80,14 +101,13 @@ function company_list()
         deleteCompaniesByCompanyId($co_id);
         $html .= companyTable($user);
       } else {
-        $html .= '<strong>このページは閲覧できません．</strong>';
+        $html .= notLogin();
       }
     } else {
       $html .= companyTable($user);
     }
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= notLogin();
   }
 
   return $html;
@@ -110,8 +130,7 @@ function job_openings_add()
     $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_card($user);
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= notLogin();
   }
 
   return $html;
@@ -134,8 +153,7 @@ function company_add()
     $html .= "<strong>現在、" . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_company($user);
   } else {
-    $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong>このページは閲覧できません．' . $loginout . 'してください</strong>';
+    $html .= notLogin();
   }
   return $html;
 }

@@ -1,0 +1,58 @@
+.jo-entry {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.jo-entry .btn {
+  display: block;
+  padding: 1em 3em;
+  margin: 1rem;
+  background-color: #283b59; /* 背景色 */
+  box-shadow: 0 5px 0 #736f70; /* 影の太さ・色 */
+  border-radius: 60px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  text-decoration: none; /* 文字の下線を消す */
+  text-align: center;
+
+  max-width: 300px;
+}
+.jo-entry .title {
+  color: #283b59;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.jo-entry .img-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.jo-entry img {
+  width: 40%;
+}
+.jo-entry .description {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-area {
+  width: 40%;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #283b59;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (max-width: 425px) {
+  .page-area {
+    width: 100%;
+  }
+}
