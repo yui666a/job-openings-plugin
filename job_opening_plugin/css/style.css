@@ -966,4 +966,8 @@ button.add-confirm:disabled {
 .contents-card-wrapper .btn-application-under-text:hover {
   opacity: 0.6;
 }
+
+.who-is-login{
+  margin-left: 25px;
+}
 /*# sourceMappingURL=style.css.map */

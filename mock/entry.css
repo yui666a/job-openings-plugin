@@ -2,14 +2,12 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-
   justify-content: center;
 }
 
 .jo-entry .btn {
   display: block;
-  padding: 1em 3em;
-  margin: 1rem;
+  padding: 0.5em 1em;
   background-color: #283b59; /* 背景色 */
   box-shadow: 0 5px 0 #736f70; /* 影の太さ・色 */
   border-radius: 60px;
@@ -17,27 +15,8 @@
   cursor: pointer;
   text-decoration: none; /* 文字の下線を消す */
   text-align: center;
-
-  max-width: 300px;
-}
-.jo-entry .title {
-  color: #283b59;
-  font-weight: bold;
-  font-size: 1.5em;
-}
-.jo-entry .img-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.jo-entry img {
-  width: 40%;
-}
-.jo-entry .description {
-  margin: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 0.9em;
+  max-width: 11em;
 }
 
 .page-area {
@@ -48,10 +27,48 @@
   border-radius: 50px;
   display: flex;
   justify-content: center;
+  align-content: center;
+}
+
+
+
+.jo-entry .left-area {
+  width: 40%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+}
+.jo-entry .img-wrapper {
+  width: 100%;
+}
+
+.page-area .text-wrapper{
+  width: 60%;
+  padding: 1rem;
+}
+
+.jo-entry .title {
+  color: #283b59;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.jo-entry img {
+  width: 100%;
+}
+.jo-entry .text-wrapper{
+  width: 70%;
+}
+
+.description {
+  margin: 1rem 0;
+  font-size: 0.9em;
+  display: flex;
   flex-direction: column;
 }
 
-@media (max-width: 425px) {
+
+
+@media (max-width: 768px) {
   .page-area {
     width: 100%;
   }
