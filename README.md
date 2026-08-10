@@ -1,21 +1,121 @@
 # Job Opening（求人簡易投稿プラグイン）
 
-WordPress サイト上で、求人情報を企業単位で登録・掲載するためのプラグインです。
+**WordPress の管理画面を開かずに、サイト上のフォームから求人を投稿できるプラグインです。**
 
-WordPress の管理画面（wp-admin）を知らない一般ユーザーでも求人を投稿できるように、**フロント側の固定ページに配置したフォーム**から求人・企業情報を登録できる点が特徴です。企業情報を一度登録しておけば、以後の求人作成ではその企業を選ぶだけで住所や就業時間などが自動入力されます。
+求人情報を企業単位で登録・掲載します。wp-admin を知らない担当者でも投稿できるよう、フロント側の固定ページに置いたフォームから求人・企業情報を登録する構成になっています。企業情報を一度登録しておけば、以後の求人作成では企業を選ぶだけで住所や就業時間などが自動入力されます。
 
-- Plugin Name: Job Opening
-- Version: 0.1
-- Author: yui666a（[STYLE ARTS](http://style-arts.jp/)）
-- 動作要件: WordPress 5.9 以上（`JOB_OPENING__MINIMUM_WP_VERSION`）
+[![デモを見る](https://img.shields.io/badge/デモを見る-yui666a.github.io-283b59?style=for-the-badge)](https://yui666a.github.io/job-openings-plugin/)
+![WordPress](https://img.shields.io/badge/WordPress-5.9+-21759b?style=for-the-badge&logo=wordpress&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777bb4?style=for-the-badge&logo=php&logoColor=white)
+
+<p align="center">
+  <a href="https://yui666a.github.io/job-openings-plugin/public-list.html">
+    <img src="docs/screenshots/public-list.png" alt="求人一覧（訪問者向け）" width="800" />
+  </a>
+  <br />
+  <em>サイト訪問者に表示される求人一覧。掲載期限内の求人だけが新着順で並びます。</em>
+</p>
+
+## 特徴
+
+| | |
+| --- | --- |
+| **管理画面が不要** | 固定ページに貼ったショートコードがそのまま投稿フォームになります。担当者に wp-admin の権限や操作説明を渡す必要がありません |
+| **企業情報の使い回し** | 企業を選ぶだけで住所・就業時間・福利厚生などが自動入力されます。同じ企業で複数の求人を出すときに入力し直す必要がありません |
+| **掲載期限で自動的に非表示** | 「本日から〇日間」または開始日・終了日を指定できます。期限切れの求人は訪問者向けの一覧から自動的に外れます |
+| **投稿者ごとに分離** | 自分が作成した求人・企業だけを編集できます。複数の企業担当者が同じサイトを使えます |
+| **カスタム投稿タイプで保存** | 求人は `job_openings` として保存されるため、テーマ側から通常の投稿と同じように扱えます |
 
 ## デモ
 
-導入しなくても画面を確認できるデモサイトを公開しています。
+インストールしなくても、全画面をブラウザで確認できます。
 
-**https://yui666a.github.io/job-openings-plugin/**
+### **▶ https://yui666a.github.io/job-openings-plugin/**
 
 プラグイン本体のテンプレートをサンプルデータで描画した静的サイトです。表示の確認のみで、保存・削除などの操作はできません。生成方法は [`tools/demo/README.md`](tools/demo/README.md) を参照してください。
+
+---
+
+## 画面
+
+### 投稿者が使う画面
+
+企業を登録し、その企業に紐づけて求人を作成します。
+
+<table>
+<tr>
+<td width="50%">
+  <a href="https://yui666a.github.io/job-openings-plugin/entry.html">
+    <img src="docs/screenshots/entry.png" alt="入口ページ" />
+  </a>
+  <p align="center"><strong>入口ページ</strong><br /><code>[entry_page]</code><br />投稿者が最初に開くページ</p>
+</td>
+<td width="50%">
+  <a href="https://yui666a.github.io/job-openings-plugin/add-company.html">
+    <img src="docs/screenshots/add-company.png" alt="企業情報を作成" />
+  </a>
+  <p align="center"><strong>STEP 1 企業情報を作成</strong><br /><code>[company_add]</code><br />郵便番号から住所を自動入力</p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+  <a href="https://yui666a.github.io/job-openings-plugin/company-list.html">
+    <img src="docs/screenshots/company-list.png" alt="作成した企業一覧" />
+  </a>
+  <p align="center"><strong>STEP 2 作成した企業一覧</strong><br /><code>[company_list]</code><br />登録した企業の確認・編集・削除</p>
+</td>
+<td width="50%">
+  <a href="https://yui666a.github.io/job-openings-plugin/add-card.html">
+    <img src="docs/screenshots/add-card.png" alt="求人情報を作成" />
+  </a>
+  <p align="center"><strong>STEP 3 求人情報を作成</strong><br /><code>[job_openings_add]</code><br />企業を選ぶと住所などが自動入力</p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+  <a href="https://yui666a.github.io/job-openings-plugin/job-list.html">
+    <img src="docs/screenshots/job-list.png" alt="作成した求人一覧" />
+  </a>
+  <p align="center"><strong>STEP 4 作成した求人一覧</strong><br /><code>[job_openings_list]</code><br />公開・下書きの切り替え、複製</p>
+</td>
+<td width="50%"></td>
+</tr>
+</table>
+
+### サイト訪問者が見る画面
+
+<p align="center">
+  <a href="https://yui666a.github.io/job-openings-plugin/public-list.html">
+    <img src="docs/screenshots/public-list.png" alt="求人一覧（訪問者向け）" width="760" />
+  </a>
+  <br />
+  <em><code>[user_job_openings]</code> — 公開済みかつ掲載期限内の求人のみが表示されます</em>
+</p>
+
+---
+
+## 動作環境
+
+- WordPress 5.9 以上（`JOB_OPENING__MINIMUM_WP_VERSION`）
+- Version: 0.1
+- Author: yui666a（[STYLE ARTS](http://style-arts.jp/)）
+
+---
+
+## 全体の流れ
+
+```mermaid
+flowchart LR
+  A["企業情報を作成<br/>[company_add]"] --> B["求人情報を作成<br/>[job_openings_add]"]
+  B --> C["作成した求人一覧<br/>[job_openings_list]"]
+  C -->|公開| D["求人一覧（訪問者向け）<br/>[user_job_openings]"]
+  C -->|下書き| C
+  D -->|掲載期限が切れる| E["一覧から自動的に外れる"]
+
+  A -.->|住所・就業時間などを<br/>自動入力| B
+```
+
+企業情報は `{prefix}sac_job_opening_companies` テーブルに、求人はカスタム投稿タイプ `job_openings` として保存されます。
 
 ---
 

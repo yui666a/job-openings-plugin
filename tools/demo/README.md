@@ -48,6 +48,37 @@ cp job_opening_plugin/js/main.js job_opening_plugin/js/companyAutoInput.js docs/
 | `job-list.html` | 作成した求人一覧 `[job_openings_list]` |
 | `public-list.html` | 求人一覧（訪問者向け）`[user_job_openings]` |
 
+## スクリーンショット
+
+ルートの `README.md` に載せているスクリーンショットは `docs/screenshots/` に置いています。`screenshot.mjs` が公開中のデモサイトを撮影したもので、撮影時にデモ用のヘッダー・バナー・注釈（`.demo-bar` / `.demo-banner` / `.demo-note`）は非表示にしています。
+
+画面のデザインを変更した場合は、デモを再生成したうえで撮り直してください。
+
+ヘッドレス Chrome を CDP で操作するだけなので、追加のパッケージは不要です（Node.js 22 以上）。
+
+```sh
+# 1. ヘッドレス Chrome を起動する
+#    パスは Playwright / Puppeteer が入れた Chromium などに読み替えてください
+chrome-headless-shell --headless --disable-gpu \
+  --remote-debugging-port=9333 --user-data-dir=/tmp/cdp-profile about:blank &
+
+# 2. 撮影する
+OUT=docs/screenshots node tools/demo/screenshot.mjs
+```
+
+ローカルで生成した `docs/` を撮る場合は `BASE` を指定します。
+
+```sh
+cd docs && python3 -m http.server 8899 &
+BASE=http://localhost:8899 OUT=docs/screenshots node tools/demo/screenshot.mjs
+```
+
+### ビューポート幅について
+
+`screenshot.mjs` の `SHOTS` には画面ごとにビューポート幅を持たせています。
+
+プラグインの CSS は `.contents-header-wrapper` が `width: 100%` と `padding: 2rem 4%` を併用しており、`box-sizing` が指定されていないため内容が必ず横に溢れます。溢れた状態で撮ると右端が切れるため、各画面が収まる幅を指定しています。画面を修正して幅が変わった場合はこの値も調整してください。
+
 ## デモ用に実物と変えている点
 
 静的な HTML として成立させるため、以下だけ実際の動作と異なります。
