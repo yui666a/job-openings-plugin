@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>求人一覧（訪問者向け）｜Job Opening デモ</title>
+  <meta name="description" content="WordPress プラグイン Job Opening の画面デモ。求人一覧（訪問者向け）" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cardStyle.css" />
+  
+  <style>
+    body { background: #fff; margin: 0; padding: 0 0 4rem; font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .demo-bar { background:#283b59; color:#fff; padding:.55rem 1rem; font-size:.85rem; display:flex; gap:.9rem; flex-wrap:wrap; align-items:center; position:sticky; top:0; z-index:999; }
+    .demo-bar a { color:#fff; text-decoration:none; opacity:.72; }
+    .demo-bar a:hover { opacity:1; text-decoration:underline; }
+    .demo-bar a.on { opacity:1; font-weight:700; text-decoration:underline; }
+    .demo-bar .t { font-weight:700; opacity:1; margin-right:.4rem; }
+    .demo-bar .t a { opacity:1; }
+    .demo-banner { background:#eef2f7; border-bottom:1px solid #d4dce6; color:#3d4a5c; padding:.5rem 1rem; font-size:.8rem; }
+    .demo-note { background:#fff8e1; border-left:4px solid #f0b429; padding:.7rem 1rem; margin:1rem; font-size:.85rem; color:#5c4813; }
+    .demo-note code { background:#f6ecd0; padding:.1em .35em; border-radius:3px; }
+    .demo-body { padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <span class="t"><a href="index.html">Job Opening デモ</a></span>
+    <a href="entry.html">入口ページ</a>
+    <a href="add-company.html">企業 新規作成</a>
+    <a href="company-list.html">企業一覧</a>
+    <a href="add-card.html">求人 新規作成</a>
+    <a href="job-list.html">求人一覧（管理）</a>
+    <a href="public-list.html" class="on">求人一覧（訪問者向け）</a>
+  </div>
+  <div class="demo-banner">
+    これは表示確認用のデモです。サンプルデータを表示しているだけで、保存・削除などの操作はできません。
+  </div>
+  <div class="demo-note">固定ページに <code>[user_job_openings]</code> を貼ると表示されます。これはサイト訪問者（求職者）が見る画面です。<br /><strong>公開済みかつ掲載期限内の求人だけ</strong>が新着順で並ぶため、上の管理画面にある下書き1件はここには出ません。</div>
+  <div class="demo-body">
+  <div class="contents-header-wrapper">
+    <div class="contents-wrapper" id="jsi-content-wrapper">
+      <div class="contents-job-list-wrapper">  <div class="job-list-fream">
+    <a href="https://example.com/job_openings/101" class="job-list-box-wrapper">
+      <div class="job-list-contents">
+        <div class="job-list-box-caption">
+                <div class="job-list-img-wrapper">
+        <img
+          src="logo-a.svg"
+          alt="株式会社ながおか製作所のロゴ"
+        />
+      </div>
+          <div class="job-list-text-wrapper">
+            <div class="job-title">
+              精密板金の生産技術エンジニア（第二新卒歓迎）
+            </div>
+            <div class="job-list-tag-box">
+              <ul class="job-list-tag">
+                <span>
+                  <li>中途</li>
+                </span>
+              </ul>
+            </div>
+            <div class="job-list-detail-box">
+              <span class="job-list-detail-text">[仕事内容] レーザー加工機・ベンダーを用いた精密板金の工程設計を担当します。CAD/CAMによる展開図作成から、治具設計、現場への落とし込みまで一貫して関わります。 [募集要件] 機械・電気系の学科卒、または製造業での実務経験2年以上。CAD経験があれば尚可。</span>
+              <div class="job-list-detail-link">
+                <span>…続きを見る</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>  <div class="job-list-fream">
+    <a href="https://example.com/job_openings/102" class="job-list-box-wrapper">
+      <div class="job-list-contents">
+        <div class="job-list-box-caption">
+                <div class="job-list-img-wrapper">
+        <img
+          src="logo-b.svg"
+          alt="合同会社ヒルサイド・デザインのロゴ"
+        />
+      </div>
+          <div class="job-list-text-wrapper">
+            <div class="job-title">
+              UIデザイナー（フルリモート可）
+            </div>
+            <div class="job-list-tag-box">
+              <ul class="job-list-tag">
+                <span>
+                  <li>新卒</li><li>中途</li><li>リモートワーク可</li>
+                </span>
+              </ul>
+            </div>
+            <div class="job-list-detail-box">
+              <span class="job-list-detail-text">[仕事内容] 自治体・地方企業のWebサイトおよびアプリのUI設計を担当します。ヒアリングから情報設計、プロトタイピングまで幅広く関わっていただきます。 [募集要件] Figmaを用いた実務経験1年以上。デザインシステム構築の経験がある方を歓迎します。</span>
+              <div class="job-list-detail-link">
+                <span>…続きを見る</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>  </div>
+  </div>
+</div>
+  </div>
+</body>
+</html>

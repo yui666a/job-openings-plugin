@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>求人情報を作成｜Job Opening デモ</title>
+  <meta name="description" content="WordPress プラグイン Job Opening の画面デモ。求人情報を作成" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="js/main.js"></script>
+  <style>
+    body { background: #fff; margin: 0; padding: 0 0 4rem; font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .demo-bar { background:#283b59; color:#fff; padding:.55rem 1rem; font-size:.85rem; display:flex; gap:.9rem; flex-wrap:wrap; align-items:center; position:sticky; top:0; z-index:999; }
+    .demo-bar a { color:#fff; text-decoration:none; opacity:.72; }
+    .demo-bar a:hover { opacity:1; text-decoration:underline; }
+    .demo-bar a.on { opacity:1; font-weight:700; text-decoration:underline; }
+    .demo-bar .t { font-weight:700; opacity:1; margin-right:.4rem; }
+    .demo-bar .t a { opacity:1; }
+    .demo-banner { background:#eef2f7; border-bottom:1px solid #d4dce6; color:#3d4a5c; padding:.5rem 1rem; font-size:.8rem; }
+    .demo-note { background:#fff8e1; border-left:4px solid #f0b429; padding:.7rem 1rem; margin:1rem; font-size:.85rem; color:#5c4813; }
+    .demo-note code { background:#f6ecd0; padding:.1em .35em; border-radius:3px; }
+    .demo-body { padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <span class="t"><a href="index.html">Job Opening デモ</a></span>
+    <a href="entry.html">入口ページ</a>
+    <a href="add-company.html">企業 新規作成</a>
+    <a href="company-list.html">企業一覧</a>
+    <a href="add-card.html" class="on">求人 新規作成</a>
+    <a href="job-list.html">求人一覧（管理）</a>
+    <a href="public-list.html">求人一覧（訪問者向け）</a>
+  </div>
+  <div class="demo-banner">
+    これは表示確認用のデモです。サンプルデータを表示しているだけで、保存・削除などの操作はできません。
+  </div>
+  <div class="demo-note">固定ページに <code>[job_openings_add]</code> を貼ると表示されます。<strong>募集企業を選ぶと住所や就業時間が自動入力されます</strong>。職種は14分類から最大3つまで選べます。<br />仕事内容などの入力欄は、実際の環境ではリッチテキストエディタ（TinyMCE）になります。</div>
+  <div class="demo-body">
+  <div class="step-wrapper margin4">
+    <!-- <div class="step-number" id="step1-index">1</div> -->
+    <div class="step-text" id="step1-label">
+      <a href="add-company.html">企業情報を新規追加</a>
+    </div>
+
+    <!-- <div class="step-number" id="step2-index">2</div> -->
+    <div class="step-text" id="step2-label">
+      <a href="company-list.html">作成した企業一覧</a>
+    </div>
+
+    <!-- <div class="step-number" id="step3-index">3</div> -->
+    <div class="step-text" id="step3-label">
+      <a href="add-card.html">求人情報を新規追加</a>
+    </div>
+
+    <!-- <div class="step-number" id="step4-index">4</div> -->
+    <div class="step-text" id="step4-label">
+      <a href="job-list.html">作成した求人一覧</a>
+    </div>
+  </div>  <!-- main -->
+  <div class="job-information">
+    <h3>求人情報</h3>
+    <form action="#" method="post" class="h-adr">
+      <input type="hidden" name="post_method" value="Y">
+      <input type="hidden" name="userId" value="1">
+      <input type="hidden" name="ticket" value="preview-ticket">
+      <input type="hidden" name="companies_data" value="[{&quot;co_id&quot;:1,&quot;co_name&quot;:&quot;\u682a\u5f0f\u4f1a\u793e\u306a\u304c\u304a\u304b\u88fd\u4f5c\u6240&quot;,&quot;co_sector&quot;:&quot;\u88fd\u9020\u696d\uff08\u7cbe\u5bc6\u6a5f\u68b0\uff09&quot;,&quot;co_url&quot;:&quot;https:\/\/example.com\/nagaoka&quot;,&quot;co_pr_point&quot;:&quot;\u82e5\u624b\u306e\u88c1\u91cf\u304c\u5927\u304d\u304f\u3001\u5165\u793e2\u5e74\u76ee\u304b\u3089\u8a2d\u8a08\u3092\u4efb\u3055\u308c\u307e\u3059\u3002&quot;,&quot;co_zip_code&quot;:&quot;940-0062&quot;,&quot;co_address&quot;:&quot;\u65b0\u6f5f\u770c\u9577\u5ca1\u5e02\u5927\u624b\u901a1-4-10&quot;,&quot;co_achievement&quot;:null,&quot;co_office_hours&quot;:&quot;8:30\u301c17:30\uff08\u4f11\u61a960\u5206\uff09&quot;,&quot;co_employee_benefits&quot;:&quot;\u5404\u7a2e\u793e\u4f1a\u4fdd\u967a\u5b8c\u5099\uff0f\u9000\u8077\u91d1\u5236\u5ea6\uff0f\u8cc7\u683c\u53d6\u5f97\u652f\u63f4&quot;,&quot;co_day_off&quot;:&quot;\u571f\u65e5\u795d\uff08\u5e74\u9593\u4f11\u65e5121\u65e5\uff09&quot;},{&quot;co_id&quot;:2,&quot;co_name&quot;:&quot;\u5408\u540c\u4f1a\u793e\u30d2\u30eb\u30b5\u30a4\u30c9\u30fb\u30c7\u30b6\u30a4\u30f3&quot;,&quot;co_sector&quot;:&quot;Web\u30fb\u30a4\u30f3\u30bf\u30fc\u30cd\u30c3\u30c8&quot;,&quot;co_url&quot;:&quot;https:\/\/example.com\/hillside&quot;,&quot;co_pr_point&quot;:&quot;\u30d5\u30eb\u30ea\u30e2\u30fc\u30c8\u53ef\u3002\u526f\u696d\u30fb\u517c\u696d\u3082\u6b53\u8fce\u3057\u3066\u3044\u307e\u3059\u3002&quot;,&quot;co_zip_code&quot;:&quot;940-0088&quot;,&quot;co_address&quot;:&quot;\u65b0\u6f5f\u770c\u9577\u5ca1\u5e02\u67cf\u753a2-1-1&quot;,&quot;co_achievement&quot;:null,&quot;co_office_hours&quot;:&quot;\u30d5\u30ec\u30c3\u30af\u30b9\uff08\u30b3\u30a2\u30bf\u30a4\u30e011:00\u301c16:00\uff09&quot;,&quot;co_employee_benefits&quot;:&quot;\u30ea\u30e2\u30fc\u30c8\u624b\u5f53\uff0f\u66f8\u7c4d\u8cfc\u5165\u88dc\u52a9\uff0f\u30ab\u30f3\u30d5\u30a1\u30ec\u30f3\u30b9\u53c2\u52a0\u8cbb\u652f\u7d66&quot;,&quot;co_day_off&quot;:&quot;\u5b8c\u5168\u9031\u4f11\u4e8c\u65e5\u5236\uff08\u5e74\u9593\u4f11\u65e5125\u65e5\uff09&quot;}]">
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          募集企業名
+        </div>
+        <select name="company_id" id="company_id"><option value="1">株式会社ながおか製作所</option><option value="2">合同会社ヒルサイド・デザイン</option></select>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          求人名（表示するタイトル）
+        </div>
+        <input required type="text" name="title" id="title" placeholder="" />
+        <div class="form-description">
+          求人ページの見出し(求人名)をご入力いただけます
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          応募URLや宛先メールアドレス
+        </div>
+        <input required type="text" name="apply_link" id="apply_link" placeholder="https://~, xxx@gmail.com" />
+        <div class="form-description">
+          応募者が遷移するURLや宛先eメールアドレスをご入力ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">求人管理</div>
+        <input type="text" name="manage_id" id="manage_id" placeholder="35470, https://~~~ など" />
+        <div class="form-description">
+          任意のID（貴社内の求人管理ID等）または，URLをご入力いただけます
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          求人タイプ
+        </div>
+        <label> <input required type="radio" name="recruitment_type" class="recruitment_type" value="new_graduate" />新卒</label><label> <input required type="radio" name="recruitment_type" class="recruitment_type" value="mid_career" />中途</label><label> <input required type="radio" name="recruitment_type" class="recruitment_type" value="both" />どちらでも</label>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          職種
+        </div>
+        <select name="occupation[]" id="occupation" multiple="multiple" required></select>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>部署・役職名
+        </div>
+        <input type="text" required placeholder="" name="position" class="position"  />
+        <div class="form-description">
+          募集されるポジション（役職または部署）を記載してください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          仕事内容
+        </div>
+        <textarea class="rich" name="work_detail" rows="6" required></textarea>
+        <div class="form-description">
+          仕事内容やミッションをわかりやすくご記載ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          募集要件
+        </div>
+        <textarea class="rich" name="application_conditions" rows="6" required></textarea>
+        <div class="form-description">
+          必須条件、歓迎条件、求める人物像などをご記載ください
+        </div>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          待遇・労働条件など
+        </div>
+        <textarea required class="rich" name="working_conditions" rows="6"></textarea>
+        <div class="form-description">雇用形態や労働契約の期間、待遇などについてご記入ください</div>
+      </div>
+
+      <!--
+      <div class="form-item">
+        <div class="item-label"><span class="required-tag">必須</span>勤務地</div>
+        <select id="location" name="location" multiple required></select>
+        <button class="add" type="button">＋追加</button>
+
+        <div>
+          <label>
+            <input type="checkbox" name="example" value="サンプル" />
+            勤務地問わず
+          </label>
+        </div>
+      </div>
+      -->
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          リモートワーク
+        </div>
+        <label> <input required type="radio" name="remote_work" class="remote_work" value="true" />可</label><label> <input required type="radio" name="remote_work" class="remote_work" value="false" />不可</label><label> <input required type="radio" name="remote_work" class="remote_work" value="both" />未選択</label>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="recommended-tag">任意</span>
+          勤務地住所
+        </div>
+        <input type="hidden" class="p-country-name" value="Japan">
+        〒<input type="text" placeholder="999-9999" name="zipcode" class="p-postal-code" size="8" maxlength="8" style="width: 130px;"><br>
+        <input type="text" placeholder="〇〇県〇〇市９−９−９" name="address" class="p-region p-locality p-street-address p-extended-address" /><br>
+        <input type="text" placeholder="△△ビル 3F" name="address_2" class="" /><br>
+      </div>
+
+      <div class="form-item">
+        <div class="item-label">
+          <span class="required-tag">必須</span>
+          掲載期間
+        </div>
+
+        <div style="margin-bottom: 4px">
+          <input type="radio" name="date_period_type" value="period" checked />
+          本日から
+          <input type="tel" id="start" name="trip_period" value="90" style="width: 50px" />
+          日間表示する
+        </div>
+        <div>
+          <input type="radio" name="date_period_type" value="fromto" />
+          <input type="date" id="start" name="trip_start" style="width:40%"/>
+          　〜　
+          <input type="date" id="start" name="trip_last" style="width:40%"/>
+        </div>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" class="button draft" name='action' value='draft'>下書き保存</button>
+        <button type="submit" class="button confirm" name='action' value='post'>投稿する</button>
+      </div>
+    </form>
+  </div>
+  </div>
+</body>
+</html>

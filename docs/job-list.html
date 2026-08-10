@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>作成した求人一覧（管理）｜Job Opening デモ</title>
+  <meta name="description" content="WordPress プラグイン Job Opening の画面デモ。作成した求人一覧（管理）" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  
+  <style>
+    body { background: #fff; margin: 0; padding: 0 0 4rem; font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .demo-bar { background:#283b59; color:#fff; padding:.55rem 1rem; font-size:.85rem; display:flex; gap:.9rem; flex-wrap:wrap; align-items:center; position:sticky; top:0; z-index:999; }
+    .demo-bar a { color:#fff; text-decoration:none; opacity:.72; }
+    .demo-bar a:hover { opacity:1; text-decoration:underline; }
+    .demo-bar a.on { opacity:1; font-weight:700; text-decoration:underline; }
+    .demo-bar .t { font-weight:700; opacity:1; margin-right:.4rem; }
+    .demo-bar .t a { opacity:1; }
+    .demo-banner { background:#eef2f7; border-bottom:1px solid #d4dce6; color:#3d4a5c; padding:.5rem 1rem; font-size:.8rem; }
+    .demo-note { background:#fff8e1; border-left:4px solid #f0b429; padding:.7rem 1rem; margin:1rem; font-size:.85rem; color:#5c4813; }
+    .demo-note code { background:#f6ecd0; padding:.1em .35em; border-radius:3px; }
+    .demo-body { padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <span class="t"><a href="index.html">Job Opening デモ</a></span>
+    <a href="entry.html">入口ページ</a>
+    <a href="add-company.html">企業 新規作成</a>
+    <a href="company-list.html">企業一覧</a>
+    <a href="add-card.html">求人 新規作成</a>
+    <a href="job-list.html" class="on">求人一覧（管理）</a>
+    <a href="public-list.html">求人一覧（訪問者向け）</a>
+  </div>
+  <div class="demo-banner">
+    これは表示確認用のデモです。サンプルデータを表示しているだけで、保存・削除などの操作はできません。
+  </div>
+  <div class="demo-note">固定ページに <code>[job_openings_list]</code> を貼ると表示されます。公開・下書きの切り替え、編集、コピーして新規作成ができます。<br />デモではサンプル求人3件（公開2件・下書き1件）を表示しています。公開中の行は「非公開にする」、下書きの行は「公開する」と出し分けられます。</div>
+  <div class="demo-body">
+<strong class="who-is-login">現在、長岡 太郎としてログインしています(<a href="#">ログアウト</a>する)</strong>  <div class="step-wrapper margin4">
+    <!-- <div class="step-number" id="step1-index">1</div> -->
+    <div class="step-text" id="step1-label">
+      <a href="add-company.html">企業情報を新規追加</a>
+    </div>
+
+    <!-- <div class="step-number" id="step2-index">2</div> -->
+    <div class="step-text" id="step2-label">
+      <a href="company-list.html">作成した企業一覧</a>
+    </div>
+
+    <!-- <div class="step-number" id="step3-index">3</div> -->
+    <div class="step-text" id="step3-label">
+      <a href="add-card.html">求人情報を新規追加</a>
+    </div>
+
+    <!-- <div class="step-number" id="step4-index">4</div> -->
+    <div class="step-text" id="step4-label">
+      <a href="job-list.html">作成した求人一覧</a>
+    </div>
+  </div>
+  <table class="margin4 wp-list-table widefat fixed striped table-view-list posts">
+  <thead>
+    <tr>
+      <th
+        scope="col"
+        id="job_position"
+        class="manage-column column-job_position column-primary sorted desc"
+      >
+        <span>求人タイトル</span><span class="sorting-indicator"></span>
+      </th>
+      <th
+        scope="col"
+        id="job_listing_type"
+        class="manage-column column-job_listing_type"
+      >
+        タイプ
+      </th>
+      <th
+        scope="col"
+        id="job_location"
+        class="manage-column column-job_location sortable desc"
+      >
+        <span>社名・勤務地</span><span class="sorting-indicator"></span>
+      </th>
+      <th scope="col" id="job_status" class="manage-column column-job_status">
+        <span class="tips" data-tip="ステータス">ステータス</span>
+      </th>
+      <th
+        scope="col"
+        id="job_posted"
+        class="manage-column column-job_posted sortable desc"
+      >
+        <span>期限</span><span class="sorting-indicator"></span
+        >
+      </th>
+      <!--<th
+        scope="col"
+        id="job_expires"
+        class="manage-column column-job_expires sortable desc"
+      >
+      <span>期限</span><span class="sorting-indicator"></span
+        >
+      </th>-->
+      <!--<th
+        scope="col"
+        id="job_listing_category"
+        class="manage-column column-job_listing_category"
+      >
+        カテゴリー
+      </th>-->
+      <th scope="col" id="job_actions" class="manage-column column-job_actions">
+        操作
+      </th>
+    </tr>
+  </thead><tbody id="the-list">    <tr
+      id="post-101"
+      class="iedit author-self level-0 post-101 type-job_listing status-publish has-post-thumbnail hentry job_listing job-type-full-time"
+    >
+      <td
+        class="job_position column-job_position has-row-actions column-primary"
+        data-colname="求人タイトル"
+      >
+        <div class="job_position">
+          <a
+            href="#" onclick="return false" title="デモでは操作できません"
+            class="tips job_title"
+            data-tip="ID: 101"
+            >精密板金の生産技術エンジニア（第二新卒歓迎）</a
+          ><br/>(管理番号: NGO-2026-011)
+        </div>
+      </td>
+      <td
+        class="job_listing_type column-job_listing_type"
+        data-colname="タイプ"
+      >
+        <span class="job-type">中途</span>
+      </td>
+      <td class="job_location column-job_location" data-colname="社名・勤務地">
+        <div class="company">
+          <span class="tips" data-tip="asdf">
+            株式会社ながおか製作所
+          </span>
+        </div>
+        <img
+          class="company_logo"
+          src="logo-a.svg"
+          alt="株式会社ながおか製作所"
+        />
+        <a
+          class="google_map_link"
+          href="https://maps.google.com/maps?q=新潟県長岡市&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
+          >新潟県長岡市</a
+        >
+      </td>
+      <td class="job_status column-job_status" data-colname="ステータス">
+        <span data-tip="公開中" class="tips status-publish">公開中</span>
+      </td>
+      <td class="job_posted column-job_posted" data-colname="期限">
+        <strong>2026年7月15日<br/>〜 2026-12-31</strong>
+      </td>
+      <!--<td
+        class="job_listing_category column-job_listing_category"
+        data-colname="カテゴリー"
+      >
+        <span class="na">–</span>
+      </td>-->
+      <td class="job_actions column-job_actions" data-colname="操作">
+        <div class="actions">
+          <div>
+            <a
+              class="button button-icon tips icon-view"
+              href="https://example.com/job_openings/101"
+              data-tip="表示"
+              >表示</a
+            >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="#" onclick="return false" title="デモでは操作できません"
+              data-tip="編集"
+              >編集</a
+            >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-delete"
+              href="https://example.com/wp-admin/post.php?post=101&amp;action=trash&_wpnonce=preview"
+              data-tip="削除"
+              >削除</a
+            >
+          </div>
+          <div>
+                <a
+      class="button button-icon tips icon-view"
+      href="https://example.com/job_opening_list?&action=draft&post=101";
+      data-tip="非公開にする"
+      >非公開にする</a
+      >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="#" onclick="return false" title="デモでは操作できません"
+              data-tip="コピーして新規作成"
+              >コピーして新規作成</a
+            >
+          </div>
+        </div>
+      </td>
+    </tr>    <tr
+      id="post-102"
+      class="iedit author-self level-0 post-102 type-job_listing status-publish has-post-thumbnail hentry job_listing job-type-full-time"
+    >
+      <td
+        class="job_position column-job_position has-row-actions column-primary"
+        data-colname="求人タイトル"
+      >
+        <div class="job_position">
+          <a
+            href="#" onclick="return false" title="デモでは操作できません"
+            class="tips job_title"
+            data-tip="ID: 102"
+            >UIデザイナー（フルリモート可）</a
+          ><br/>(管理番号: HSD-2026-003)
+        </div>
+      </td>
+      <td
+        class="job_listing_type column-job_listing_type"
+        data-colname="タイプ"
+      >
+        <span class="job-type">新卒・中途</span>
+      </td>
+      <td class="job_location column-job_location" data-colname="社名・勤務地">
+        <div class="company">
+          <span class="tips" data-tip="asdf">
+            合同会社ヒルサイド・デザイン
+          </span>
+        </div>
+        <img
+          class="company_logo"
+          src="logo-b.svg"
+          alt="合同会社ヒルサイド・デザイン"
+        />
+        <a
+          class="google_map_link"
+          href="https://maps.google.com/maps?q=新潟県長岡市&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
+          >新潟県長岡市</a
+        >
+      </td>
+      <td class="job_status column-job_status" data-colname="ステータス">
+        <span data-tip="公開中" class="tips status-publish">公開中</span>
+      </td>
+      <td class="job_posted column-job_posted" data-colname="期限">
+        <strong>2026年8月1日<br/>〜 2026-11-30</strong>
+      </td>
+      <!--<td
+        class="job_listing_category column-job_listing_category"
+        data-colname="カテゴリー"
+      >
+        <span class="na">–</span>
+      </td>-->
+      <td class="job_actions column-job_actions" data-colname="操作">
+        <div class="actions">
+          <div>
+            <a
+              class="button button-icon tips icon-view"
+              href="https://example.com/job_openings/102"
+              data-tip="表示"
+              >表示</a
+            >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="#" onclick="return false" title="デモでは操作できません"
+              data-tip="編集"
+              >編集</a
+            >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-delete"
+              href="https://example.com/wp-admin/post.php?post=102&amp;action=trash&_wpnonce=preview"
+              data-tip="削除"
+              >削除</a
+            >
+          </div>
+          <div>
+                <a
+      class="button button-icon tips icon-view"
+      href="https://example.com/job_opening_list?&action=draft&post=102";
+      data-tip="非公開にする"
+      >非公開にする</a
+      >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="#" onclick="return false" title="デモでは操作できません"
+              data-tip="コピーして新規作成"
+              >コピーして新規作成</a
+            >
+          </div>
+        </div>
+      </td>
+    </tr>    <tr
+      id="post-103"
+      class="iedit author-self level-0 post-103 type-job_listing status-publish has-post-thumbnail hentry job_listing job-type-full-time"
+    >
+      <td
+        class="job_position column-job_position has-row-actions column-primary"
+        data-colname="求人タイトル"
+      >
+        <div class="job_position">
+          <a
+            href="#" onclick="return false" title="デモでは操作できません"
+            class="tips job_title"
+            data-tip="ID: 103"
+            >2027年度 新卒総合職（技術系）</a
+          ><br/>(管理番号: NGO-2027-001)
+        </div>
+      </td>
+      <td
+        class="job_listing_type column-job_listing_type"
+        data-colname="タイプ"
+      >
+        <span class="job-type">新卒</span>
+      </td>
+      <td class="job_location column-job_location" data-colname="社名・勤務地">
+        <div class="company">
+          <span class="tips" data-tip="asdf">
+            株式会社ながおか製作所
+          </span>
+        </div>
+        <img
+          class="company_logo"
+          src="logo-a.svg"
+          alt="株式会社ながおか製作所"
+        />
+        <a
+          class="google_map_link"
+          href="https://maps.google.com/maps?q=新潟県長岡市&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
+          >新潟県長岡市</a
+        >
+      </td>
+      <td class="job_status column-job_status" data-colname="ステータス">
+        <span data-tip="非公開" class="tips status-draft">非公開</span>
+      </td>
+      <td class="job_posted column-job_posted" data-colname="期限">
+        <strong>2026年6月10日<br/>〜 2027-03-31</strong>
+      </td>
+      <!--<td
+        class="job_listing_category column-job_listing_category"
+        data-colname="カテゴリー"
+      >
+        <span class="na">–</span>
+      </td>-->
+      <td class="job_actions column-job_actions" data-colname="操作">
+        <div class="actions">
+          <div>
+            <a
+              class="button button-icon tips icon-view"
+              href="https://example.com/job_openings/103"
+              data-tip="表示"
+              >表示</a
+            >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="#" onclick="return false" title="デモでは操作できません"
+              data-tip="編集"
+              >編集</a
+            >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-delete"
+              href="https://example.com/wp-admin/post.php?post=103&amp;action=trash&_wpnonce=preview"
+              data-tip="削除"
+              >削除</a
+            >
+          </div>
+          <div>
+                <a
+      class="button button-icon tips icon-view"
+      href="https://example.com/job_opening_list?&action=publish&post=103";
+      data-tip="公開する"
+      >公開する</a
+      >
+          </div>
+          <div>
+            <a
+              class="button button-icon tips icon-edit"
+              href="#" onclick="return false" title="デモでは操作できません"
+              data-tip="コピーして新規作成"
+              >コピーして新規作成</a
+            >
+          </div>
+        </div>
+      </td>
+    </tr></tbody></table>
+  </div>
+</body>
+</html>

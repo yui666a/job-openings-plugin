@@ -9,6 +9,14 @@ WordPress の管理画面（wp-admin）を知らない一般ユーザーでも�
 - Author: yui666a（[STYLE ARTS](http://style-arts.jp/)）
 - 動作要件: WordPress 5.9 以上（`JOB_OPENING__MINIMUM_WP_VERSION`）
 
+## デモ
+
+導入しなくても画面を確認できるデモサイトを公開しています。
+
+**https://yui666a.github.io/job-openings-plugin/**
+
+プラグイン本体のテンプレートをサンプルデータで描画した静的サイトです。表示の確認のみで、保存・削除などの操作はできません。生成方法は [`tools/demo/README.md`](tools/demo/README.md) を参照してください。
+
 ---
 
 ## リポジトリ構成
@@ -16,6 +24,8 @@ WordPress の管理画面（wp-admin）を知らない一般ユーザーでも�
 | パス | 内容 |
 | --- | --- |
 | `job_opening_plugin/` | **プラグイン本体。** WordPress にインストールするのはこのディレクトリ |
+| `docs/` | デモサイト（GitHub Pages で公開）。`tools/demo/` で自動生成される |
+| `tools/demo/` | デモサイトの生成スクリプト |
 | `mock/` | 実装前に作成した静的 HTML モック（`index.html` から辿れる） |
 | `index.html` | モックへのリンク集 |
 

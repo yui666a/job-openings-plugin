@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Opening｜WordPress 求人投稿プラグインのデモ</title>
+  <meta name="description" content="WordPress プラグイン Job Opening の画面デモ。管理画面を使わずフロントの固定ページから求人を投稿できます。" />
+  <style>
+    :root { --ink:#1f2937; --muted:#5b6775; --line:#e2e8f0; --navy:#283b59; --bg:#fff; --card:#fff; --accent:#f0b429; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --ink:#e8edf4; --muted:#a7b3c2; --line:#2c3a4d; --navy:#9db4d8; --bg:#141a22; --card:#1b232e; }
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif; line-height:1.75; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.2rem 5rem; }
+    header.hero { background:var(--navy); color:#fff; padding: 3rem 1.2rem 2.4rem; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) header.hero { background:#1c2836; } }
+    .hero-inner { max-width: 860px; margin: 0 auto; }
+    .hero h1 { margin:0 0 .5rem; font-size: 1.9rem; letter-spacing:.01em; }
+    .hero p { margin:0; opacity:.9; font-size:1rem; max-width: 40em; }
+    .badge { display:inline-block; background:rgba(255,255,255,.16); border-radius:99px; padding:.15rem .7rem; font-size:.75rem; margin-bottom:.9rem; }
+    h2 { font-size:1.15rem; margin: 2.4rem 0 .3rem; padding-bottom:.4rem; border-bottom:2px solid var(--line); }
+    .lead { color:var(--muted); font-size:.92rem; margin:.4rem 0 1.2rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:.9rem; margin-top:1rem; }
+    .card { display:block; border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; text-decoration:none; color:inherit; background:var(--card); transition:.15s; }
+    .card:hover { border-color:var(--navy); transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,.07); }
+    .card .step { font-size:.7rem; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
+    .card .name { font-weight:700; margin:.15rem 0 .3rem; }
+    .card .desc { font-size:.83rem; color:var(--muted); line-height:1.6; }
+    .card code { font-size:.78rem; background:rgba(128,128,128,.13); padding:.1em .35em; border-radius:3px; }
+    .note { background:rgba(240,180,41,.11); border-left:4px solid var(--accent); padding:.85rem 1rem; border-radius:0 6px 6px 0; font-size:.87rem; margin:1.2rem 0; }
+    ul.plain { padding-left:1.2rem; } ul.plain li { margin:.3rem 0; font-size:.92rem; }
+    footer { margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line); font-size:.83rem; color:var(--muted); }
+    a { color:#2563eb; } @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) a { color:#7ab0ff; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="badge">WordPress プラグイン / 画面デモ</span>
+      <h1>Job Opening</h1>
+      <p>求人情報を企業単位で登録・掲載する WordPress プラグインです。WordPress の管理画面を開かなくても、サイト上の固定ページに置いたフォームから求人を投稿できます。</p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="note">
+      <strong>このデモについて</strong><br />
+      プラグインが実際に出力する画面を、サンプルデータで表示しています。表示の確認だけができる状態で、保存・削除などの操作はできません。
+    </div>
+
+    <h2>投稿者が使う画面</h2>
+    <p class="lead">求人を掲載する企業の担当者が使う画面です。番号の順に進みます。求人は企業に紐づくため、先に企業を登録します。</p>
+    <div class="grid">
+      <a class="card" href="entry.html">
+        <div class="step">はじめに</div>
+        <div class="name">入口ページ</div>
+        <div class="desc">投稿者が最初に開くページ。ここから各画面に移動します。<br /><code>[entry_page]</code></div>
+      </a>
+      <a class="card" href="add-company.html">
+        <div class="step">STEP 1</div>
+        <div class="name">企業情報を作成</div>
+        <div class="desc">社名・住所・就業時間などを登録します。郵便番号から住所を自動入力。<br /><code>[company_add]</code></div>
+      </a>
+      <a class="card" href="company-list.html">
+        <div class="step">STEP 2</div>
+        <div class="name">作成した企業一覧</div>
+        <div class="desc">登録した企業の確認・編集・削除ができます。<br /><code>[company_list]</code></div>
+      </a>
+      <a class="card" href="add-card.html">
+        <div class="step">STEP 3</div>
+        <div class="name">求人情報を作成</div>
+        <div class="desc">企業を選ぶと住所や就業時間が自動入力されます。職種は14分類から選択。<br /><code>[job_openings_add]</code></div>
+      </a>
+      <a class="card" href="job-list.html">
+        <div class="step">STEP 4</div>
+        <div class="name">作成した求人一覧</div>
+        <div class="desc">公開・下書きの切り替え、編集、コピーして新規作成ができます。<br /><code>[job_openings_list]</code></div>
+      </a>
+    </div>
+
+    <h2>サイト訪問者が見る画面</h2>
+    <p class="lead">求職者に見せる公開ページです。公開済みかつ掲載期限内の求人だけが新着順で並びます。</p>
+    <div class="grid">
+      <a class="card" href="public-list.html">
+        <div class="step">公開ページ</div>
+        <div class="name">求人一覧（訪問者向け）</div>
+        <div class="desc">掲載期限を過ぎた求人は自動的に一覧から外れます。<br /><code>[user_job_openings]</code></div>
+      </a>
+    </div>
+
+    <h2>できること</h2>
+    <ul class="plain">
+      <li>WordPress の管理画面を使わず、固定ページのフォームから求人を投稿できる</li>
+      <li>企業情報を一度登録すれば、以後の求人作成では選ぶだけで住所などが自動入力される</li>
+      <li>掲載期間を「本日から〇日間」または開始日・終了日の指定で設定でき、期限切れは自動的に非表示になる</li>
+      <li>投稿者ごとに、自分が作成した求人・企業のみ編集できる</li>
+      <li>求人はカスタム投稿タイプとして保存されるため、テーマ側から通常の投稿と同様に扱える</li>
+    </ul>
+
+    <footer>
+      導入手順や注意点は <a href="https://github.com/yui666a/job-openings-plugin#readme">README</a> を参照してください。<br />
+      このデモページはプラグイン本体のテンプレートから自動生成しています（<code>tools/demo/</code>）。
+    </footer>
+  </div>
+</body>
+</html>
