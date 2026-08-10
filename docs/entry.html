@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>入口ページ（マイページ）｜Job Opening デモ</title>
+  <meta name="description" content="WordPress プラグイン Job Opening の画面デモ。入口ページ（マイページ）" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/entry.css" />
+  
+  <style>
+    body { background: #fff; margin: 0; padding: 0 0 4rem; font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .demo-bar { background:#283b59; color:#fff; padding:.55rem 1rem; font-size:.85rem; display:flex; gap:.9rem; flex-wrap:wrap; align-items:center; position:sticky; top:0; z-index:999; }
+    .demo-bar a { color:#fff; text-decoration:none; opacity:.72; }
+    .demo-bar a:hover { opacity:1; text-decoration:underline; }
+    .demo-bar a.on { opacity:1; font-weight:700; text-decoration:underline; }
+    .demo-bar .t { font-weight:700; opacity:1; margin-right:.4rem; }
+    .demo-bar .t a { opacity:1; }
+    .demo-banner { background:#eef2f7; border-bottom:1px solid #d4dce6; color:#3d4a5c; padding:.5rem 1rem; font-size:.8rem; }
+    .demo-note { background:#fff8e1; border-left:4px solid #f0b429; padding:.7rem 1rem; margin:1rem; font-size:.85rem; color:#5c4813; }
+    .demo-note code { background:#f6ecd0; padding:.1em .35em; border-radius:3px; }
+    .demo-body { padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <span class="t"><a href="index.html">Job Opening デモ</a></span>
+    <a href="entry.html" class="on">入口ページ</a>
+    <a href="add-company.html">企業 新規作成</a>
+    <a href="company-list.html">企業一覧</a>
+    <a href="add-card.html">求人 新規作成</a>
+    <a href="job-list.html">求人一覧（管理）</a>
+    <a href="public-list.html">求人一覧（訪問者向け）</a>
+  </div>
+  <div class="demo-banner">
+    これは表示確認用のデモです。サンプルデータを表示しているだけで、保存・削除などの操作はできません。
+  </div>
+  <div class="demo-note">固定ページに <code>[entry_page]</code> を貼ると表示されます。投稿者が最初に開く入口で、ここから各画面に移動します。<br />デモではアイコンを同梱画像に差し替えています（プラグイン本体は外部サイトの画像を参照しているため）。</div>
+  <div class="demo-body">
+
+<div class="jo-entry">
+  <div class="page-area">
+    <div class="left-area">
+      <div class="img-wrapper">
+        <img
+          src="assets/icon-co-add.png"
+        />
+      </div>
+    </div>
+    <div class="text-wrapper">
+      <div class="title">企業を新規追加</div>
+      <div class="description">
+        求人情報を投稿したい企業情報を新たに作成します
+      </div>
+      <div>
+        <a href="add-company.html" class="btn">ページに移動する</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-area">
+    <div class="left-area">
+      <div class="img-wrapper">
+        <img
+          src="assets/icon-co-list.png"
+        />
+      </div>
+    </div>
+    <div class="text-wrapper">
+      <div class="title">作成した企業一覧</div>
+      <div class="description">作成した企業情報を確認・修正できます</div>
+      <div>
+        <a href="company-list.html" class="btn">ページに移動する</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-area">
+    <div class="left-area">
+      <div class="img-wrapper">
+        <img
+          src="assets/icon-jo-add.png"
+        />
+      </div>
+    </div>
+    <div class="text-wrapper">
+      <div class="title">求人情報を新規追加</div>
+      <div class="description">求人情報を新たに作成します</div>
+      <div>
+        <a href="add-card.html" class="btn">ページに移動する</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-area">
+    <div class="left-area">
+      <div class="img-wrapper">
+        <img
+          src="assets/icon-jo-list.png"
+        />
+      </div>
+    </div>
+    <div class="text-wrapper">
+      <div class="title">作成した求人一覧</div>
+      <div class="description">作成した企業情報を確認・修正できます</div>
+      <div>
+        <a href="job-list.html" class="btn">ページに移動する</a>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</body>
+</html>
