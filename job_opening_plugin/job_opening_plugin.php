@@ -107,6 +107,7 @@ function on_activate()
   job_opening_create_page_if_absent('job_openings_table', '求人一覧', '[user_job_openings]');
   job_opening_create_page_if_absent('entry_page', '求人管理画面一覧', '[entry_page]');
 }
+register_activation_hook(__FILE__, 'on_activate');
 
 /**
  * スラッグが未使用のときだけ固定ページを作成する
@@ -134,7 +135,6 @@ function job_opening_create_page_if_absent($slug, $title, $content)
     'post_status'  => 'publish',
   ));
 }
-register_activation_hook(__FILE__, 'on_activate');
 
 /**
  * プラグインを無効にしたときの処理
