@@ -140,7 +140,7 @@ function job_openings_add()
     || current_user_can('contributor')
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong class="who-is-login">現在、' . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
+    $html .= '<strong class="who-is-login">現在、' . esc_html($user->display_name) . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_card($user);
   } else {
     $html .= notLogin();
@@ -163,7 +163,7 @@ function company_add()
     || current_user_can('contributor')
   ) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-    $html .= '<strong class="who-is-login">現在、' . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
+    $html .= '<strong class="who-is-login">現在、' . esc_html($user->display_name) . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_company($user);
   } else {
     $html .= notLogin();

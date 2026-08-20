@@ -25,11 +25,15 @@ function create_company_template($user, $action_url, $session_key)
   $sector_selector .= '</select>';
 
 
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープした変数を用意する
+  $e_action_url = esc_url($action_url);
+  $e_display_name = esc_attr($user->display_name);
+
   $html = header_link_buttons();
   $html .= <<<EOF
   <div class="company-information">
     <h3>企業情報</h3>
-    <form action="{$action_url}" method="post" enctype="multipart/form-data" class="h-adr">
+    <form action="{$e_action_url}" method="post" enctype="multipart/form-data" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">
@@ -41,7 +45,7 @@ function create_company_template($user, $action_url, $session_key)
           type="text"
           name="company_name"
           id="name"
-          value="{$user->display_name}"
+          value="{$e_display_name}"
           placeholder="株式会社 XXXX-XXXX HOLDINGS"
         />
       </div>
