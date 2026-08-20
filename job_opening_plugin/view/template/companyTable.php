@@ -4,11 +4,23 @@ function make_company_table_row($data)
 {
   $coTable_page = HOME_URL . "/" . get_option("sac_company_list");
   // 削除は GET だけで発火するため、リンク自体に nonce を持たせる
+  // wp_nonce_url() は内部で esc_html() を通すため、ここで重ねてエスケープしない
   $remove_url = wp_nonce_url($coTable_page . "?&action=remove&id=" . $data->co_id, 'job_opening_remove_company_' . $data->co_id, 'ticket');
+
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープした変数を用意する
+  $e_coTable_page = esc_url($coTable_page);
+  $e_co_id = esc_attr($data->co_id);
+  $e_co_name = esc_html($data->co_name);
+  $e_co_name_attr = esc_attr($data->co_name);
+  $e_co_logo = esc_url($data->co_logo);
+  $e_co_address = esc_html($data->co_address);
+  $e_map_url = esc_url('https://maps.google.com/maps?q=' . $data->co_address . '&zoom=14&size=512x512&maptype=roadmap&sensor=false');
+  $e_created_at = esc_html($data->created_at);
+  $e_updated_at = esc_html($data->updated_at);
   $job_openings_table_main = <<<EOF
     <tr
-      id="post-{$data->co_id}"
-      class="iedit author-self level-0 post-{$data->co_id} type-job_listing status-publish has-post-thumbnail hentry job_listing job-type-full-time"
+      id="post-{$e_co_id}"
+      class="iedit author-self level-0 post-{$e_co_id} type-job_listing status-publish has-post-thumbnail hentry job_listing job-type-full-time"
     >
       <td
         class="job_position column-job_position has-row-actions column-primary"
@@ -16,37 +28,37 @@ function make_company_table_row($data)
       >
         <div class="job_position">
           <a
-            href="{$coTable_page}?&action=edit&id={$data->co_id}"
-            data-tip="ID: {$data->co_id}"
+            href="{$e_coTable_page}?&action=edit&id={$e_co_id}"
+            data-tip="ID: {$e_co_id}"
             >
-            {$data->co_name}</a>
+            {$e_co_name}</a>
             <br/>
           <img
             class="company_logo"
-            src="{$data->co_logo}"
-            alt="{$data->co_name}"
+            src="{$e_co_logo}"
+            alt="{$e_co_name_attr}"
           />
         </div>
       </td>
       <td class="job_location column-job_location" data-colname="所在地">
         <a
           class="google_map_link"
-          href="https://maps.google.com/maps?q={$data->co_address}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
+          href="{$e_map_url}"
           target="_blank" rel="noopener noreferrer"
-          >{$data->co_address}</a
+          >{$e_co_address}</a
         >
       </td>
       <td class="job_created column-job_created" data-colname="作成日">
-        <strong>{$data->created_at}</strong><br/>
+        <strong>{$e_created_at}</strong><br/>
       </td>
       <td class="job_updated column-job_updated" data-colname="最終更新日">
-        <strong>{$data->updated_at}</strong>
+        <strong>{$e_updated_at}</strong>
       </td>
       <td class="job_actions column-job_actions" data-colname="操作">
         <div class="actions">
           <a
             class="button button-icon tips icon-edit"
-            href="{$coTable_page}?&action=edit&id={$data->co_id}"
+            href="{$e_coTable_page}?&action=edit&id={$e_co_id}"
             data-tip="編集"
             >編集
           </a>

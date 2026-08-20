@@ -33,13 +33,21 @@ function userJobTable($post_id)
 
   $tags = addTags($recruitment_type, $remote_work);
 
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープした変数を用意する
+  // 一覧では抜粋のみを出すため、strip_tags() 済みの本文も含めてすべて esc_html() で扱う
+  $e_permalink = esc_url($permalink);
+  $e_title = esc_html($title);
+  $e_main_text = esc_html($main_text);
+
   $co_logo_img = "";
   if ($company->co_logo != "") {
+    $e_co_logo = esc_url($company->co_logo);
+    $e_co_logo_alt = esc_attr($company->co_name . 'のロゴ');
     $co_logo_img = <<<EOF
       <div class="job-list-img-wrapper">
         <img
-          src="{$company->co_logo}"
-          alt="{$company->co_name}のロゴ"
+          src="{$e_co_logo}"
+          alt="{$e_co_logo_alt}"
         />
       </div>
 EOF;
@@ -48,13 +56,13 @@ EOF;
 
   $html = <<<EOF
   <div class="job-list-fream">
-    <a href="{$permalink}" class="job-list-box-wrapper">
+    <a href="{$e_permalink}" class="job-list-box-wrapper">
       <div class="job-list-contents">
         <div class="job-list-box-caption">
           {$co_logo_img}
           <div class="job-list-text-wrapper">
             <div class="job-title">
-              {$title}
+              {$e_title}
             </div>
             <div class="job-list-tag-box">
               <ul class="job-list-tag">
@@ -64,7 +72,7 @@ EOF;
               </ul>
             </div>
             <div class="job-list-detail-box">
-              <span class="job-list-detail-text">{$main_text}</span>
+              <span class="job-list-detail-text">{$e_main_text}</span>
               <div class="job-list-detail-link">
                 <span>…続きを見る</span>
               </div>

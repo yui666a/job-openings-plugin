@@ -27,8 +27,23 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
   };
 
   // 公開状態の切り替えは GET だけで発火するため、リンク自体に nonce を持たせる
+  // wp_nonce_url() は内部で esc_html() を通すため、ここで重ねてエスケープしない
   $publish_url = wp_nonce_url($job_table_url . "?&action=publish&post=" . $post_id, 'job_opening_publish_job_' . $post_id, 'ticket');
   $draft_url = wp_nonce_url($job_table_url . "?&action=draft&post=" . $post_id, 'job_opening_draft_job_' . $post_id, 'ticket');
+
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープした変数を用意する
+  $e_title = esc_html($title);
+  $e_manage_id = esc_html($manage_id);
+  $e_recruitment_type = esc_html($recruitment_type);
+  $e_co_name = esc_html($company->co_name);
+  $e_co_logo = esc_url($company->co_logo);
+  $e_co_name_attr = esc_attr($company->co_name);
+  $e_job_location = esc_html($job_location);
+  $e_map_url = esc_url('https://maps.google.com/maps?q=' . $job_location . '&zoom=14&size=512x512&maptype=roadmap&sensor=false');
+  $e_permalink = esc_url($permalink);
+  $e_current_request = esc_url($current_request);
+  $e_post_date = esc_html($post_date);
+  $e_job_expires = esc_html($job_expires);
 
   $post_status_link = "";
   if (get_post_status($post_id) == "draft") {
@@ -62,41 +77,41 @@ EOF;
       >
         <div class="job_position">
           <a
-            href="{$current_request}?&action=edit&post={$post_id}"
+            href="{$e_current_request}?&action=edit&post={$post_id}"
             class="tips job_title"
             data-tip="ID: {$post_id}"
-            >{$title}</a
-          ><br/>(管理番号: {$manage_id})
+            >{$e_title}</a
+          ><br/>(管理番号: {$e_manage_id})
         </div>
       </td>
       <td
         class="job_listing_type column-job_listing_type"
         data-colname="タイプ"
       >
-        <span class="job-type">{$recruitment_type}</span>
+        <span class="job-type">{$e_recruitment_type}</span>
       </td>
       <td class="job_location column-job_location" data-colname="社名・勤務地">
         <div class="company">
           <span class="tips" data-tip="asdf">
-            {$company->co_name}
+            {$e_co_name}
           </span>
         </div>
         <img
           class="company_logo"
-          src="{$company->co_logo}"
-          alt="{$company->co_name}"
+          src="{$e_co_logo}"
+          alt="{$e_co_name_attr}"
         />
         <a
           class="google_map_link"
-          href="https://maps.google.com/maps?q={$job_location}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false"
-          >{$job_location}</a
+          href="{$e_map_url}"
+          >{$e_job_location}</a
         >
       </td>
       <td class="job_status column-job_status" data-colname="ステータス">
         {$status_icon}
       </td>
       <td class="job_posted column-job_posted" data-colname="期限">
-        <strong>{$post_date}<br/>〜 {$job_expires}</strong>
+        <strong>{$e_post_date}<br/>〜 {$e_job_expires}</strong>
       </td>
       <!--<td
         class="job_listing_category column-job_listing_category"
@@ -109,7 +124,7 @@ EOF;
           <div>
             <a
               class="button button-icon tips icon-view"
-              href="{$permalink}"
+              href="{$e_permalink}"
               data-tip="表示"
               >表示</a
             >
@@ -117,7 +132,7 @@ EOF;
           <div>
             <a
               class="button button-icon tips icon-edit"
-              href="{$current_request}?&action=edit&post={$post_id}"
+              href="{$e_current_request}?&action=edit&post={$post_id}"
               data-tip="編集"
               >編集</a
             >
@@ -136,7 +151,7 @@ EOF;
           <div>
             <a
               class="button button-icon tips icon-edit"
-              href="{$current_request}?&action=copy&post={$post_id}"
+              href="{$e_current_request}?&action=copy&post={$post_id}"
               data-tip="コピーして新規作成"
               >コピーして新規作成</a
             >
