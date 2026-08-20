@@ -123,9 +123,9 @@ function editCompany($user, $company_id)
           }
         endforeach;
 
-          // 一覧ページに遷移する
-          header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
-          exit();
+        // 一覧ページに遷移する
+        header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
+        exit();
       }
     } else {
       $message = 'すでに送信済みです';
