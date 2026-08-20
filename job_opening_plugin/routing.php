@@ -1,6 +1,7 @@
 <?php
 
 include_once(JOB_OPENING__PLUGIN_DIR . 'util/dictionaries.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'util/upload.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/userJobOpening.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/jobTable.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/companyTable.php');

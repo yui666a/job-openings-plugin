@@ -36,13 +36,21 @@ function editCompany($user, $company_id)
       );
       $query_format = array('%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
 
-      // ファイル名を取得
-      $filename = $_FILES['company_logo']['name'] . "_" . $userId;
-      // move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
-      $uploaded_path = UPLOAD_DIR["basedir"] . '/sac_jo/company_images/' . $filename;
-      $result = move_uploaded_file($_FILES['company_logo']['tmp_name'], $uploaded_path);
-      if ($result) {
-        $co_logo = UPLOAD_DIR["baseurl"] . '/sac_jo/company_images/' . $filename;
+      // ロゴのアップロード（拡張子・MIME の検証、ファイル名のサニタイズは wp_handle_upload() に任せる）
+      $uploaded = job_opening_handle_company_logo_upload(isset($_FILES['company_logo']) ? $_FILES['company_logo'] : array());
+      if (isset($uploaded['error'])) {
+        // ロゴだけ差し替えられないまま他項目を更新すると、失敗に気づけないため更新しない
+        $message = 'ロゴのアップロードに失敗しました：' . $uploaded['error'];
+        echo <<<EOF
+    <div class="updated">
+      <p><strong>{$message}</strong></p>
+    </div>
+EOF;
+        return edit_company($user, $company_id, str_replace('%7E', '~', $_SERVER['REQUEST_URI']), $_SESSION['key']);
+      }
+      // ロゴが選択されていないときは co_logo を更新対象に含めず、既存のロゴを残す
+      if (isset($uploaded['url'])) {
+        $co_logo = $uploaded['url'];
         $query = array_merge($query, array('co_logo' => $co_logo));
         array_push($query_format, "%s");
       }

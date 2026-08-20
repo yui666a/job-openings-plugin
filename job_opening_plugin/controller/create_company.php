@@ -20,13 +20,20 @@ function create_company($user)
     // セッションキーとチケットが一致しているどうか
     // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
     if (true) {
-      // ファイル名を取得
-      $filename = $_FILES['company_logo']['name'] . "_" . $userId;
-      //move_uploaded_file（第1引数：ファイル名,第2引数：格納後のディレクトリ/ファイル名）
-      $uploaded_path = UPLOAD_DIR["basedir"] . '/sac_jo/company_images/' . $filename;
-      $result = move_uploaded_file($_FILES['company_logo']['tmp_name'], $uploaded_path);
-      if ($result) {
-        $co_logo = UPLOAD_DIR["baseurl"] . '/sac_jo/company_images/' . $filename;
+      // ロゴのアップロード（拡張子・MIME の検証、ファイル名のサニタイズは wp_handle_upload() に任せる）
+      $uploaded = job_opening_handle_company_logo_upload(isset($_FILES['company_logo']) ? $_FILES['company_logo'] : array());
+      if (isset($uploaded['error'])) {
+        // ロゴなしで登録を続けると、失敗に気づかないまま企業が作られてしまうため登録しない
+        $message = 'ロゴのアップロードに失敗しました：' . $uploaded['error'];
+        echo <<<EOF
+    <div class="updated">
+      <p><strong>{$message}</strong></p>
+    </div>
+EOF;
+        return create_company_template($user, str_replace('%7E', '~', $_SERVER['REQUEST_URI']), $_SESSION['key']);
+      }
+      if (isset($uploaded['url'])) {
+        $co_logo = $uploaded['url'];
       }
 
       $wpdb->insert(
