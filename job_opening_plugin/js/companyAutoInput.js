@@ -1,4 +1,6 @@
-$(function () {
+// WordPress 同梱の jQuery は noConflict モードで読み込まれ、グローバルの `$` が定義されない。
+// 素の `$(...)` のままでは `$ is not a function` になるため、`$` を引数で受け取る。
+jQuery(function ($) {
   //セレクトボックスが切り替わったら発動
   $("[name=company_id]").change(function () {
     var companies_data = JSON.parse($("[name=companies_data]").val());
