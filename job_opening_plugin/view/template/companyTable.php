@@ -3,6 +3,8 @@
 function make_company_table_row($data)
 {
   $coTable_page = HOME_URL . "/" . get_option("sac_company_list");
+  // 削除は GET だけで発火するため、リンク自体に nonce を持たせる
+  $remove_url = wp_nonce_url($coTable_page . "?&action=remove&id=" . $data->co_id, 'job_opening_remove_company_' . $data->co_id, 'ticket');
   $job_openings_table_main = <<<EOF
     <tr
       id="post-{$data->co_id}"
@@ -50,7 +52,7 @@ function make_company_table_row($data)
           </a>
           <a
             class="button button-icon tips icon-delete"
-            href="{$coTable_page}?&action=remove&id={$data->co_id}"
+            href="{$remove_url}"
             data-tip="削除"
             >削除
           </a>

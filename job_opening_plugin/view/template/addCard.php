@@ -4,7 +4,6 @@ function create_job_opening($user, $action_url, $session_key, $companies)
 {
   // 企業セレクタの作成
   $companies_selector = '<select name="company_id" id="company_id">';
-  session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
     $companies_selector .= '<option value="' . $data->co_id . '">' . $data->co_name . '</option>';

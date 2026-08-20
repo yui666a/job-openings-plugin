@@ -23,7 +23,6 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
   // 企業セレクタの作成
   $companies_selector = '<select name="company_id" id="company_id">';
-  session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
     $isSelected = $data->co_id == $company_id  ? 'selected' : '';
@@ -266,7 +265,6 @@ function copy_job_opening($user, $action_url, $session_key, $companies, $job_id)
 
   // 企業セレクタの作成
   $companies_selector = '<select name="company_id" id="company_id">';
-  session_start();
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
     $isSelected = $data->co_id == $company_id  ? 'selected' : '';

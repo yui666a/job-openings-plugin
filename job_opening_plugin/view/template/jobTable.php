@@ -26,12 +26,16 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
       break;
   };
 
+  // 公開状態の切り替えは GET だけで発火するため、リンク自体に nonce を持たせる
+  $publish_url = wp_nonce_url($job_table_url . "?&action=publish&post=" . $post_id, 'job_opening_publish_job_' . $post_id, 'ticket');
+  $draft_url = wp_nonce_url($job_table_url . "?&action=draft&post=" . $post_id, 'job_opening_draft_job_' . $post_id, 'ticket');
+
   $post_status_link = "";
   if (get_post_status($post_id) == "draft") {
     $post_status_link = <<<EOF
     <a
       class="button button-icon tips icon-view"
-      href="{$job_table_url}?&action=publish&post={$post_id}";
+      href="{$publish_url}"
       data-tip="公開する"
       >公開する</a
       >
@@ -40,7 +44,7 @@ EOF;
     $post_status_link = <<<EOF
     <a
       class="button button-icon tips icon-view"
-      href="{$job_table_url}?&action=draft&post={$post_id}";
+      href="{$draft_url}"
       data-tip="非公開にする"
       >非公開にする</a
       >

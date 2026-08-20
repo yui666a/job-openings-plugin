@@ -31,9 +31,8 @@ function create_card($user)
     $trip_start = $_POST['trip_start']; // 掲載開始月日
     $trip_last = $_POST['trip_last']; // 掲載終了月日
 
-    // セッションキーとチケットが一致しているどうか
-    // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-    if (true) {
+    // nonce が一致しているかどうか
+    if (isset($_POST['ticket']) && wp_verify_nonce($_POST['ticket'], 'job_opening_create_card')) {
       if ($date_period_type == "period") {
         $date = new DateTime();
         $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
@@ -118,11 +117,9 @@ function create_card($user)
       exit();
       // $message = '登録処理が完了しました';
     } else {
-      $message = 'すでに送信済みです';
+      $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
     }
 
-    // セッションの破棄
-    unset($_SESSION['key']);
     echo <<<EOF
     <div class="updated">
       <p><strong>{$message}</strong></p>
@@ -130,9 +127,8 @@ function create_card($user)
 EOF;
   }
 
-  // ワンタイムチケットの生成とセッションへの保存
-  $session_key = md5(sha1(uniqid(mt_rand(), true)));
-  $_SESSION['key'] = $session_key;
+  // nonce の生成
+  $session_key = wp_create_nonce('job_opening_create_card');
 
   $companies = getCompaniesByUserId($user->ID);
 

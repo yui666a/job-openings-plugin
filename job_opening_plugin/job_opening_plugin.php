@@ -30,9 +30,6 @@ define('JOB_OPENING__MINIMUM_WP_VERSION', '5.9');
 define('UPLOAD_DIR', wp_upload_dir());
 define('HOME_URL', get_option("home"));
 
-// セッションの開始
-session_start();
-
 /**
  * JS・CSSファイルを読み込む
  */

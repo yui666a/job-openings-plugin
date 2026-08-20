@@ -342,4 +342,4 @@ job_opening_plugin/
 ## 未実装・既知の制約
 
 - 管理画面の「設定」ページは未実装です（`routing.php` の `settings` に TODO）。
-- 二重投稿を防ぐワンタイムチケットは生成・保存まで実装されていますが、検証部分がコメントアウトされており機能していません（`create_card.php` / `create_company.php`）。
+- 二重投稿の防止は実装されていません。CSRF 対策として WordPress の nonce を検証していますが、nonce は有効期間内であれば繰り返し通るため、同じフォームの再送信は防げません。
