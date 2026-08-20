@@ -53,35 +53,42 @@ function job_openings_list()
   $user = wp_get_current_user();
   $html = "";
   if (job_opening_current_user_can_manage()) {
-    $mode = $_GET["action"];
-    $joid = $_GET["post"];
+    $mode = isset($_GET["action"]) ? $_GET["action"] : "";
+    // 数値以外は 0 になり存在しない投稿として扱えるため、get_post() に到達する前に弾ける
+    $joid = isset($_GET["post"]) ? absint($_GET["post"]) : 0;
 
-    // ユーザとジョブIDの一致を検証する
-    $post = get_post($joid, "ARRAY_A");
-    $post_author = explode(" ", $post["post_author"])[0];
-
-    if ($mode && $joid && ($user->ID == $post_author)) {
-      if ($mode == "edit") {
-        $html .= editJob($user, $joid);
-      } else if ($mode == "copy") {
-        $html .= editJob2($user, $joid);
-      } else if ($mode == "draft" && job_opening_verify_get_nonce('job_opening_draft_job_' . $joid)) {
-        wp_update_post([
-          'ID'           => $joid,
-          'post_status'   => 'draft',
-        ]);
-        $html .= jobTable($user);
-      } else if ($mode == "publish" && job_opening_verify_get_nonce('job_opening_publish_job_' . $joid)) {
-        wp_update_post([
-          'ID'           => $joid,
-          'post_status'   => 'publish',
-        ]);
-        $html .= jobTable($user);
-      } else {
-        $html .= notLogin();
-      }
-    } else {
+    if (!$mode || !$joid) {
+      // パラメータなしのアクセスは通常の一覧表示
       $html .= jobTable($user);
+    } else {
+      // ユーザとジョブIDの一致を検証する
+      $post = get_post($joid, "ARRAY_A");
+      $post_author = $post ? (int) $post["post_author"] : 0;
+
+      if ($post && ((int) $user->ID === $post_author)) {
+        if ($mode == "edit") {
+          $html .= editJob($user, $joid);
+        } else if ($mode == "copy") {
+          $html .= editJob2($user, $joid);
+        } else if ($mode == "draft" && job_opening_verify_get_nonce('job_opening_draft_job_' . $joid)) {
+          wp_update_post([
+            'ID'           => $joid,
+            'post_status'   => 'draft',
+          ]);
+          $html .= jobTable($user);
+        } else if ($mode == "publish" && job_opening_verify_get_nonce('job_opening_publish_job_' . $joid)) {
+          wp_update_post([
+            'ID'           => $joid,
+            'post_status'   => 'publish',
+          ]);
+          $html .= jobTable($user);
+        } else {
+          $html .= job_opening_forbidden();
+        }
+      } else {
+        // 所有者でない求人の操作は一覧に落とさず拒否を伝える
+        $html .= job_opening_forbidden();
+      }
     }
   } else {
     $html .= notLogin();
@@ -102,19 +109,26 @@ function company_list()
     // 数値以外は 0 になり該当レコードが引けないため、SQL に到達する前に弾ける
     $co_id = isset($_GET["id"]) ? absint($_GET["id"]) : 0;
 
-    // ユーザとジョブIDの一致を検証する
-    $company = $co_id ? getCompanyById($co_id) : null;
-    if ($mode && $co_id && $company && ($user->ID == $company->user_id)) {
-      if ($mode == "edit") {
-        $html .= editCompany($user, $co_id);
-      } else if ($mode == "remove" && job_opening_verify_get_nonce('job_opening_remove_company_' . $co_id)) {
-        deleteCompaniesByCompanyId($co_id);
-        $html .= companyTable($user);
-      } else {
-        $html .= notLogin();
-      }
-    } else {
+    if (!$mode || !$co_id) {
+      // パラメータなしのアクセスは通常の一覧表示
       $html .= companyTable($user);
+    } else {
+      // ユーザとジョブIDの一致を検証する
+      $company = getCompanyById($co_id);
+
+      if ($company && ((int) $user->ID === (int) $company->user_id)) {
+        if ($mode == "edit") {
+          $html .= editCompany($user, $co_id);
+        } else if ($mode == "remove" && job_opening_verify_get_nonce('job_opening_remove_company_' . $co_id)) {
+          deleteCompaniesByCompanyId($co_id);
+          $html .= companyTable($user);
+        } else {
+          $html .= job_opening_forbidden();
+        }
+      } else {
+        // 所有者でない企業情報の操作は一覧に落とさず拒否を伝える
+        $html .= job_opening_forbidden();
+      }
     }
   } else {
     $html .= notLogin();

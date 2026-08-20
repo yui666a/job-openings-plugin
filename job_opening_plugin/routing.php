@@ -13,6 +13,7 @@ include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/header.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/card.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/addTags.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/notLogin.php');
+include_once(JOB_OPENING__PLUGIN_DIR . 'view/template/forbidden.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'view/entryPage.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/editJob.php');
 include_once(JOB_OPENING__PLUGIN_DIR . 'controller/editCompany.php');
