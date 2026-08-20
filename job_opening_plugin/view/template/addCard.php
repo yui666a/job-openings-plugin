@@ -6,7 +6,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   $companies_selector = '<select name="company_id" id="company_id">';
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
-    $companies_selector .= '<option value="' . $data->co_id . '">' . $data->co_name . '</option>';
+    $companies_selector .= '<option value="' . esc_attr($data->co_id) . '">' . esc_html($data->co_name) . '</option>';
 
     $multi_dimensional_array[] = array(
       'co_id' => $data->co_id,
@@ -41,12 +41,15 @@ function create_job_opening($user, $action_url, $session_key, $companies)
   }
 
 
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープした変数を用意する
+  $e_action_url = esc_url($action_url);
+
   $html = header_link_buttons();
   $html .= <<<EOF
   <!-- main -->
   <div class="job-information">
     <h3>求人情報</h3>
-    <form action="{$action_url}" method="post" class="h-adr">
+    <form action="{$e_action_url}" method="post" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
       <input type="hidden" name="ticket" value="{$session_key}">

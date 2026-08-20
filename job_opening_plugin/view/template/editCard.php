@@ -26,7 +26,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
     $isSelected = $data->co_id == $company_id  ? 'selected' : '';
-    $companies_selector .= '<option value="' . $data->co_id . '" ' . $isSelected . '>' . $data->co_name . '</option>';
+    $companies_selector .= '<option value="' . esc_attr($data->co_id) . '" ' . $isSelected . '>' . esc_html($data->co_name) . '</option>';
 
     $multi_dimensional_array[] = array(
       'co_id' => $data->co_id,
@@ -72,6 +72,22 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
     $isChecked = $option[1] == $remote_work  ? 'checked' : '';
     $remote_radio .= '<label> <input required type="radio" ' . $isChecked . ' name="remote_work" class="remote_work" value="' . $option[1] . '" />' . $option[0] . '</label>';
   }
+
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープしておく
+  // textarea の中身は </textarea> で脱出されうるため esc_textarea() を使う
+  $action_url = esc_url($action_url);
+  $title = esc_attr($title);
+  $apply_link = esc_attr($apply_link);
+  $manage_id = esc_html($manage_id);
+  $position = esc_attr($position);
+  $work_detail = esc_textarea($work_detail);
+  $application_conditions = esc_textarea($application_conditions);
+  $working_conditions = esc_textarea($working_conditions);
+  $zipcode = esc_attr($zipcode);
+  $address = esc_attr($address);
+  $address_2 = esc_attr($address_2);
+  $published_date = esc_attr($published_date);
+  $expired_date = esc_attr($expired_date);
 
   $html = header_link_buttons();
   $html .= <<<EOF
@@ -268,7 +284,7 @@ function copy_job_opening($user, $action_url, $session_key, $companies, $job_id)
   $multi_dimensional_array = array();
   foreach ($companies as $data) :
     $isSelected = $data->co_id == $company_id  ? 'selected' : '';
-    $companies_selector .= '<option value="' . $data->co_id . '" ' . $isSelected . '>' . $data->co_name . '</option>';
+    $companies_selector .= '<option value="' . esc_attr($data->co_id) . '" ' . $isSelected . '>' . esc_html($data->co_name) . '</option>';
 
     $multi_dimensional_array[] = array(
       'co_id' => $data->co_id,
@@ -314,6 +330,22 @@ function copy_job_opening($user, $action_url, $session_key, $companies, $job_id)
     $isChecked = $option[1] == $remote_work  ? 'checked' : '';
     $remote_radio .= '<label> <input required type="radio" ' . $isChecked . ' name="remote_work" class="remote_work" value="' . $option[1] . '" />' . $option[0] . '</label>';
   }
+
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープしておく
+  // textarea の中身は </textarea> で脱出されうるため esc_textarea() を使う
+  $action_url = esc_url($action_url);
+  $title = esc_attr($title);
+  $apply_link = esc_attr($apply_link);
+  $manage_id = esc_html($manage_id);
+  $position = esc_attr($position);
+  $work_detail = esc_textarea($work_detail);
+  $application_conditions = esc_textarea($application_conditions);
+  $working_conditions = esc_textarea($working_conditions);
+  $zipcode = esc_attr($zipcode);
+  $address = esc_attr($address);
+  $address_2 = esc_attr($address_2);
+  $published_date = esc_attr($published_date);
+  $expired_date = esc_attr($expired_date);
 
   $html = header_link_buttons();
   $html .= <<<EOF

@@ -57,11 +57,13 @@ function create_job_openingssss(
 
   $co_logo_wrapper = "";
   if ($company->co_logo != "") {
+    $e_co_logo = esc_url($company->co_logo);
+    $e_co_logo_alt = esc_attr($company->co_name . 'のロゴ');
     $co_logo_wrapper = <<<EOF
     <div class="job-list-img-wrapper">
       <img
-      src="{$company->co_logo}"
-      alt="{$company->co_name}のロゴ"
+      src="{$e_co_logo}"
+      alt="{$e_co_logo_alt}"
       width="100%"
       height="100%"
       />
@@ -121,11 +123,40 @@ EOF;
   $zipcode_text = $zipcode != "" ? "〒" . $zipcode : "";
   $co_zipcode_text = $company->co_zip_code != "" ? "〒" . $company->co_zip_code : "";
 
+  // ヒアドキュメント内では関数を呼べないため、埋め込む前にエスケープした変数を用意する
+  // 仕事内容・募集要項・PR は TinyMCE のリッチテキスト入力で HTML を含む前提のため、
+  // esc_html() ではなく wp_kses_post() で許可タグを絞る
+  $e_title = esc_html($title);
+  $e_work_detail = wp_kses_post($work_detail);
+  $e_application_conditions = wp_kses_post($application_conditions);
+  $e_working_conditions = wp_kses_post($working_conditions);
+  $e_qwert = esc_html($qwert);
+  $e_position = esc_html($position);
+  $e_recruitment_type_text = esc_html($recruitment_type_text);
+  $e_zipcode_text = esc_html($zipcode_text);
+  $e_address = esc_html($address);
+  $e_address_2 = esc_html($address_2);
+  $e_map_query = esc_url('https://maps.google.com/maps?q=' . $address . $address_2 . '&zoom=14&size=512x512&maptype=roadmap&sensor=false');
+  $e_can_remote_work = esc_html($can_remote_work);
+  $e_sector = esc_html($sector);
+  $e_co_name = esc_html($company->co_name);
+  $e_co_office_hours = wp_kses_post($company->co_office_hours);
+  $e_co_day_off = wp_kses_post($company->co_day_off);
+  $e_co_employee_benefits = wp_kses_post($company->co_employee_benefits);
+  $e_co_pr_point = wp_kses_post($company->co_pr_point);
+  $e_co_zipcode_text = esc_html($co_zipcode_text);
+  $e_co_address = esc_html($company->co_address);
+  $e_co_address2 = esc_html($company->co_address2);
+  $e_co_map_query = esc_url('https://maps.google.com/maps?q=' . $company->co_address . $company->co_address2 . '&zoom=14&size=512x512&maptype=roadmap&sensor=false');
+  $e_co_url = esc_url($company->co_url);
+  $e_co_url_text = esc_html($company->co_url);
+  $e_apply_link = esc_url($qwer);
+
   $html = <<<EOF
   <div class="job-opening-card" id="job-opening-card">
     <div class="header-wrapper">
       <div class="container-header">
-        <h3 class="job-opening-title">{$title}</h3>
+        <h3 class="job-opening-title">{$e_title}</h3>
         <div class="job-list-tag-box">
           <ul class="job-list-tag">
             <span>{$tags}</span>
@@ -142,53 +173,53 @@ EOF;
           <h1 class="work-detail-header-title">仕事内容</h1>
         </div>
         <div class="work-detail-text-box">
-          <div class="work-detail-text">{$work_detail}</div>
+          <div class="work-detail-text">{$e_work_detail}</div>
         </div>
 
         <div class="assignments">
           <div class="assignment">
             <div class="assignment-item-label">職種 /<br />募集ポジション</div>
             <div class="assignment-item-value">
-              <div>{$qwert}</div>
-              <div>{$position}</div>
+              <div>{$e_qwert}</div>
+              <div>{$e_position}</div>
             </div>
           </div>
 
           <div class="assignment">
             <div class="assignment-item-label">新卒 / 中途</div>
             <div class="assignment-item-value">
-              <div>{$recruitment_type_text}</div>
+              <div>{$e_recruitment_type_text}</div>
             </div>
           </div>
 
           <div class="assignment">
             <div class="assignment-item-label">待遇・労働条件など</div>
             <div class="assignment-item-value">
-              <div>{$working_conditions}</div>
+              <div>{$e_working_conditions}</div>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">勤務地</div>
             <div class="assignment-item-value">
-              <a href="https://maps.google.com/maps?q={$address}{$address_2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-              >{$zipcode_text}  {$address} {$address_2}</a> {$can_remote_work}</div>
+              <a href="{$e_map_query}" class="google-map-address"
+              >{$e_zipcode_text}  {$e_address} {$e_address_2}</a> {$e_can_remote_work}</div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">就業時間</div>
             <div class="assignment-item-value">
-              <div>{$company->co_office_hours}</div>
+              <div>{$e_co_office_hours}</div>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">休日・休暇</div>
             <div class="assignment-item-value">
-              <div>{$company->co_day_off}</div>
+              <div>{$e_co_day_off}</div>
             </div>
           </div>
           <div class="assignment">
             <div class="assignment-item-label">制度・福利厚生</div>
             <div class="assignment-item-value">
-              <div>{$company->co_employee_benefits}</div>
+              <div>{$e_co_employee_benefits}</div>
             </div>
           </div>
         </div>
@@ -199,7 +230,7 @@ EOF;
           <h1 class="work-detail-header-title">募集要項</h1>
         </div>
         <div class="work-detail-text-box">
-          <div class="work-detail-text">{$application_conditions}</div>
+          <div class="work-detail-text">{$e_application_conditions}</div>
         </div>
       </div>
 
@@ -213,22 +244,22 @@ EOF;
             <div class="assignment">
               <div class="assignment-item-label">会社名</div>
               <div class="assignment-item-value">
-                <div>{$company->co_name}</div>
+                <div>{$e_co_name}</div>
               </div>
             </div>
 
             <div class="assignment">
               <div class="assignment-item-label">業種</div>
               <div class="assignment-item-value">
-                <div>{$sector}</div>
+                <div>{$e_sector}</div>
               </div>
             </div>
 
             <div class="assignment">
               <div class="assignment-item-label">本社所在地</div>
               <div class="assignment-item-value">
-                <a href="https://maps.google.com/maps?q={$company->co_address}{$company->co_address2}&amp;zoom=14&amp;size=512x512&amp;maptype=roadmap&amp;sensor=false" class="google-map-address"
-                >{$co_zipcode_text} {$company->co_address} {$company->co_address2}</a
+                <a href="{$e_co_map_query}" class="google-map-address"
+                >{$e_co_zipcode_text} {$e_co_address} {$e_co_address2}</a
               >
               </div>
             </div>
@@ -236,19 +267,19 @@ EOF;
             <div class="assignment">
               <div class="assignment-item-label">HP</div>
               <div class="assignment-item-value">
-                <div><a href="{$company->co_url}">{$company->co_url}</a></div>
+                <div><a href="{$e_co_url}">{$e_co_url_text}</a></div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="work-detail-text-box">
-          <div class="work-detail-text">{$company->co_pr_point}</div>
+          <div class="work-detail-text">{$e_co_pr_point}</div>
         </div>
       </div>
 
       <div class="btn-application-under">
-        <a href="{$qwer}" class="btn-application-under-text">応募画面に進む</a>
+        <a href="{$e_apply_link}" class="btn-application-under-text">応募画面に進む</a>
       </div>
     </div>
   </div>

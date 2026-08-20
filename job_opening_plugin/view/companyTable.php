@@ -4,7 +4,7 @@ function companyTable($user)
 {
   $html = "";
   $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
-  $html .= '<strong class="who-is-login">現在、' . $user->display_name . "としてログインしています(" . $loginout . "する)</strong>";
+  $html .= '<strong class="who-is-login">現在、' . esc_html($user->display_name) . "としてログインしています(" . $loginout . "する)</strong>";
 
   $companies = getCompaniesByUserId($user->ID);
 
