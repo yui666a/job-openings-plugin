@@ -24,41 +24,38 @@ function create_company($user)
       $uploaded = job_opening_handle_company_logo_upload(isset($_FILES['company_logo']) ? $_FILES['company_logo'] : array());
       if (isset($uploaded['error'])) {
         // ロゴなしで登録を続けると、失敗に気づかないまま企業が作られてしまうため登録しない
-        $message = 'ロゴのアップロードに失敗しました：' . $uploaded['error'];
-        echo <<<EOF
-    <div class="updated">
-      <p><strong>{$message}</strong></p>
-    </div>
-EOF;
-        return create_company_template($user, str_replace('%7E', '~', $_SERVER['REQUEST_URI']), $_SESSION['key']);
-      }
-      if (isset($uploaded['url'])) {
+        $upload_error = $uploaded['error'];
+      } elseif (isset($uploaded['url'])) {
         $co_logo = $uploaded['url'];
       }
 
-      $wpdb->insert(
-        $wpdb->prefix . 'sac_job_opening_companies',
-        array(
-          'co_name' => $co_name,
-          'co_logo' => $co_logo,
-          'user_id' => $userId,
-          'co_sector' => $co_sector,
-          'co_url' => $co_url,
-          'co_summary' => $co_summary,
-          'co_pr_point' => $co_pr,
-          'co_zip_code' => $co_zip_code,
-          'co_address' => $co_address,
-          'co_address2' => $co_address2,
-          'co_office_hours' => $co_hour,
-          'co_employee_benefits' => $co_benefits,
-          'co_day_off' => $co_day_off,
-          'created_at' => current_time('mysql', 0)
-        ),
-        array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
-      );
-      // 一覧ページに遷移する
-      header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
-      exit();
+      if (isset($upload_error)) {
+        $message = 'ロゴのアップロードに失敗しました：' . esc_html($upload_error);
+      } else {
+        $wpdb->insert(
+          $wpdb->prefix . 'sac_job_opening_companies',
+          array(
+            'co_name' => $co_name,
+            'co_logo' => $co_logo,
+            'user_id' => $userId,
+            'co_sector' => $co_sector,
+            'co_url' => $co_url,
+            'co_summary' => $co_summary,
+            'co_pr_point' => $co_pr,
+            'co_zip_code' => $co_zip_code,
+            'co_address' => $co_address,
+            'co_address2' => $co_address2,
+            'co_office_hours' => $co_hour,
+            'co_employee_benefits' => $co_benefits,
+            'co_day_off' => $co_day_off,
+            'created_at' => current_time('mysql', 0)
+          ),
+          array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
+        );
+        // 一覧ページに遷移する
+        header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
+        exit();
+      }
     } else {
       $message = 'すでに送信済みです';
     }
