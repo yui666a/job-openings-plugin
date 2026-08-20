@@ -27,7 +27,8 @@ function getCompanyById($companyId)
     $companyId
   );
   $companies = $wpdb->get_results($query, OBJECT);
-  return $companies[0];
+  // 該当なしのとき $companies[0] は未定義オフセットの警告を出すため、null に丸める
+  return $companies[0] ?? null;
 }
 
 function deleteCompaniesByCompanyId($companyId)
