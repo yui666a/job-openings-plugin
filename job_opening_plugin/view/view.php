@@ -89,12 +89,13 @@ function company_list()
     || current_user_can('author')
     || current_user_can('contributor')
   ) {
-    $mode = $_GET["action"];
-    $co_id = $_GET["id"];
+    $mode = isset($_GET["action"]) ? $_GET["action"] : "";
+    // 数値以外は 0 になり該当レコードが引けないため、SQL に到達する前に弾ける
+    $co_id = isset($_GET["id"]) ? absint($_GET["id"]) : 0;
 
     // ユーザとジョブIDの一致を検証する
-    $company = getCompanyById($co_id);
-    if ($mode && $co_id && ($user->ID == $company->user_id)) {
+    $company = $co_id ? getCompanyById($co_id) : null;
+    if ($mode && $co_id && $company && ($user->ID == $company->user_id)) {
       if ($mode == "edit") {
         $html .= editCompany($user, $co_id);
       } else if ($mode == "remove") {

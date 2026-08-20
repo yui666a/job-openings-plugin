@@ -11,7 +11,10 @@ function getCompanies()
 function getCompaniesByUserId($userId)
 {
   global $wpdb;
-  $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE user_id=" . $userId . ";";
+  $query = $wpdb->prepare(
+    "SELECT * FROM `{$wpdb->prefix}sac_job_opening_companies` WHERE user_id = %d",
+    $userId
+  );
   $companies = $wpdb->get_results($query, OBJECT);
   return $companies;
 }
@@ -19,7 +22,10 @@ function getCompaniesByUserId($userId)
 function getCompanyById($companyId)
 {
   global $wpdb;
-  $query = "SELECT * FROM `" . $wpdb->prefix . "sac_job_opening_companies`WHERE co_id=" . $companyId . ";";
+  $query = $wpdb->prepare(
+    "SELECT * FROM `{$wpdb->prefix}sac_job_opening_companies` WHERE co_id = %d",
+    $companyId
+  );
   $companies = $wpdb->get_results($query, OBJECT);
   return $companies[0];
 }
@@ -27,6 +33,9 @@ function getCompanyById($companyId)
 function deleteCompaniesByCompanyId($companyId)
 {
   global $wpdb;
-  $query = "DELETE FROM `" . $wpdb->prefix . "sac_job_opening_companies` WHERE " . $wpdb->prefix . "sac_job_opening_companies.co_id = " . $companyId . ";";
-  $wpdb->get_results($query, OBJECT);
+  $query = $wpdb->prepare(
+    "DELETE FROM `{$wpdb->prefix}sac_job_opening_companies` WHERE co_id = %d",
+    $companyId
+  );
+  $wpdb->query($query);
 }
