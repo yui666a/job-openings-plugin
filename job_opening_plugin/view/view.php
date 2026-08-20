@@ -3,8 +3,9 @@
 /**
  * GET リンクに付与した nonce を検証する
  *
- * check_admin_referer() は管理画面を前提にリファラも見るため、
- * 固定ページのショートコードから呼ぶこのプラグインでは使わない。
+ * check_admin_referer() は検証に失敗すると wp_nonce_ays() を出して die() するため、
+ * 固定ページのショートコードから呼ぶこのプラグインでは使わない。ページ全体の描画が
+ * 途中で止まってしまう。
  */
 function job_opening_verify_get_nonce($action)
 {
