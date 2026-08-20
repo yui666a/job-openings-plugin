@@ -135,10 +135,13 @@ add_shortcode('entry_page', 'entry_page');
 /**
  * テンプレートの指定
  */
-function get_custom_page_template($page_template)
+function get_custom_page_template($single_template)
 {
-  $page_template = JOB_OPENING__PLUGIN_DIR . 'view/template/single-job_openings.php';
-  return $page_template;
+  // single_template の引数 $type は 'single' 固定で投稿タイプを含まないため、グローバル $post を見る
+  if (get_post_type() !== 'job_openings') {
+    return $single_template;
+  }
+  return JOB_OPENING__PLUGIN_DIR . 'view/template/single-job_openings.php';
 }
 // add_filter( 'page_template', 'get_custom_page_template' );
 add_filter('single_template', 'get_custom_page_template');
