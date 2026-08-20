@@ -1,6 +1,18 @@
 <?php
 
 /**
+ * このプラグインの求人・企業情報を操作できるかを判定する
+ *
+ * ロール名を current_user_can() に渡す書き方は公式に「discouraged」とされているため使わない。
+ * edit_posts を持つのは administrator / editor / author / contributor で、subscriber は持たない。
+ * 従来のロール名の羅列と許可範囲が一致する。
+ */
+function job_opening_current_user_can_manage()
+{
+  return current_user_can('edit_posts');
+}
+
+/**
  * GET リンクに付与した nonce を検証する
  *
  * check_admin_referer() は検証に失敗すると wp_nonce_ays() を出して die() するため、
@@ -22,12 +34,7 @@ function entry_page()
 {
   $user = wp_get_current_user();
   $html = "";
-  if (
-    current_user_can('administrator')
-    || current_user_can('editor')
-    || current_user_can('author')
-    || current_user_can('contributor')
-  ) {
+  if (job_opening_current_user_can_manage()) {
     // ユーザとジョブIDの一致を検証する
     $html .= entryPage();
   } else {
@@ -45,12 +52,7 @@ function job_openings_list()
   global $wpdb;
   $user = wp_get_current_user();
   $html = "";
-  if (
-    current_user_can('administrator')
-    || current_user_can('editor')
-    || current_user_can('author')
-    || current_user_can('contributor')
-  ) {
+  if (job_opening_current_user_can_manage()) {
     $mode = $_GET["action"];
     $joid = $_GET["post"];
 
@@ -95,12 +97,7 @@ function company_list()
 
   $user = wp_get_current_user();
   $html = "";
-  if (
-    current_user_can('administrator')
-    || current_user_can('editor')
-    || current_user_can('author')
-    || current_user_can('contributor')
-  ) {
+  if (job_opening_current_user_can_manage()) {
     $mode = isset($_GET["action"]) ? $_GET["action"] : "";
     // 数値以外は 0 になり該当レコードが引けないため、SQL に到達する前に弾ける
     $co_id = isset($_GET["id"]) ? absint($_GET["id"]) : 0;
@@ -133,12 +130,7 @@ function job_openings_add()
 {
   $user = wp_get_current_user();
   $html = "";
-  if (
-    current_user_can('administrator')
-    || current_user_can('editor')
-    || current_user_can('author')
-    || current_user_can('contributor')
-  ) {
+  if (job_opening_current_user_can_manage()) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= '<strong class="who-is-login">現在、' . esc_html($user->display_name) . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_card($user);
@@ -156,12 +148,7 @@ function company_add()
 {
   $user = wp_get_current_user();
   $html = "";
-  if (
-    current_user_can('administrator')
-    || current_user_can('editor')
-    || current_user_can('author')
-    || current_user_can('contributor')
-  ) {
+  if (job_opening_current_user_can_manage()) {
     $loginout = wp_loginout($_SERVER['REQUEST_URI'], false);
     $html .= '<strong class="who-is-login">現在、' . esc_html($user->display_name) . "としてログインしています(" . $loginout . "する)</strong>";
     $html .= create_company($user);
@@ -219,24 +206,28 @@ function user_job_openings()
 //=================================================
 function job_openings_list_admin()
 {
-  if (current_user_can('administrator') || current_user_can('editor')) {
+  if (job_opening_current_user_can_manage()) {
     echo job_openings_list();
   }
 }
 
 function company_list_admin()
 {
-  if (current_user_can('administrator') || current_user_can('editor')) {
+  if (job_opening_current_user_can_manage()) {
     echo company_list();
   }
 }
 
 function job_openings_add_admin()
 {
-  echo job_openings_add();
+  if (job_opening_current_user_can_manage()) {
+    echo job_openings_add();
+  }
 }
 
 function company_add_admin()
 {
-  echo company_add();
+  if (job_opening_current_user_can_manage()) {
+    echo company_add();
+  }
 }
