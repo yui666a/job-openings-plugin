@@ -100,12 +100,39 @@ function on_activate()
   update_option("sac_user_job_openings", "user_job_openings");
 
   // 固定ページを作成
-  wp_insert_post(array('post_title' => '作成した求人一覧', 'post_content'  => '[job_openings_list]',  'post_name' => "job_opening_list", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
-  wp_insert_post(array('post_title' => '作成した企業一覧', 'post_content'  => '[company_list]',       'post_name' => "company_list", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
-  wp_insert_post(array('post_title' => '求人情報を作成', 'post_content'  => '[job_openings_add]',     'post_name' => "add_job_opening", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
-  wp_insert_post(array('post_title' => '企業情報を作成', 'post_content'  => '[company_add]',          'post_name' => "add_company", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
-  wp_insert_post(array('post_title' => '求人一覧', 'post_content'  => '[user_job_openings]',         'post_name' => "job_openings_table", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
-  wp_insert_post(array('post_title' => '求人管理画面一覧', 'post_content'  => '[entry_page]',          'post_name' => "entry page", 'post_type'      => 'page', 'post_status'   => 'publish', 'post_author'   => 1));
+  job_opening_create_page_if_absent('job_opening_list', '作成した求人一覧', '[job_openings_list]');
+  job_opening_create_page_if_absent('company_list', '作成した企業一覧', '[company_list]');
+  job_opening_create_page_if_absent('add_job_opening', '求人情報を作成', '[job_openings_add]');
+  job_opening_create_page_if_absent('add_company', '企業情報を作成', '[company_add]');
+  job_opening_create_page_if_absent('job_openings_table', '求人一覧', '[user_job_openings]');
+  job_opening_create_page_if_absent('entry_page', '求人管理画面一覧', '[entry_page]');
+}
+
+/**
+ * スラッグが未使用のときだけ固定ページを作成する
+ *
+ * @param string $slug    固定ページのスラッグ（post_name）
+ * @param string $title   固定ページのタイトル
+ * @param string $content 固定ページの本文（ショートコード）
+ * @return int 作成したページの ID。既存または作成失敗時は 0
+ */
+function job_opening_create_page_if_absent($slug, $title, $content)
+{
+  // $post_type を配列で渡す。文字列で渡すと WordPress は attachment も併せて検索し、
+  // 同名の添付ファイルがあるだけで「ページあり」と誤判定するため。
+  if (get_page_by_path($slug, OBJECT, array('page')) !== null) {
+    return 0;
+  }
+
+  // post_author は渡さない。wp_insert_post() は未指定のときだけ現在のユーザー ID を
+  // 既定値にするため、明示的に 0 を渡すと投稿者不明のページができる。
+  return wp_insert_post(array(
+    'post_title'   => $title,
+    'post_content' => $content,
+    'post_name'    => $slug,
+    'post_type'    => 'page',
+    'post_status'  => 'publish',
+  ));
 }
 register_activation_hook(__FILE__, 'on_activate');
 
