@@ -208,7 +208,7 @@ ZIP でアップロードする場合は、`job_opening_plugin` ディレクト�
 「企業情報を作成」ページ（`[company_add]`）から登録します。登録項目は次のとおりです。
 
 - 企業名（必須）／業種／企業 URL
-- 企業ロゴ（画像アップロード。`uploads/sac_jo/company_images/` に保存）
+- 企業ロゴ（画像アップロード。JPEG / PNG / GIF のみ。`uploads/sac_jo/company_images/` に保存）
 - 企業概要／PR ポイント
 - 郵便番号／住所／住所 2（郵便番号から住所を自動入力）
 - 就業時間／福利厚生／休日
@@ -315,7 +315,8 @@ job_opening_plugin/
 │   ├── companyTable.php    企業一覧
 │   └── template/           各画面の HTML テンプレート
 ├── util/
-│   └── dictionaries.php    職種コード ⇔ 日本語名の対応表
+│   ├── dictionaries.php    職種コード ⇔ 日本語名の対応表
+│   └── upload.php          企業ロゴのアップロード（wp_handle_upload のラッパ）
 ├── css/  js/  img/
 └── readme.md               開発メモ
 ```
