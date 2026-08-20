@@ -17,9 +17,8 @@ function create_company($user)
     $co_benefits = $_POST['company_benefits'];
     $co_day_off = $_POST['company_day_off'];
 
-    // セッションキーとチケットが一致しているどうか
-    // if ($_SESSION['key'] and $_POST['ticket'] and $_SESSION['key'] == $_POST['ticket']) {
-    if (true) {
+    // nonce が一致しているかどうか
+    if (isset($_POST['ticket']) && wp_verify_nonce($_POST['ticket'], 'job_opening_create_company')) {
       // ロゴのアップロード（拡張子・MIME の検証、ファイル名のサニタイズは wp_handle_upload() に任せる）
       $uploaded = job_opening_handle_company_logo_upload(isset($_FILES['company_logo']) ? $_FILES['company_logo'] : array());
       if (isset($uploaded['error'])) {
@@ -57,11 +56,9 @@ function create_company($user)
         exit();
       }
     } else {
-      $message = 'すでに送信済みです';
+      $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
     }
 
-    // セッションの破棄
-    unset($_SESSION['key']);
     echo <<<EOF
     <div class="updated">
       <p><strong>{$message}</strong></p>
@@ -69,9 +66,8 @@ function create_company($user)
 EOF;
   }
 
-  // ワンタイムチケットの生成とセッションへの保存
-  $session_key = md5(sha1(uniqid(mt_rand(), true)));
-  $_SESSION['key'] = $session_key;
+  // nonce の生成
+  $session_key = wp_create_nonce('job_opening_create_company');
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);

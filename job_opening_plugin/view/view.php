@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * GET リンクに付与した nonce を検証する
+ *
+ * check_admin_referer() は管理画面を前提にリファラも見るため、
+ * 固定ページのショートコードから呼ぶこのプラグインでは使わない。
+ */
+function job_opening_verify_get_nonce($action)
+{
+  return isset($_GET['ticket']) && wp_verify_nonce($_GET['ticket'], $action);
+}
+
 //=================================================
 // サブメニュー  ページ内容の表示・更新処理
 //=================================================
@@ -51,13 +62,13 @@ function job_openings_list()
         $html .= editJob($user, $joid);
       } else if ($mode == "copy") {
         $html .= editJob2($user, $joid);
-      } else if ($mode == "draft") {
+      } else if ($mode == "draft" && job_opening_verify_get_nonce('job_opening_draft_job_' . $joid)) {
         wp_update_post([
           'ID'           => $joid,
           'post_status'   => 'draft',
         ]);
         $html .= jobTable($user);
-      } else if ($mode == "publish") {
+      } else if ($mode == "publish" && job_opening_verify_get_nonce('job_opening_publish_job_' . $joid)) {
         wp_update_post([
           'ID'           => $joid,
           'post_status'   => 'publish',
@@ -98,7 +109,7 @@ function company_list()
     if ($mode && $co_id && $company && ($user->ID == $company->user_id)) {
       if ($mode == "edit") {
         $html .= editCompany($user, $co_id);
-      } else if ($mode == "remove") {
+      } else if ($mode == "remove" && job_opening_verify_get_nonce('job_opening_remove_company_' . $co_id)) {
         deleteCompaniesByCompanyId($co_id);
         $html .= companyTable($user);
       } else {
