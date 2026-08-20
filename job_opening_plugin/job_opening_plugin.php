@@ -88,16 +88,13 @@ function on_activate()
   wp_mkdir_p(UPLOAD_DIR["basedir"] . $directory_path);
 
   // オプションを追加
-  add_option('sac_job_openings_list', 'job_opening_list', '', 'yes');
-  add_option('sac_company_list', 'company_list', '', 'yes');
-  add_option('sac_job_openings_add', 'add_job_opening', '', 'yes');
-  add_option('sac_company_add', 'add_company', '', 'yes');
-  add_option('sac_user_job_openings', 'user_job_openings', '', 'yes');
-  update_option("sac_job_openings_list", "job_opening_list");
-  update_option("sac_company_list", "company_list");
-  update_option("sac_job_openings_add", "add_job_opening");
-  update_option("sac_company_add", "add_company");
-  update_option("sac_user_job_openings", "user_job_openings");
+  // update_option() は未登録のキーなら追加も行うため、add_option() は併用しない。
+  // $autoload に 'yes' は渡さない。WordPress 6.7.0 で非推奨になった書き方のため。
+  update_option('sac_job_openings_list', 'job_opening_list', true);
+  update_option('sac_company_list', 'company_list', true);
+  update_option('sac_job_openings_add', 'add_job_opening', true);
+  update_option('sac_company_add', 'add_company', true);
+  update_option('sac_user_job_openings', 'user_job_openings', true);
 
   // 固定ページを作成
   job_opening_create_page_if_absent('job_opening_list', '作成した求人一覧', '[job_openings_list]');
