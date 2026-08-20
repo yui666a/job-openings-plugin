@@ -127,10 +127,23 @@ function wp_loginout($r = '', $e = true) { return '<a href="#">ログアウト</
 function wp_login_url($r = '') { return '/wp-login.php'; }
 function get_permalink($id = 0) { return HOME_URL . '/job_openings/' . $id; }
 function get_admin_url($b = '') { return HOME_URL . '/wp-admin/'; }
-function esc_url($u) { return $u; }
+// コアの esc_url() は & を &#038; に置き換える。素通しにすると、本体のエスケープが
+// 効いていないように見える生成物になるため、その部分だけ再現する。
+function esc_url($u) {
+  $u = str_replace('&amp;', '&', (string)$u);
+  return str_replace('&', '&#038;', $u);
+}
 function esc_attr($t) { return htmlspecialchars((string)$t, ENT_QUOTES, 'UTF-8'); }
 function esc_html($t) { return htmlspecialchars((string)$t, ENT_QUOTES, 'UTF-8'); }
-function wp_nonce_url($u, $a = -1) { return $u . '&_wpnonce=preview'; }
+// コアと同じく、先に &amp; を & に戻してから esc_html() する
+function wp_nonce_url($u, $a = -1, $n = '_wpnonce') {
+  $u = str_replace('&amp;', '&', (string)$u);
+  return esc_html($u . '&' . $n . '=preview');
+}
+// 本体が wp_kses_post() / esc_textarea() を使うため、デモ側にもスタブを置く。
+// 許可タグの再現までは行わず、デモの描画が通ることだけを担保する。
+function wp_kses_post($t) { return (string)$t; }
+function esc_textarea($t) { return htmlspecialchars((string)$t, ENT_QUOTES, 'UTF-8'); }
 function wp_strip_all_tags($t) { return strip_tags((string)$t); }
 function wp_reset_postdata() {}
 function setup_postdata($p) {}
