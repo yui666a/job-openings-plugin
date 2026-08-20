@@ -113,25 +113,15 @@ function on_activate()
 register_activation_hook(__FILE__, 'on_activate');
 
 /**
- * TODO: プラグインを無効にしたときの処理を書く
+ * プラグインを無効にしたときの処理
+ *
+ * 企業テーブルの DROP は行わない。無効化は一時停止であり、テーマの不具合切り分けなどで
+ * 一時的に停止しただけで登録済みの企業情報が失われるため。削除は uninstall.php で行う。
  */
-function on_deactivation()
+function job_opening_on_deactivation()
 {
-  global $wpdb;
-  //➀テーブル名があったら
-  if ($wpdb->get_var("show tables like '" . $wpdb->prefix . "sac_job_opening_companies" . "'") == $wpdb->prefix . "sac_job_opening_companies") { // 「==」へ変更
-    //➁DROP TABLEを実行
-    $sql = "DROP TABLE " . $wpdb->prefix . "sac_job_opening_companies";
-    $wpdb->query($sql);
-  }
-  //➀テーブル名があったら
-  if ($wpdb->get_var("show tables like '" . $wpdb->prefix . "sac_job_opening_companies_meta" . "'") == $wpdb->prefix . "sac_job_opening_companies_meta") { // 「==」へ変更
-    //➁DROP TABLEを実行
-    $sql = "DROP TABLE " . $wpdb->prefix . "sac_job_opening_companies_meta";
-    $wpdb->query($sql);
-  }
 }
-register_deactivation_hook(__FILE__, 'on_deactivation');
+register_deactivation_hook(__FILE__, 'job_opening_on_deactivation');
 
 
 /**

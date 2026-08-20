@@ -164,9 +164,9 @@ ZIP でアップロードする場合は、`job_opening_plugin` ディレクト�
 3. **固定ページの自動生成**（後述のショートコードを埋め込んだ状態で公開されます）
 4. **ページスラッグを保持するオプションの登録**（`sac_job_openings_list` など）
 
-> **注意：無効化するとデータが消えます**
-> `register_deactivation_hook` で `sac_job_opening_companies` と `sac_job_opening_companies_meta` の 2 テーブルを **DROP** します。登録済みの企業情報は失われるため、無効化の前にはバックアップを取ってください。
-> （求人情報はカスタム投稿タイプ `job_openings` として `wp_posts` に保存されるため、こちらは削除されません。）
+> **注意：削除（アンインストール）するとデータが消えます**
+> `uninstall.php` で `sac_job_opening_companies` と `sac_job_opening_companies_meta` の 2 テーブルを **DROP** します。登録済みの企業情報は失われるため、削除の前にはバックアップを取ってください。停止（無効化）ではテーブルを削除しないため、一時的に停止してもデータは残ります。
+> （求人情報はカスタム投稿タイプ `job_openings` として `wp_posts` に保存されるため、こちらは削除されません。企業ロゴ画像・自動生成された固定ページ・`wp_options` の設定値も削除時に残ります。）
 
 ---
 
@@ -297,6 +297,7 @@ TinyMCE はプラグイン内に同梱しています（`js/tinymce/`）。
 job_opening_plugin/
 ├── job_opening_plugin.php  プラグイン定義、定数、CSS/JS 読み込み、有効化/無効化処理、
 │                           ショートコード登録、カスタム投稿タイプ・タクソノミー登録
+├── uninstall.php           削除（アンインストール）時の企業テーブル削除
 ├── routing.php             各ファイルの読み込みと wp-admin メニューの登録
 ├── model/
 │   └── createDB.php        企業テーブル・企業メタテーブルの作成（dbDelta）
@@ -341,4 +342,3 @@ job_opening_plugin/
 
 - 管理画面の「設定」ページは未実装です（`routing.php` の `settings` に TODO）。
 - 二重投稿を防ぐワンタイムチケットは生成・保存まで実装されていますが、検証部分がコメントアウトされており機能していません（`create_card.php` / `create_company.php`）。
-- プラグイン無効化時に企業テーブルが削除されます。アンインストールではなく無効化の時点で消える点に注意してください。
