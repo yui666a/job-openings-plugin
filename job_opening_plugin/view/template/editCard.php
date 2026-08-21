@@ -1,6 +1,6 @@
 <?php
 
-function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
+function edit_job_opening($user, $action_url, $nonce, $companies, $job_id)
 {
   $post = get_post($job_id, "ARRAY_A");
   $published_date = explode(" ", $post["post_date"])[0];
@@ -97,7 +97,7 @@ function edit_job_opening($user, $action_url, $session_key, $companies, $job_id)
     <form action="{$action_url}" method="post" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
-      <input type="hidden" name="ticket" value="{$session_key}">
+      <input type="hidden" name="ticket" value="{$nonce}">
       <input type="hidden" name="companies_data" value="{$companies_data}">
       <input type="hidden" name="selected_occupations" value="{$selected_occupations_data}">
 
@@ -258,7 +258,7 @@ EOF;
   return $html;
 }
 
-function copy_job_opening($user, $action_url, $session_key, $companies, $job_id)
+function copy_job_opening($user, $action_url, $nonce, $companies, $job_id)
 {
   $post = get_post($job_id, "ARRAY_A");
   $published_date = explode(" ", $post["post_date"])[0];
@@ -355,7 +355,7 @@ function copy_job_opening($user, $action_url, $session_key, $companies, $job_id)
     <form action="{$action_url}" method="post" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
-      <input type="hidden" name="ticket" value="{$session_key}">
+      <input type="hidden" name="ticket" value="{$nonce}">
       <input type="hidden" name="companies_data" value="{$companies_data}">
       <input type="hidden" name="selected_occupations" value="{$selected_occupations_data}">
 

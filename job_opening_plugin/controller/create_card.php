@@ -128,11 +128,11 @@ EOF;
   }
 
   // nonce の生成
-  $session_key = wp_create_nonce('job_opening_create_card');
+  $nonce = wp_create_nonce('job_opening_create_card');
 
   $companies = getCompaniesByUserId($user->ID);
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  return create_job_opening($user, $action_url, $session_key, $companies);
+  return create_job_opening($user, $action_url, $nonce, $companies);
 }

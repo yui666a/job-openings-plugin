@@ -1,6 +1,6 @@
 <?php
 
-function create_job_opening($user, $action_url, $session_key, $companies)
+function create_job_opening($user, $action_url, $nonce, $companies)
 {
   // 企業セレクタの作成
   $companies_selector = '<select name="company_id" id="company_id">';
@@ -52,7 +52,7 @@ function create_job_opening($user, $action_url, $session_key, $companies)
     <form action="{$e_action_url}" method="post" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
-      <input type="hidden" name="ticket" value="{$session_key}">
+      <input type="hidden" name="ticket" value="{$nonce}">
       <input type="hidden" name="companies_data" value="{$companies_data}">
 
       <div class="form-item">

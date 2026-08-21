@@ -1,6 +1,6 @@
 <?php
 
-function edit_company($user, $company_id, $action_url, $session_key)
+function edit_company($user, $company_id, $action_url, $nonce)
 {
   $company = getCompanyById($company_id);
 
@@ -49,7 +49,7 @@ function edit_company($user, $company_id, $action_url, $session_key)
     <form action="{$e_action_url}" method="post" enctype="multipart/form-data" class="h-adr">
       <input type="hidden" name="post_method" value="Y">
       <input type="hidden" name="userId" value="{$user->ID}">
-      <input type="hidden" name="ticket" value="{$session_key}">
+      <input type="hidden" name="ticket" value="{$nonce}">
 
       <div class="form-item">
         <div class="item-label"> <span class="required-tag">必須</span>募集企業名</div>
