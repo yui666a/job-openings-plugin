@@ -113,7 +113,7 @@ function create_card($user)
       add_post_meta($post_id, '_apply_link', $apply_link);
 
       // 一覧ページに遷移する
-      header("Location:" . HOME_URL . "/" . get_option("sac_job_openings_list"));
+      header("Location:" . home_url("/" . get_option("sac_job_openings_list")));
       exit();
       // $message = '登録処理が完了しました';
     } else {

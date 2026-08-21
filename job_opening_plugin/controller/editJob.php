@@ -89,7 +89,7 @@ function editJob($user, $job_id)
       // update_post_meta($post_id, '_company_salary', $company_salary);
       update_post_meta($post_id, '_apply_link', $apply_link);
 
-      $message = '登録処理が完了しました（<a href="' . HOME_URL . "/" . get_option("sac_job_openings_list") . '">一覧にもどる</a>）';
+      $message = '登録処理が完了しました（<a href="' . home_url("/" . get_option("sac_job_openings_list")) . '">一覧にもどる</a>）';
     } else {
       $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
     }
@@ -227,9 +227,9 @@ function editJob2($user, $job_id)
       add_post_meta($post_id, '_apply_link', $apply_link);
 
       // 一覧ページに遷移する
-      header("Location:" . HOME_URL . "/" . get_option("sac_job_openings_list"));
+      header("Location:" . home_url("/" . get_option("sac_job_openings_list")));
       exit();
-      // $message = '登録処理が完了しました（<a href="' . HOME_URL . "/" . get_option("sac_job_openings_list") . '">一覧にもどる</a>）';
+      // $message = '登録処理が完了しました（<a href="' . home_url("/" . get_option("sac_job_openings_list")) . '">一覧にもどる</a>）';
     } else {
       $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
     }

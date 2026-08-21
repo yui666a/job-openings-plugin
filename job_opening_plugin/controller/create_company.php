@@ -52,7 +52,7 @@ function create_company($user)
           array('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
         );
         // 一覧ページに遷移する
-        header("Location:" . HOME_URL . "/" . get_option("sac_company_list"));
+        header("Location:" . home_url("/" . get_option("sac_company_list")));
         exit();
       }
     } else {

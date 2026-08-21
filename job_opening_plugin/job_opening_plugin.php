@@ -27,8 +27,6 @@ function console_error($data)
 define('JOB_OPENING_VERSION', '0.1');
 define('JOB_OPENING__PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('JOB_OPENING__MINIMUM_WP_VERSION', '5.9');
-define('UPLOAD_DIR', wp_upload_dir());
-define('HOME_URL', get_option("home"));
 
 /**
  * JS・CSSファイルを読み込む
@@ -82,7 +80,8 @@ function on_activate()
   create_table_meta();
   //作成したいディレクトリ（のパス）
   $directory_path = "/sac_jo/company_images";
-  wp_mkdir_p(UPLOAD_DIR["basedir"] . $directory_path);
+  $upload_dir = wp_upload_dir();
+  wp_mkdir_p($upload_dir["basedir"] . $directory_path);
 
   // オプションを追加
   // update_option() は未登録のキーなら追加も行うため、add_option() は併用しない。
