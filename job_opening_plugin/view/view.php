@@ -200,10 +200,8 @@ function user_job_openings()
     $today = date("Y/m/d");
     $target_day = $job_expires;
     if(strtotime($today) === strtotime($target_day)){
-      // console_log("ターゲット日付は今日です");
       $html .= userJobTable($post_id);
     }else if(strtotime($today) < strtotime($target_day)){
-      // console_log("ターゲット日付は未来です");
       $html .= userJobTable($post_id);
     }else{
       // 期限切れ
