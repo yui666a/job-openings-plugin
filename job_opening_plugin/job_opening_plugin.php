@@ -35,14 +35,11 @@ define('HOME_URL', get_option("home"));
  */
 function add_files()
 {
-  // WordPress提供のjquery.jsを読み込まない
-  wp_deregister_script('jquery');
-  // jQueryの読み込み
-  wp_enqueue_script('jquery', '//code.jquery.com/jquery-3.5.1.min.js', "", "0.1", false);
-
   // start select2ライブラリ読み込み
   wp_enqueue_style('select2css', '//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css', "", "0.1");
-  wp_enqueue_script('select2js', '//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js', "", "0.1", false);
+  // select2 は jQuery プラグインとして $.fn に生えるため、依存を指定して jQuery より後に出力させる。
+  // 指定なしでも head 内の enqueue 順で偶然先に jQuery が出ていたが、順序が保証されない。
+  wp_enqueue_script('select2js', '//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js', array('jquery'), "0.1", false);
   // end select2ライブラリ読み込み
   // 郵便番号自動入力
   // see: https://github.com/yubinbango/yubinbango

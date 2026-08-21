@@ -58,7 +58,9 @@ const occupations = [
   },
 ];
 
-$(document).ready(function () {
+// WordPress 同梱の jQuery は noConflict モードで読み込まれ、グローバルの `$` が定義されない。
+// 素の `$(...)` のままでは `$ is not a function` になるため、`$` を引数で受け取る。
+jQuery(function ($) {
   try {
     $("#occupation").select2({
       multiple: "multiple",
@@ -78,13 +80,13 @@ $(document).ready(function () {
     console.error("エラー");
     console.error(e.message);
   }
-});
 
-// 企業の情報入力画面で企業ロゴをプレビュー表示する
-$("#company_logo").on("change", function (e) {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-    $("#logo_preview").attr("src", e.target.result);
-  };
-  reader.readAsDataURL(e.target.files[0]);
+  // 企業の情報入力画面で企業ロゴをプレビュー表示する
+  $("#company_logo").on("change", function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $("#logo_preview").attr("src", e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
 });
