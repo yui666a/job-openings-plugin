@@ -3,10 +3,10 @@
 function header_link_buttons()
 {
   $html = '';
-  $sac_company_list = HOME_URL."/".get_option("sac_company_list");
-  $sac_job_openings_list = HOME_URL."/".get_option("sac_job_openings_list");
-  $sac_job_openings_add = HOME_URL."/".get_option("sac_job_openings_add");
-  $sac_company_add = HOME_URL."/".get_option("sac_company_add");
+  $sac_company_list = home_url("/" . get_option("sac_company_list"));
+  $sac_job_openings_list = home_url("/" . get_option("sac_job_openings_list"));
+  $sac_job_openings_add = home_url("/" . get_option("sac_job_openings_add"));
+  $sac_company_add = home_url("/" . get_option("sac_company_add"));
 
   $html = <<<EOF
   <div class="step-wrapper margin4">

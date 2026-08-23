@@ -2,7 +2,7 @@
 
 function make_company_table_row($data)
 {
-  $coTable_page = HOME_URL . "/" . get_option("sac_company_list");
+  $coTable_page = home_url("/" . get_option("sac_company_list"));
   // 削除は GET だけで発火するため、リンク自体に nonce を持たせる
   // wp_nonce_url() は内部で esc_html() を通すため、ここで重ねてエスケープしない
   $remove_url = wp_nonce_url($coTable_page . "?&action=remove&id=" . $data->co_id, 'job_opening_remove_company_' . $data->co_id, 'ticket');

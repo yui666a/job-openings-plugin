@@ -4,7 +4,7 @@ function make_job_openings_table_row($post_id, $title, $author, $post_date, $job
 {
   $admin_url = esc_url(get_admin_url(''));
   $delete_url = wp_nonce_url($admin_url . "post.php?post=" . $post_id . "&amp;action=trash", 'trash-post_' . $post_id);
-  $job_table_url = HOME_URL . "/" . get_option("sac_job_openings_list");
+  $job_table_url = home_url("/" . get_option("sac_job_openings_list"));
   $current_request = $_SERVER["REQUEST_URI"];
   $company_id = get_post_meta($post_id, '_company_id', true);
   $manage_id = get_post_meta($post_id, '_manage_id', true);
