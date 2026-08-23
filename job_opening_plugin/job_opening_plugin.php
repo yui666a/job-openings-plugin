@@ -13,16 +13,6 @@ Author: yui666a
 Author URI: http://style-arts.jp/
 */
 
-function console_log($data)
-{
-  echo '<script>console.log(' . json_encode($data) . ')</script>';
-}
-
-function console_error($data)
-{
-  echo '<script>console.error(' . json_encode($data) . ')</script>';
-}
-
 // 定数定義
 define('JOB_OPENING_VERSION', '0.1');
 define('JOB_OPENING__PLUGIN_DIR', plugin_dir_path(__FILE__));
