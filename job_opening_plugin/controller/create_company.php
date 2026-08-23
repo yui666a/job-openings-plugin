@@ -67,10 +67,10 @@ EOF;
   }
 
   // nonce の生成
-  $session_key = wp_create_nonce('job_opening_create_company');
+  $nonce = wp_create_nonce('job_opening_create_company');
 
   //htmlの出力
   $action_url = str_replace('%7E', '~', $_SERVER['REQUEST_URI']);
-  return create_company_template($user, $action_url, $session_key);
+  return create_company_template($user, $action_url, $nonce);
 }
 
