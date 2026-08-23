@@ -17,6 +17,8 @@ Author URI: http://style-arts.jp/
 define('JOB_OPENING_VERSION', '0.1');
 define('JOB_OPENING__PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('JOB_OPENING__MINIMUM_WP_VERSION', '5.9');
+// 日数指定の上限。modify() に無制限の日数を渡すと DateTime の扱える範囲を超えるため区切る。
+define('JOB_OPENING_MAX_POSTING_DAYS', 365);
 
 /**
  * JS・CSSファイルを読み込む

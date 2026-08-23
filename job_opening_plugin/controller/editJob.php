@@ -25,18 +25,21 @@ function editJob($user, $job_id)
     $trip_start = $_POST['trip_start']; // 掲載開始月日
     $trip_last = $_POST['trip_last']; // 掲載終了月日
 
+    // nonce の検証に失敗した場合と掲載期間が不正な場合を区別するため、未検証を null で表す
+    $period = null;
+
     // nonce が一致しているかどうか
     if (isset($_POST['ticket']) && wp_verify_nonce($_POST['ticket'], 'job_opening_edit_job')) {
-      if ($date_period_type == "period") {
-        $date = new DateTime();
-        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
-        $date->modify('+' . $trip_period . ' day'); // 掲載終了日
-        $expired_date = $date->format('Y-m-d');
-      } else {
-        $date = new DateTime($trip_start);
-        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
-        $expired_date = $trip_last; // 掲載終了日
-      }
+      $period = job_opening_resolve_posting_period($date_period_type, $trip_period, $trip_start, $trip_last);
+    }
+
+    if ($period === null) {
+      $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
+    } else if (isset($period['error'])) {
+      $message = $period['error'];
+    } else {
+      $post_date = $period['post_date']; // 投稿日
+      $expired_date = $period['expired_date']; // 掲載終了日
 
       $content = create_job_openingssss(
         $company_id,
@@ -90,8 +93,6 @@ function editJob($user, $job_id)
       update_post_meta($post_id, '_apply_link', $apply_link);
 
       $message = '登録処理が完了しました（<a href="' . home_url("/" . get_option("sac_job_openings_list")) . '">一覧にもどる</a>）';
-    } else {
-      $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
     }
 
     echo <<<EOF
@@ -144,18 +145,21 @@ function editJob2($user, $job_id)
     $trip_start = $_POST['trip_start']; // 掲載開始月日
     $trip_last = $_POST['trip_last']; // 掲載終了月日
 
+    // nonce の検証に失敗した場合と掲載期間が不正な場合を区別するため、未検証を null で表す
+    $period = null;
+
     // nonce が一致しているかどうか
     if (isset($_POST['ticket']) && wp_verify_nonce($_POST['ticket'], 'job_opening_copy_job')) {
-      if ($date_period_type == "period") {
-        $date = new DateTime();
-        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
-        $date->modify('+' . $trip_period . ' day'); // 掲載終了日
-        $expired_date = $date->format('Y-m-d');
-      } else {
-        $date = new DateTime($trip_start);
-        $post_date = $date->format('Y-m-d H:i:s'); // 投稿日
-        $expired_date = $trip_last; // 掲載終了日
-      }
+      $period = job_opening_resolve_posting_period($date_period_type, $trip_period, $trip_start, $trip_last);
+    }
+
+    if ($period === null) {
+      $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
+    } else if (isset($period['error'])) {
+      $message = $period['error'];
+    } else {
+      $post_date = $period['post_date']; // 投稿日
+      $expired_date = $period['expired_date']; // 掲載終了日
 
       $content = create_job_openingssss(
         $company_id,
@@ -230,8 +234,6 @@ function editJob2($user, $job_id)
       header("Location:" . home_url("/" . get_option("sac_job_openings_list")));
       exit();
       // $message = '登録処理が完了しました（<a href="' . home_url("/" . get_option("sac_job_openings_list")) . '">一覧にもどる</a>）';
-    } else {
-      $message = '不正なリクエストです。お手数ですが、ページを開き直してもう一度お試しください。';
     }
 
     echo <<<EOF

@@ -196,15 +196,14 @@ function user_job_openings()
     setup_postdata($post);
     $post_id = get_the_ID();
     $job_expires = get_post_meta($post_id, '_expired_date', true);
-    
-    $today = date("Y/m/d");
-    $target_day = $job_expires;
-    if(strtotime($today) === strtotime($target_day)){
+
+    // date() は PHP の date.timezone を見るため、サイトの設定時刻で今日を求める
+    $today = current_time('Y-m-d');
+    $expires = job_opening_parse_date($job_expires, wp_timezone());
+    // 解釈できない掲載終了日は、判定不能を期限切れに倒すと原因の分かりにくい非表示になるため
+    // 掲載を続ける側に倒す。strtotime() の false との大小比較も同じ理由で使わない。
+    if (!$expires || $today <= $expires->format('Y-m-d')) {
       $html .= userJobTable($post_id);
-    }else if(strtotime($today) < strtotime($target_day)){
-      $html .= userJobTable($post_id);
-    }else{
-      // 期限切れ
     }
   }
 
